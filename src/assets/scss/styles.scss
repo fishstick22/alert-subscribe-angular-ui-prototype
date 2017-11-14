@@ -1,0 +1,7 @@
+/* https://scotch.io/tutorials/using-sass-with-the-angular-cli */
+@import './variables';
+@import './mixins';
+
+// https://getbootstrap.com/docs/4.0/getting-started/theming/#introduction
+@import "~bootstrap/scss/bootstrap";
+@import "~font-awesome/css/font-awesome.css";

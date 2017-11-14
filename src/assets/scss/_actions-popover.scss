@@ -1,0 +1,13 @@
+.outer-popover, 
+.inner-popover 
+{ 
+    display: block;
+}
+
+.outer-popover {
+    width: 300px; padding: 0;
+}
+
+.inner-popover {
+    padding: 5px;
+}
