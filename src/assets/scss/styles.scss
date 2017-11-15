@@ -5,3 +5,20 @@
 // https://getbootstrap.com/docs/4.0/getting-started/theming/#introduction
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/css/font-awesome.css";
+
+/* https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css */
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
+}
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: left;
+}
+.clickable { 
+  cursor: pointer; 
+}

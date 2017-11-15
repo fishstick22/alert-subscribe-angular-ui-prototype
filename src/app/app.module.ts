@@ -19,9 +19,18 @@ import { InMemoryWebApiModule }        from 'angular-in-memory-web-api';
 // import { InMemoryDataService }         from 'app/services/data-api/in-memory-data.service';
 import { environment }                 from 'environments/environment';
 
+import { NavbarComponent } from 'app/navbar/navbar.component';
+import { FooterComponent } from 'app/footer/footer.component';
+import { HomeComponent } from 'app/home/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    FooterComponent,
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
