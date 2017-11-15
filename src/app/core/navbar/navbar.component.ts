@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('customLogoTitle: ' + this.customLogoTitle);
+    // console.log('customLogoTitle: ' + this.customLogoTitle);
   }
 
 }

@@ -19,10 +19,17 @@ import { InMemoryWebApiModule }        from 'angular-in-memory-web-api';
 // import { InMemoryDataService }         from 'app/services/data-api/in-memory-data.service';
 import { environment }                 from 'environments/environment';
 
-import { NavbarComponent } from 'app/navbar/navbar.component';
-import { FooterComponent } from 'app/footer/footer.component';
-import { HomeComponent } from 'app/home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+// application core (basic site sturcture, etc) components
+import { NavbarComponent } from 'app/core/navbar/navbar.component';
+import { FooterComponent } from 'app/core/footer/footer.component';
+import { HomeComponent } from 'app/core/home/home.component';
+import { PageNotFoundComponent } from 'app/core/page-not-found/page-not-found.component';
+
+// feature components/modules
+import { DashboardComponent } from 'app/dashboard/dashboard.component';
+import { CommunicationsModule } from 'app/communications/communications.module';
+
+// shared
 
 @NgModule({
   declarations: [
@@ -30,7 +37,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +46,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule,
     HttpModule,
     NgbModule.forRoot(),
+    CommunicationsModule,
     // (environment.inMemAPI) ? InMemoryWebApiModule.forRoot(InMemoryDataService) : []
   ],
   providers: [
