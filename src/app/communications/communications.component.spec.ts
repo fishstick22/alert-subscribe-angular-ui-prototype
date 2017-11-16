@@ -8,6 +8,9 @@ import { DebugElement } from '@angular/core';
 import { addMatchers, newEvent, Router, RouterStub
 } from '../../testing';
 
+import { FakeDataApiService, DataApiService,
+  Communication, FakeCommunicationsService, CommunicationService } from 'app/shared/services/testing/fake-data-api.service';
+
 import { CommunicationsModule } from './communications.module';
 import { CommunicationsComponent } from './communications.component';
 
@@ -20,7 +23,9 @@ describe('CommunicationsComponent', () => {
     TestBed.configureTestingModule({
       imports: [ CommunicationsModule ],
       providers: [
-        { provide: Router,         useClass: RouterStub}
+        DataApiService,
+        { provide: DataApiService, usevalue: FakeDataApiService },
+        { provide: Router, useClass: RouterStub}
       ]
     })
     .compileComponents()

@@ -1,8 +1,5 @@
 import { NgModule }               from '@angular/core';
 import { BrowserModule }          from '@angular/platform-browser';
-import { FormsModule,
-         ReactiveFormsModule }    from '@angular/forms';
-import { HttpModule }             from '@angular/http';
 
 import { NgbModule }              from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,13 +8,6 @@ import { NgbModule }              from '@ng-bootstrap/ng-bootstrap';
 import { APP_CONFIG, AppConfig }  from 'app/app.config';
 import { AppComponent }           from 'app/app.component';
 import { AppRoutingModule }       from 'app/app-routing.module';
-
-// Imports for loading & configuring the in-memory web api
-// this way can turn it on and off without commenting out code
-// https://stackoverflow.com/questions/40214211/disable-angular2-in-memory-web-api-for-production
-import { InMemoryWebApiModule }        from 'angular-in-memory-web-api';
-// import { InMemoryDataService }         from 'app/services/data-api/in-memory-data.service';
-import { environment }                 from 'environments/environment';
 
 // application core (basic site sturcture, etc) components
 import { NavbarComponent } from 'app/core/navbar/navbar.component';
@@ -30,6 +20,9 @@ import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { CommunicationsModule } from 'app/communications/communications.module';
 
 // shared
+import { SharedModule } from 'app/shared/shared.module';
+import { DataApiService } from 'app/shared/services/data-api.service';
+import { DragDropService } from 'app/shared/services/drag-drop.service';
 
 @NgModule({
   declarations: [
@@ -43,13 +36,16 @@ import { CommunicationsModule } from 'app/communications/communications.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    HttpModule,
+    // FormsModule,
+    // HttpModule,
     NgbModule.forRoot(),
     CommunicationsModule,
+    SharedModule,
     // (environment.inMemAPI) ? InMemoryWebApiModule.forRoot(InMemoryDataService) : []
   ],
   providers: [
+    DataApiService,
+    DragDropService,
     { provide: APP_CONFIG, useValue: AppConfig }
   ],
   bootstrap: [AppComponent]

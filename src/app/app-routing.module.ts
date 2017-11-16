@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'communications', loadChildren: 'app/communications/communications.module#CommunicationsModule' },
   // { path: 'program',        component: ProgramComponent },
   // { path: 'client',         component: ClientComponent },
-  // { path: 'test',           component: TestComponent },
+  { path: 'shared-test',    loadChildren: 'app/shared/shared.module#SharedModule' },
   { path: '**',             component: PageNotFoundComponent }
 ];
 
