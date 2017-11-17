@@ -2,10 +2,14 @@ import { Injectable }                  from '@angular/core';
 
 export {FakeCommunicationsService,
     Communication, CommunicationService } from './fake-communications.service';
+export { FakeProgramsService,
+    Program, ProgramService } from './fake-programs.service';
 export { DataApiService } from 'app/shared/services/data-api.service';
 
 import { FakeCommunicationsService,
     Communication, CommunicationService } from './fake-communications.service';
+import { FakeProgramsService,
+    Program, ProgramService } from './fake-programs.service';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
@@ -18,9 +22,9 @@ export class FakeDataApiService extends DataApiService {
         communicationService: FakeCommunicationsService,
         // private clientService: ClientService,
         // private clientConfigurationService: ClientConfigurationService,
-        // private programService: ProgramService,
+        programService: FakeProgramsService,
         // private programConfigurationService: ProgramConfigurationService
-      ) { super(communicationService); }
+      ) { super(communicationService, programService); }
 
 
 

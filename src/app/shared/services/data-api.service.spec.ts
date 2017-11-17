@@ -8,7 +8,11 @@ import { DataApiService } from './data-api.service';
 import { FakeCommunicationsService,
   Communication, CommunicationService } from './testing/fake-communications.service';
 
+import { FakeProgramsService,
+  Program, ProgramService } from './testing/fake-programs.service';
+
 const communication: Communication = new Communication(260, 'Refill Available Notice');
+const program: Program = new Program(1, 'Prescription Alerts');
 
 describe('DataApiService', () => {
   beforeEach(() => {
@@ -16,8 +20,10 @@ describe('DataApiService', () => {
       providers: [
         DataApiService,
         CommunicationService,
+        ProgramService,
         { provide: APP_CONFIG, useValue: AppConfig },
-        { provide: CommunicationService, usevalue: FakeCommunicationsService }
+        { provide: CommunicationService, usevalue: FakeCommunicationsService },
+        { provide: ProgramService, usevalue: FakeProgramsService }
       ]
     });
   });
