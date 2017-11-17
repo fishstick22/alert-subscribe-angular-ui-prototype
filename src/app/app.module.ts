@@ -23,6 +23,7 @@ import { CommunicationsModule } from 'app/communications/communications.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { DataApiService } from 'app/shared/services/data-api.service';
 import { DragDropService } from 'app/shared/services/drag-drop.service';
+import { SortableColumnService } from 'app/shared/services/sortable-column.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { DragDropService } from 'app/shared/services/drag-drop.service';
   providers: [
     DataApiService,
     DragDropService,
+    SortableColumnService,
     { provide: APP_CONFIG, useValue: AppConfig }
   ],
   bootstrap: [AppComponent]

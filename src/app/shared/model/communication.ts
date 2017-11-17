@@ -28,3 +28,17 @@ export class Communication {
     );
   }
 }
+
+export class CommunicationSortCriteria {
+  sortColumn: string;
+  sortDirection: string;
+}
+
+export class CommunicationConfigAction {
+    constructor(id: string, type: string) {
+      this.commId = id;
+      this.configType = type;
+    }
+    commId: string;
+    configType: string;
+}

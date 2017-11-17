@@ -12,6 +12,7 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 export class SharedComponent implements OnInit {
 
   communications: Communication[];
+  displayComm: Communication[];
 
   constructor(
     private dataApiService: DataApiService
@@ -26,6 +27,7 @@ export class SharedComponent implements OnInit {
   async getCommunications() {
     try {
       this.communications = await this.dataApiService.getCommunications();
+      this.displayComm = this.communications;
     } catch (error) {
       console.log('getCommunications error: ', error);
     }

@@ -1,2 +1,16 @@
 <h2>Shared Module Tests</h2>
 <app-drag-drop-test></app-drag-drop-test>
+<app-click-outside-test></app-click-outside-test>
+<h4>Manage Communications</h4>
+<app-comm-action-table 
+  [communications]="communications"
+  [displayComm]="displayComm"
+  [displayCommStartEmpty]="false"
+  [showCommId]="true"
+  [showCommName]="true"
+  [showCommDesc]="true"
+  [showStatus]="true"
+  [showAction]="true"
+  (selRowOut)="setClickedRow($event)"
+  (commConfigAction)="configureCommunication($event)">
+</app-comm-action-table>

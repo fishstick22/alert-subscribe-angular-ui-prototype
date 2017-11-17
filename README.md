@@ -58,4 +58,4 @@ Enable IE11 Polyfills: uncomment imports in polyfills.ts
 
 Lint tweaks: tslint.json
 "import-spacing": false -- allows aligning the from clauses
-
+"no-inferrable-types": [false, "ignore-params"] -- rather see types regardless
