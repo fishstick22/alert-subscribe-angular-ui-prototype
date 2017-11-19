@@ -5,12 +5,16 @@ import { NgbModal, ModalDismissReasons,
 
 import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
+import { ProgramConfiguration } from 'app/shared/model/program-configuration';
+
+import { ProgramConfigurationModalComponent } from './program-configuration-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
 export class ProgramConfigurationService {
 
   programs: Program[];
+  programConfigurations: ProgramConfiguration[];
   closeResult: string;
 
   constructor(
@@ -18,52 +22,82 @@ export class ProgramConfigurationService {
     private modalService: NgbModal
   ) { }
 
-  configureProgramModal(commId) {
-    // const modalOpts: NgbModalOptions = {
-    //   size: 'lg'
-    // };
-    // const modalRef = this.modalService.open(ProgramConfigByCommComponent, modalOpts);
-    // const modalComp: ProgramConfigByCommComponent  = modalRef.componentInstance;
+  async configureProgramModal(communication: Communication) {
+    const modalOpts: NgbModalOptions = {
+      size: 'lg'
+    };
+    const modalRef = this.modalService.open(ProgramConfigurationModalComponent, modalOpts);
+    const modalComp: ProgramConfigurationModalComponent  = modalRef.componentInstance;
 
-    // // modalComp.name = 'Configure Program';
-    // modalComp.communication = this.findCommunication(commId);
-    // modalComp.programs = this.programs;
-    // modalComp.programConfigurations = this.findProgramConfigurations(commId);
+    this.programs = await this.getPrograms();
+    this.programConfigurations = await this.getProgramConfigurations();
 
-    // modalRef.result.then((result) => {
-    //   if (result.resultTxt === modalComp.SAVESUCCESS) {
-    //     console.log('configureProgramModal result: ', result.modalResult);
-    //     this.closeResult = `Closed with: ${result.resultTxt}`;
-    //     if (result.modalResult) {
-    //       const modalResult: ProgramConfigModalResult = result.modalResult;
-    //       if (modalResult.prevProgConfig) {
-    //         this.updateProgramConfiguration(modalResult.prevProgConfig);
-    //       }
-    //       if (modalResult.newProgConfig) {
-    //         this.addProgramConfiguration(modalResult.newProgConfig);
-    //       }
-    //     } else {
-    //       // this would be some kind of exception
-    //       console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
-    //     }
-    //   } else {
-    //     this.closeResult = `Closed with: ${result}`;
-    //   }
-    //   this.setClickedRow(null);
-    //   console.log('configureProgram result: ', this.closeResult);
-    // }, (reason) => {
-    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    //   this.setClickedRow(null);
-    //   console.log('addNewProgramConfig result: ', this.closeResult);
-    // });
+    // modalComp.name = 'Configure Program';
+    modalComp.communication = communication;
+    modalComp.programs = this.programs;
+    modalComp.programConfigurations = this.findProgramConfigurations(communication.id);
+    modalComp.modalInit();
+
+    modalRef.result.then((result) => {
+      if (result.resultTxt === modalComp.SAVESUCCESS) {
+        console.log('configureProgramModal result: ', result.modalResult);
+        this.closeResult = `Closed with: ${result.resultTxt}`;
+        // if (result.modalResult) {
+        //   const modalResult: ProgramConfigModalResult = result.modalResult;
+        //   if (modalResult.prevProgConfig) {
+        //     this.updateProgramConfiguration(modalResult.prevProgConfig);
+        //   }
+        //   if (modalResult.newProgConfig) {
+        //     this.addProgramConfiguration(modalResult.newProgConfig);
+        //   }
+        // } else {
+        //   // this would be some kind of exception
+        //   console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
+        // }
+      } else {
+        this.closeResult = `Closed with: ${result}`;
+      }
+      // this.setClickedRow(null);
+      console.log('configureProgramModal result: ', this.closeResult);
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      // this.setClickedRow(null);
+      console.log('configureProgramModal result: ', this.closeResult);
+    });
+  }
+
+  private findProgram(id: number): Program {
+    return this.programs.find(p => p.id === id);
+  }
+
+  private findProgramConfigurations(id): ProgramConfiguration[] {
+    return this.programConfigurations.filter(pc => {
+      if (pc.communication.id === id) {
+        console.log(pc, 'Program: ', typeof(pc.program));
+        if (typeof(pc.program) === 'number') {
+          const programId = <number> pc.program;
+          pc.program = this.findProgram(programId);
+        }
+        return true;
+      }
+    });
   }
 
   async getPrograms() {
     try {
       this.programs = await this.dataApiService.getPrograms();
+      return this.programs;
     } catch (error) {
       console.log('getPrograms error: ', error);
     }
   }
 
+  async getProgramConfigurations() {
+    try {
+      this.programConfigurations = await this.dataApiService.getProgramConfigurations();
+      return this.programConfigurations;
+    } catch (error) {
+      console.log('getProgramConfigurations error: ', error);
+    }
+  }
 }

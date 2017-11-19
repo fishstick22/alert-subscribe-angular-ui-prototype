@@ -13,7 +13,7 @@ import { addMatchers, newEvent, Router, RouterStub
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
 import { FakeDataApiService, DataApiService,
-  Communication, FakeCommunicationsService, CommunicationService } from 'app/shared/services/testing/fake-data-api.service';
+  Communication, FakeCommunicationsService, CommunicationsService } from 'app/shared/services/testing/fake-data-api.service';
 
 import { ProgramConfigurationService } from './services/program-configuration.service';
 import { FakeProgramConfigurationService } from './testing/fake-program-configuration.service';

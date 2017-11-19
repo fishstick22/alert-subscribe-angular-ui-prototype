@@ -16,15 +16,20 @@ import { InMemoryDataService } from 'app/shared/services/in-memory-data.service'
 import { environment } from 'environments/environment';
 
 // import { DataApiService } from './services/data-api.service';
-import { CommunicationService } from './services/communications/communication.service';
-import { ProgramService } from './services/programs/program.service';
+import { CommunicationsService } from './services/communications/communications.service';
+import { ProgramsService } from './services/programs/programs.service';
+import { ProgramConfigurationsService } from './services/program-configurations/program-configurations.service';
 // testing within shared module
 import { DragDropComponent } from './drag-drop/drag-drop.component';
 import { ClickOutsideComponent } from './click-outside/click-outside.component';
 // exported
 import { CommActionTableComponent} from './comm-action-table/comm-action-table.component';
-import { SortableColumnComponent } from './sortable-column/sortable-column.component';
 import { CommActionsPopoverComponent } from './comm-actions-popover/comm-actions-popover.component';
+import { DateEffExpComponent } from './date-eff-exp/date-eff-exp.component';
+import { DatePickerPopupComponent } from './date-picker-popup/date-picker-popup.component';
+import { SelectChannelMandatoryComponent } from './select-channel-mandatory/select-channel-mandatory.component';
+import { SelectChannelPriorityComponent } from './select-channel-priority/select-channel-priority.component';
+import { SortableColumnComponent } from './sortable-column/sortable-column.component';
 
 import { DraggableDirective } from './directives/drag-drop/draggable.directive';
 import { DroppableDirective } from './directives/drag-drop/droppable.directive';
@@ -46,18 +51,23 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     routedComponents,
     CommActionTableComponent,
     CommActionsPopoverComponent,
+    DateEffExpComponent,
+    DatePickerPopupComponent,
+    SelectChannelMandatoryComponent,
+    SelectChannelPriorityComponent,
     SortableColumnComponent,
     DragDropComponent,
     ClickOutsideComponent,
     DraggableDirective,
     DroppableDirective,
     ClickOutsideDirective,
-    SortableTableDirective
+    SortableTableDirective,
   ],
   providers: [
     HttpClientModule,
-    CommunicationService,
-    ProgramService
+    CommunicationsService,
+    ProgramsService,
+    ProgramConfigurationsService
   ],
   exports: [
     CommonModule,
@@ -65,6 +75,10 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     ReactiveFormsModule,
     CommActionTableComponent,
     CommActionsPopoverComponent,
+    DateEffExpComponent,
+    DatePickerPopupComponent,
+    SelectChannelMandatoryComponent,
+    SelectChannelPriorityComponent,
     SortableColumnComponent,
     DraggableDirective,
     DroppableDirective,

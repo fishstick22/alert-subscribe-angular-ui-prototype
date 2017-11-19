@@ -1,9 +1,9 @@
 // re-export for tester convenience
 export { Communication } from 'app/shared/model/communication';
-export { CommunicationService } from 'app/shared/services/communications/communication.service';
+export { CommunicationsService } from 'app/shared/services/communications/communications.service';
 
 import { Communication } from 'app/shared/model/communication';
-import { CommunicationService } from 'app/shared/services/communications/communication.service';
+import { CommunicationsService } from 'app/shared/services/communications/communications.service';
 
 export const COMMS: Communication[] = [
   new Communication(260, 'Refill Available Notice')
@@ -25,7 +25,7 @@ export const COMMS: Communication[] = [
   //       'clientConfiguration': []},
 ];
 
-export class FakeCommunicationsService extends CommunicationService {
+export class FakeCommunicationsService extends CommunicationsService {
 
   communications = COMMS.map(c => c.clone());
   lastPromise: Promise<any>;  // remember so we can spy on promise calls

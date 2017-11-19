@@ -5,7 +5,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
 import { FakeDataApiService, DataApiService,
-  Communication, FakeCommunicationsService, CommunicationService } from './services/testing/fake-data-api.service';
+  Communication, FakeCommunicationsService, CommunicationsService } from './services/testing/fake-data-api.service';
 
 // import { SharedModule } from 'app/shared/shared.module';
 // import { DragDropService } from 'app/shared/services/drag-drop.service';
@@ -34,7 +34,7 @@ export class CommActionTableStubComponent  {
   @Input() configureState: string;
   @Input() communications: Communication[];
   @Input() displayComm: Communication[];
-  @Input() supressComm: number[] = [];
+  @Input() supressComm: number[]; // = [];
   @Input() displayCommStartEmpty: boolean = true;
   @Input() displayClient: string = ''; // = 'Client';
   @Input() displayProgram: string = ''; // = 'Program';
@@ -49,14 +49,14 @@ describe('SharedComponent', () => {
   let component: SharedComponent;
   let fixture: ComponentFixture<SharedComponent>;
 
-  const communications: Communication[] = [];
-  const displayComm: Communication[] = [];
-  const displayCommStartEmpty = false;
-  const showCommId = true;
-  const showCommName = true;
-  const showCommDesc = true;
-  const showStatus = true;
-  const showAction = true;
+  // const communications: Communication[] = [];
+  // const displayComm: Communication[] = [];
+  // const displayCommStartEmpty = false;
+  // const showCommId = true;
+  // const showCommName = true;
+  // const showCommDesc = true;
+  // const showStatus = true;
+  // const showAction = true;
 
   // setClickedRow($event) {}
   // configureCommunication($event) {}
@@ -75,10 +75,10 @@ describe('SharedComponent', () => {
        ],
       providers: [
         DataApiService,
-        CommunicationService,
+        CommunicationsService,
         // DragDropService,
         { provide: APP_CONFIG, useValue: AppConfig },
-        { provide: CommunicationService, usevalue: FakeCommunicationsService },
+        { provide: CommunicationsService, usevalue: FakeCommunicationsService },
         { provide: DataApiService, usevalue: FakeDataApiService }
       ],
       imports: [ FormsModule ]

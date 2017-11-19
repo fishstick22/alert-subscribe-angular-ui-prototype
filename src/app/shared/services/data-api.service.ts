@@ -1,18 +1,18 @@
 import { Injectable }                  from '@angular/core';
 
-import { CommunicationService }        from 'app/shared/services/communications/communication.service';
+import { CommunicationsService }        from 'app/shared/services/communications/communications.service';
 
 // import { ClientService }               from 'app/services/data-api/client/client.service';
 // import { ClientConfigurationService }  from 'app/services/data-api/client-configuration/client-configuration.service';
-import { ProgramService }              from 'app/shared/services/programs/program.service';
-// import { ProgramConfigurationService } from 'app/services/data-api/program-configuration/program-configuration.service';
+import { ProgramsService }              from 'app/shared/services/programs/programs.service';
+import { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
 
 // import { IProgramConfig }              from 'app/classes/model/iprog-config';
 
 import { Communication }               from 'app/shared/model/communication';
 // import { ClientConfiguration }         from 'app/classes/model/client-configuration';
 import { Program }                     from 'app/shared/model/program';
-// import { ProgramConfiguration }        from 'app/classes/model/program-configuration';
+import { ProgramConfiguration }        from 'app/shared/model/program-configuration';
 // import { Client }                      from 'app/classes/model/client';
 
 @Injectable()
@@ -28,21 +28,21 @@ export class DataApiService {
   // clients: Client[];
   // clientConfigurations: ClientConfiguration[];
   programs: Program[];
-  // programConfigurations: ProgramConfiguration[];
+  programConfigurations: ProgramConfiguration[];
 
   constructor(
-    protected communicationService: CommunicationService,
+    protected communicationsService: CommunicationsService,
     // private clientService: ClientService,
     // private clientConfigurationService: ClientConfigurationService,
-    protected programService: ProgramService,
-    // private programConfigurationService: ProgramConfigurationService
+    protected programsService: ProgramsService,
+    protected programConfigurationService: ProgramConfigurationsService
   ) { }
 
   public async getCommunications(): Promise<Communication[]> {
     if (this.communications) {
       return this.communications;
     } else {
-      this.communications = await this.communicationService.getCommunicationsThruApi();
+      this.communications = await this.communicationsService.getCommunicationsThruApi();
       return this.communications;
       // return this.removeProgramConfigurationCruft(this.communications);
     }
@@ -83,7 +83,7 @@ export class DataApiService {
     if (this.programs) {
       return this.programs;
     } else {
-      this.programs = await this.programService.getProgramsThruApi();
+      this.programs = await this.programsService.getProgramsThruApi();
       return this.programs;
       // return this.removeProgramConfigurationCruft(this.programs);
     }
@@ -107,14 +107,14 @@ export class DataApiService {
   //   return program;
   // }
 
-  // public async getProgramConfigurations(): Promise<ProgramConfiguration[]> {
-  //   if (this.programConfigurations) {
-  //     return this.programConfigurations;
-  //   } else {
-  //     this.programConfigurations = await this.programConfigurationService.getProgramConfigurationsThruApi();
-  //     return this.programConfigurations;
-  //   }
-  // }
+  public async getProgramConfigurations(): Promise<ProgramConfiguration[]> {
+    if (this.programConfigurations) {
+      return this.programConfigurations;
+    } else {
+      this.programConfigurations = await this.programConfigurationService.getProgramConfigurationsThruApi();
+      return this.programConfigurations;
+    }
+  }
 
   // public async createProgramConfiguration(programConfiguration: ProgramConfiguration): Promise<ProgramConfiguration> {
   //   programConfiguration = await this.programConfigurationService.createProgramConfigurationThruApi(programConfiguration);

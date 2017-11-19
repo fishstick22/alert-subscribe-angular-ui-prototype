@@ -14,7 +14,7 @@ import 'rxjs/add/operator/toPromise';
 import { Communication } from 'app/shared/model/communication';
 
 @Injectable()
-export class CommunicationService {
+export class CommunicationsService {
 
   protected communications: Communication[];
   protected headers = new Headers({'Content-Type': 'application/json'});

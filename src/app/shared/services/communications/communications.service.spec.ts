@@ -5,20 +5,20 @@ import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http'
 
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
-import { CommunicationService } from './communication.service';
+import { CommunicationsService } from './communications.service';
 
 describe('CommunicationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        CommunicationService,
+        CommunicationsService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: HttpClient, usevalue: HttpClient }
       ]
     });
   });
 
-  it('should be created', inject([CommunicationService], (service: CommunicationService) => {
+  it('should be created', inject([CommunicationsService], (service: CommunicationsService) => {
     expect(service).toBeTruthy();
   }));
 });

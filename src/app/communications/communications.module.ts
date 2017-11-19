@@ -6,6 +6,7 @@ import { routedComponents, CommunicationsRoutingModule } from './communications-
 // shared
 import { SharedModule } from 'app/shared/shared.module';
 import { ProgramConfigurationService } from './services/program-configuration.service';
+import { ProgramConfigurationModalComponent } from './services/program-configuration-modal.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { ProgramConfigurationService } from './services/program-configuration.se
     CommunicationsRoutingModule,
     SharedModule, // supposed to provide CommActionTableComponent
   ],
-  declarations: [routedComponents],
+  declarations: [routedComponents, ProgramConfigurationModalComponent],
+  entryComponents: [ProgramConfigurationModalComponent],
   providers: [ProgramConfigurationService]
 })
 export class CommunicationsModule { }

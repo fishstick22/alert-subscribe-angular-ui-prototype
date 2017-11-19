@@ -4,7 +4,7 @@ import { NgbModal, ModalDismissReasons,
   NgbModalOptions }             from '@ng-bootstrap/ng-bootstrap';
 
 import { FakeDataApiService, DataApiService,
-  Program, FakeProgramsService, ProgramService } from 'app/shared/services/testing/fake-data-api.service';
+  Program, FakeProgramsService, ProgramsService } from 'app/shared/services/testing/fake-data-api.service';
 
 import { ProgramConfigurationService } from './program-configuration.service';
 

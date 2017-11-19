@@ -1,0 +1,12 @@
+<div *ngIf="lastConfigRow" class="flex-justify-right">
+  <select id="{{id}}" name="{{name}}" [(ngModel)]="value" required
+    class="form-control form-control-sm" (blur)="onBlur()">
+    <option *ngFor="let cpo of channelPriortyOpts" [ngValue]="cpo">{{cpo}}</option>
+  </select>
+</div>
+<div *ngIf="!lastConfigRow" class="flex-justify-right">
+  <select id="{{id}}" name="{{name}}" value="actualStaticValue" required
+    class="form-control form-control-sm" disabled>
+    <option value="actualStaticValue">{{actualStaticValue}}</option>
+  </select>
+</div>

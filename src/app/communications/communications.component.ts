@@ -53,7 +53,11 @@ export class CommunicationsComponent implements OnInit {
   private configureCommunicationForProgram(commId) {
     // invoke service to manage a modal dialog allowing user to
     // configure the client-level communication configurations
-    this.programConfigurationService.configureProgramModal(commId);
+    this.programConfigurationService.configureProgramModal(this.findCommunication(commId));
+  }
+
+  private findCommunication(id: number): Communication {
+    return this.communications.find(c => c.id === id);
   }
 
   async getCommunications() {

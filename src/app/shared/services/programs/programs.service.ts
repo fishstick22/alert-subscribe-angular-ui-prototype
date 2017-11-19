@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 import { Program } from 'app/shared/model/program';
 
 @Injectable()
-export class ProgramService {
+export class ProgramsService {
 
   protected programs: Program[];
   protected headers = new Headers({'Content-Type': 'application/json'});

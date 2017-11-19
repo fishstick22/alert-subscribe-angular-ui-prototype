@@ -1,0 +1,100 @@
+<form #programConfigurationViaCommunicationForm="ngForm" 
+(ngSubmit)="saveProgramConfiguration()" >
+
+<div class="modal-header bg-gradient-dark">
+  <h4 class="modal-title text-white">
+    Configure Program <!-- -->
+    <small>for CommId {{communication.id}}: {{communication.name}}</small> 
+  </h4>
+  <button type="button" class="close text-white" aria-label="Close" (click)="configureProgramModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <table class="table table-responsive table-sm table-striped table-bordered table-hover">
+    <caption></caption>
+    <thead class="bg-gradient-dark text-white">
+      <tr>
+        <th>ID</th>
+        <th>N<small>ame</small></th>
+        <th>E<small>mail</small></th>
+        <th>IVR</th>
+        <th>SMS</th>
+        <th>M<small>ail</small></th>
+        <th>M<small>obile</small></th>
+        <th>M<small>andatory</small></th>
+        <th>E<small>ffective</small></th>
+        <th>E<small>xpiration</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pc of programConfigurations; let i = index" 
+          [class.table-info]="i == lastPgmConfigRow">
+        <td>
+          <span *ngIf="i !== lastPgmConfigRow" class="badge badge-secondary">{{pc.id}}</span>
+          <span *ngIf="i === lastPgmConfigRow">
+              <i class="fa fa-file-o clickable" aria-hidden="true" 
+                 title="New Program configuration for {{communication.name}}"></i></span></td>
+        <td>
+          <span *ngIf="i !== lastPgmConfigRow">
+            <input type="text" class="form-control form-control-sm" name="name" [(ngModel)]="pc.name" readonly
+                   id="pgmConfigName" aria-describedby="pgmConfigNameHelp" placeholder="Enter Program Configuration Name"></span>
+          <span *ngIf="i === lastPgmConfigRow">
+            <input type="text" class="form-control form-control-sm" name="name" [(ngModel)]="pc.name" required
+                   id="pgmConfigName" aria-describedby="pgmConfigNameHelp" placeholder="Enter Program Configuration Name"></span></td>
+        <td><app-select-channel-priority id="chanEmailPriority" name="chanEmailPriority" 
+              [(ngModel)]="pc.chanEmailPriority"
+              [actualStaticValue]="pc.chanEmailPriority"
+              [lastConfigRow]="i === lastPgmConfigRow" ></app-select-channel-priority></td>
+        <td><app-select-channel-priority id="chanIvrPriority" name="chanIvrPriority" 
+              [(ngModel)]="pc.chanIvrPriority"
+              [actualStaticValue]="pc.chanIvrPriority"
+              [lastConfigRow]="i === lastPgmConfigRow" ></app-select-channel-priority></td>
+        <td><app-select-channel-priority id="chanSmsPriority" name="chanSmsPriority" 
+              [(ngModel)]="pc.chanSmsPriority"
+              [actualStaticValue]="pc.chanSmsPriority"
+              [lastConfigRow]="i === lastPgmConfigRow" ></app-select-channel-priority></td>  
+        <td><app-select-channel-priority id="chanMailPriority" name="chanMailPriority" 
+              [(ngModel)]="pc.chanMailPriority"
+              [actualStaticValue]="pc.chanMailPriority"
+              [lastConfigRow]="i === lastPgmConfigRow" ></app-select-channel-priority></td> 
+        <td><app-select-channel-priority id="chanMobilePriority" name="chanMobilePriority" 
+              [(ngModel)]="pc.chanMobilePriority"
+              [actualStaticValue]="pc.chanMobilePriority"
+              [lastConfigRow]="i === lastPgmConfigRow" ></app-select-channel-priority></td> 
+        <td><app-select-channel-mandatory id="chanMandatory" name="chanMandatory" 
+              [(ngModel)]="pc.chanMandatory"
+              [actualStaticValue]="pc.chanMandatory"
+              [lastConfigRow]="i === lastPgmConfigRow" ></app-select-channel-mandatory></td>
+        <td><app-date-eff-exp
+              dateType="effective" [progConfig]="pc"
+              [lastConfigRow]="i === lastPgmConfigRow"
+              (newDateValue)="updateDateValue($event, pc, 'effective')"></app-date-eff-exp></td>
+        <td><app-date-eff-exp
+              dateType="expiration" [progConfig]="pc"
+              [lastConfigRow]="i === lastPgmConfigRow"
+              (newDateValue)="updateDateValue($event, pc, 'expiration')"></app-date-eff-exp></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-group">
+    <label for="programName">Choose Program</label>
+    <select id="program" name="program" [(ngModel)]="selectedProgram" required>
+      <option *ngFor="let p of programs" [ngValue]="p.id">{{p.name}}</option>
+    </select>
+  </div>
+</div>
+<div class="modal-footer">
+  <!-- https://github.com/twbs/bootstrap/issues/24413 -->
+  <!--span class="mr-auto">Some instructional content or condition message goes here: {{newPgmConfig.effective}}</span-->
+  <div class="w-100">
+    <span class="float-left">Some instructional content or condition message goes here:<!-- {{newPgmConfig.effective}}--></span>
+    <div class="float-right">
+        <button type="submit" class="btn btn-outline-dark" [disabled]="!programConfigurationViaCommunicationForm.valid">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="configureProgramModal.close('Close click')">Cancel</button>
+    </div>
+  </div>
+  
+</div>
+
+</form>

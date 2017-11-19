@@ -25,7 +25,7 @@ describe('SortableColumnComponent', () => {
     fixture = TestBed.createComponent(SortableColumnComponent);
     component = fixture.componentInstance;
     sortableColumnService = fixture.debugElement.injector.get(SortableColumnService);
-    
+    //
     fixture.detectChanges();
   });
 
