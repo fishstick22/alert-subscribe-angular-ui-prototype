@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 
-import { NgbModal, ModalDismissReasons,
-  NgbModalOptions }             from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal,
+         ModalDismissReasons,
+         NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
-import { ProgramConfigurationModalComponent } from './program-configuration-modal.component';
+import { ProgramConfigurationModalComponent,
+         ProgramConfigModalResult } from './program-configuration-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
@@ -42,28 +44,50 @@ export class ProgramConfigurationService {
       if (result.resultTxt === modalComp.SAVESUCCESS) {
         console.log('configureProgramModal result: ', result.modalResult);
         this.closeResult = `Closed with: ${result.resultTxt}`;
-        // if (result.modalResult) {
-        //   const modalResult: ProgramConfigModalResult = result.modalResult;
-        //   if (modalResult.prevProgConfig) {
-        //     this.updateProgramConfiguration(modalResult.prevProgConfig);
-        //   }
-        //   if (modalResult.newProgConfig) {
-        //     this.addProgramConfiguration(modalResult.newProgConfig);
-        //   }
-        // } else {
-        //   // this would be some kind of exception
-        //   console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
-        // }
+        if (result.modalResult) {
+          const modalResult: ProgramConfigModalResult = result.modalResult;
+          if (modalResult.prevProgConfig) {
+            this.updateProgramConfiguration(modalResult.prevProgConfig);
+          }
+          if (modalResult.newProgConfig) {
+            this.addProgramConfiguration(modalResult.newProgConfig);
+          }
+        } else {
+          // this would be some kind of exception
+          console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
+        }
       } else {
         this.closeResult = `Closed with: ${result}`;
       }
       // this.setClickedRow(null);
       console.log('configureProgramModal result: ', this.closeResult);
     }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       // this.setClickedRow(null);
       console.log('configureProgramModal result: ', this.closeResult);
     });
+  }
+
+  private addProgramConfiguration(programConfiguration: ProgramConfiguration): void {
+    this.dataApiService.createProgramConfiguration(programConfiguration)
+      .then(pc => console.log('addProgramConfiguration:', programConfiguration, this.programConfigurations))
+      .catch(error =>  console.log('addProgramConfiguration error: ', error));
+  }
+
+  private updateProgramConfiguration(programConfiguration: ProgramConfiguration): void {
+    this.dataApiService.updateProgramConfiguration(programConfiguration)
+      .then(pc => console.log('updateProgramConfiguration:', programConfiguration, this.programConfigurations))
+      .catch(error =>  console.log('updateProgramConfiguration error: ', error));
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
   private findProgram(id: number): Program {

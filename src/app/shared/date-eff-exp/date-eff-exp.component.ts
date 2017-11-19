@@ -6,12 +6,8 @@ import { ProgramConfiguration }     from 'app/shared/model/program-configuration
 @Component({
   selector: 'app-date-eff-exp',
   templateUrl: './date-eff-exp.component.html',
-  // styleUrls: ['./date-eff-exp.component.scss'],
-  styles: [
-    '.flex-justify-center {display: flex; justify-content: center; align-items: center;}',
-    'input { width: 80px; }'
-  ],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./date-eff-exp.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class DateEffExpComponent implements OnInit {
 

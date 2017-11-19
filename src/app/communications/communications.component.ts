@@ -44,6 +44,7 @@ export class CommunicationsComponent implements OnInit {
     if (commConfigAction.configType === 'program') {
       this.configureCommunicationForProgram(commConfigAction.commId);
     }
+    this.setClickedRow(null);
   }
 
   private configureCommunicationForClient(commId) {

@@ -8,7 +8,7 @@
   [exclude]="exclude"
   [excludeBeforeClick]="excludeBeforeClick">
 
-  <input name="dp" [(ngModel)]="dateModel" class="form-control form-control-sm" placeholder="yyyy-mm-dd"
+  <input name="dp" [(ngModel)]="dateModel" class="form-control form-control-sm date-eff-exp-input" placeholder="yyyy-mm-dd"
          (click)="d.toggle()" (ngModelChange)="saveDate($event)" ngbDatepicker #d="ngbDatepicker"
          [required]="required">
 

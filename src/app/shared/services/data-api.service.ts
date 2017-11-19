@@ -21,8 +21,11 @@ export class DataApiService {
   /********************************************
    * PROTOTYPE IMPLEMENTATION ONLY!!!         *
    * this won't work in production, reading   *
-   * the entire dataset into memory           *
-   * replace this with some paging solution   *
+   * the entire dataset into memory IS BAD    *
+   * can get away with this with small        *
+   * in-memory-data-api, but PROD volume would*
+   * NEVERY FLY                               *
+   * so replace this with some paging solution*
   *********************************************/
   communications: Communication[];
   // clients: Client[];
@@ -116,16 +119,16 @@ export class DataApiService {
     }
   }
 
-  // public async createProgramConfiguration(programConfiguration: ProgramConfiguration): Promise<ProgramConfiguration> {
-  //   programConfiguration = await this.programConfigurationService.createProgramConfigurationThruApi(programConfiguration);
-  //   this.insertProgramConfiguration(programConfiguration);
-  //   return programConfiguration;
-  // }
+  public async createProgramConfiguration(programConfiguration: ProgramConfiguration): Promise<ProgramConfiguration> {
+    programConfiguration = await this.programConfigurationService.createProgramConfigurationThruApi(programConfiguration);
+    this.insertProgramConfiguration(programConfiguration);
+    return programConfiguration;
+  }
 
-  // public async updateProgramConfiguration(programConfiguration: ProgramConfiguration): Promise<ProgramConfiguration> {
-  //   programConfiguration = await this.programConfigurationService.updateProgramConfigurationThruApi(programConfiguration);
-  //   return programConfiguration;
-  // }
+  public async updateProgramConfiguration(programConfiguration: ProgramConfiguration): Promise<ProgramConfiguration> {
+    programConfiguration = await this.programConfigurationService.updateProgramConfigurationThruApi(programConfiguration);
+    return programConfiguration;
+  }
 
   // /*
   // */
@@ -140,9 +143,9 @@ export class DataApiService {
   //   }
   // }
 
-  // private insertProgramConfiguration(programConfiguration: ProgramConfiguration): void {
-  //   this.programConfigurations.push(programConfiguration);
-  // }
+  private insertProgramConfiguration(programConfiguration: ProgramConfiguration): void {
+    this.programConfigurations.push(programConfiguration);
+  }
 
   // private removeProgramConfigurationCruft(progConfigableObjs: IProgramConfig[]): any[] {
   //   // some reason spring rest is giving empty array objects of programConfiguration property

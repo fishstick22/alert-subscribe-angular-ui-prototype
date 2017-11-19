@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
+// import { HttpModule } from '@angular/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 import { APP_CONFIG, IAppConfig } from 'app/app.config';
 
@@ -12,7 +12,7 @@ import { ProgramConfiguration }   from 'app/shared/model/program-configuration';
 export class ProgramConfigurationsService {
 
   protected programConfigurations: ProgramConfiguration[];
-  protected headers = new Headers({'Content-Type': 'application/json'});
+  // protected headers = new Headers({'Content-Type': 'application/json'});
   protected progConfigApiEndpoint;
 
   constructor(@Inject(APP_CONFIG) protected config: IAppConfig, protected http: HttpClient) {
@@ -28,6 +28,33 @@ export class ProgramConfigurationsService {
     }
   }
 
+  async createProgramConfigurationThruApi(programConfiguration: ProgramConfiguration): Promise<ProgramConfiguration> {
+    try {
+      const response = await this.http.post(
+        this.progConfigApiEndpoint,
+        programConfiguration
+        // JSON.stringify(programConfiguration),
+        // {headers: this.headers}
+      ).toPromise();
+      return response as ProgramConfiguration;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+  async updateProgramConfigurationThruApi(programConfiguration: ProgramConfiguration): Promise<ProgramConfiguration> {
+    try {
+      const url = `${this.progConfigApiEndpoint}/${programConfiguration.id}`;
+      const response = await this.http.put(
+        url, programConfiguration
+        // JSON.stringify(programConfiguration),
+        // {headers: this.headers}
+      ).toPromise();
+      return response as ProgramConfiguration;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
   protected handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

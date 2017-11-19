@@ -78,4 +78,38 @@ export class ProgramConfigurationModalComponent implements OnInit {
     this.programConfigurations[this.programConfigurations.length] = this.newPgmConfig;
 
   }
+
+  private findProgram(id): Program {
+    return this.programs.find(p => p.id === id);
+  }
+
+  private saveProgramConfiguration() {
+    console.log('ProgramConfigByCommComponent save');
+    console.log(this.newPgmConfig, ' program id: ', this.selectedProgram);
+
+    this.newPgmConfig.program = this.findProgram(this.selectedProgram);
+    this.newPgmConfig.communication = this.communication;
+
+    const modalResult: ProgramConfigModalResult = {
+      prevProgConfig: this.prevPgmConfig,
+      newProgConfig: this.newPgmConfig
+    };
+
+    this.configureProgramModal.close({resultTxt: this.SAVESUCCESS, modalResult: modalResult});
+  }
+
+  private updateDateValue(newDateValue, pc: ProgramConfiguration, dateType: string) {
+    console.log('ProgramConfigByCommComponent updateDateValue: ', newDateValue, pc, dateType);
+    if (dateType === 'effective') {
+      pc.effective = newDateValue;
+    }
+    if (dateType === 'expiration') {
+      pc.expiration = newDateValue;
+    }
+  }
+}
+
+export class ProgramConfigModalResult {
+  prevProgConfig: ProgramConfiguration;
+  newProgConfig: ProgramConfiguration;
 }
