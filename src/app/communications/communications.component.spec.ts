@@ -15,8 +15,9 @@ import { APP_CONFIG, AppConfig } from 'app/app.config';
 import { FakeDataApiService, DataApiService,
   Communication, FakeCommunicationsService, CommunicationsService } from 'app/shared/services/testing/fake-data-api.service';
 
-import { ProgramConfigurationService } from './services/program-configuration.service';
-import { FakeProgramConfigurationService } from './testing/fake-program-configuration.service';
+import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
+import { FakeProgramConfigurationsModalService } from './testing/fake-program-configurations-modal.service';
+
 import { CommunicationsComponent } from './communications.component';
 
 @Component({
@@ -76,14 +77,13 @@ describe('CommunicationsComponent', () => {
       ],
       providers: [
         DataApiService,
-        ProgramConfigurationService,
+        ProgramConfigurationsModalService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: DataApiService, usevalue: FakeDataApiService },
-        { provide: ProgramConfigurationService, usevalue: FakeProgramConfigurationService },
+        { provide: ProgramConfigurationsModalService, usevalue: FakeProgramConfigurationsModalService },
         { provide: Router, useClass: RouterStub}
       ],
       imports: [
-      // CommunicationsModule
         FormsModule
       ]
     })

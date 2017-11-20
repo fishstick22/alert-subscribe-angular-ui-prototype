@@ -1,18 +1,19 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { Communication }            from 'app/shared/model/communication';
 import { Program }                  from 'app/shared/model/program';
 import { ProgramConfiguration }     from 'app/shared/model/program-configuration';
-import { Communication }            from 'app/shared/model/communication';
-import { DataApiService } from 'app/shared/services/data-api.service';
+// import { DataApiService } from 'app/shared/services/data-api.service';
 
 @Component({
-  selector: 'app-program-configuration-modal',
-  templateUrl: './program-configuration-modal.component.html',
-  styleUrls: ['./program-configuration-modal.component.scss'],
+  // entry component, don't use the selector
+  // selector: 'app-program-configurations-modal',
+  templateUrl: './program-configurations-modal.component.html',
+  styleUrls: ['./program-configurations-modal.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ProgramConfigurationModalComponent implements OnInit {
+export class ProgramConfigurationsModalComponent implements OnInit {
 
   @Input() communication: Communication = new Communication(); // wtf;
   @Input() programs: Program[];
@@ -27,7 +28,7 @@ export class ProgramConfigurationModalComponent implements OnInit {
   lastPgmConfigRow: number;
 
   constructor(
-    private dataApiService: DataApiService,
+    // private dataApiService: DataApiService,
     private configureProgramModal: NgbActiveModal
   ) { }
 

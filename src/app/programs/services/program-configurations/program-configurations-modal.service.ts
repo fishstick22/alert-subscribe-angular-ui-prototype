@@ -8,13 +8,15 @@ import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
-import { ProgramConfigurationModalComponent,
-         ProgramConfigModalResult } from './program-configuration-modal.component';
+import { ProgramConfigurationsModalComponent,
+          ProgramConfigModalResult } from './program-configurations-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
-export class ProgramConfigurationService {
+export class ProgramConfigurationsModalService {
 
+  communications: Communication[];
+  program: Program;
   programs: Program[];
   programConfigurations: ProgramConfiguration[];
   closeResult: string;
@@ -24,20 +26,16 @@ export class ProgramConfigurationService {
     private modalService: NgbModal
   ) { }
 
-  async configureProgramModal(communication: Communication) {
+  async configureProgramModal(program: Program) {
     const modalOpts: NgbModalOptions = {
       size: 'lg'
     };
-    const modalRef = this.modalService.open(ProgramConfigurationModalComponent, modalOpts);
-    const modalComp: ProgramConfigurationModalComponent  = modalRef.componentInstance;
+    const modalRef = this.modalService.open(ProgramConfigurationsModalComponent, modalOpts);
+    const modalComp: ProgramConfigurationsModalComponent  = modalRef.componentInstance;
 
-    this.programs = await this.getPrograms();
-    this.programConfigurations = await this.getProgramConfigurations();
-
-    // modalComp.name = 'Configure Program';
-    modalComp.communication = communication;
-    modalComp.programs = this.programs;
-    modalComp.programConfigurations = this.findProgramConfigurations(communication.id);
+    modalComp.communications = await this.getCommunications();
+    modalComp.program = program;
+    modalComp.programConfigurations = await this.findProgramConfigurations(program);
     modalComp.modalInit();
 
     modalRef.result.then((result) => {
@@ -46,12 +44,12 @@ export class ProgramConfigurationService {
         this.closeResult = `Closed with: ${result.resultTxt}`;
         if (result.modalResult) {
           const modalResult: ProgramConfigModalResult = result.modalResult;
-          if (modalResult.prevProgConfig) {
-            this.updateProgramConfiguration(modalResult.prevProgConfig);
-          }
-          if (modalResult.newProgConfig) {
-            this.addProgramConfiguration(modalResult.newProgConfig);
-          }
+          // if (modalResult.prevProgConfig) {
+          //   this.updateProgramConfiguration(modalResult.prevProgConfig);
+          // }
+          // if (modalResult.newProgConfig) {
+          //   this.addProgramConfiguration(modalResult.newProgConfig);
+          // }
         } else {
           // this would be some kind of exception
           console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
@@ -68,16 +66,28 @@ export class ProgramConfigurationService {
     });
   }
 
-  private addProgramConfiguration(programConfiguration: ProgramConfiguration): void {
-    this.dataApiService.createProgramConfiguration(programConfiguration)
-      .then(pc => console.log('addProgramConfiguration:', programConfiguration, this.programConfigurations))
-      .catch(error =>  console.log('addProgramConfiguration error: ', error));
+  private findCommunication(id: number): Communication {
+    return this.communications.find(c => c.id === id);
   }
 
-  private updateProgramConfiguration(programConfiguration: ProgramConfiguration): void {
-    this.dataApiService.updateProgramConfiguration(programConfiguration)
-      .then(pc => console.log('updateProgramConfiguration:', programConfiguration, this.programConfigurations))
-      .catch(error =>  console.log('updateProgramConfiguration error: ', error));
+  private async findProgramConfigurations(selectedProgram: Program) { // : ProgramConfiguration[] {
+    await this.getProgramConfigurations();
+    return this.programConfigurations.filter(pc => {
+      if (typeof(pc.program) === 'number') {
+        if (pc.program === selectedProgram.id) {
+          pc.program = selectedProgram;
+          if (typeof(pc.communication) === 'number') {
+            pc.communication = this.findCommunication(<number>pc.communication);
+          }
+          return true;
+        } else { return false; }
+      } else if (pc.program.id === selectedProgram.id) {
+        if (typeof(pc.communication) === 'number') {
+          pc.communication = this.findCommunication(<number>pc.communication);
+        }
+        return true;
+      }
+    });
   }
 
   private getDismissReason(reason: any): string {
@@ -90,21 +100,13 @@ export class ProgramConfigurationService {
     }
   }
 
-  private findProgram(id: number): Program {
-    return this.programs.find(p => p.id === id);
-  }
-
-  private findProgramConfigurations(id): ProgramConfiguration[] {
-    return this.programConfigurations.filter(pc => {
-      if (pc.communication.id === id) {
-        console.log(pc, 'Program: ', typeof(pc.program));
-        if (typeof(pc.program) === 'number') {
-          const programId = <number> pc.program;
-          pc.program = this.findProgram(programId);
-        }
-        return true;
-      }
-    });
+  async getCommunications() {
+    try {
+      this.communications = await this.dataApiService.getCommunications();
+      return this.communications;
+    } catch (error) {
+      console.log('getCommunications error: ', error);
+    }
   }
 
   async getPrograms() {

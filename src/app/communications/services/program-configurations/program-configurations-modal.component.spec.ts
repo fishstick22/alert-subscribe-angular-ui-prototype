@@ -1,8 +1,7 @@
 import { Component, Injectable, Input } from '@angular/core';
 import { FormsModule }    from '@angular/forms';
-import { NgbModule }              from '@ng-bootstrap/ng-bootstrap';
-
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 // import { Program }                  from 'app/shared/model/program';
@@ -15,7 +14,7 @@ import { DataApiService, FakeDataApiService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService
 } from 'app/shared/services/testing/fake-data-api.service';
 
-import { ProgramConfigurationModalComponent } from './program-configuration-modal.component';
+import { ProgramConfigurationsModalComponent } from './program-configurations-modal.component';
 
 @Component({
   selector: 'app-select-channel-priority',
@@ -59,15 +58,15 @@ export class FakeNgbActiveModal {
 }
 
 describe('ProgramConfigurationModalComponent', () => {
-  let component: ProgramConfigurationModalComponent;
-  let fixture: ComponentFixture<ProgramConfigurationModalComponent>;
+  let component: ProgramConfigurationsModalComponent;
+  let fixture: ComponentFixture<ProgramConfigurationsModalComponent>;
 
   const communication: Communication = new Communication(260, 'Refill Available Notice');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ProgramConfigurationModalComponent,
+        ProgramConfigurationsModalComponent,
         SelectChannelPriorityStubComponent,
         SelectChannelMandatoryStubComponent,
         DateEffExpStubComponent
@@ -84,7 +83,7 @@ describe('ProgramConfigurationModalComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProgramConfigurationModalComponent);
+    fixture = TestBed.createComponent(ProgramConfigurationsModalComponent);
     component = fixture.componentInstance;
     // https://stackoverflow.com/questions/36654834/angular2-unit-test-with-input
     component.communication = communication;
