@@ -17,7 +17,7 @@
     <tr *ngFor="let program of programs; let i = index"
          title="" 
         (click)="setClickedRow(i)" 
-        [class.table-success]="i == selectedRow">
+        [class.table-success]="i === selectedRow">
       <th scope="row"><span class="badge badge-secondary">{{program.id}}</span></th>
       <td><span>{{program.name}}</span></td>
       <td><span>{{program.description}}</span></td>

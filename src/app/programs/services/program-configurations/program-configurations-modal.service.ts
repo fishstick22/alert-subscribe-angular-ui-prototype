@@ -26,6 +26,12 @@ export class ProgramConfigurationsModalService {
     private modalService: NgbModal
   ) { }
 
+  private addProgramConfiguration(programConfiguration: ProgramConfiguration): void {
+    this.dataApiService.createProgramConfiguration(programConfiguration)
+      .then(pc => console.log('addProgramConfiguration:', programConfiguration, this.programConfigurations))
+      .catch(error =>  console.log('addProgramConfiguration error: ', error));
+  }
+
   async configureProgramModal(program: Program) {
     const modalOpts: NgbModalOptions = {
       size: 'lg'
@@ -47,9 +53,11 @@ export class ProgramConfigurationsModalService {
           // if (modalResult.prevProgConfig) {
           //   this.updateProgramConfiguration(modalResult.prevProgConfig);
           // }
-          // if (modalResult.newProgConfig) {
-          //   this.addProgramConfiguration(modalResult.newProgConfig);
-          // }
+          if (modalResult.newProgramConfigs) {
+            for (let i = 0; i < modalResult.newProgramConfigs.length; i++) {
+              this.addProgramConfiguration(modalResult.newProgramConfigs[i]);
+            }
+          }
         } else {
           // this would be some kind of exception
           console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);

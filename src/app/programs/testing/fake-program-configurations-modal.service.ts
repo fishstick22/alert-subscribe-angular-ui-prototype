@@ -66,3 +66,22 @@ export class DateEffExpStubComponent {
 export class FakeNgbActiveModal {
 
 }
+
+@Component({
+  selector: 'app-comm-action-table',
+  template: `dummy testing component`
+})
+export class CommActionTableStubComponent  {
+  @Input() configureState: string;
+  @Input() communications: Communication[];
+  @Input() displayComm: Communication[];
+  @Input() supressComm: number[] = [];
+  @Input() displayCommStartEmpty: boolean = true;
+  @Input() displayClient: string = ''; // = 'Client';
+  @Input() displayProgram: string = ''; // = 'Program';
+  @Input() showCommId: boolean = true;
+  @Input() showCommName: boolean = true;
+  @Input() showCommDesc: boolean = false;
+  @Input() showStatus: boolean = false;
+  @Input() showAction: boolean = true;
+}

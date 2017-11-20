@@ -35,7 +35,11 @@ export class ProgramsComponent implements OnInit {
   }
 
   private setClickedRow(index) {
-    this.selectedRow = index;
+    if (this.selectedRow === index || this.selectedRow === null ) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = index;
+    }
   }
 
   configureProgram(progConfigAction: ProgramConfigAction) {
@@ -48,6 +52,7 @@ export class ProgramsComponent implements OnInit {
     if (progConfigAction.configType === 'communications') {
       this.configureProgramCommunications(progConfigAction.progId);
     }
+    this.setClickedRow(null);
   }
 
   private configureProgramCommunications(progId) {

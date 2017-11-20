@@ -57,18 +57,71 @@ export class ProgramConfigurationsModalComponent implements OnInit {
     this.tomorrow.setDate(this.today.getDate() + 1);
     this.configureState = 'start';
 
-    this.supressComm = this.findExistingComms();
+    this.supressComm = this.findExistingConfiguredComms();
   }
 
-  findExistingComms(): number[] {
+  private addProgramConfig(communication?: Communication) {
+
+    if (this.newProgramConfig && this.configureState === 'pick') {
+      this.newProgramConfig.communication = communication;
+      // this.newProgramConfigs[this.newProgramConfigs.length] = this.newProgramConfig;
+      this.supressComm.push(communication.id);
+      // this.configureState = 'continue';
+      // this.newProgramConfig = null;
+      this.programDropEnabled = false;
+    }
+
+    if (this.configureState === 'start' || this.configureState === 'continue') {
+      // first time through
+      this.lastProgramConfigRow = this.programConfigurations.length;
+      if (this.lastProgramConfigRow === 0) {
+        this.newProgramConfig = new ProgramConfiguration();
+        this.newProgramConfig.effective =  // TODO shared util method
+            this.tomorrow.getFullYear() + '-' +
+          (this.tomorrow.getMonth() + 1) + '-' +
+            this.tomorrow.getDate();
+      } else {
+        // clone setting from previous config row
+        this.prevProgramConfig = this.programConfigurations[this.lastProgramConfigRow - 1];
+        this.newProgramConfig = new ProgramConfiguration(this.prevProgramConfig);
+        this.newProgramConfig.effective = this.prevProgramConfig.effective;
+      }
+      this.programConfigurations[this.programConfigurations.length] = this.newProgramConfig;
+      this.newProgramConfigs[this.newProgramConfigs.length] = this.newProgramConfig;
+      this.newProgramConfig.expiration = '9999-12-31';
+      this.newProgramConfig.program = this.program;
+
+      this.newProgramConfig.communication = new Communication();
+
+      this.configureState = 'pick';
+      this.programDropEnabled = true;
+    } else {
+      if (this.newProgramConfig && this.configureState === 'pick') {
+        this.configureState = 'continue';
+      }
+    }
+  }
+
+  private communicationDrop(dragEvent) {
+    console.log('ProgramConfigComponent communicationDrop: ', dragEvent);
+    if (dragEvent.dragData && typeof(dragEvent.dragData.id) === 'number' ) {
+      this.addProgramConfig(this.findCommunication(dragEvent.dragData.id));
+    }
+  }
+
+  private findCommunication(id): Communication {
+    return this.communications.find(c => c.id === id);
+  }
+
+  private findExistingConfiguredComms(): number[] {
     const existing: number[] = [];
-    // for (let i = 0; i < this.programConfigurations.length; i++) {
-    //   existing.push(this.programConfigurations[i].communication.id);
-    // }
+    for (let i = 0; i < this.programConfigurations.length; i++) {
+      existing.push(this.programConfigurations[i].communication.id);
+    }
     return existing;
   }
 
-  saveProgramConfiguration() {
+  private saveProgramConfiguration() {
     console.log('ProgramConfigComponent save');
     console.log(this.newProgramConfig, ' program id: ', this.program);
 
@@ -78,6 +131,7 @@ export class ProgramConfigurationsModalComponent implements OnInit {
 
     this.configureProgramModal.close({resultTxt: this.SAVESUCCESS, modalResult: modalResult});
   }
+
   private updateDateValue(newDateValue, pc: ProgramConfiguration, dateType: string) {
     console.log('ProgramConfigByCommComponent updateDateValue: ', newDateValue, pc, dateType);
     if (dateType === 'effective') {

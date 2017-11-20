@@ -13,6 +13,7 @@ import { SelectChannelPriorityStubComponent,
   SelectChannelMandatoryStubComponent,
   DateEffExpStubComponent,
   FakeNgbActiveModal,
+  CommActionTableStubComponent,
   DraggableDirective,
   DroppableDirective,
   DragDropService, DropEvent
@@ -31,6 +32,7 @@ describe('ProgramConfigurationsModalComponent', () => {
         SelectChannelPriorityStubComponent,
         SelectChannelMandatoryStubComponent,
         DateEffExpStubComponent,
+        CommActionTableStubComponent,
         DraggableDirective,
         DroppableDirective
       ],

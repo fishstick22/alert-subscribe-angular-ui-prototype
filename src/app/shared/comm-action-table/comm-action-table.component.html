@@ -31,7 +31,7 @@ appSortableTable (sorted)="onSorted($event)">
   <tr appDraggable 
       [draggable] *ngFor="let communication of displayComm; let i = index"
       [dragData]="communication" [dragClass]="'drag-over'"  
-      (click)="setClickedRow(i)" [class.table-info]="i == selectedRow"
+      (click)="setClickedRow(i)" [class.table-info]="i === selectedRow"
       title="Click or Drag to configure {{communication.name}} for  {{displayProgram}}{{displayClient}}">
     <td *ngIf="showCommId">
       <span class="badge badge-secondary clickable"
