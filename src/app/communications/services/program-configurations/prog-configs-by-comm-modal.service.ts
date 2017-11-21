@@ -8,12 +8,12 @@ import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
-import { ProgramConfigurationsModalComponent,
-         ProgramConfigModalResult } from './program-configurations-modal.component';
+import { ProgramConfigsByCommModalComponent,
+         ProgramConfigModalResult } from './prog-configs-by-comm-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
-export class ProgramConfigurationsModalService {
+export class ProgramConfigsByCommModalService {
 
   programs: Program[];
   programConfigurations: ProgramConfiguration[];
@@ -28,8 +28,8 @@ export class ProgramConfigurationsModalService {
     const modalOpts: NgbModalOptions = {
       size: 'lg'
     };
-    const modalRef = this.modalService.open(ProgramConfigurationsModalComponent, modalOpts);
-    const modalComp: ProgramConfigurationsModalComponent  = modalRef.componentInstance;
+    const modalRef = this.modalService.open(ProgramConfigsByCommModalComponent, modalOpts);
+    const modalComp: ProgramConfigsByCommModalComponent  = modalRef.componentInstance;
 
     this.programs = await this.getPrograms();
     this.programConfigurations = await this.getProgramConfigurations();

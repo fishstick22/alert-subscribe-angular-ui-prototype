@@ -9,11 +9,11 @@ import { ProgramConfiguration }     from 'app/shared/model/program-configuration
 @Component({
   // entry component, don't use the selector
   // selector: 'app-program-configurations-modal',
-  templateUrl: './program-configurations-modal.component.html',
-  styleUrls: ['./program-configurations-modal.component.scss'],
+  templateUrl: './prog-configs-by-comm-modal.component.html',
+  styleUrls: ['./prog-configs-by-comm-modal.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ProgramConfigurationsModalComponent implements OnInit {
+export class ProgramConfigsByCommModalComponent implements OnInit {
 
   @Input() communication: Communication = new Communication(); // wtf;
   @Input() programs: Program[];

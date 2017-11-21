@@ -3,7 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Communication, CommunicationConfigAction } from 'app/shared/model/communication';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
-import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
+import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
 
 @Component({
   selector: 'app-communications',
@@ -25,7 +25,7 @@ export class CommunicationsComponent implements OnInit {
 
   constructor(
     private dataApiService: DataApiService,
-    private programConfigurationService: ProgramConfigurationsModalService
+    private programConfigurationService: ProgramConfigsByCommModalService
   ) { }
 
   async ngOnInit() {

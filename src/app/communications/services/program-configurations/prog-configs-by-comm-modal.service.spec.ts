@@ -7,7 +7,7 @@ import { NgbModal, ModalDismissReasons,
 import { FakeDataApiService, DataApiService,
   Program, FakeProgramsService, ProgramsService } from 'app/shared/services/testing/fake-data-api.service';
 
-import { ProgramConfigurationsModalService } from './program-configurations-modal.service';
+import { ProgramConfigsByCommModalService } from './prog-configs-by-comm-modal.service';
 
 @Injectable()
 export class FakeNgbModal {}
@@ -16,7 +16,7 @@ describe('ProgramConfigurationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ProgramConfigurationsModalService,
+        ProgramConfigsByCommModalService,
         DataApiService,
         NgbModal,
         { provide: NgbModal, usevalue: FakeNgbModal },
@@ -25,7 +25,7 @@ describe('ProgramConfigurationService', () => {
     });
   });
 
-  it('should be created', inject([ProgramConfigurationsModalService], (service: ProgramConfigurationsModalService) => {
+  it('should be created', inject([ProgramConfigsByCommModalService], (service: ProgramConfigsByCommModalService) => {
     expect(service).toBeTruthy();
   }));
 });

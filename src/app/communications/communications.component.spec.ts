@@ -15,8 +15,8 @@ import { APP_CONFIG, AppConfig } from 'app/app.config';
 import { FakeDataApiService, DataApiService,
   Communication, FakeCommunicationsService, CommunicationsService } from 'app/shared/services/testing/fake-data-api.service';
 
-import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
-import { FakeProgramConfigurationsModalService } from './testing/fake-program-configurations-modal.service';
+import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
+import { FakeProgramConfigsByCommModalService } from './testing/fake-prog-configs-by-comm-modal.service';
 
 import { CommunicationsComponent } from './communications.component';
 
@@ -77,10 +77,10 @@ describe('CommunicationsComponent', () => {
       ],
       providers: [
         DataApiService,
-        ProgramConfigurationsModalService,
+        ProgramConfigsByCommModalService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: DataApiService, usevalue: FakeDataApiService },
-        { provide: ProgramConfigurationsModalService, usevalue: FakeProgramConfigurationsModalService },
+        { provide: ProgramConfigsByCommModalService, usevalue: FakeProgramConfigsByCommModalService },
         { provide: Router, useClass: RouterStub}
       ],
       imports: [

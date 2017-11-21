@@ -13,7 +13,6 @@ export { DropEvent } from 'app/shared/directives/drag-drop/drop-event.model';
 import { Communication }            from 'app/shared/model/communication';
 import { Program }                  from 'app/shared/model/program';
 import { ProgramConfiguration }     from 'app/shared/model/program-configuration';
-
 import { DraggableDirective } from 'app/shared/directives/drag-drop/draggable.directive';
 import { DroppableDirective } from 'app/shared/directives/drag-drop/droppable.directive';
 import { ClickOutsideDirective } from 'app/shared/directives/click-outside.directive';
@@ -22,11 +21,10 @@ import { DragDropService } from 'app/shared/services/drag-drop.service';
 import { DropEvent } from 'app/shared/directives/drag-drop/drop-event.model';
 
 @Injectable()
-export class FakeProgramConfigurationsModalService {
+export class FakeProgramConfigurationsModalService {}
 
-  constructor() { }
-
-}
+@Injectable()
+export class FakeNgbActiveModal {}
 
 @Component({
   selector: 'app-select-channel-priority',
@@ -60,11 +58,6 @@ export class DateEffExpStubComponent {
   @Input() dateType: string;
   @Input() progConfig: ProgramConfiguration;
   @Input() lastConfigRow: boolean;
-}
-
-@Injectable()
-export class FakeNgbActiveModal {
-
 }
 
 @Component({

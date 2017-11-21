@@ -4,17 +4,15 @@ export { Communication }            from 'app/shared/model/communication';
 export { Program }                  from 'app/shared/model/program';
 export { ProgramConfiguration }     from 'app/shared/model/program-configuration';
 
-
 import { Communication }            from 'app/shared/model/communication';
 import { Program }                  from 'app/shared/model/program';
 import { ProgramConfiguration }     from 'app/shared/model/program-configuration';
 
 @Injectable()
-export class FakeProgramConfigurationsModalService {
+export class FakeProgramConfigsByCommModalService {}
 
-  constructor() { }
-
-}
+@Injectable()
+export class FakeNgbActiveModal {}
 
 @Component({
   selector: 'app-select-channel-priority',
@@ -48,9 +46,4 @@ export class DateEffExpStubComponent {
   @Input() dateType: string;
   @Input() progConfig: ProgramConfiguration;
   @Input() lastConfigRow: boolean;
-}
-
-@Injectable()
-export class FakeNgbActiveModal {
-
 }

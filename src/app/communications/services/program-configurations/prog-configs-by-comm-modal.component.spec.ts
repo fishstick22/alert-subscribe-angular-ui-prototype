@@ -14,7 +14,7 @@ import { DataApiService, FakeDataApiService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService
 } from 'app/shared/services/testing/fake-data-api.service';
 
-import { ProgramConfigurationsModalComponent } from './program-configurations-modal.component';
+import { ProgramConfigsByCommModalComponent } from './prog-configs-by-comm-modal.component';
 
 @Component({
   selector: 'app-select-channel-priority',
@@ -58,15 +58,15 @@ export class FakeNgbActiveModal {
 }
 
 describe('ProgramConfigurationModalComponent', () => {
-  let component: ProgramConfigurationsModalComponent;
-  let fixture: ComponentFixture<ProgramConfigurationsModalComponent>;
+  let component: ProgramConfigsByCommModalComponent;
+  let fixture: ComponentFixture<ProgramConfigsByCommModalComponent>;
 
   const communication: Communication = new Communication(260, 'Refill Available Notice');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ProgramConfigurationsModalComponent,
+        ProgramConfigsByCommModalComponent,
         SelectChannelPriorityStubComponent,
         SelectChannelMandatoryStubComponent,
         DateEffExpStubComponent
@@ -83,7 +83,7 @@ describe('ProgramConfigurationModalComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProgramConfigurationsModalComponent);
+    fixture = TestBed.createComponent(ProgramConfigsByCommModalComponent);
     component = fixture.componentInstance;
     // https://stackoverflow.com/questions/36654834/angular2-unit-test-with-input
     component.communication = communication;
