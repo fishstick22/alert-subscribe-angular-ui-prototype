@@ -1,12 +1,12 @@
-// re-export for tester convenience
-export { ProgramConfiguration } from 'app/shared/model/program-configuration';
-export { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
-
 
 import { Program }              from 'app/shared/model/program';
 import { Communication }        from 'app/shared/model/communication';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 import { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
+
+// re-export for tester convenience
+export { ProgramConfiguration } from 'app/shared/model/program-configuration';
+export { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
 
 const prog = new Program(1, 'Prescription Alerts');
 const comm = new Communication(261, 'Order Received');
@@ -35,9 +35,6 @@ export class FakeProgramConfigurationsService extends ProgramConfigurationsServi
 
   async getProgramConfigurationsThruApi(): Promise<ProgramConfiguration[]> {
     try {
-      // const response = await this.http.get(this.commApiEndpoint).toPromise();
-      // return response.json() as ProgramConfiguration[];
-      // return response as ProgramConfiguration[];
       return this.lastPromise = Promise.resolve<ProgramConfiguration[]>(this.programs);
     } catch (error) {
       this.handleError(error);

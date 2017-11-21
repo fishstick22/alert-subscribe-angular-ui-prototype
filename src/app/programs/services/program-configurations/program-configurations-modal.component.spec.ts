@@ -9,10 +9,11 @@ import { DataApiService, FakeDataApiService,
   Program, ProgramsService, FakeProgramsService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService
 } from 'app/shared/services/testing/fake-data-api.service';
-import { SelectChannelPriorityStubComponent,
+import {
+  FakeNgbActiveModal,
+  SelectChannelPriorityStubComponent,
   SelectChannelMandatoryStubComponent,
   DateEffExpStubComponent,
-  FakeNgbActiveModal,
   CommActionTableStubComponent,
   DraggableDirective,
   DroppableDirective,

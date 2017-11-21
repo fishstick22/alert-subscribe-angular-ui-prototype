@@ -1,10 +1,8 @@
 import { Client }               from './client';
 import { Communication }        from './communication';
-// import { ICommunicationConfig } from './icomm-config';
+import { CommunicationConfiguration } from './communication-configuration';
 
-// export class ClientConfiguration implements ICommunicationConfig {
-
-export class ClientConfiguration {
+export class ClientConfiguration implements CommunicationConfiguration {
   id: number;
   name: string;
   description: string;

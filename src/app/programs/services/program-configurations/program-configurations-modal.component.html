@@ -77,11 +77,11 @@
                     [actualStaticValue]="cc.chanMandatory"
                     [lastConfigRow]="i === lastProgramConfigRow" ></app-select-channel-mandatory></td>
               <td><app-date-eff-exp
-                    dateType="effective" [progConfig]="cc"
+                    dateType="effective" [commConfig]="cc"
                     [lastConfigRow]="i === lastProgramConfigRow"
                     (newDateValue)="updateDateValue($event, cc, 'effective')"></app-date-eff-exp></td>
               <td><app-date-eff-exp
-                    dateType="expiration" [progConfig]="cc"
+                    dateType="expiration" [commConfig]="cc"
                     [lastConfigRow]="i === lastProgramConfigRow"
                     (newDateValue)="updateDateValue($event, cc, 'expiration')"></app-date-eff-exp></td>
             </tr>

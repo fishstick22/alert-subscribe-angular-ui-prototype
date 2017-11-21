@@ -1,7 +1,7 @@
 import { Component, OnInit, Input,
   Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
-import { ProgramConfiguration }     from 'app/shared/model/program-configuration';
+import { CommunicationConfiguration } from 'app/shared/model/communication-configuration';
 
 @Component({
   selector: 'app-date-eff-exp',
@@ -12,7 +12,7 @@ import { ProgramConfiguration }     from 'app/shared/model/program-configuration
 export class DateEffExpComponent implements OnInit {
 
   @Input() dateType: string;
-  @Input() progConfig: ProgramConfiguration;
+  @Input() commConfig: CommunicationConfiguration;
 
   @Input() lastConfigRow: boolean;
 

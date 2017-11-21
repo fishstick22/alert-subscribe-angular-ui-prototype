@@ -33,7 +33,7 @@ export class ProgramConfigsByCommModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('ProgramConfigurationModalComponent ngOnInit: ', this.programs);
+    console.log('ProgramConfigurationsModalComponent ngOnInit: ', this.programs);
   }
 
   modalInit() {

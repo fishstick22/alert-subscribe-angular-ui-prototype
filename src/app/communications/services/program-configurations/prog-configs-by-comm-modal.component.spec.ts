@@ -4,60 +4,27 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-// import { Program }                  from 'app/shared/model/program';
-// import { ProgramConfiguration }     from 'app/classes/model/program-configuration';
-// import { Communication }            from 'app/shared/model/communication';
-// import { DataApiService } from 'app/shared/services/data-api.service';
 import { DataApiService, FakeDataApiService,
   Communication, CommunicationsService, FakeCommunicationsService,
   Program, ProgramsService, FakeProgramsService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService
 } from 'app/shared/services/testing/fake-data-api.service';
 
+import {
+  FakeNgbActiveModal,
+  SelectChannelPriorityStubComponent,
+  SelectChannelMandatoryStubComponent,
+  DateEffExpStubComponent,
+  CommActionTableStubComponent,
+  DraggableDirective,
+  DroppableDirective,
+  DragDropService, DropEvent
+} from 'app/communications/testing/fake-prog-configs-by-comm-modal.service';
+
 import { ProgramConfigsByCommModalComponent } from './prog-configs-by-comm-modal.component';
 
-@Component({
-  selector: 'app-select-channel-priority',
-  template: ``
-})
-export class SelectChannelPriorityStubComponent {
-  @Input() id: string;
-  @Input() name: string;
-  @Input() actualStaticValue: string; // sometimes you just do stuff because
-                                      // a problem is driving you nuts
-  @Input() lastConfigRow: boolean;
-}
 
-@Component({
-  selector: 'app-select-channel-mandatory',
-  template: ``
-})
-export class SelectChannelMandatoryStubComponent {
-  @Input() id: string;
-  @Input() name: string;
-  @Input() actualStaticValue: string; // sometimes you just do stuff because
-                                      // a problem is driving you nuts
-  @Input() lastConfigRow: boolean;
-}
-
-@Component({
-  selector: 'app-date-eff-exp',
-  template: ``
-})
-export class DateEffExpStubComponent {
-
-  @Input() dateType: string;
-  @Input() progConfig: ProgramConfiguration;
-
-  @Input() lastConfigRow: boolean;
-}
-
-@Injectable()
-export class FakeNgbActiveModal {
-
-}
-
-describe('ProgramConfigurationModalComponent', () => {
+describe('ProgramConfigurationsModalComponent', () => {
   let component: ProgramConfigsByCommModalComponent;
   let fixture: ComponentFixture<ProgramConfigsByCommModalComponent>;
 

@@ -67,11 +67,11 @@
               [actualStaticValue]="pc.chanMandatory"
               [lastConfigRow]="i === lastPgmConfigRow" ></app-select-channel-mandatory></td>
         <td><app-date-eff-exp
-              dateType="effective" [progConfig]="pc"
+              dateType="effective" [commConfig]="pc"
               [lastConfigRow]="i === lastPgmConfigRow"
               (newDateValue)="updateDateValue($event, pc, 'effective')"></app-date-eff-exp></td>
         <td><app-date-eff-exp
-              dateType="expiration" [progConfig]="pc"
+              dateType="expiration" [commConfig]="pc"
               [lastConfigRow]="i === lastPgmConfigRow"
               (newDateValue)="updateDateValue($event, pc, 'expiration')"></app-date-eff-exp></td>
       </tr>

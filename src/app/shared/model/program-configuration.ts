@@ -1,8 +1,8 @@
 import { Program }              from './program';
 import { Communication }        from './communication';
-// import { ICommunicationConfig } from './icomm-config';
+import { CommunicationConfiguration } from './communication-configuration';
 
-export class ProgramConfiguration { // implements ICommunicationConfig {
+export class ProgramConfiguration implements CommunicationConfiguration {
 
   id: number;
   name: string;

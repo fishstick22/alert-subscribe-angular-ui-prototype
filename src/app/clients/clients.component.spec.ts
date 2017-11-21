@@ -6,25 +6,19 @@ import { FakeDataApiService, DataApiService,
 
 import { ClientConfigurationsModalService } from './services/client-configurations/client-configurations-modal.service';
 import { FakeClientConfigurationsModalService } from './testing/fake-client-configurations-modal.service';
+import { SelectChannelPriorityStubComponent,
+  SelectChannelMandatoryStubComponent,
+  DateEffExpStubComponent,
+  FakeNgbActiveModal,
+  ClientActionTableStubComponent,
+  CommActionTableStubComponent,
+  DraggableDirective,
+  DroppableDirective,
+  DragDropService, DropEvent
+} from 'app/clients/testing/fake-client-configurations-modal.service';
 
 import { ClientsComponent } from './clients.component';
 
-@Component({
-  selector: 'app-client-action-table',
-  template: 'dummy component for testing'
-})
-export class ClientActionTableStubComponent {
-
-  @Input() clients: Client[];
-  @Input() displayClient: Client[];
-  @Input() displayClientStartEmpty: boolean = true;
-  @Input() displayCommunication: string = 'Communication';
-  @Input() showClientId: boolean = true;
-  @Input() showClientCode: boolean = true;
-  @Input() showClientName: boolean = true;
-  @Input() showStatus: boolean = false;
-  @Input() showAction: boolean = true;
-}
 
 describe('ClientsComponent', () => {
   let component: ClientsComponent;
