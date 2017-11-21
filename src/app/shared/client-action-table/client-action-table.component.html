@@ -1,0 +1,54 @@
+<table class="table table-responsive table-sm table-striped table-bordered table-hover"
+appSortableTable (sorted)="onSorted($event)">
+<caption><span *ngIf="displayClientStartEmpty">
+  Clients List begins empty: start typing in the search boxes to find Clients  
+</span></caption>
+<thead>
+<tr class="bg-gradient-dark text-white"><!-- column sorting header row -->
+  <th *ngIf="showClientId"><app-sortable-column columnName="id" sortDirection="asc">ID</app-sortable-column></th>
+  <th *ngIf="showClientCode"><app-sortable-column columnName="code">Code</app-sortable-column></th>
+  <th *ngIf="showClientName"><app-sortable-column columnName="name">Name</app-sortable-column></th>
+  <th *ngIf="showStatus">Status</th>
+  <th *ngIf="showAction">Actions</th>
+</tr>
+<tr class="thead-light"><!-- search/filter header row -->
+  <th width="10%" *ngIf="showClientId">
+    <input type="text" id="seachClientId" class="form-control form-control-sm" placeholder="search"
+           name="clientId" [(ngModel)]="clientIdSearch" (keyup)="searchClientId()"/>
+  </th>
+  <th width="15%" *ngIf="showClientCode">
+    <input type="text" id="seachDescription" class="form-control form-control-sm" placeholder="search Code"
+           name="clientCode" [(ngModel)]="clientCodeSearch" (keyup)="searchClientCode()"/>
+  </th>
+  <th *ngIf="showClientName">
+    <input type="text" id="seachName" class="form-control form-control-sm" placeholder="search Name"
+           name="clientName" [(ngModel)]="clientNameSearch" (keyup)="searchClientName()"/>
+  </th>
+  <th *ngIf="showStatus"></th>
+  <th *ngIf="showAction"></th>
+</tr>
+</thead>
+<tbody>
+<tr appDraggable
+    [draggable] *ngFor="let client of displayClient; let i = index"
+    [dragData]="client" [dragClass]="'drag-over'"  
+    (click)="setClickedRow(i); " [class.table-info]="i == selectedRow"
+     title="Click or Drag to configure {{client.name}} for Communication {{displayCommunication}}" >
+  <td *ngIf="showClientId">
+    <span class="badge badge-secondary clickable"
+      (click)="selectClient(client)">{{client.id}}</span></td>
+  <td *ngIf="showClientCode"><span>{{client.code}}</span></td>
+  <td *ngIf="showClientName"><span>{{client.name}}</span></td>
+  <td *ngIf="showStatus"><span *ngIf="client.id === 142"><i class="fa fa-check" aria-hidden="true" title="{{client.name}} Configured (Date)"></i></span></td>
+  <td *ngIf="showAction">
+    <app-client-actions-popover
+      [clientId]="client.id"
+      [clientName]="client.name"
+      (configAction)="configureClient($event)">
+      <i class="fa fa-pencil-square-o clickable" aria-hidden="true" title="Click to configure {{client.name}} Communication settings"></i>
+  </app-client-actions-popover>
+  </td>
+</tr>
+</tbody>
+<tfoot></tfoot>
+</table>

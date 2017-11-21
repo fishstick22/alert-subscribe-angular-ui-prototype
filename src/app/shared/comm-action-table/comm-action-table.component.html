@@ -1,6 +1,8 @@
 <table class="table table-responsive table-sm table-striped table-bordered table-hover"
 appSortableTable (sorted)="onSorted($event)">
-<caption></caption>
+<caption><span *ngIf="displayCommStartEmpty">
+  Communications List begins empty: start typing in the search boxes to find Communications  
+</span></caption>
 <thead>
   <tr class="bg-gradient-dark text-white"><!-- column sorting header row -->
     <th *ngIf="showCommId"><app-sortable-column columnName="id" sortDirection="asc">ID</app-sortable-column></th>

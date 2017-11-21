@@ -12,6 +12,11 @@ import { FakeProgramsService,
 import { FakeProgramConfigurationsService,
     ProgramConfiguration, ProgramConfigurationsService } from './testing/fake-program-configurations.service';
 
+import { FakeClientsService,
+  Client, ClientsService } from './testing/fake-clients.service';
+import { FakeClientConfigurationsService,
+    ClientConfiguration, ClientConfigurationsService } from './testing/fake-client-configurations.service';
+
 const communication: Communication = new Communication(260, 'Refill Available Notice');
 const program: Program = new Program(1, 'Prescription Alerts');
 
@@ -23,10 +28,14 @@ describe('DataApiService', () => {
         CommunicationsService,
         ProgramsService,
         ProgramConfigurationsService,
+        ClientsService,
+        ClientConfigurationsService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: CommunicationsService, usevalue: FakeCommunicationsService },
         { provide: ProgramsService, usevalue: FakeProgramsService },
-        { provide: ProgramConfigurationsService, usevalue: FakeProgramConfigurationsService }
+        { provide: ProgramConfigurationsService, usevalue: FakeProgramConfigurationsService },
+        { provide: ClientsService, usevalue: FakeClientsService },
+        { provide: ClientConfigurationsService, usevalue: FakeClientConfigurationsService }
       ]
     });
   });

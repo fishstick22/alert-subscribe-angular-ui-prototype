@@ -35,6 +35,10 @@ import { DraggableDirective } from './directives/drag-drop/draggable.directive';
 import { DroppableDirective } from './directives/drag-drop/droppable.directive';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { SortableTableDirective } from './directives/sortable-table.directive';
+import { ClientsService } from './services/clients/clients.service';
+import { ClientActionTableComponent } from './client-action-table/client-action-table.component';
+import { ClientConfigurationsService } from './services/client-configurations/client-configurations.service';
+import { ClientActionsPopoverComponent } from './client-actions-popover/client-actions-popover.component';
 
 
 @NgModule({
@@ -49,6 +53,8 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
   ],
   declarations: [
     routedComponents,
+    ClientActionTableComponent,
+    ClientActionsPopoverComponent,
     CommActionTableComponent,
     CommActionsPopoverComponent,
     DateEffExpComponent,
@@ -61,18 +67,22 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     DraggableDirective,
     DroppableDirective,
     ClickOutsideDirective,
-    SortableTableDirective,
+    SortableTableDirective
   ],
   providers: [
     HttpClientModule,
     CommunicationsService,
     ProgramsService,
-    ProgramConfigurationsService
+    ProgramConfigurationsService,
+    ClientsService,
+    ClientConfigurationsService
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ClientActionTableComponent,
+    ClientActionsPopoverComponent,
     CommActionTableComponent,
     CommActionsPopoverComponent,
     DateEffExpComponent,

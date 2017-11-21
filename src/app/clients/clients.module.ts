@@ -6,6 +6,8 @@ import { routedComponents, ClientsRoutingModule } from './clients-routing.module
 // shared
 import { SharedModule } from 'app/shared/shared.module';
 import { ClientsComponent } from './clients.component';
+import { ClientConfigurationsModalService } from './services/client-configurations/client-configurations-modal.service';
+import { ClientConfigurationsModalComponent } from './services/client-configurations/client-configurations-modal.component';
 
 @NgModule({
   imports: [
@@ -13,6 +15,7 @@ import { ClientsComponent } from './clients.component';
     ClientsRoutingModule,
     SharedModule, // supposed to provide CommActionTableComponent
   ],
-  declarations: [routedComponents, ClientsComponent],
+  declarations: [routedComponents, ClientsComponent, ClientConfigurationsModalComponent],
+  providers: [ClientConfigurationsModalService],
 })
 export class ClientsModule { }

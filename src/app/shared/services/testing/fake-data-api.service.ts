@@ -6,6 +6,10 @@ export { FakeProgramsService,
     Program, ProgramsService } from './fake-programs.service';
 export { FakeProgramConfigurationsService,
     ProgramConfiguration, ProgramConfigurationsService } from './fake-program-configurations.service';
+export { FakeClientsService,
+  Client, ClientsService } from './fake-clients.service';
+export { FakeClientConfigurationsService,
+    ClientConfiguration, ClientConfigurationsService } from './fake-client-configurations.service';
 
 export { DataApiService } from 'app/shared/services/data-api.service';
 
@@ -16,6 +20,10 @@ import { FakeProgramsService,
 import { FakeProgramConfigurationsService,
         ProgramConfiguration, ProgramConfigurationsService } from './fake-program-configurations.service';
 import { DataApiService } from 'app/shared/services/data-api.service';
+import { FakeClientsService,
+  Client, ClientsService } from './fake-clients.service';
+import { FakeClientConfigurationsService,
+    ClientConfiguration, ClientConfigurationsService } from './fake-client-configurations.service';
 
 @Injectable()
 export class FakeDataApiService extends DataApiService {
@@ -25,11 +33,11 @@ export class FakeDataApiService extends DataApiService {
 
   constructor(
     communicationsService: FakeCommunicationsService,
-    // private clientService: ClientService,
-    // private clientConfigurationService: ClientConfigurationService,
+    clientsService: ClientsService,
+    clientConfigurationsService: ClientConfigurationsService,
     programsService: FakeProgramsService,
     programConfigurationsService: FakeProgramConfigurationsService
-  ) { super(communicationsService, programsService, programConfigurationsService); }
+  ) { super(communicationsService, clientsService, clientConfigurationsService, programsService, programConfigurationsService); }
 
 
 

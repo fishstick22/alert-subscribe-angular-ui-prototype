@@ -2,8 +2,8 @@ import { ProgramConfiguration } from './program-configuration';
 import { Program }              from './program';
 import { Communication }        from './communication';
 
-const prog = new Program(1, 'Prescription Alerts');
-const comm = new Communication(261, 'Order Received');
+const program = new Program(1, 'Prescription Alerts');
+const commmunication = new Communication(261, 'Order Received');
 const progConfig: ProgramConfiguration  = new ProgramConfiguration();
 
 progConfig.id = 1,
@@ -17,8 +17,8 @@ progConfig.chanMobilePriority = 0,
 progConfig.chanMandatory = 'Email',
 progConfig.effective = '2017-1-1',
 progConfig.expiration = '9999-12-31',
-progConfig.program = new Program(1, 'Prescription Alerts');
-progConfig.communication = new Communication(261, 'Order Received');
+progConfig.program = program;
+progConfig.communication = commmunication;
 
 
 describe('ProgramConfiguration', () => {
@@ -43,10 +43,6 @@ describe('ProgramConfiguration', () => {
   it('has name', () => {
     const pc = new ProgramConfiguration(progConfig);
     expect(pc.name).toBe('Prescription Alerts Order Status');
-  });
-
-  it('should create an instance', () => {
-    expect(new ProgramConfiguration()).toBeTruthy();
   });
 
   it('can clone itself with the ID left undefined', () => {
