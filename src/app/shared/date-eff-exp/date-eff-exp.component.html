@@ -3,12 +3,12 @@
 
   <div *ngIf="dateType === 'effective'" class="flex-justify-center">
     <!-- the effective date of the current effective row -->
-    <input class="form-control form-control-sm date-eff-exp-input" value="{{progConfig.effective}}" readonly>
+    <input class="form-control form-control-sm date-eff-exp-input" value="{{commConfig.effective}}" readonly>
   </div>
 
   <div *ngIf="dateType === 'expiration'" class="flex-justify-center">
     <!-- the expiration date of the current/previous row -->
-    <input class="form-control form-control-sm date-eff-exp-input" value="{{progConfig.expiration}}" readonly>
+    <input class="form-control form-control-sm date-eff-exp-input" value="{{commConfig.expiration}}" readonly>
   </div>
 </div>
 
@@ -17,11 +17,11 @@
 
   <div *ngIf="dateType === 'effective'" class="flex-justify-center">
     <!-- set the effective date for the new row -->
-    <app-date-picker-popup [dateValue]="progConfig.effective"
+    <app-date-picker-popup [dateValue]="commConfig.effective"
       (newDateValue)="updateDateValue($event)"></app-date-picker-popup></div>
 
   <div *ngIf="dateType === 'expiration'" class="flex-justify-center">
     <!-- the expiration date of the new row -->
-    <input class="form-control form-control-sm date-eff-exp-input" value="{{progConfig.expiration}}" readonly>
+    <input class="form-control form-control-sm date-eff-exp-input" value="{{commConfig.expiration}}" readonly>
   </div>
 </div>
