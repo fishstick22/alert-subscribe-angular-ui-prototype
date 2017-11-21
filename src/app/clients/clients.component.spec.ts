@@ -4,6 +4,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FakeDataApiService, DataApiService,
   Client, FakeClientsService, ClientsService } from 'app/shared/services/testing/fake-data-api.service';
 
+import { ClientConfigurationsModalService } from './services/client-configurations/client-configurations-modal.service';
+import { FakeClientConfigurationsModalService } from './testing/fake-client-configurations-modal.service';
 
 import { ClientsComponent } from './clients.component';
 
@@ -38,7 +40,7 @@ describe('ClientsComponent', () => {
         DataApiService,
         // ClientConfigurationsModalService,
         { provide: DataApiService, usevalue: FakeDataApiService },
-       // { provide: ClientConfigurationsModalService, usevalue: FakeClientConfigurationsModalService },
+        { provide: ClientConfigurationsModalService, usevalue: FakeClientConfigurationsModalService },
        // { provide: Router, useClass: RouterStub}
       ]
     })

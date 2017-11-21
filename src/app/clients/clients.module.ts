@@ -16,6 +16,7 @@ import { ClientConfigurationsModalComponent } from './services/client-configurat
     SharedModule, // supposed to provide CommActionTableComponent
   ],
   declarations: [routedComponents, ClientsComponent, ClientConfigurationsModalComponent],
+  entryComponents: [ClientConfigurationsModalComponent],
   providers: [ClientConfigurationsModalService],
 })
 export class ClientsModule { }

@@ -8,6 +8,8 @@ import { SharedModule } from 'app/shared/shared.module';
 
 import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
 import { ProgramConfigsByCommModalComponent } from './services/program-configurations/prog-configs-by-comm-modal.component';
+import { ClientConfigsByCommModalService } from './services/client-configurations/client-configs-by-comm-modal.service';
+import { ClientConfigsByCommModalComponent } from './services/client-configurations/client-configs-by-comm-modal.component';
 
 @NgModule({
   imports: [
@@ -15,8 +17,8 @@ import { ProgramConfigsByCommModalComponent } from './services/program-configura
     CommunicationsRoutingModule,
     SharedModule, // supposed to provide CommActionTableComponent
   ],
-  declarations: [routedComponents, ProgramConfigsByCommModalComponent],
+  declarations: [routedComponents, ProgramConfigsByCommModalComponent, ClientConfigsByCommModalComponent],
   entryComponents: [ProgramConfigsByCommModalComponent],
-  providers: [ProgramConfigsByCommModalService]
+  providers: [ProgramConfigsByCommModalService, ClientConfigsByCommModalService]
 })
 export class CommunicationsModule { }

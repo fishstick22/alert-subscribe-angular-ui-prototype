@@ -8,6 +8,8 @@ import { Client,
 
 import { DataApiService } from 'app/shared/services/data-api.service';
 
+import { ClientConfigurationsModalService } from './services/client-configurations/client-configurations-modal.service';
+
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
@@ -16,26 +18,17 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 })
 export class ClientsComponent implements OnInit {
 
-  // communications: Communication[];
   clients: Client[];
-  // clientConfigurations: ClientConfiguration[];
-  displayClient: Client[];
-
   selectedRow: number;
-  closeResult: string;
 
   constructor(
     private dataApiService: DataApiService,
-    // private modalService: NgbModal
+    private clientConfigService: ClientConfigurationsModalService
   ) { }
 
   async ngOnInit() {
     console.log('ClientComponent ngOnInit...');
-    // await this.getCommunications();
     await this.getClients();
-    // await this.getClientConfigurations();
-
-    // this.displayClient = this.clients;
   }
 
   async getClients() {
@@ -48,11 +41,26 @@ export class ClientsComponent implements OnInit {
 
   private configureClient(clientConfigAction: ClientConfigAction) {
     if (clientConfigAction.configType === 'communications') {
-      // this.configureClientModal(clientConfigAction.clientId);
+      this.configureClientCommunications(clientConfigAction.clientId);
     }
   }
 
+  private configureClientCommunications(clientId) {
+    // invoke service to manage a modal dialog allowing user to
+    // configure the client-level communication configurations
+    const client: Client = this.findClient(clientId);
+    this.clientConfigService.configureClientModal(client);
+  }
+
+  private findClient(id): Client {
+    return this.clients.find(c => c.id === id);
+  }
+
   private setClickedRow(index) {
-    this.selectedRow = index;
+    if (this.selectedRow === index || this.selectedRow === null ) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = index;
+    }
   }
 }
