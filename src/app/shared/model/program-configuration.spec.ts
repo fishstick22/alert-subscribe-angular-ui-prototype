@@ -1,27 +1,16 @@
-import { ProgramConfiguration } from './program-configuration';
-import { Program }              from './program';
-import { Communication }        from './communication';
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from './testing/model-testing-helper';
 
-const program = new Program(1, 'Prescription Alerts');
-const commmunication = new Communication(261, 'Order Received');
-const progConfig: ProgramConfiguration  = new ProgramConfiguration();
+const helper = new ModelTestingHelper();
+const client = helper.getTestClient();
+const communication = helper.getTestCommunication();
+const progConfig: ProgramConfiguration  = helper.getTestProgramConfiguration();
 
-progConfig.id = 1,
-progConfig.name = 'Prescription Alerts Order Status',
-progConfig.description = 'Order Status Program-level Configuration',
-progConfig.chanEmailPriority = 2,
-progConfig.chanIvrPriority = 3,
-progConfig.chanSmsPriority = 1,
-progConfig.chanMailPriority = 0,
-progConfig.chanMobilePriority = 0,
-progConfig.chanMandatory = 'Email',
-progConfig.effective = '2017-1-1',
-progConfig.expiration = '9999-12-31',
-progConfig.program = program;
-progConfig.communication = commmunication;
-
-
-describe('ProgramConfiguration', () => {
+describe('Shared/Model: ProgramConfiguration', () => {
 
   // empty constuctor tests
   // it('has undefined id', () => {

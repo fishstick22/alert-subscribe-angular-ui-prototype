@@ -4,7 +4,7 @@ const id = 142;
 const code = 'AMD';
 const name = 'AT&T INC.';
 
-describe('Client', () => {
+describe('Shared/Model: Client', () => {
 
   it('has id', () => {
     const client = new Client(id, code, name);

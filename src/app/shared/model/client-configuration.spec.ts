@@ -1,26 +1,16 @@
-import { ClientConfiguration } from './client-configuration';
-import { Client }              from './client';
-import { Communication }       from './communication';
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from './testing/model-testing-helper';
 
-const client = new Client(142, 'AMD', 'AT&T INC.');
-const communication = new Communication(261, 'Order Received');
-const clientConfig: ClientConfiguration  = new ClientConfiguration();
+const helper = new ModelTestingHelper();
+const client = helper.getTestClient();
+const communication = helper.getTestCommunication();
+const clientConfig: ClientConfiguration  = helper.getTestClientConfiguration();
 
-clientConfig.id = 1,
-clientConfig.name = 'Prescription Alerts Order Status',
-clientConfig.description = 'Order Status Client-level Configuration',
-clientConfig.chanEmailPriority = 2,
-clientConfig.chanIvrPriority = 3,
-clientConfig.chanSmsPriority = 1,
-clientConfig.chanMailPriority = 0,
-clientConfig.chanMobilePriority = 0,
-clientConfig.chanMandatory = 'Email',
-clientConfig.effective = '2017-1-1',
-clientConfig.expiration = '9999-12-31',
-clientConfig.client = client;
-clientConfig.communication = communication;
-
-describe('ClientConfiguration', () => {
+describe('Shared/Model: ClientConfiguration', () => {
 
   // clientConfig constuctor tests
   it('has undefined id', () => {

@@ -3,7 +3,7 @@ import { Program } from './program';
 const id = 1;
 const name = 'Prescription Alerts';
 
-describe('Program', () => {
+describe('Shared/Model: Program', () => {
 
   it('has id', () => {
     const prog = new Program(id, name);
