@@ -1,17 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FakeDataApiService, DataApiService,
-  Client, FakeClientsService, ClientsService } from 'app/shared/services/testing/fake-data-api.service';
+import { Client,
+  ClientActionTableStubComponent,
+  FakeDataApiService, DataApiService } from 'app/shared/testing/shared-module-testing-helper';
 
 import { ClientConfigurationsModalService } from './services/client-configurations/client-configurations-modal.service';
 import { FakeClientConfigurationsModalService } from './testing/fake-client-configurations-modal.service';
-import { SelectChannelPriorityStubComponent,
-  SelectChannelMandatoryStubComponent,
-  DateEffExpStubComponent,
+
+import {
+  // SelectChannelMandatoryStubComponent,
+  // DateEffExpStubComponent,
   FakeNgbActiveModal,
-  ClientActionTableStubComponent,
-  CommActionTableStubComponent,
+  // ClientActionTableStubComponent,
+  // CommActionTableStubComponent,
   DraggableDirective,
   DroppableDirective,
   DragDropService, DropEvent

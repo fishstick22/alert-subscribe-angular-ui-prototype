@@ -1,29 +1,20 @@
-// re-export for tester convenience
-export { Communication } from 'app/shared/model/communication';
-export { CommunicationsService } from 'app/shared/services/communications/communications.service';
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         CommunicationConfiguration,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
 
-import { Communication } from 'app/shared/model/communication';
 import { CommunicationsService } from 'app/shared/services/communications/communications.service';
 
-export const COMMS: Communication[] = [
-  new Communication(260, 'Refill Available Notice')
-  // {'id': 260,  'name': 'Refill Available Notice',
-  //       'description': 'Notifies a member when one or more of their Rx\'s is eligible for refill',
-  //       'programConfiguration': [],
-  //       'clientConfiguration': []},
-  // {'id': 261,  'name': 'Order Received',
-  //       'description': 'Notifies a member when their order is received',
-  //       'programConfiguration': [],
-  //       'clientConfiguration': []},
-  // {'id': 263,  'name': 'Refill Expiring Notice',
-  //       'description': 'Notifies a member when one or more of their Rx\'s is about to expire but has at least 1 refill left',
-  //       'programConfiguration': [],
-  //       'clientConfiguration': []},
-  // {'id': 264,  'name': 'Order Shipped',
-  //       'description': 'Notifies a member when their order is shipped',
-  //       'programConfiguration': [],
-  //       'clientConfiguration': []},
-];
+// re-export for tester convenience
+// export { Communication } from 'app/shared/model/communication';
+export { CommunicationsService } from 'app/shared/services/communications/communications.service';
+
+const helper = new ModelTestingHelper();
+const communication = helper.getTestCommunication();
+export const COMMS: Communication[] = [communication];
 
 export class FakeCommunicationsService extends CommunicationsService {
 
@@ -32,9 +23,6 @@ export class FakeCommunicationsService extends CommunicationsService {
 
   async getCommunicationsThruApi(): Promise<Communication[]> {
     try {
-      // const response = await this.http.get(this.commApiEndpoint).toPromise();
-      // return response.json() as Communication[];
-      // return response as Communication[];
       return this.lastPromise = Promise.resolve<Communication[]>(this.communications);
     } catch (error) {
       this.handleError(error);

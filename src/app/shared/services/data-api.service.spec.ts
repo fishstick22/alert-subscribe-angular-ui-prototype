@@ -5,17 +5,13 @@ import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http'
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 import { DataApiService } from './data-api.service';
 
-import { FakeCommunicationsService,
-  Communication, CommunicationsService } from './testing/fake-communications.service';
-import { FakeProgramsService,
-  Program, ProgramsService } from './testing/fake-programs.service';
-import { FakeProgramConfigurationsService,
-    ProgramConfiguration, ProgramConfigurationsService } from './testing/fake-program-configurations.service';
-
-import { FakeClientsService,
-  Client, ClientsService } from './testing/fake-clients.service';
-import { FakeClientConfigurationsService,
-    ClientConfiguration, ClientConfigurationsService } from './testing/fake-client-configurations.service';
+import {
+  Client, ClientsService, FakeClientsService,
+  ClientConfiguration, ClientConfigurationsService, FakeClientConfigurationsService,
+  Communication, CommunicationsService, FakeCommunicationsService,
+  Program, ProgramsService, FakeProgramsService,
+  ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService,
+} from 'app/shared/testing/shared-module-testing-helper';
 
 const communication: Communication = new Communication(260, 'Refill Available Notice');
 const program: Program = new Program(1, 'Prescription Alerts');

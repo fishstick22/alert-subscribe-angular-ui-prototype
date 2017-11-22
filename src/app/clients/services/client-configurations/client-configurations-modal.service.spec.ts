@@ -5,7 +5,7 @@ import { NgbModal, ModalDismissReasons,
   NgbModalOptions }             from '@ng-bootstrap/ng-bootstrap';
 
 import { FakeDataApiService, DataApiService,
-  Client, FakeClientsService, ClientsService } from 'app/shared/services/testing/fake-data-api.service';
+  Client, FakeClientsService, ClientsService } from 'app/shared/testing/shared-module-testing-helper';
 
 import { ClientConfigurationsModalService } from './client-configurations-modal.service';
 

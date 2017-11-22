@@ -6,9 +6,9 @@ import { ModelTestingHelper,
          ProgramConfiguration } from './testing/model-testing-helper';
 
 const helper = new ModelTestingHelper();
-const client = helper.getTestClient();
+const program = helper.getTestProgram();
 const communication = helper.getTestCommunication();
-const progConfig: ProgramConfiguration  = helper.getTestProgramConfiguration();
+const programConfig: ProgramConfiguration  = helper.getTestProgramConfiguration();
 
 describe('Shared/Model: ProgramConfiguration', () => {
 
@@ -25,19 +25,19 @@ describe('Shared/Model: ProgramConfiguration', () => {
 
   // progConfig constuctor tests
   it('has undefined id', () => {
-    const pc = new ProgramConfiguration(progConfig);
+    const pc = new ProgramConfiguration(programConfig);
     expect(pc.id).toBe(undefined);
   });
 
   it('has name', () => {
-    const pc = new ProgramConfiguration(progConfig);
+    const pc = new ProgramConfiguration(programConfig);
     expect(pc.name).toBe('Prescription Alerts Order Status');
   });
 
   it('can clone itself with the ID left undefined', () => {
 
-    const clone = progConfig.clone();
-    expect(progConfig).not.toEqual(clone);
+    const clone = programConfig.clone();
+    expect(programConfig).not.toEqual(clone);
     expect(clone.id).toBe(undefined);
   });
 

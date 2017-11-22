@@ -13,7 +13,7 @@ import { addMatchers, newEvent, Router, RouterStub
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
 import { FakeDataApiService, DataApiService,
-  Communication, FakeCommunicationsService, CommunicationsService } from 'app/shared/services/testing/fake-data-api.service';
+  Communication, FakeCommunicationsService, CommunicationsService } from 'app/shared/testing/shared-module-testing-helper';
 
 import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
 import { FakeProgramConfigsByCommModalService } from './testing/fake-prog-configs-by-comm-modal.service';
@@ -30,7 +30,7 @@ import {
   // DateEffExpStubComponent,
   CommActionTableStubComponent,
   // ClientActionTableStubComponent
-} from 'app/shared/testing/stub-testing-components';
+} from 'app/shared/testing/shared-module-testing-helper';
 import { CommunicationsComponent } from './communications.component';
 
 let component: CommunicationsComponent;

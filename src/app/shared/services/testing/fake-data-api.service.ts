@@ -1,29 +1,38 @@
-import { Injectable }                  from '@angular/core';
+import { Injectable } from '@angular/core';
 
-export {FakeCommunicationsService,
-    Communication, CommunicationsService } from './fake-communications.service';
-export { FakeProgramsService,
-    Program, ProgramsService } from './fake-programs.service';
-export { FakeProgramConfigurationsService,
-    ProgramConfiguration, ProgramConfigurationsService } from './fake-program-configurations.service';
-export { FakeClientsService,
-  Client, ClientsService } from './fake-clients.service';
-export { FakeClientConfigurationsService,
-    ClientConfiguration, ClientConfigurationsService } from './fake-client-configurations.service';
-
-export { DataApiService } from 'app/shared/services/data-api.service';
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         CommunicationConfiguration,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
 
 import { FakeCommunicationsService,
-    Communication, CommunicationsService } from './fake-communications.service';
+         CommunicationsService } from './fake-communications.service';
 import { FakeProgramsService,
-    Program, ProgramsService } from './fake-programs.service';
+         ProgramsService } from './fake-programs.service';
 import { FakeProgramConfigurationsService,
-        ProgramConfiguration, ProgramConfigurationsService } from './fake-program-configurations.service';
-import { DataApiService } from 'app/shared/services/data-api.service';
+         ProgramConfigurationsService } from './fake-program-configurations.service';
 import { FakeClientsService,
-  Client, ClientsService } from './fake-clients.service';
+         ClientsService } from './fake-clients.service';
 import { FakeClientConfigurationsService,
-    ClientConfiguration, ClientConfigurationsService } from './fake-client-configurations.service';
+         ClientConfigurationsService } from './fake-client-configurations.service';
+import { DataApiService } from 'app/shared/services/data-api.service';
+
+// re-export for tester convenience
+export { FakeCommunicationsService,
+         CommunicationsService } from './fake-communications.service';
+export { FakeProgramsService,
+         ProgramsService } from './fake-programs.service';
+export { FakeProgramConfigurationsService,
+         ProgramConfigurationsService } from './fake-program-configurations.service';
+export { FakeClientsService,
+         ClientsService } from './fake-clients.service';
+export { FakeClientConfigurationsService,
+         ClientConfigurationsService } from './fake-client-configurations.service';
+
+export { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
 export class FakeDataApiService extends DataApiService {
@@ -37,9 +46,15 @@ export class FakeDataApiService extends DataApiService {
     clientConfigurationsService: ClientConfigurationsService,
     programsService: FakeProgramsService,
     programConfigurationsService: FakeProgramConfigurationsService
-  ) { super(communicationsService, clientsService, clientConfigurationsService, programsService, programConfigurationsService); }
-
-
+  ) {
+    super(
+      communicationsService,
+      clientsService,
+      clientConfigurationsService,
+      programsService,
+      programConfigurationsService
+    );
+  }
 
   public async getCommunications(): Promise<Communication[]> {
     if (this.communications) {

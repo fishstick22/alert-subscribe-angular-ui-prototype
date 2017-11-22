@@ -1,32 +1,22 @@
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         CommunicationConfiguration,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
 
-import { Program }              from 'app/shared/model/program';
-import { Communication }        from 'app/shared/model/communication';
-import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 import { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
 
 // re-export for tester convenience
-export { ProgramConfiguration } from 'app/shared/model/program-configuration';
+// export { ProgramConfiguration } from 'app/shared/model/program-configuration';
 export { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
 
-const prog = new Program(1, 'Prescription Alerts');
-const comm = new Communication(261, 'Order Received');
-const progConfig: ProgramConfiguration  = new ProgramConfiguration();
-
-progConfig.id = 1,
-progConfig.name = 'Prescription Alerts Order Status',
-progConfig.description = 'Order Status Program-level Configuration',
-progConfig.chanEmailPriority = 2,
-progConfig.chanIvrPriority = 3,
-progConfig.chanSmsPriority = 1,
-progConfig.chanMailPriority = 0,
-progConfig.chanMobilePriority = 0,
-progConfig.chanMandatory = 'Email',
-progConfig.effective = '2017-1-1',
-progConfig.expiration = '9999-12-31',
-progConfig.program = new Program(1, 'Prescription Alerts');
-progConfig.communication = new Communication(261, 'Order Received');
-
-export const PROGCONFIGS: ProgramConfiguration[] = [progConfig];
+const helper = new ModelTestingHelper();
+const client = helper.getTestClient();
+const communication = helper.getTestCommunication();
+const programConfig: ProgramConfiguration  = helper.getTestProgramConfiguration();
+export const PROGCONFIGS: ProgramConfiguration[] = [programConfig];
 
 export class FakeProgramConfigurationsService extends ProgramConfigurationsService {
 

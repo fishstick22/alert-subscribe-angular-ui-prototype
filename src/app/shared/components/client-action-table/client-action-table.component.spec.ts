@@ -16,19 +16,12 @@ import { DroppableDirective          } from 'app/shared/directives/drag-drop/dro
 import { ClickOutsideDirective       } from 'app/shared/directives/click-outside.directive';
 import { SortableTableDirective      } from 'app/shared/directives/sortable-table.directive';
 
+import { ClientActionsPopoverStubComponent } from 'app/shared/components/testing/stub-testing-components';
 import { ClientActionTableComponent  } from './client-action-table.component';
 
-@Component({
-  selector: 'app-client-actions-popover',
-  template: 'dummy component for testing'
-})
-export class ClientActionsPopoverStubComponent {
-  @Input() clientId: string;
-  @Input() clientName: string;
-  // @Output() configAction = new EventEmitter<any>();
-}
 
-describe('ClientActionTableComponent', () => {
+
+describe('Shared/Components: ClientActionTableComponent', () => {
   let component: ClientActionTableComponent;
   let fixture: ComponentFixture<ClientActionTableComponent>;
   let sortableColumnService: SortableColumnService;

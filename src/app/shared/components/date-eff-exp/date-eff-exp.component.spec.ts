@@ -5,25 +5,15 @@ import { FormsModule }    from '@angular/forms';
 
 import { DateEffExpComponent } from './date-eff-exp.component';
 
-////
+import { DatePickerPopupStubComponent } from 'app/shared/components/testing/stub-testing-components';
 
-// import { NgbDateStruct }            from '@ng-bootstrap/ng-bootstrap';
-@Component({selector: 'app-date-picker-popup', template: 'stub component for testing'})
-export class DatepickerPopupStubComponent  {
-  @Input() dateValue: string;
-  @Input() required: true;
-  // @Output() newDateValue = new EventEmitter<any>();
-
-  // dateModel: NgbDateStruct;
-}
-////
-describe('DateEffExpComponent', () => {
+describe('Shared/Component: DateEffExpComponent', () => {
   let component: DateEffExpComponent;
   let fixture: ComponentFixture<DateEffExpComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateEffExpComponent, DatepickerPopupStubComponent ],
+      declarations: [ DateEffExpComponent, DatePickerPopupStubComponent ],
       imports: [ FormsModule ]
     })
     .compileComponents();

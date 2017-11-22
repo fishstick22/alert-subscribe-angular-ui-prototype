@@ -8,7 +8,7 @@ import { DataApiService, FakeDataApiService,
   Communication, CommunicationsService, FakeCommunicationsService,
   Program, ProgramsService, FakeProgramsService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService
-} from 'app/shared/services/testing/fake-data-api.service';
+} from 'app/shared/testing/shared-module-testing-helper';
 import {
   FakeNgbActiveModal,
   SelectChannelPriorityStubComponent,

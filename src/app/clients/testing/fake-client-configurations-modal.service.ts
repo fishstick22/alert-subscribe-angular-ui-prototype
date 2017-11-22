@@ -12,7 +12,7 @@ import {
   DateEffExpStubComponent,
   CommActionTableStubComponent,
   ClientActionTableStubComponent
-} from 'app/shared/testing/stub-testing-components';
+} from 'app/shared/testing/shared-module-testing-helper';
 
 import { DraggableDirective } from 'app/shared/directives/drag-drop/draggable.directive';
 import { DroppableDirective } from 'app/shared/directives/drag-drop/droppable.directive';
@@ -33,7 +33,7 @@ export {
   DateEffExpStubComponent,
   CommActionTableStubComponent,
   ClientActionTableStubComponent
-} from 'app/shared/testing/stub-testing-components';
+} from 'app/shared/testing/shared-module-testing-helper';
 
 export { DraggableDirective } from 'app/shared/directives/drag-drop/draggable.directive';
 export { DroppableDirective } from 'app/shared/directives/drag-drop/droppable.directive';

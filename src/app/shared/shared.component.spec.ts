@@ -5,7 +5,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
 import { FakeDataApiService, DataApiService,
-  Communication, FakeCommunicationsService, CommunicationsService } from './services/testing/fake-data-api.service';
+  Communication, FakeCommunicationsService, CommunicationsService
+} from 'app/shared/testing/shared-module-testing-helper';
 
 // import { SharedModule } from 'app/shared/shared.module';
 // import { DragDropService } from 'app/shared/services/drag-drop.service';
@@ -49,18 +50,6 @@ describe('SharedComponent', () => {
   let component: SharedComponent;
   let fixture: ComponentFixture<SharedComponent>;
 
-  // const communications: Communication[] = [];
-  // const displayComm: Communication[] = [];
-  // const displayCommStartEmpty = false;
-  // const showCommId = true;
-  // const showCommName = true;
-  // const showCommDesc = true;
-  // const showStatus = true;
-  // const showAction = true;
-
-  // setClickedRow($event) {}
-  // configureCommunication($event) {}
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -68,15 +57,10 @@ describe('SharedComponent', () => {
         DragDropStubComponent,
         ClickOutsideStubComponent,
         CommActionTableStubComponent
-        // SharedComponent,
-        // DragDropComponent,
-        // DraggableDirective,
-        // DroppableDirective
        ],
       providers: [
         DataApiService,
         CommunicationsService,
-        // DragDropService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: CommunicationsService, usevalue: FakeCommunicationsService },
         { provide: DataApiService, usevalue: FakeDataApiService }

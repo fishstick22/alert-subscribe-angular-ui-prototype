@@ -1,31 +1,21 @@
-// re-export for tester convenience
-export { ClientConfiguration } from 'app/shared/model/client-configuration';
-export { ClientConfigurationsService } from 'app/shared/services/client-configurations/client-configurations.service';
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         CommunicationConfiguration,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
 
-
-import { Client }              from 'app/shared/model/client';
-import { Communication }        from 'app/shared/model/communication';
-import { ClientConfiguration } from 'app/shared/model/client-configuration';
 import { ClientConfigurationsService } from 'app/shared/services/client-configurations/client-configurations.service';
 
-const client = new Client(142, 'AMD', 'AT&T INC.');
-const communication = new Communication(261, 'Order Received');
-const clientConfig: ClientConfiguration  = new ClientConfiguration();
+// re-export for tester convenience
+// export { ClientConfiguration } from 'app/shared/model/client-configuration';
+export { ClientConfigurationsService } from 'app/shared/services/client-configurations/client-configurations.service';
 
-clientConfig.id = 1,
-clientConfig.name = 'Prescription Alerts Order Status',
-clientConfig.description = 'Order Status Client-level Configuration',
-clientConfig.chanEmailPriority = 2,
-clientConfig.chanIvrPriority = 3,
-clientConfig.chanSmsPriority = 1,
-clientConfig.chanMailPriority = 0,
-clientConfig.chanMobilePriority = 0,
-clientConfig.chanMandatory = 'Email',
-clientConfig.effective = '2017-1-1',
-clientConfig.expiration = '9999-12-31',
-clientConfig.client = client;
-clientConfig.communication = communication;
-
+const helper = new ModelTestingHelper();
+const client = helper.getTestClient();
+const communication = helper.getTestCommunication();
+const clientConfig: ClientConfiguration  = helper.getTestClientConfiguration();
 export const CLIENTCONFIGS: ClientConfiguration[] = [clientConfig];
 
 export class FakeClientConfigurationsService extends ClientConfigurationsService {
@@ -35,9 +25,6 @@ export class FakeClientConfigurationsService extends ClientConfigurationsService
 
   async getClientConfigurationsThruApi(): Promise<ClientConfiguration[]> {
     try {
-      // const response = await this.http.get(this.commApiEndpoint).toPromise();
-      // return response.json() as ClientConfiguration[];
-      // return response as ClientConfiguration[];
       return this.lastPromise = Promise.resolve<ClientConfiguration[]>(this.clients);
     } catch (error) {
       this.handleError(error);

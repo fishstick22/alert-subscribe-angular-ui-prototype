@@ -3,12 +3,16 @@
 import { Client               } from 'app/shared/model/client';
 import { ClientConfiguration  } from 'app/shared/model/client-configuration';
 import { Communication        } from 'app/shared/model/communication';
+import { CommunicationConfiguration
+                              } from 'app/shared/model/communication-configuration';
 import { Program              } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
 export { Client               } from 'app/shared/model/client';
 export { ClientConfiguration  } from 'app/shared/model/client-configuration';
 export { Communication        } from 'app/shared/model/communication';
+export { CommunicationConfiguration
+                              } from 'app/shared/model/communication-configuration';
 export { Program              } from 'app/shared/model/program';
 export { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
