@@ -3,7 +3,7 @@ import { Communication } from './communication';
 const id = 261;
 const name = 'Order Received';
 
-describe('Communication', () => {
+describe('Shared/Model: Communication', () => {
 
   it('has id', () => {
     const comm = new Communication(id, name);

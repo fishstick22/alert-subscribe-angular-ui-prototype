@@ -1,3 +1,44 @@
-<p>
-  programs works!
-</p>
+<h4>Manage Programs</h4>
+
+<table class="table table-responsive table-sm table-striped table-bordered table-hover">
+  <caption>
+    Programs define collections of Communications, each with a program-level configuration that 
+    specify the (default) channel priority, if the comm is mandatory, with an effective and expiration date
+  </caption>
+  <thead class="bg-gradient-dark text-white">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let program of programs; let i = index"
+         title="" 
+        (click)="setClickedRow(i)" 
+        [class.table-success]="i === selectedRow">
+      <th scope="row"><span class="badge badge-secondary">{{program.id}}</span></th>
+      <td><span>{{program.name}}</span></td>
+      <td><span>{{program.description}}</span></td>
+      <td>
+        <app-program-actions-popover
+          [progId]="program.id"
+          [progName]="program.name"
+          (configAction)="configureProgram($event)">
+          <i class="fa fa-pencil-square-o clickable" aria-hidden="true" title="Click to configure Program {{program.name}}"></i>
+        </app-program-actions-popover>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
+          (click)="addProgramModal()"title="Add New Program"></i>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+  <tfoot></tfoot>
+</table>

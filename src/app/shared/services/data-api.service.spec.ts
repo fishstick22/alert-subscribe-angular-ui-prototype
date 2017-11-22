@@ -4,12 +4,14 @@ import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http'
 
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 import { DataApiService } from './data-api.service';
-// import { CommunicationService } from './communications/communication.service';
-import { FakeCommunicationsService,
-  Communication, CommunicationService } from './testing/fake-communications.service';
 
-import { FakeProgramsService,
-  Program, ProgramService } from './testing/fake-programs.service';
+import {
+  Client, ClientsService, FakeClientsService,
+  ClientConfiguration, ClientConfigurationsService, FakeClientConfigurationsService,
+  Communication, CommunicationsService, FakeCommunicationsService,
+  Program, ProgramsService, FakeProgramsService,
+  ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService,
+} from 'app/shared/testing/shared-module-testing-helper';
 
 const communication: Communication = new Communication(260, 'Refill Available Notice');
 const program: Program = new Program(1, 'Prescription Alerts');
@@ -19,11 +21,17 @@ describe('DataApiService', () => {
     TestBed.configureTestingModule({
       providers: [
         DataApiService,
-        CommunicationService,
-        ProgramService,
+        CommunicationsService,
+        ProgramsService,
+        ProgramConfigurationsService,
+        ClientsService,
+        ClientConfigurationsService,
         { provide: APP_CONFIG, useValue: AppConfig },
-        { provide: CommunicationService, usevalue: FakeCommunicationsService },
-        { provide: ProgramService, usevalue: FakeProgramsService }
+        { provide: CommunicationsService, usevalue: FakeCommunicationsService },
+        { provide: ProgramsService, usevalue: FakeProgramsService },
+        { provide: ProgramConfigurationsService, usevalue: FakeProgramConfigurationsService },
+        { provide: ClientsService, usevalue: FakeClientsService },
+        { provide: ClientConfigurationsService, usevalue: FakeClientConfigurationsService }
       ]
     });
   });

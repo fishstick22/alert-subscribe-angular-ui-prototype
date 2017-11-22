@@ -1,40 +1,87 @@
-import { Injectable }                  from '@angular/core';
+import { Injectable } from '@angular/core';
 
-export {FakeCommunicationsService,
-    Communication, CommunicationService } from './fake-communications.service';
-export { FakeProgramsService,
-    Program, ProgramService } from './fake-programs.service';
-export { DataApiService } from 'app/shared/services/data-api.service';
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         CommunicationConfiguration,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
 
 import { FakeCommunicationsService,
-    Communication, CommunicationService } from './fake-communications.service';
+         CommunicationsService } from './fake-communications.service';
 import { FakeProgramsService,
-    Program, ProgramService } from './fake-programs.service';
+         ProgramsService } from './fake-programs.service';
+import { FakeProgramConfigurationsService,
+         ProgramConfigurationsService } from './fake-program-configurations.service';
+import { FakeClientsService,
+         ClientsService } from './fake-clients.service';
+import { FakeClientConfigurationsService,
+         ClientConfigurationsService } from './fake-client-configurations.service';
 import { DataApiService } from 'app/shared/services/data-api.service';
+
+// re-export for tester convenience
+export { FakeCommunicationsService,
+         CommunicationsService } from './fake-communications.service';
+export { FakeProgramsService,
+         ProgramsService } from './fake-programs.service';
+export { FakeProgramConfigurationsService,
+         ProgramConfigurationsService } from './fake-program-configurations.service';
+export { FakeClientsService,
+         ClientsService } from './fake-clients.service';
+export { FakeClientConfigurationsService,
+         ClientConfigurationsService } from './fake-client-configurations.service';
+
+export { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
 export class FakeDataApiService extends DataApiService {
 
-    communications: Communication[];
-    // private communicationService = new FakeCommunicationsService();
+  communications: Communication[];
+  // private communicationService = new FakeCommunicationsService();
 
-    constructor(
-        communicationService: FakeCommunicationsService,
-        // private clientService: ClientService,
-        // private clientConfigurationService: ClientConfigurationService,
-        programService: FakeProgramsService,
-        // private programConfigurationService: ProgramConfigurationService
-      ) { super(communicationService, programService); }
+  constructor(
+    communicationsService: FakeCommunicationsService,
+    clientsService: ClientsService,
+    clientConfigurationsService: ClientConfigurationsService,
+    programsService: FakeProgramsService,
+    programConfigurationsService: FakeProgramConfigurationsService
+  ) {
+    super(
+      communicationsService,
+      clientsService,
+      clientConfigurationsService,
+      programsService,
+      programConfigurationsService
+    );
+  }
 
+  public async getCommunications(): Promise<Communication[]> {
+    if (this.communications) {
+      return this.communications;
+    } else {
+      this.communications = await this.communicationsService.getCommunicationsThruApi();
+      return this.communications;
+      // return this.removeProgramConfigurationCruft(this.communications);
+    }
+  }
 
+  public async getPrograms(): Promise<Program[]> {
+    if (this.programs) {
+      return this.programs;
+    } else {
+      this.programs = await this.programsService.getProgramsThruApi();
+      return this.programs;
+      // return this.removeProgramConfigurationCruft(this.programs);
+    }
+  }
 
-    public async getCommunications(): Promise<Communication[]> {
-        if (this.communications) {
-          return this.communications;
-        } else {
-          this.communications = await this.communicationService.getCommunicationsThruApi();
-          return this.communications;
-          // return this.removeProgramConfigurationCruft(this.communications);
-        }
-      }
+  public async getProgramConfigurations(): Promise<ProgramConfiguration[]> {
+    if (this.programConfigurations) {
+      return this.programConfigurations;
+    } else {
+      this.programConfigurations = await this.programConfigurationService.getProgramConfigurationsThruApi();
+      return this.programConfigurations;
+    }
+  }
 }

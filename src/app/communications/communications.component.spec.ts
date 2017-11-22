@@ -13,56 +13,33 @@ import { addMatchers, newEvent, Router, RouterStub
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
 import { FakeDataApiService, DataApiService,
-  Communication, FakeCommunicationsService, CommunicationService } from 'app/shared/services/testing/fake-data-api.service';
+  Communication, FakeCommunicationsService, CommunicationsService } from 'app/shared/testing/shared-module-testing-helper';
 
-import { ProgramConfigurationService } from './services/program-configuration.service';
-import { FakeProgramConfigurationService } from './testing/fake-program-configuration.service';
+import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
+import { FakeProgramConfigsByCommModalService } from './testing/fake-prog-configs-by-comm-modal.service';
+
+import { ClientConfigsByCommModalService } from './services/client-configurations/client-configs-by-comm-modal.service';
+import { FakeClientConfigsByCommModalService } from './testing/fake-client-configs-by-comm-modal.service';
+
+
+import {
+  // Communication,
+  // Program,
+  // ProgramConfiguration,
+  // Client,
+  // ClientConfiguration,
+  // CommunicationConfiguration,
+  // SelectChannelPriorityStubComponent,
+  // SelectChannelMandatoryStubComponent,
+  // DateEffExpStubComponent,
+  CommActionTableStubComponent,
+  ClientActionTableStubComponent
+} from 'app/shared/testing/shared-module-testing-helper';
 import { CommunicationsComponent } from './communications.component';
 
-@Component({
-  selector: 'app-drag-drop-test',
-  template: `dummy testing component`
-})
-export class DragDropStubComponent {}
-
-@Component({
-  selector: 'app-click-outside-test',
-  template: `dummy testing component`
-})
-export class ClickOutsideStubComponent {}
-
-@Component({
-  selector: 'app-comm-action-table',
-  template: `dummy testing component`
-})
-export class CommActionTableStubComponent  {
-  @Input() configureState: string;
-  @Input() communications: Communication[];
-  @Input() displayComm: Communication[];
-  @Input() supressComm: number[] = [];
-  @Input() displayCommStartEmpty: boolean = true;
-  @Input() displayClient: string = ''; // = 'Client';
-  @Input() displayProgram: string = ''; // = 'Program';
-  @Input() showCommId: boolean = true;
-  @Input() showCommName: boolean = true;
-  @Input() showCommDesc: boolean = false;
-  @Input() showStatus: boolean = false;
-  @Input() showAction: boolean = true;
-}
 let component: CommunicationsComponent;
 let fixture: ComponentFixture<CommunicationsComponent>;
 
-const communications: Communication[] = [];
-const displayComm: Communication[] = [];
-const displayCommStartEmpty = false;
-const showCommId = true;
-const showCommName = true;
-const showCommDesc = true;
-const showStatus = true;
-const showAction = true;
-
-// setClickedRow($event) {}
-// configureCommunication($event) {}
 
 describe('CommunicationsComponent', () => {
 
@@ -70,20 +47,21 @@ describe('CommunicationsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         CommunicationsComponent,
-        DragDropStubComponent,
-        ClickOutsideStubComponent,
+        // DragDropStubComponent,
+        // ClickOutsideStubComponent,
         CommActionTableStubComponent
       ],
       providers: [
         DataApiService,
-        ProgramConfigurationService,
+        ProgramConfigsByCommModalService,
+        ClientConfigsByCommModalService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: DataApiService, usevalue: FakeDataApiService },
-        { provide: ProgramConfigurationService, usevalue: FakeProgramConfigurationService },
+        { provide: ProgramConfigsByCommModalService, usevalue: FakeProgramConfigsByCommModalService },
+        { provide: ClientConfigsByCommModalService, usevalue: FakeClientConfigsByCommModalService },
         { provide: Router, useClass: RouterStub}
       ],
       imports: [
-      // CommunicationsModule
         FormsModule
       ]
     })

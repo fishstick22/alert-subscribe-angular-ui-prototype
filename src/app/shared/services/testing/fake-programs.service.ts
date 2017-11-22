@@ -1,16 +1,22 @@
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         CommunicationConfiguration,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
+
+import { ProgramsService } from 'app/shared/services/programs/programs.service';
+
+const helper = new ModelTestingHelper();
+const program = helper.getTestProgram();
+export const PROGS: Program[] = [program];
+
 // re-export for tester convenience
-export { Program } from 'app/shared/model/program';
-export { ProgramService } from 'app/shared/services/programs/program.service';
+// export { Program } from 'app/shared/model/program';
+export { ProgramsService } from 'app/shared/services/programs/programs.service';
 
-import { Program } from 'app/shared/model/program';
-import { ProgramService } from 'app/shared/services/programs/program.service';
-
-export const PROGS: Program[] = [
-  new Program(1, 'Prescription Alerts')
-//   {'id': 1, 'name': 'Prescription Alerts',     'description': 'PBM Communications including Order Status and Refill Reminder alerts'},
-];
-
-export class FakeProgramsService extends ProgramService {
+export class FakeProgramsService extends ProgramsService {
 
   programs = PROGS.map(p => p.clone());
   lastPromise: Promise<any>;  // remember so we can spy on promise calls

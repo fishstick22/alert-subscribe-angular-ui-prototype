@@ -1,0 +1,128 @@
+<form #clientConfigurationForm="ngForm" 
+(ngSubmit)="saveClientConfiguration()" >
+
+  <div class="modal-header bg-gradient-dark">
+    <h4 class="modal-title text-white">
+      Configure Communication(s)
+      <small>for ClientId {{client.id}}: {{client.name}}</small>
+    </h4>
+    <button type="button" class="close text-white" aria-label="Close" (click)="configureClientModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    
+  <div class="modal-body">
+    <div id="configuredClients">
+      <table class="table table-responsive table-sm table-striped table-bordered table-hover">
+        <caption></caption>
+        <thead class="bg-gradient-dark text-white">
+          <tr>
+            <th>ID</th>
+            <th>N<small>ame</small></th>
+            <th>E<small>mail</small></th>
+            <th>IVR</th>
+            <th>SMS</th>
+            <th>M<small>ail</small></th>
+            <th>M<small>obile</small></th>
+            <th>M<small>andatory</small></th>
+            <th>E<small>ffective</small></th>
+            <th>E<small>xpiration</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr appDroppable *ngFor="let cc of clientConfigurations; let i = index"
+              [dragOverClass]="'drag-target-border'" [dragHintClass]="'drag-hint'"
+              [dropEnabled]="i === lastClientConfigRow && !cc.communication.id"
+              
+              (onDrop)="communicationDrop($event)"
+              [class.table-info]="i == lastClientConfigRow"> 
+            
+            <td>
+              <span *ngIf="i !== lastClientConfigRow" class="badge badge-secondary">{{cc.communication.id}}</span>
+              <span *ngIf="i === lastClientConfigRow && !cc.communication.id">
+                <i class="fa fa-file-o clickable" aria-hidden="true" 
+                    title="New Client configuration for {{cc.communication.name}}"></i></span>
+              <span *ngIf="i === lastClientConfigRow && cc.communication.id" class="badge badge-primary">{{cc.communication.id}}</span>
+            </td>
+            <td width="18%"><span >{{cc.communication.name}}</span></td>
+            <td><app-select-channel-priority 
+                  id="chanEmailPriority" name="chanEmailPriority" 
+                  [(ngModel)]="cc.chanEmailPriority"
+                  [actualStaticValue]="cc.chanEmailPriority"
+                  [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-priority></td>
+            <td><app-select-channel-priority 
+                  id="chanIvrPriority" name="chanIvrPriority" 
+                  [(ngModel)]="cc.chanIvrPriority"
+                  [actualStaticValue]="cc.chanIvrPriority"
+                  [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-priority></td>
+            <td><app-select-channel-priority 
+                  id="chanSmsPriority" name="chanSmsPriority" 
+                  [(ngModel)]="cc.chanSmsPriority"
+                  [actualStaticValue]="cc.chanSmsPriority"
+                  [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-priority></td>  
+            <td><app-select-channel-priority 
+                  id="chanMailPriority" name="chanMailPriority" 
+                  [(ngModel)]="cc.chanMailPriority"
+                  [actualStaticValue]="cc.chanMailPriority"
+                  [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-priority></td> 
+            <td><app-select-channel-priority 
+                  id="chanMobilePriority" name="chanMobilePriority" 
+                  [(ngModel)]="cc.chanMobilePriority"
+                  [actualStaticValue]="cc.chanMobilePriority"
+                  [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-priority></td> 
+            <td><app-select-channel-mandatory
+                  id="chanMandatory" name="chanMandatory" 
+                  [(ngModel)]="cc.chanMandatory"
+                  [actualStaticValue]="cc.chanMandatory"
+                  [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-mandatory></td>
+            <td><app-date-eff-exp
+                  dateType="effective" [commConfig]="cc"
+                  [lastConfigRow]="i === lastClientConfigRow"
+                  (newDateValue)="updateDateValue($event, cc, 'effective')"></app-date-eff-exp></td>
+            <td><app-date-eff-exp
+                  dateType="expiration" [commConfig]="cc"
+                  [lastConfigRow]="i === lastClientConfigRow"
+                  (newDateValue)="updateDateValue($event, cc, 'expiration')"></app-date-eff-exp></td>
+          </tr>
+          <tr *ngIf="configureState === 'start'">
+            <td>
+              <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
+                (click)="addClientConfig()" title="Add New Client Configuration to {{client.name}}"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!--configuredClients-->
+      
+  </div>
+      
+  <div class="modal-footer">
+    <div class="w-100">
+      <span class="float-left">Some instructional content or condition message goes here: </span>
+      <div class="float-right">
+          <button type="submit" class="btn btn-outline-dark" [disabled]="!clientConfigurationForm.valid">Save</button>
+          <button type="button" class="btn btn-outline-dark" (click)="configureClientModal.close('Close click')">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-footer">
+    <div id=ActionTable>
+      <app-comm-action-table *ngIf="configureState === 'pick'" 
+        [communications]="communications"
+        [displayComm]="displayComm"
+        [displayCommStartEmpty]="true"
+        [displayClient]="client.name"
+        [showCommId]="true"
+        [showCommName]="true"
+        [showCommDesc]="true"
+        [showStatus]="false"
+        [showAction]="false"
+        (selRowOut)="setClickedRow($event)"
+        (selectedCommunication)="addClientConfig($event)"
+        (commConfigAction)="configureCommunication($event)">
+      </app-comm-action-table>
+    </div>
+  </div>
+
+</form>

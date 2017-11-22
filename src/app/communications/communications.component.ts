@@ -3,7 +3,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Communication, CommunicationConfigAction } from 'app/shared/model/communication';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
-import { ProgramConfigurationService } from './services/program-configuration.service';
+import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
+import { ClientConfigsByCommModalService } from './services/client-configurations/client-configs-by-comm-modal.service';
 
 @Component({
   selector: 'app-communications',
@@ -25,7 +26,8 @@ export class CommunicationsComponent implements OnInit {
 
   constructor(
     private dataApiService: DataApiService,
-    private programConfigurationService: ProgramConfigurationService
+    private programConfigurationService: ProgramConfigsByCommModalService,
+    private clientConfigsByCommModalService: ClientConfigsByCommModalService
   ) { }
 
   async ngOnInit() {
@@ -44,16 +46,24 @@ export class CommunicationsComponent implements OnInit {
     if (commConfigAction.configType === 'program') {
       this.configureCommunicationForProgram(commConfigAction.commId);
     }
+    this.setClickedRow(null);
   }
 
   private configureCommunicationForClient(commId) {
     // invoke service to manage a modal dialog allowing user to
     // configure the client-level communication configurations
+    const communication: Communication = this.findCommunication(commId);
+    this.clientConfigsByCommModalService.configureClientModal(communication);
   }
   private configureCommunicationForProgram(commId) {
     // invoke service to manage a modal dialog allowing user to
-    // configure the client-level communication configurations
-    this.programConfigurationService.configureProgramModal(commId);
+    // configure the program-level communication configurations
+    const communication: Communication = this.findCommunication(commId);
+    this.programConfigurationService.configureProgramModal(communication);
+  }
+
+  private findCommunication(id: number): Communication {
+    return this.communications.find(c => c.id === id);
   }
 
   async getCommunications() {

@@ -1,0 +1,56 @@
+<table class="table table-responsive table-sm table-striped table-bordered table-hover"
+appSortableTable (sorted)="onSorted($event)">
+<caption><span *ngIf="displayCommStartEmpty">
+  Communications List begins empty: start typing in the search boxes to find Communications  
+</span></caption>
+<thead>
+  <tr class="bg-gradient-dark text-white"><!-- column sorting header row -->
+    <th *ngIf="showCommId"><app-sortable-column columnName="id" sortDirection="asc">ID</app-sortable-column></th>
+    <th *ngIf="showCommName"><app-sortable-column columnName="name">Name</app-sortable-column></th>
+    <th *ngIf="showCommDesc"><app-sortable-column columnName="description">Description</app-sortable-column></th>
+    <th *ngIf="showStatus">Status</th>
+    <th *ngIf="showAction">Actions</th>
+  </tr>
+  <tr class="thead-light"><!-- search/filter header row -->
+    <th width="10%" *ngIf="showCommId">
+      <input type="text" id="seachCommId" class="form-control form-control-sm" placeholder="search"
+             name="commId" [(ngModel)]="commIdSearch" (keyup)="searchCommId()"/>
+    </th>
+    <th width="23%" *ngIf="showCommName">
+      <input type="text" id="seachName" class="form-control form-control-sm" placeholder="search Name"
+             name="commName" [(ngModel)]="commNameSearch" (keyup)="searchCommName()"/>
+    </th>
+    <th *ngIf="showCommDesc">
+      <input type="text" id="seachDescription" class="form-control form-control-sm" placeholder="search Description"
+             name="commDesc" [(ngModel)]="commDescSearch" (keyup)="searchCommDesc()"/>
+    </th>
+    <th *ngIf="showStatus"></th>
+    <th *ngIf="showAction"></th>
+  </tr>
+</thead>
+<tbody>
+  <tr><td class="bg-gradient-light" border=0 colspan=3></td></tr>
+  <tr appDraggable 
+      [draggable] *ngFor="let communication of displayComm; let i = index"
+      [dragData]="communication" [dragClass]="'drag-over'"  
+      (click)="setClickedRow(i)" [class.table-info]="i === selectedRow"
+      title="Click or Drag to configure {{communication.name}} for  {{displayProgram}}{{displayClient}}">
+    <td *ngIf="showCommId">
+      <span class="badge badge-secondary clickable"
+        (click)="selectCommunication(communication)">{{communication.id}}</span></td>
+    <td *ngIf="showCommName"><span>{{communication.name}}</span></td>
+    <td *ngIf="showCommDesc"><span>{{communication.description}}</span></td>
+    <td *ngIf="showStatus">
+      <span *ngIf="communication.id === 261"><i class="fa fa-check" aria-hidden="true" title="{{communication.name}} Configured (Date)"></i></span></td>
+    <td *ngIf="showAction">
+        <app-comm-actions-popover
+          [commId]="communication.id"
+          [commName]="communication.name"
+          (configAction)="configureCommunication($event)">
+          <i class="fa fa-pencil-square-o clickable" aria-hidden="true" title="Click to configure {{communication.name}} Program or Client settings"></i>
+        </app-comm-actions-popover>
+    </td>
+  </tr>
+</tbody>
+<tfoot></tfoot>
+</table>

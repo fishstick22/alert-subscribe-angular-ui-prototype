@@ -1,0 +1,132 @@
+<form #programConfigurationForm="ngForm" 
+(ngSubmit)="saveProgramConfiguration()" >
+
+  <div class="modal-header bg-gradient-dark">
+    <h4 class="modal-title text-white">
+      Configure Communication(s)
+      <small>for ProgramId {{program.id}}: {{program.name}}</small>
+    </h4>
+    <button type="button" class="close text-white" aria-label="Close" (click)="configureProgramModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    
+  <div class="modal-body">
+      <div id="configuredPrograms">
+  
+        <table class="table table-responsive table-sm table-striped table-bordered table-hover">
+          <caption></caption>
+          <thead class="bg-gradient-dark text-white">
+            <tr>
+              <th>ID</th>
+              <th>N<small>ame</small></th>
+              <th>E<small>mail</small></th>
+              <th>IVR</th>
+              <th>SMS</th>
+              <th>M<small>ail</small></th>
+              <th>M<small>obile</small></th>
+              <th>M<small>andatory</small></th>
+              <th>E<small>ffective</small></th>
+              <th>E<small>xpiration</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr appDroppable *ngFor="let cc of programConfigurations; let i = index"
+                [dragOverClass]="'drag-target-border'" [dragHintClass]="'drag-hint'"
+                [dropEnabled]="i === lastProgramConfigRow && !cc.communication.id"
+                
+                (onDrop)="communicationDrop($event)"
+                [class.table-info]="i == lastProgramConfigRow"> 
+              
+              <td>
+                <span *ngIf="i !== lastProgramConfigRow" class="badge badge-secondary">{{cc.communication.id}}</span>
+                <span *ngIf="i === lastProgramConfigRow && !cc.communication.id">
+                  <i class="fa fa-file-o clickable" aria-hidden="true" 
+                      title="Pick Communication to configure for {{program.name}}"></i></span>
+                <span *ngIf="i === lastProgramConfigRow && cc.communication.id" class="badge badge-primary">{{cc.communication.id}}</span>
+              </td>
+              <td width="20%"><small>{{cc.communication.name}}</small></td>
+              <td><app-select-channel-priority 
+                    id="chanEmailPriority" name="chanEmailPriority" 
+                    [(ngModel)]="cc.chanEmailPriority"
+                    [actualStaticValue]="cc.chanEmailPriority"
+                    [lastConfigRow]="i === lastProgramConfigRow" ></app-select-channel-priority></td>
+              <td><app-select-channel-priority 
+                    id="chanIvrPriority" name="chanIvrPriority" 
+                    [(ngModel)]="cc.chanIvrPriority"
+                    [actualStaticValue]="cc.chanIvrPriority"
+                    [lastConfigRow]="i === lastProgramConfigRow" ></app-select-channel-priority></td>
+              <td><app-select-channel-priority 
+                    id="chanSmsPriority" name="chanSmsPriority" 
+                    [(ngModel)]="cc.chanSmsPriority"
+                    [actualStaticValue]="cc.chanSmsPriority"
+                    [lastConfigRow]="i === lastProgramConfigRow" ></app-select-channel-priority></td>  
+              <td><app-select-channel-priority 
+                    id="chanMailPriority" name="chanMailPriority" 
+                    [(ngModel)]="cc.chanMailPriority"
+                    [actualStaticValue]="cc.chanMailPriority"
+                    [lastConfigRow]="i === lastProgramConfigRow" ></app-select-channel-priority></td> 
+              <td><app-select-channel-priority 
+                    id="chanMobilePriority" name="chanMobilePriority" 
+                    [(ngModel)]="cc.chanMobilePriority"
+                    [actualStaticValue]="cc.chanMobilePriority"
+                    [lastConfigRow]="i === lastProgramConfigRow" ></app-select-channel-priority></td> 
+              <td><app-select-channel-mandatory
+                    id="chanMandatory" name="chanMandatory" 
+                    [(ngModel)]="cc.chanMandatory"
+                    [actualStaticValue]="cc.chanMandatory"
+                    [lastConfigRow]="i === lastProgramConfigRow" ></app-select-channel-mandatory></td>
+              <td><app-date-eff-exp
+                    dateType="effective" [commConfig]="cc"
+                    [lastConfigRow]="i === lastProgramConfigRow"
+                    (newDateValue)="updateDateValue($event, cc, 'effective')"></app-date-eff-exp></td>
+              <td><app-date-eff-exp
+                    dateType="expiration" [commConfig]="cc"
+                    [lastConfigRow]="i === lastProgramConfigRow"
+                    (newDateValue)="updateDateValue($event, cc, 'expiration')"></app-date-eff-exp></td>
+            </tr>
+            <tr *ngIf="configureState === 'start' || configureState === 'continue'">
+              <td>
+                <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
+                  (click)="addProgramConfig()" title="Add New Communication to {{program.name}} Configurations"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+  
+    </div>
+  
+  <div class="modal-footer">
+    <div class="w-100">
+      <span class="float-left">Some instructional content or condition message goes here: </span>
+      <div class="float-right">
+          <button type="submit" class="btn btn-outline-dark" [disabled]="!programConfigurationForm.valid">Save</button>
+          <button type="button" class="btn btn-outline-dark" (click)="configureProgramModal.close('Close click')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <div class="w-100">
+        <app-comm-action-table *ngIf="configureState === 'pick' || configureState === 'continue'" 
+          [configureState]="configureState"
+          [communications]="communications"
+          [displayComm]="displayComm"
+          [supressComm]="supressComm"
+          [displayCommStartEmpty]="true"
+          [displayProgram]="program.name"
+          [showCommId]="true"
+          [showCommName]="true"
+          [showCommDesc]="true"
+          [showStatus]="false"
+          [showAction]="false"
+          (selRowOut)="setClickedRow($event)"
+          (selectedCommunication)="addProgramConfig($event)"
+          (commConfigAction)="configureCommunication($event)">
+        </app-comm-action-table>
+      </div>
+    </div>
+  
+</form>   
