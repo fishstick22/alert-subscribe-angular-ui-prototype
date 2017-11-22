@@ -18,6 +18,10 @@ import { FakeDataApiService, DataApiService,
 import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
 import { FakeProgramConfigsByCommModalService } from './testing/fake-prog-configs-by-comm-modal.service';
 
+import { ClientConfigsByCommModalService } from './services/client-configurations/client-configs-by-comm-modal.service';
+import { FakeClientConfigsByCommModalService } from './testing/fake-client-configs-by-comm-modal.service';
+
+
 import {
   // Communication,
   // Program,
@@ -29,24 +33,13 @@ import {
   // SelectChannelMandatoryStubComponent,
   // DateEffExpStubComponent,
   CommActionTableStubComponent,
-  // ClientActionTableStubComponent
+  ClientActionTableStubComponent
 } from 'app/shared/testing/shared-module-testing-helper';
 import { CommunicationsComponent } from './communications.component';
 
 let component: CommunicationsComponent;
 let fixture: ComponentFixture<CommunicationsComponent>;
 
-// const communications: Communication[] = [];
-// const displayComm: Communication[] = [];
-// const displayCommStartEmpty = false;
-// const showCommId = true;
-// const showCommName = true;
-// const showCommDesc = true;
-// const showStatus = true;
-// const showAction = true;
-
-// setClickedRow($event) {}
-// configureCommunication($event) {}
 
 describe('CommunicationsComponent', () => {
 
@@ -61,9 +54,11 @@ describe('CommunicationsComponent', () => {
       providers: [
         DataApiService,
         ProgramConfigsByCommModalService,
+        ClientConfigsByCommModalService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: DataApiService, usevalue: FakeDataApiService },
         { provide: ProgramConfigsByCommModalService, usevalue: FakeProgramConfigsByCommModalService },
+        { provide: ClientConfigsByCommModalService, usevalue: FakeClientConfigsByCommModalService },
         { provide: Router, useClass: RouterStub}
       ],
       imports: [

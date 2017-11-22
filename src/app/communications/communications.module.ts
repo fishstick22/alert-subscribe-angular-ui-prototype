@@ -18,7 +18,7 @@ import { ClientConfigsByCommModalComponent } from './services/client-configurati
     SharedModule, // supposed to provide CommActionTableComponent
   ],
   declarations: [routedComponents, ProgramConfigsByCommModalComponent, ClientConfigsByCommModalComponent],
-  entryComponents: [ProgramConfigsByCommModalComponent],
+  entryComponents: [ProgramConfigsByCommModalComponent, ClientConfigsByCommModalComponent],
   providers: [ProgramConfigsByCommModalService, ClientConfigsByCommModalService]
 })
 export class CommunicationsModule { }

@@ -1,6 +1,34 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule }    from '@angular/forms';
+
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { ModelTestingHelper,
+         Client, TEST_CLIENT,
+         ClientConfiguration,
+         Communication, TEST_COMMUNICATION,
+         CommunicationConfiguration,
+         Program, TEST_PROGRAM,
+         ProgramConfiguration,
+         DataApiService, FakeDataApiService, } from 'app/shared/testing/shared-module-testing-helper';
+
+import { SelectChannelPriorityStubComponent,
+         SelectChannelMandatoryStubComponent,
+         DateEffExpStubComponent,
+         FakeNgbActiveModal,
+         ClientActionTableStubComponent,
+         CommActionTableStubComponent,
+         DraggableDirective,
+         DroppableDirective,
+         DragDropService, DropEvent,
+} from 'app/communications/testing/fake-client-configs-by-comm-modal.service';
 
 import { ClientConfigsByCommModalComponent } from './client-configs-by-comm-modal.component';
+
+const helper = new ModelTestingHelper();
+// const client = helper.getTestClient();
+// const communication = helper.getTestCommunication();
+// const clientConfig: ClientConfiguration  = helper.getTestClientConfiguration();
 
 describe('ClientConfigsByCommModalComponent', () => {
   let component: ClientConfigsByCommModalComponent;
@@ -8,7 +36,24 @@ describe('ClientConfigsByCommModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientConfigsByCommModalComponent ]
+      declarations: [
+        ClientConfigsByCommModalComponent,
+        DraggableDirective,
+        DroppableDirective,
+        SelectChannelPriorityStubComponent,
+        SelectChannelMandatoryStubComponent,
+        DateEffExpStubComponent,
+        ClientActionTableStubComponent,
+      ],
+      imports: [ FormsModule ],
+      providers: [
+        DragDropService,
+        NgbActiveModal,
+        DataApiService,
+        { provide: NgbActiveModal, usevalue: FakeNgbActiveModal },
+        { provide: DataApiService, usevalue: FakeDataApiService }
+      ]
+
     })
     .compileComponents();
   }));
@@ -16,6 +61,7 @@ describe('ClientConfigsByCommModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ClientConfigsByCommModalComponent);
     component = fixture.componentInstance;
+    component.communication = helper.getTestCommunication();
     fixture.detectChanges();
   });
 
