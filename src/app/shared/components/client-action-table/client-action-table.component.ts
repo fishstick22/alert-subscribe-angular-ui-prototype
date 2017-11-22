@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output,
   EventEmitter, ViewEncapsulation } from '@angular/core';
 
-import { Client, ClientSortCriteria,
-    ClientConfigAction }  from 'app/shared/model/client';
+import { Client,
+         ClientSortCriteria,
+         ClientConfigAction       } from 'app/shared/model/client';
 
 @Component({
   selector: 'app-client-action-table',
