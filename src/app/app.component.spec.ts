@@ -60,8 +60,6 @@ function tests() {
   let links: RouterLinkStubDirective[];
   let linkDes: DebugElement[];
 
-
-
   beforeEach(() => {
     // trigger initial data binding
     fixture.detectChanges();

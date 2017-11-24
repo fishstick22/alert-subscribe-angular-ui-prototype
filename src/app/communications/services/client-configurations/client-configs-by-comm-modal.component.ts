@@ -47,7 +47,6 @@ export class ClientConfigsByCommModalComponent implements OnInit {
   modalInit() {
     console.log('ClientConfigsByCommModalComponent init: ');
     console.log(this.communication);
-    // console.log(this.clientConfigurations);
     // get the list of clients to populate the dropdown (covered in @Input() clients: Client[];)
     // check if there are progConfig already (for now just checking for first one, have to check for eff dates)
     this.displayClientStartEmpty = true;
@@ -63,10 +62,7 @@ export class ClientConfigsByCommModalComponent implements OnInit {
 
     if (this.newClientConfig && this.configureState === 'pick') {
       this.newClientConfig.client = client;
-      // this.newClientConfigs[this.newClientConfigs.length] = this.newClientConfig;
       this.supressClient.push(client.id);
-      // this.configureState = 'continue';
-      // this.newClientConfig = null;
       this.clientDropEnabled = false;
     }
 

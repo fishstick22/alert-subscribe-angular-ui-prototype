@@ -31,13 +31,13 @@ export class ProgramConfigsByCommModalService {
     const modalRef = this.modalService.open(ProgramConfigsByCommModalComponent, modalOpts);
     const modalComp: ProgramConfigsByCommModalComponent  = modalRef.componentInstance;
 
-    this.programs = await this.getPrograms();
-    this.programConfigurations = await this.getProgramConfigurations();
+    // this.programs = await this.getPrograms();
+    // this.programConfigurations = await this.getProgramConfigurations();
 
     // modalComp.name = 'Configure Program';
     modalComp.communication = communication;
-    modalComp.programs = this.programs;
-    modalComp.programConfigurations = this.findProgramConfigurations(communication.id);
+    modalComp.programs = await this.getPrograms();
+    modalComp.programConfigurations = await this.findProgramConfigurations(communication);
     modalComp.modalInit();
 
     modalRef.result.then((result) => {
@@ -94,16 +94,24 @@ export class ProgramConfigsByCommModalService {
     return this.programs.find(p => p.id === id);
   }
 
-  private findProgramConfigurations(id): ProgramConfiguration[] {
+  private async findProgramConfigurations(selectedComm: Communication) { // : ProgramConfiguration[] {
+    await this.getProgramConfigurations();
     return this.programConfigurations.filter(pc => {
-      if (pc.communication.id === id) {
-        console.log(pc, 'Program: ', typeof(pc.program));
+      if (typeof(pc.communication) === 'number') {
+        if (pc.communication === selectedComm.id) {
+          pc.communication = selectedComm;
+          if (typeof(pc.program) === 'number') {
+            pc.program = this.findProgram(<number> pc.program);
+          }
+          return true;
+        } else { return false; }
+      } else if (pc.communication.id === selectedComm.id) {
         if (typeof(pc.program) === 'number') {
-          const programId = <number> pc.program;
-          pc.program = this.findProgram(programId);
+          pc.program = this.findProgram(<number> pc.program);
         }
         return true;
       }
+      return false;
     });
   }
 

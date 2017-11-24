@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { routedComponents, ProgramsRoutingModule } from './programs-routing.module';
@@ -14,10 +14,10 @@ import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   imports: [
-    // CommonModule, // supposed to be imported from shared module?
+    // CommonModule, // gets provided by shared module
     NgbModule.forRoot(),
     ProgramsRoutingModule,
-    SharedModule, // supposed to provide CommActionTableComponent
+    SharedModule
   ],
   declarations: [
     routedComponents,

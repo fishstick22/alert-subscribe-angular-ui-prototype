@@ -6,19 +6,31 @@ import { routedComponents, CommunicationsRoutingModule } from './communications-
 // shared
 import { SharedModule } from 'app/shared/shared.module';
 
-import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
+import { CommunicationsComponent } from './communications.component';
+import { ClientConfigsByCommModalComponent } from './services/client-configurations/client-configs-by-comm-modal.component';
 import { ProgramConfigsByCommModalComponent } from './services/program-configurations/prog-configs-by-comm-modal.component';
 import { ClientConfigsByCommModalService } from './services/client-configurations/client-configs-by-comm-modal.service';
-import { ClientConfigsByCommModalComponent } from './services/client-configurations/client-configs-by-comm-modal.component';
+import { ProgramConfigsByCommModalService } from './services/program-configurations/prog-configs-by-comm-modal.service';
 
 @NgModule({
   imports: [
-    // CommonModule, // supposed to be imported from shared module?
+    /// CommonModule, // gets provided by shared module
     CommunicationsRoutingModule,
-    SharedModule, // supposed to provide CommActionTableComponent
+    SharedModule
   ],
-  declarations: [routedComponents, ProgramConfigsByCommModalComponent, ClientConfigsByCommModalComponent],
-  entryComponents: [ProgramConfigsByCommModalComponent, ClientConfigsByCommModalComponent],
-  providers: [ProgramConfigsByCommModalService, ClientConfigsByCommModalService]
+  declarations: [
+    routedComponents,
+    CommunicationsComponent,
+    ClientConfigsByCommModalComponent,
+    ProgramConfigsByCommModalComponent
+  ],
+  entryComponents: [
+    ClientConfigsByCommModalComponent,
+    ProgramConfigsByCommModalComponent
+  ],
+  providers: [
+    ClientConfigsByCommModalService,
+    ProgramConfigsByCommModalService
+  ]
 })
 export class CommunicationsModule { }

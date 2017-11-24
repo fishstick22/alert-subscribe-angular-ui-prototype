@@ -33,8 +33,6 @@ export class ProgramConfigurationsService {
       const response = await this.http.post(
         this.progConfigApiEndpoint,
         programConfiguration
-        // JSON.stringify(programConfiguration),
-        // {headers: this.headers}
       ).toPromise();
       return response as ProgramConfiguration;
     } catch (error) {
@@ -47,8 +45,6 @@ export class ProgramConfigurationsService {
       const url = `${this.progConfigApiEndpoint}/${programConfiguration.id}`;
       const response = await this.http.put(
         url, programConfiguration
-        // JSON.stringify(programConfiguration),
-        // {headers: this.headers}
       ).toPromise();
       return response as ProgramConfiguration;
     } catch (error) {
