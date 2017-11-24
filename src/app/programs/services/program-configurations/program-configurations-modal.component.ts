@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Communication }            from 'app/shared/model/communication';
-import { Program }                  from 'app/shared/model/program';
-import { ProgramConfiguration }     from 'app/shared/model/program-configuration';
+import { Communication } from 'app/shared/model/communication';
+import { Program } from 'app/shared/model/program';
+import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 //
 @Component({
   selector: 'app-program-configurations-modal',

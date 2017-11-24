@@ -1,16 +1,18 @@
 import { Injectable, Input } from '@angular/core';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { DataApiService, FakeDataApiService,
+import {
   Communication, CommunicationsService, FakeCommunicationsService,
   Client, ClientsService, FakeClientsService,
-  ClientConfiguration, ClientConfigurationsService, FakeClientConfigurationsService
+  ClientConfiguration, ClientConfigurationsService, FakeClientConfigurationsService,
+  DataApiService, FakeDataApiService
 } from 'app/shared/testing/shared-module-testing-helper';
 
-import { SelectChannelPriorityStubComponent,
+import {
+  SelectChannelPriorityStubComponent,
   SelectChannelMandatoryStubComponent,
   DateEffExpStubComponent,
   FakeNgbActiveModal,

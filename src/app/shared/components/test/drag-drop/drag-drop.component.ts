@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DraggableDirective }          from 'app/shared/directives/drag-drop/draggable.directive';
-import { DroppableDirective }          from 'app/shared/directives/drag-drop/droppable.directive';
+import { DraggableDirective } from 'app/shared/directives/drag-drop/draggable.directive';
+import { DroppableDirective } from 'app/shared/directives/drag-drop/droppable.directive';
 
 import { DropEvent } from 'app/shared/directives/drag-drop/drop-event.model';
 

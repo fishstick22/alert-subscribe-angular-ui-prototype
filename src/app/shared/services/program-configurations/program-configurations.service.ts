@@ -6,7 +6,7 @@ import { APP_CONFIG, IAppConfig } from 'app/app.config';
 
 import 'rxjs/add/operator/toPromise';
 
-import { ProgramConfiguration }   from 'app/shared/model/program-configuration';
+import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
 @Injectable()
 export class ProgramConfigurationsService {

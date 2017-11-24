@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TestBed, inject } from '@angular/core/testing';
 
-import { NgbModal, ModalDismissReasons,
-  NgbModalOptions }             from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
-import { FakeDataApiService, DataApiService,
-  Client, FakeClientsService, ClientsService } from 'app/shared/testing/shared-module-testing-helper';
+import {
+  Client, FakeClientsService, ClientsService,
+  DataApiService, FakeDataApiService
+} from 'app/shared/testing/shared-module-testing-helper';
 
 import { ClientConfigurationsModalService } from './client-configurations-modal.service';
 

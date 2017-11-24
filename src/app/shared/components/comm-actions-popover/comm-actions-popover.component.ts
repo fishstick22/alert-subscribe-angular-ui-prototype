@@ -1,9 +1,9 @@
 import { Component, OnInit, Input,
-         Output, EventEmitter }       from '@angular/core';
+         Output, EventEmitter } from '@angular/core';
 
- import { Communication,
-          CommunicationSortCriteria,
-          CommunicationConfigAction } from 'app/shared/model/communication';
+import { Communication,
+         CommunicationSortCriteria,
+         CommunicationConfigAction } from 'app/shared/model/communication';
 
 // https://ng-bootstrap.github.io/#/components/popover/examples
 

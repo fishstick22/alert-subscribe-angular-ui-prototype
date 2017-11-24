@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Communication }            from 'app/shared/model/communication';
-import { Program }                  from 'app/shared/model/program';
-import { ProgramConfiguration }     from 'app/shared/model/program-configuration';
-// import { DataApiService } from 'app/shared/services/data-api.service';
+import { Communication } from 'app/shared/model/communication';
+import { Program } from 'app/shared/model/program';
+import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
 @Component({
   // entry component, don't use the selector
@@ -28,7 +27,7 @@ export class ProgramConfigsByCommModalComponent implements OnInit {
   lastPgmConfigRow: number;
 
   constructor(
-    // private dataApiService: DataApiService,
+
     private configureProgramModal: NgbActiveModal
   ) { }
 

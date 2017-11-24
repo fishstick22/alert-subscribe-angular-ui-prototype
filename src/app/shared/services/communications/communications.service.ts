@@ -1,5 +1,5 @@
-import { Injectable, Inject }    from '@angular/core';
-// import { Headers, Http }         from '@angular/http';
+import { Injectable, Inject } from '@angular/core';
+// import { Headers, Http } from '@angular/http';
 // https://github.com/angular/angular/issues/20096
 // Importing both HttpModule and HttpClientModule fixes the problem.
 // It's caused by angular2-jwt because it still relies on the first one.

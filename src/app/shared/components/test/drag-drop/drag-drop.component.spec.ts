@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { DraggableDirective }          from 'app/shared/directives/drag-drop/draggable.directive';
-import { DroppableDirective }          from 'app/shared/directives/drag-drop/droppable.directive';
+import { DraggableDirective } from 'app/shared/directives/drag-drop/draggable.directive';
+import { DroppableDirective } from 'app/shared/directives/drag-drop/droppable.directive';
 import { DragDropService } from 'app/shared/services/drag-drop.service';
 
 import { DropEvent } from 'app/shared/directives/drag-drop/drop-event.model';

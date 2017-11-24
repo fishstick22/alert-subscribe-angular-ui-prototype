@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FakeDataApiService, DataApiService,
-  Program, FakeProgramsService, ProgramsService } from 'app/shared/testing/shared-module-testing-helper';
+import {
+  DataApiService, FakeDataApiService,
+  Program, ProgramsService, FakeProgramsService
+} from 'app/shared/testing/shared-module-testing-helper';
 
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
 import { FakeProgramConfigurationsModalService } from './testing/fake-program-configurations-modal.service';

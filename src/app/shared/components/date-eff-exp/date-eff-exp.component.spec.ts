@@ -1,7 +1,7 @@
 import { Component, OnInit, Input,
-  Output, EventEmitter }     from '@angular/core';
+         Output, EventEmitter } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { DateEffExpComponent } from './date-eff-exp.component';
 

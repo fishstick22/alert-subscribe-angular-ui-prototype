@@ -1,19 +1,19 @@
-import { Injectable }                  from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { CommunicationsService }        from 'app/shared/services/communications/communications.service';
+import { CommunicationsService } from 'app/shared/services/communications/communications.service';
 
-import { ClientsService }               from 'app/shared/services/clients/clients.service';
-import { ClientConfigurationsService }  from 'app/shared/services/client-configurations/client-configurations.service';
-import { ProgramsService }              from 'app/shared/services/programs/programs.service';
+import { ClientsService } from 'app/shared/services/clients/clients.service';
+import { ClientConfigurationsService } from 'app/shared/services/client-configurations/client-configurations.service';
+import { ProgramsService } from 'app/shared/services/programs/programs.service';
 import { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
 
-// import { IProgramConfig }              from 'app/classes/model/iprog-config';
+// import { IProgramConfig } from 'app/classes/model/iprog-config';
 
-import { Communication }               from 'app/shared/model/communication';
-import { ClientConfiguration }         from 'app/shared/model/client-configuration';
-import { Program }                     from 'app/shared/model/program';
-import { ProgramConfiguration }        from 'app/shared/model/program-configuration';
-import { Client }                      from 'app/shared/model/client';
+import { Communication } from 'app/shared/model/communication';
+import { ClientConfiguration } from 'app/shared/model/client-configuration';
+import { Program } from 'app/shared/model/program';
+import { ProgramConfiguration } from 'app/shared/model/program-configuration';
+import { Client } from 'app/shared/model/client';
 
 @Injectable()
 export class DataApiService {

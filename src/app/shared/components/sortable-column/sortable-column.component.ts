@@ -1,9 +1,9 @@
 import { Component, OnInit, Input,
          EventEmitter, OnDestroy, HostListener } from '@angular/core';
 
-import { Subscription }                          from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
-import { SortableColumnService }                 from 'app/shared/services/sortable-column.service';
+import { SortableColumnService } from 'app/shared/services/sortable-column.service';
 
 // http://www.carbonatethis.com/sort-table-columns-with-angular-and-typescript/
 
@@ -24,8 +24,8 @@ export class SortableColumnComponent implements OnInit, OnDestroy {
 
   @HostListener('click')
   sort() {
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-      this.sortService.columnSorted({ sortColumn: this.columnName, sortDirection: this.sortDirection });
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortService.columnSorted({ sortColumn: this.columnName, sortDirection: this.sortDirection });
   }
 
   ngOnInit() {
