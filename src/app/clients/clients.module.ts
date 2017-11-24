@@ -1,14 +1,16 @@
+// Clients feature Module
+//
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 
-import { routedComponents, ClientsRoutingModule } from './clients-routing.module';
+import { routedComponents,
+         ClientsRoutingModule               } from './clients-routing.module';
+
+import { ClientConfigurationsModalComponent } from './services/client-configurations/client-configurations-modal.component';
+import { ClientConfigurationsModalService   } from './services/client-configurations/client-configurations-modal.service';
 
 // shared
 import { SharedModule } from 'app/shared/shared.module';
-
-import { ClientsComponent } from './clients.component';
-import { ClientConfigurationsModalComponent } from './services/client-configurations/client-configurations-modal.component';
-import { ClientConfigurationsModalService } from './services/client-configurations/client-configurations-modal.service';
 
 @NgModule({
   imports: [
@@ -18,7 +20,6 @@ import { ClientConfigurationsModalService } from './services/client-configuratio
   ],
   declarations: [
     routedComponents,
-    ClientsComponent,
     ClientConfigurationsModalComponent
   ],
   entryComponents: [

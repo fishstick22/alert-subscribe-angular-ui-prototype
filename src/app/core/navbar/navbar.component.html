@@ -10,17 +10,17 @@
   </button>
   <div class="collapse navbar-collapse" [class.show]="show" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/home" >Home</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/dashboard" >Dashboard</a></li>    
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/communications" >Communications</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/programs" >Programs</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/clients" >Clients</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" href="#">Contact</a></li>
     </ul>
     <ul class="nav navbar-nav">
