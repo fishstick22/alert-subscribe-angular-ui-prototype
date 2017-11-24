@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule }    from '@angular/forms';
-import { NgbModule }              from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SortableColumnService } from 'app/shared/services/sortable-column.service';
 

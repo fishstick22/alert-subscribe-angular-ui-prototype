@@ -1,4 +1,4 @@
-import { SortableColumnService }       from 'app/shared/services/sortable-column.service';
+import { SortableColumnService } from 'app/shared/services/sortable-column.service';
 
 import { SortableTableDirective } from './sortable-table.directive';
 

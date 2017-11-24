@@ -4,14 +4,21 @@ export { ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router
 import { Component, Directive, Injectable, Input } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 
+/* tslint:disable:directive-selector */
+/* tslint:disable:use-host-property-decorator */
 @Directive({
   selector: '[routerLink]',
   host: {
     '(click)': 'onClick()'
   }
 })
+/* tslint:enable:use-host-property-decorator */
+/* tslint:enable:directive-selector */
+
 export class RouterLinkStubDirective {
+  /* tslint:disable:no-input-rename */
   @Input('routerLink') linkParams: any;
+  /* tslint:enable:no-input-rename */
   navigatedTo: any = null;
 
   onClick() {
@@ -19,8 +26,10 @@ export class RouterLinkStubDirective {
   }
 }
 
+/* tslint:disable:component-selector */
 @Component({selector: 'router-outlet', template: ''})
 export class RouterOutletStubComponent { }
+/* tslint:enable:component-selector */
 
 @Injectable()
 export class RouterStub {

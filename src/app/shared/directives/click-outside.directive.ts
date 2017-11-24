@@ -1,9 +1,11 @@
-import { Directive, ElementRef, EventEmitter,
-         Inject, Injectable, Input,
-         OnChanges, OnDestroy, OnInit, Output,
-         PLATFORM_ID, SimpleChanges } from '@angular/core';
+import {
+  Directive, ElementRef, EventEmitter,
+  Inject, Injectable, Input,
+  OnChanges, OnDestroy, OnInit, Output,
+  PLATFORM_ID, SimpleChanges
+} from '@angular/core';
 
-import { isPlatformBrowser }          from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 
 // https://github.com/arkon/ng-click-outside
 
@@ -24,8 +26,9 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
 
-  constructor(private _el: ElementRef,
-              @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    private _el: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
   }

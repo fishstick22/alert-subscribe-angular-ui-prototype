@@ -1,5 +1,5 @@
-import { Program }              from './program';
-import { Communication }        from './communication';
+import { Program } from './program';
+import { Communication } from './communication';
 import { CommunicationConfiguration } from './communication-configuration';
 
 export class ProgramConfiguration implements CommunicationConfiguration {

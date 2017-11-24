@@ -2,14 +2,14 @@ import {
     Directive, ElementRef, HostListener,
     Input, Output, EventEmitter,
     OnInit, OnDestroy, Renderer2, NgZone
-}                                        from '@angular/core';
-import { Subscription }                  from 'rxjs/Subscription';
-import { DropEvent }                     from './drop-event.model';
-import { DragDropService }               from 'app/shared/services/drag-drop.service';
-import { DomHelper }                     from './dom-helper';
-import { Observable }                    from 'rxjs/Observable';
-import                                        'rxjs/add/observable/of';
-import                                        'rxjs/add/operator/map';
+} from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { DropEvent } from './drop-event.model';
+import { DragDropService } from 'app/shared/services/drag-drop.service';
+import { DomHelper } from './dom-helper';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 
 @Directive({
     selector: '[appDroppable]'
@@ -59,9 +59,9 @@ export class DroppableDirective implements OnInit, OnDestroy {
     this._dropEnabled = value;
 
     if (this._dropEnabled === true) {
-        this.subscribeService();
+      this.subscribeService();
     } else {
-        this.unsubscribeService();
+      this.unsubscribeService();
     }
   }
 
@@ -119,7 +119,7 @@ export class DroppableDirective implements OnInit, OnDestroy {
   unbindDragLeaveListener: Function;
 
   constructor(protected el: ElementRef, private renderer: Renderer2,
-      private ng2DragDropService: DragDropService, private zone: NgZone) {
+    private ng2DragDropService: DragDropService, private zone: NgZone) {
   }
 
   ngOnInit() {

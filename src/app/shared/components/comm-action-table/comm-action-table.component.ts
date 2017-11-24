@@ -4,7 +4,7 @@ import { Component, OnInit, OnChanges,
 
 import { Communication,
          CommunicationSortCriteria,
-         CommunicationConfigAction }   from 'app/shared/model/communication';
+         CommunicationConfigAction } from 'app/shared/model/communication';
 
 @Component({
   selector: 'app-comm-action-table',
@@ -56,14 +56,6 @@ export class CommActionTableComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     console.log('CommActionTableComponent:', this.communications);
-    // shouldn't have to do this?
-    // if (!this.displayComm) {
-    //   this.displayComm = [];
-    //   this.displayCommStartEmpty = true;
-    // }
-    // if (!this.supressComm) {
-    //   this.supressComm = [];
-    // }
   }
 
   selectCommunication(communication: Communication) {

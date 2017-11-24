@@ -1,13 +1,9 @@
-import { NgModule }               from '@angular/core';
-import { Routes, RouterModule }   from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { PageNotFoundComponent }  from './core/page-not-found/page-not-found.component';
-import { HomeComponent }          from './core/home/home.component';
-import { DashboardComponent }     from './dashboard/dashboard.component';
-// import { CommunicationComponent } from 'app/components/routes/communication/communication.component';
-// import { ClientComponent }        from 'app/components/routes/client/client.component';
-// import { ProgramComponent }       from 'app/components/routes/program/program.component';
-// import { TestComponent }          from 'app/components/test/test.component';
+import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { HomeComponent } from './core/home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '',               redirectTo: '/home', pathMatch: 'full' },

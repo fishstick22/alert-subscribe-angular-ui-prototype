@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Communication }            from 'app/shared/model/communication';
-import { Client }                  from 'app/shared/model/client';
+import { Communication } from 'app/shared/model/communication';
+import { Client } from 'app/shared/model/client';
 import { ClientConfiguration } from 'app/shared/model/client-configuration';
 
 @Component({
@@ -38,7 +38,6 @@ export class ClientConfigurationsModalComponent implements OnInit {
   tomorrow = new Date();
 
   constructor(
-    // private dataApiService: DataApiService,
     private configureClientModal: NgbActiveModal
   ) { }
 
@@ -48,7 +47,6 @@ export class ClientConfigurationsModalComponent implements OnInit {
   modalInit() {
     console.log('ClientConfigComponent init: ');
     console.log(this.client);
-    // console.log(this.clientConfigurations);
     // get the list of clients to populate the dropdown (covered in @Input() clients: Client[];)
     // check if there are progConfig already (for now just checking for first one, have to check for eff dates)
     this.displayCommStartEmpty = true;
@@ -64,10 +62,7 @@ export class ClientConfigurationsModalComponent implements OnInit {
 
     if (this.newClientConfig && this.configureState === 'pick') {
       this.newClientConfig.communication = communication;
-      // this.newClientConfigs[this.newClientConfigs.length] = this.newClientConfig;
       this.supressComm.push(communication.id);
-      // this.configureState = 'continue';
-      // this.newClientConfig = null;
       this.clientDropEnabled = false;
     }
 

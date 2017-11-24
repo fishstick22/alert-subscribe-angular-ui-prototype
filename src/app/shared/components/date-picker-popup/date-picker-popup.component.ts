@@ -1,6 +1,7 @@
-import { Component, OnInit, Input,
-  Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { NgbDateStruct }            from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input, Output,
+         EventEmitter, ViewEncapsulation } from '@angular/core';
+
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-date-picker-popup',
@@ -44,13 +45,11 @@ export class DatePickerPopupComponent implements OnInit {
 
   private onClick(e: Event) {
     console.log('Clicked inside:', e);
-    // this.countInside++;
   }
 
   private onClickedOutside(e: Event, d: any) {
     console.log('Clicked outside:', e);
     d.close();
-    // this.countOutside++;
   }
 
 }

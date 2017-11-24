@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,8 @@ import { ModelTestingHelper,
          CommunicationConfiguration,
          Program, TEST_PROGRAM,
          ProgramConfiguration,
-         DataApiService, FakeDataApiService, } from 'app/shared/testing/shared-module-testing-helper';
+         DataApiService, FakeDataApiService
+} from 'app/shared/testing/shared-module-testing-helper';
 
 import { SelectChannelPriorityStubComponent,
          SelectChannelMandatoryStubComponent,
@@ -26,9 +27,6 @@ import { SelectChannelPriorityStubComponent,
 import { ClientConfigsByCommModalComponent } from './client-configs-by-comm-modal.component';
 
 const helper = new ModelTestingHelper();
-// const client = helper.getTestClient();
-// const communication = helper.getTestCommunication();
-// const clientConfig: ClientConfiguration  = helper.getTestClientConfiguration();
 
 describe('ClientConfigsByCommModalComponent', () => {
   let component: ClientConfigsByCommModalComponent;

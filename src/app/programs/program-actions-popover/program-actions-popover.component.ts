@@ -1,8 +1,8 @@
-import { Component, OnInit, Input,
-  Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit,
+         Input, Output, EventEmitter,
+         ViewEncapsulation } from '@angular/core';
 
-import { Program,
-    ProgramConfigAction }    from 'app/shared/model/program';
+import { Program, ProgramConfigAction } from 'app/shared/model/program';
 
 @Component({
   selector: 'app-program-actions-popover',

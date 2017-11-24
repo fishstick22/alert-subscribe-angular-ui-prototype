@@ -1,4 +1,4 @@
-import { Injectable, Inject }    from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpHeaders, HttpClient } from '@angular/common/http';
 

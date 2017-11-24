@@ -1,9 +1,9 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { By }                        from '@angular/platform-browser';
-import { Component, DebugElement }   from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { Component, DebugElement } from '@angular/core';
 
-import { DropEvent }                 from './drop-event.model';
-import { DroppableDirective }        from './droppable.directive';
+import { DropEvent } from './drop-event.model';
+import { DroppableDirective } from './droppable.directive';
 import { DragDropService } from 'app/shared/services/drag-drop.service';
 
 @Component({

@@ -84,7 +84,7 @@
                   [lastConfigRow]="i === lastClientConfigRow"
                   (newDateValue)="updateDateValue($event, cc, 'expiration')"></app-date-eff-exp></td>
           </tr>
-          <tr *ngIf="configureState === 'start'">
+          <tr *ngIf="configureState === 'start' || configureState === 'continue'">
             <td>
               <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
                 (click)="addClientConfig()" title="Add New Client Configuration to {{client.name}}"></i>
@@ -108,9 +108,11 @@
   
   <div class="modal-footer">
     <div id=ActionTable>
-      <app-comm-action-table *ngIf="configureState === 'pick'" 
+      <app-comm-action-table *ngIf="configureState === 'pick' || configureState === 'continue'"
+        [configureState]="configureState"    
         [communications]="communications"
         [displayComm]="displayComm"
+        [supressComm]="supressComm"
         [displayCommStartEmpty]="true"
         [displayClient]="client.name"
         [showCommId]="true"

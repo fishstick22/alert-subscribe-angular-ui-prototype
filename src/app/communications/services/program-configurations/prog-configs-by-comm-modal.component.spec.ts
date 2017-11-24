@@ -1,10 +1,11 @@
 import { Component, Injectable, Input } from '@angular/core';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { DataApiService, FakeDataApiService,
+import {
+  DataApiService, FakeDataApiService,
   Communication, CommunicationsService, FakeCommunicationsService,
   Program, ProgramsService, FakeProgramsService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService
@@ -22,7 +23,6 @@ import {
 } from 'app/communications/testing/fake-prog-configs-by-comm-modal.service';
 
 import { ProgramConfigsByCommModalComponent } from './prog-configs-by-comm-modal.component';
-
 
 describe('ProgramConfigurationsModalComponent', () => {
   let component: ProgramConfigsByCommModalComponent;

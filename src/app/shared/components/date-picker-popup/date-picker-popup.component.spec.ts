@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDateStruct }            from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 import { ClickOutsideDirective } from 'app/shared/directives/click-outside.directive';
 import { DatePickerPopupComponent } from './date-picker-popup.component';

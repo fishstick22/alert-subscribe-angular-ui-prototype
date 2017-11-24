@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { APP_CONFIG, AppConfig } from 'app/app.config';
@@ -7,11 +7,6 @@ import { APP_CONFIG, AppConfig } from 'app/app.config';
 import { FakeDataApiService, DataApiService,
   Communication, FakeCommunicationsService, CommunicationsService
 } from 'app/shared/testing/shared-module-testing-helper';
-
-// import { SharedModule } from 'app/shared/shared.module';
-// import { DragDropService } from 'app/shared/services/drag-drop.service';
-// import { DragDropComponent } from './drag-drop/drag-drop.component';
-// import { ClickOutsideComponent }       from './click-outside/click-outside.component';
 
 import { SharedComponent } from './shared.component';
 

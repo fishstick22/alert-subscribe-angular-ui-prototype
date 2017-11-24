@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { Client }                   from 'app/shared/model/client';
-import { ClientConfiguration }      from 'app/shared/model/client-configuration';
-import { Communication }            from 'app/shared/model/communication';
+import { Client } from 'app/shared/model/client';
+import { ClientConfiguration } from 'app/shared/model/client-configuration';
+import { Communication } from 'app/shared/model/communication';
 
 @Component({
   selector: 'app-client-configs-by-comm-modal',

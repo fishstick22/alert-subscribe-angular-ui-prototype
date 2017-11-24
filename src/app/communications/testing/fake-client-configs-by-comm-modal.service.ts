@@ -21,19 +21,7 @@ import { SortableTableDirective } from 'app/shared/directives/sortable-table.dir
 import { DragDropService } from 'app/shared/services/drag-drop.service';
 import { DropEvent } from 'app/shared/directives/drag-drop/drop-event.model';
 
-export {
-  Communication,
-  Program,
-  ProgramConfiguration,
-  Client,
-  ClientConfiguration,
-  CommunicationConfiguration,
-  SelectChannelPriorityStubComponent,
-  SelectChannelMandatoryStubComponent,
-  DateEffExpStubComponent,
-  CommActionTableStubComponent,
-  ClientActionTableStubComponent
-} from 'app/shared/testing/shared-module-testing-helper';
+export * from 'app/shared/testing/shared-module-testing-helper';
 
 export { DraggableDirective } from 'app/shared/directives/drag-drop/draggable.directive';
 export { DroppableDirective } from 'app/shared/directives/drag-drop/droppable.directive';

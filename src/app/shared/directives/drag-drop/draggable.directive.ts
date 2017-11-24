@@ -2,9 +2,9 @@ import {
     Directive, ElementRef, HostListener,
     Input, Output, EventEmitter, OnInit,
     HostBinding, Renderer2, NgZone, OnDestroy
-}                                             from '@angular/core';
-import { DragDropService }                    from 'app/shared/services/drag-drop.service';
-import { DomHelper }                          from './dom-helper';
+} from '@angular/core';
+import { DragDropService } from 'app/shared/services/drag-drop.service';
+import { DomHelper } from './dom-helper';
 
 @Directive({
     selector: '[appDraggable]'
