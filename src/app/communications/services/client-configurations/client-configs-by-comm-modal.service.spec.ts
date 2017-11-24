@@ -7,7 +7,7 @@ import { NgbModal, ModalDismissReasons,
 import { Client,
   ClientActionTableStubComponent,
   FakeDataApiService, DataApiService } from 'app/shared/testing/shared-module-testing-helper';
-  
+
 import { ClientConfigsByCommModalService } from './client-configs-by-comm-modal.service';
 
 @Injectable()

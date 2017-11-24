@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output,
-  EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnChanges,
+  SimpleChanges, SimpleChange,
+  Input, Output, EventEmitter,
+  ViewEncapsulation } from '@angular/core';
 
 import { Client,
          ClientSortCriteria,
@@ -11,10 +13,12 @@ import { Client,
   styleUrls: ['./client-action-table.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ClientActionTableComponent implements OnInit {
+export class ClientActionTableComponent implements OnInit, OnChanges {
 
+  @Input() configureState: string;
   @Input() clients: Client[];
   @Input() displayClient: Client[];
+  @Input() supressClient: number[] = [];
   @Input() displayClientStartEmpty: boolean = true;
   @Input() displayCommunication: string = 'Communication';
   @Input() showClientId: boolean = true;
@@ -37,6 +41,19 @@ export class ClientActionTableComponent implements OnInit {
   selectedRow: number;
 
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+
+    // https://github.com/angular/angular/issues/2404
+    // ngOnChanges can fire before ngOnInit
+    // not sure why, but just make sure these are not undefined
+    // before calling the search to referesh
+    if (this.displayClient && this.clients && this.supressClient) {
+      this.searchClientTable();
+    }
+
+  }
 
   ngOnInit() {
     console.log('ClientActionTableComponent onInit...', this.clients, this.displayClient);
@@ -103,6 +120,10 @@ export class ClientActionTableComponent implements OnInit {
     this.clientNameSearchLast = this.clientNameSearch;
   }
 
+  private isSuppressed(client: Client): boolean {
+    return (this.supressClient.indexOf(client.id) > -1);
+  }
+
   private searchClientTable() {
     // TODO yes this is a monster if-then-else method
     // once the logic is worked out move it into a service and refactor
@@ -122,7 +143,7 @@ export class ClientActionTableComponent implements OnInit {
       } else {
         // refresh the list, reapply each filter, gonna guess mostly searching on names
         this.displayClient = this.clients.filter(client => {
-          return this.containsString(client.name, this.clientNameSearch);
+          return !this.isSuppressed(client) && this.containsString(client.name, this.clientNameSearch);
         });
       }
     } else {
@@ -131,11 +152,11 @@ export class ClientActionTableComponent implements OnInit {
         // we may be starting empty, if so use the full array first
         if (this.displayClient.length === 0) {
           this.displayClient = this.clients.filter(client => {
-            return this.containsString(client.name, this.clientNameSearch);
+            return !this.isSuppressed(client) && this.containsString(client.name, this.clientNameSearch);
           });
         } else {
           this.displayClient = this.displayClient.filter(client => {
-            return this.containsString(client.name, this.clientNameSearch);
+            return !this.isSuppressed(client) && this.containsString(client.name, this.clientNameSearch);
           });
         }
       }
@@ -143,11 +164,11 @@ export class ClientActionTableComponent implements OnInit {
     if (this.clientCodeSearch !== '') {
       if (this.displayClient.length === 0) {
         this.displayClient = this.clients.filter(client => {
-          return this.containsString(client.code, this.clientCodeSearch);
+          return !this.isSuppressed(client) && this.containsString(client.code, this.clientCodeSearch);
         });
       } else {
         this.displayClient = this.displayClient.filter(client => {
-          return this.containsString(client.code, this.clientCodeSearch);
+          return !this.isSuppressed(client) && this.containsString(client.code, this.clientCodeSearch);
         });
       }
     }
@@ -155,11 +176,11 @@ export class ClientActionTableComponent implements OnInit {
     if (this.clientIdSearch !== '') {
       if (this.displayClient.length === 0) {
         this.displayClient = this.clients.filter(client => {
-          return (String(client.id).indexOf(this.clientIdSearch) !== -1 );
+          return !this.isSuppressed(client) && (String(client.id).indexOf(this.clientIdSearch) !== -1 );
         });
       } else {
         this.displayClient = this.displayClient.filter(client => {
-          return (String(client.id).indexOf(this.clientIdSearch) !== -1 );
+          return !this.isSuppressed(client) && (String(client.id).indexOf(this.clientIdSearch) !== -1 );
         });
       }
     }

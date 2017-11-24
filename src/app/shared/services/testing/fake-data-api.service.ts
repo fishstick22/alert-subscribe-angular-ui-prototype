@@ -21,16 +21,11 @@ import { FakeClientConfigurationsService,
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 // re-export for tester convenience
-export { FakeCommunicationsService,
-         CommunicationsService } from './fake-communications.service';
-export { FakeProgramsService,
-         ProgramsService } from './fake-programs.service';
-export { FakeProgramConfigurationsService,
-         ProgramConfigurationsService } from './fake-program-configurations.service';
-export { FakeClientsService,
-         ClientsService } from './fake-clients.service';
-export { FakeClientConfigurationsService,
-         ClientConfigurationsService } from './fake-client-configurations.service';
+export * from './fake-communications.service';
+export * from './fake-programs.service';
+export * from './fake-program-configurations.service';
+export * from './fake-clients.service';
+export * from './fake-client-configurations.service';
 
 export { DataApiService } from 'app/shared/services/data-api.service';
 

@@ -24,8 +24,10 @@ export class ClientActionsPopoverStubComponent {
 })
 export class ClientActionTableStubComponent {
 
+  @Input() configureState: string;
   @Input() clients: Client[];
   @Input() displayClient: Client[];
+  @Input() supressClient: number[] = [];
   @Input() displayClientStartEmpty: boolean = true;
   @Input() displayCommunication: string = 'Communication';
   @Input() showClientId: boolean = true;
