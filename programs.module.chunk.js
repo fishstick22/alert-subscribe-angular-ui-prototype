@@ -307,19 +307,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__programs_routing_module__ = __webpack_require__("../../../../../src/app/programs/programs-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__programs_component__ = __webpack_require__("../../../../../src/app/programs/programs.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__program_actions_popover_program_actions_popover_component__ = __webpack_require__("../../../../../src/app/programs/program-actions-popover/program-actions-popover.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_program_configurations_program_configurations_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_program_configurations_program_configurations_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__program_actions_popover_program_actions_popover_component__ = __webpack_require__("../../../../../src/app/programs/program-actions-popover/program-actions-popover.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_program_configurations_program_configurations_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_program_configurations_program_configurations_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-// import { CommonModule } from '@angular/common';
+// Programs feature Module
+//
 
 
 
@@ -334,19 +333,18 @@ var ProgramsModule = (function () {
     ProgramsModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             imports: [
-                // CommonModule, // supposed to be imported from shared module?
+                // CommonModule, // gets provided by shared module
                 __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["d" /* NgbModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_2__programs_routing_module__["a" /* ProgramsRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_7_app_shared_shared_module__["SharedModule"],
+                __WEBPACK_IMPORTED_MODULE_6_app_shared_shared_module__["SharedModule"]
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__programs_routing_module__["b" /* routedComponents */],
-                __WEBPACK_IMPORTED_MODULE_3__programs_component__["a" /* ProgramsComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__program_actions_popover_program_actions_popover_component__["a" /* ProgramActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */]
+                __WEBPACK_IMPORTED_MODULE_3__program_actions_popover_program_actions_popover_component__["a" /* ProgramActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */]
             ],
-            entryComponents: [__WEBPACK_IMPORTED_MODULE_6__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_5__services_program_configurations_program_configurations_modal_service__["a" /* ProgramConfigurationsModalService */]],
+            entryComponents: [__WEBPACK_IMPORTED_MODULE_5__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_4__services_program_configurations_program_configurations_modal_service__["a" /* ProgramConfigurationsModalService */]],
         })
     ], ProgramsModule);
     return ProgramsModule;
