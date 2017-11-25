@@ -35,5 +35,8 @@ export { DropEvent } from 'app/shared/directives/drag-drop/drop-event.model';
 export class FakeProgramConfigurationsModalService {}
 
 @Injectable()
+export class FakeProgramsMaintenanceModalService {}
+
+@Injectable()
 export class FakeNgbActiveModal {}
 

@@ -4,6 +4,7 @@ import { Program, ProgramConfigAction } from 'app/shared/model/program';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
+import { ProgramsMaintenanceModalService } from './services/programs-maintenance/programs-maintenance-modal.service';
 
 @Component({
   selector: 'app-programs',
@@ -18,7 +19,8 @@ export class ProgramsComponent implements OnInit {
 
   constructor(
     private dataApiService: DataApiService,
-    private programConfigService: ProgramConfigurationsModalService
+    private programConfigService: ProgramConfigurationsModalService,
+    private programsMaintService: ProgramsMaintenanceModalService
   ) { }
 
   async ngOnInit() {
@@ -44,7 +46,7 @@ export class ProgramsComponent implements OnInit {
 
   configureProgram(progConfigAction: ProgramConfigAction) {
     if (progConfigAction.configType === 'edit') {
-      // this.editProgramModal(progConfigAction.progId);
+      this.editProgram(progConfigAction.progId);
     }
     if (progConfigAction.configType === 'delete') {
       // this.deleteProgramModal(progConfigAction.progId);
@@ -53,6 +55,11 @@ export class ProgramsComponent implements OnInit {
       this.configureProgramCommunications(progConfigAction.progId);
     }
     this.setClickedRow(null);
+  }
+
+  private editProgram(progId) {
+    const program: Program = this.findProgram(progId);
+    this.programsMaintService.maintainProgramModal(progId);
   }
 
   private configureProgramCommunications(progId) {
