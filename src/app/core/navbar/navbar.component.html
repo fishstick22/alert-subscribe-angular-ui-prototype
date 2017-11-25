@@ -1,23 +1,26 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-gradient-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient-dark">
   <a class="navbar-brand" href="/" title='{{customLogoTitle}}'>
     <img src='assets/images/cvs.png' alt='{{customLogoTitle}}' width=50>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" 
+          data-toggle="collapse" data-target="#navbarSupportedContent" 
+          (click)="toggleCollapse()"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
+  <div class="collapse navbar-collapse" [class.show]="show" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/home" >Home</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/dashboard" >Dashboard</a></li>    
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/communications" >Communications</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/programs" >Programs</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" routerLink="/clients" >Clients</a></li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item" routerLinkActive="active" (click)="toggleCollapse()">
         <a class="nav-link" href="#">Contact</a></li>
     </ul>
     <ul class="nav navbar-nav">

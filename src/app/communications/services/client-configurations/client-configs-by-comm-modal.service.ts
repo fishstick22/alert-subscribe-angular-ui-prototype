@@ -92,8 +92,10 @@ export class ClientConfigsByCommModalService {
         }
         return true;
       }
+      return false;
     });
   }
+
   async getClients() {
     try {
       this.clients = await this.dataApiService.getClients();
