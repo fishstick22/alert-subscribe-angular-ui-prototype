@@ -10,6 +10,7 @@ import {
   ClientConfiguration, ClientConfigurationsService, FakeClientConfigurationsService,
   Communication, CommunicationsService, FakeCommunicationsService,
   Program, ProgramsService, FakeProgramsService,
+  ProgramProfile, ProgramProfilesService, FakeProgramProfilesService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService,
 } from 'app/shared/testing/shared-module-testing-helper';
 
@@ -23,12 +24,14 @@ describe('DataApiService', () => {
         DataApiService,
         CommunicationsService,
         ProgramsService,
+        ProgramProfilesService,
         ProgramConfigurationsService,
         ClientsService,
         ClientConfigurationsService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: CommunicationsService, usevalue: FakeCommunicationsService },
         { provide: ProgramsService, usevalue: FakeProgramsService },
+        { provide: ProgramProfilesService, usevalue: FakeProgramProfilesService },
         { provide: ProgramConfigurationsService, usevalue: FakeProgramConfigurationsService },
         { provide: ClientsService, usevalue: FakeClientsService },
         { provide: ClientConfigurationsService, usevalue: FakeClientConfigurationsService }

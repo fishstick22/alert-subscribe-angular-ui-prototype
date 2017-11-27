@@ -11,6 +11,7 @@ import { Program } from 'app/shared/model/program';
 })
 export class ProgramsMaintenanceModalComponent implements OnInit {
 
+  @Input() configType: string = '';
   @Input() program: Program = new Program(); // just becasue service inits whenever
 
   public SAVESUCCESS: string = 'Close on succesful save';
@@ -34,9 +35,12 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     // this.displayCommStartEmpty = true;
     // this.displayComm = [];
     // this.newProgramConfigs = [];
-    // this.tomorrow.setDate(this.today.getDate() + 1);
+    this.tomorrow.setDate(this.today.getDate() + 1);
     // this.configureState = 'start';
-
+    if (this.configType === 'edit') {
+      // editing a program actually means creating a new row from
+      // the current row, setting expiration on current
+    }
     // this.supressComm = this.findExistingConfiguredComms();
   }
 }

@@ -21,14 +21,17 @@ export class ProgramsMaintenanceModalService {
     private modalService: NgbModal
   ) { }
 
-  async maintainProgramModal(program: Program) {
+  async maintainProgramModal(configType, program?: Program) {
     const modalOpts: NgbModalOptions = {
       size: 'lg'
     };
     const modalRef = this.modalService.open(ProgramsMaintenanceModalComponent, modalOpts);
     const modalComp: ProgramsMaintenanceModalComponent  = modalRef.componentInstance;
 
-    modalComp.program = program;
+    modalComp.configType = configType;
+    if (configType === 'edit') {
+      modalComp.program = program;
+    }
     modalComp.modalInit();
 
     modalRef.result.then((result) => {

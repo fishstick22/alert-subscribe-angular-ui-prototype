@@ -6,7 +6,8 @@ import { ModelTestingHelper,
          Communication, TEST_COMMUNICATION,
          CommunicationConfiguration,
          Program, TEST_PROGRAM,
-         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
+         ProgramConfiguration,
+         ProgramProfile } from 'app/shared/model/testing/model-testing-helper';
 
 import { ClientActionsPopoverStubComponent,
          ClientActionTableStubComponent,
@@ -28,8 +29,10 @@ import { ClientConfigurationsService,
          FakeCommunicationsService,
          FakeDataApiService,
          FakeProgramConfigurationsService,
+         FakeProgramProfilesService,
          FakeProgramsService,
          ProgramConfigurationsService,
+         ProgramProfilesService,
          ProgramsService } from 'app/shared/services/testing/fake-data-api.service';
 
 // re-export for tester convenience

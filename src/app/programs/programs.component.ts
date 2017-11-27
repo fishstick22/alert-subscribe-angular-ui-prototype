@@ -59,7 +59,7 @@ export class ProgramsComponent implements OnInit {
 
   private editProgram(progId) {
     const program: Program = this.findProgram(progId);
-    this.programsMaintService.maintainProgramModal(progId);
+    this.programsMaintService.maintainProgramModal('edit', program);
   }
 
   private configureProgramCommunications(progId) {

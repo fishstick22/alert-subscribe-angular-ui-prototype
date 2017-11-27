@@ -6,6 +6,7 @@ import { Communication        } from 'app/shared/model/communication';
 import { CommunicationConfiguration
                               } from 'app/shared/model/communication-configuration';
 import { Program              } from 'app/shared/model/program';
+import { ProgramProfile       } from 'app/shared/model/program-profile';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
 export { Client               } from 'app/shared/model/client';
@@ -14,6 +15,7 @@ export { Communication        } from 'app/shared/model/communication';
 export { CommunicationConfiguration
                               } from 'app/shared/model/communication-configuration';
 export { Program              } from 'app/shared/model/program';
+export { ProgramProfile       } from 'app/shared/model/program-profile';
 export { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
 export const TEST_CLIENT        = new Client(142, 'AMD', 'AT&T INC.');
@@ -34,10 +36,29 @@ export class ModelTestingHelper {
     return new Program(1, 'Prescription Alerts');
   }
 
+  public getTestProgramProfile(): ProgramProfile {
+    const programProfile = new ProgramProfile();
+
+    programProfile.id = 1;
+    programProfile.defaultOptIn = true;
+    programProfile.visibleInUi = true;
+    programProfile.chanEmail = true;
+    programProfile.chanIvr = true;
+    programProfile.chanSms = true;
+    programProfile.chanSecure = true;
+    programProfile.chanMail = false;
+    programProfile.chanMobile = false;
+    programProfile.effective = '2017-01-01';
+    programProfile.expiration = '9999-12-31';
+    programProfile.program = 1;
+
+    return programProfile;
+  }
+
   public getTestClientConfiguration(): ClientConfiguration {
     const clientConfig: ClientConfiguration  = new ClientConfiguration();
 
-    clientConfig.id = 1,
+    clientConfig.id = 1;
     clientConfig.name = 'Prescription Alerts Order Status',
     clientConfig.description = 'Order Status Client-level Configuration',
     clientConfig.chanEmailPriority = 2,

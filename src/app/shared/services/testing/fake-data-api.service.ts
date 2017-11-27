@@ -6,23 +6,28 @@ import { ModelTestingHelper,
          Communication, TEST_COMMUNICATION,
          CommunicationConfiguration,
          Program, TEST_PROGRAM,
-         ProgramConfiguration } from 'app/shared/model/testing/model-testing-helper';
+         ProgramConfiguration,
+         ProgramProfile } from 'app/shared/model/testing/model-testing-helper';
 
+import { FakeClientsService,
+         ClientsService               } from './fake-clients.service';
+import { FakeClientConfigurationsService,
+         ClientConfigurationsService  } from './fake-client-configurations.service';
 import { FakeCommunicationsService,
-         CommunicationsService } from './fake-communications.service';
+         CommunicationsService        } from './fake-communications.service';
 import { FakeProgramsService,
-         ProgramsService } from './fake-programs.service';
+         ProgramsService              } from './fake-programs.service';
 import { FakeProgramConfigurationsService,
          ProgramConfigurationsService } from './fake-program-configurations.service';
-import { FakeClientsService,
-         ClientsService } from './fake-clients.service';
-import { FakeClientConfigurationsService,
-         ClientConfigurationsService } from './fake-client-configurations.service';
-import { DataApiService } from 'app/shared/services/data-api.service';
+import { FakeProgramProfilesService,
+         ProgramProfilesService       } from './fake-program-profiles.service';
+
+import { DataApiService               } from 'app/shared/services/data-api.service';
 
 // re-export for tester convenience
 export * from './fake-communications.service';
 export * from './fake-programs.service';
+export * from './fake-program-profiles.service';
 export * from './fake-program-configurations.service';
 export * from './fake-clients.service';
 export * from './fake-client-configurations.service';
@@ -40,6 +45,7 @@ export class FakeDataApiService extends DataApiService {
     clientsService: ClientsService,
     clientConfigurationsService: ClientConfigurationsService,
     programsService: FakeProgramsService,
+    programProfilesService: FakeProgramProfilesService,
     programConfigurationsService: FakeProgramConfigurationsService
   ) {
     super(
@@ -47,6 +53,7 @@ export class FakeDataApiService extends DataApiService {
       clientsService,
       clientConfigurationsService,
       programsService,
+      programProfilesService,
       programConfigurationsService
     );
   }
