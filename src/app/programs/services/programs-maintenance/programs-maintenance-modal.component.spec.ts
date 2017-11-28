@@ -16,6 +16,7 @@ import {
   // SelectChannelPriorityStubComponent,
   // SelectChannelMandatoryStubComponent,
   // DateEffExpStubComponent,
+  DatePickerPopupStubComponent,
   // CommActionTableStubComponent,
   // DraggableDirective,
   // DroppableDirective,
@@ -30,7 +31,7 @@ describe('ProgramsMaintenanceModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramsMaintenanceModalComponent ],
+      declarations: [ ProgramsMaintenanceModalComponent, DatePickerPopupStubComponent ],
       imports: [ FormsModule ],
       providers: [
         NgbActiveModal,

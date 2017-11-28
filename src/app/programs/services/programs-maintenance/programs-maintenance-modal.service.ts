@@ -5,6 +5,7 @@ import { NgbModal,
          NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { Program } from 'app/shared/model/program';
+import { ProgramProfile } from 'app/shared/model/program-profile';
 
 import { ProgramsMaintenanceModalComponent,
          ProgramsMaintModalResult } from './programs-maintenance-modal.component';
@@ -14,6 +15,7 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 export class ProgramsMaintenanceModalService {
 
   program: Program;
+  programProfiles: ProgramProfile[];
   closeResult: string;
 
   constructor(
@@ -31,6 +33,12 @@ export class ProgramsMaintenanceModalService {
     modalComp.configType = configType;
     if (configType === 'edit') {
       modalComp.program = program;
+      if (!program.programProfile) {
+        // hey, it could happen!
+        program.programProfile = await this.findProgramProfiles(program);
+        // console.log(program.programProfile); // somehow directly inserting a value from
+        // an async method into a property lets Angular proceed without updating the val?
+      }
     }
     modalComp.modalInit();
 
@@ -61,6 +69,35 @@ export class ProgramsMaintenanceModalService {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       // this.setClickedRow(null);
       console.log('configureProgramModal result: ', this.closeResult);
+    });
+  }
+
+  async getProgramProfiles() {
+    try {
+      this.programProfiles = await this.dataApiService.getProgramProfiles();
+      // return this.programProfiles;
+    } catch (error) {
+      console.log('getPrograms error: ', error);
+    }
+  }
+
+  private async findProgramProfiles(selectedProgram: Program) { // : ProgramConfiguration[] {
+    await this.getProgramProfiles();
+    return this.programProfiles.filter(pp => {
+      if (typeof(pp.program) === 'number') {
+        if (pp.program === selectedProgram.id) {
+          // pc.program = selectedProgram;
+          // if (typeof(pc.communication) === 'number') {
+          //   pc.communication = this.findCommunication(<number>pc.communication);
+          // }
+          return true;
+        } else { return false; }
+      } // else if (pp.program.id === selectedProgram.id) {
+      //   if (typeof(pc.communication) === 'number') {
+      //     pc.communication = this.findCommunication(<number>pc.communication);
+      //   }
+      //   return true;
+      // }
     });
   }
 

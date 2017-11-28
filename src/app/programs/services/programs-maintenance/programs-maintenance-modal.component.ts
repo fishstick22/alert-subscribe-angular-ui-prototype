@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Program } from 'app/shared/model/program';
+import { ProgramProfile } from 'app/shared/model/program-profile';
 
 @Component({
   selector: 'app-programs-maintenance-modal',
@@ -27,7 +28,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   }
 
   modalInit() {
-    console.log('ProgramConfigByCommComponent init: ');
+    console.log('ProgramsMaintenanceModalComponent init: ');
     console.log(this.program);
     // console.log(this.programConfigurations);
     // get the list of programs to populate the dropdown (covered in @Input() programs: Program[];)
@@ -42,6 +43,16 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
       // the current row, setting expiration on current
     }
     // this.supressComm = this.findExistingConfiguredComms();
+  }
+
+  private updateDateValue(newDateValue, pp: ProgramProfile, dateType: string) {
+    console.log('ProgramsMaintenanceModalComponent updateDateValue: ', newDateValue, pp, dateType);
+    if (dateType === 'effective') {
+      pp.effective = newDateValue;
+    }
+    if (dateType === 'expiration') {
+      pp.expiration = newDateValue;
+    }
   }
 }
 
