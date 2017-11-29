@@ -45,15 +45,15 @@ export class ProgramsService {
   //   }
   // }
 
-  // async updateProgramThruApi(program: Program): Promise<Program> {
-  //   const url = `${this.progApiEndpoint}/${program.id}`;
-  //   try {
-  //     const response = await this.http.put(url, JSON.stringify(program), {headers: this.headers}).toPromise();
-  //     return response as Program;
-  //   } catch (error) {
-  //     this.handleError(error);
-  //   }
-  // }
+  async updateProgramThruApi(program: Program): Promise<Program> {
+    const url = `${this.progApiEndpoint}/${program.id}`;
+    try {
+      const response = await this.http.put(url, program).toPromise();
+      return response as Program;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
 
   // async deleteProgramThruApi(program: Program): Promise<Program> {
   //   const url = `${this.progApiEndpoint}/${program.id}`;

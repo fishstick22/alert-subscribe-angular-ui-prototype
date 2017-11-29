@@ -13,127 +13,134 @@
     
   <div class="modal-body">
     <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="programName" class="text-white bg-gradient-dark flex-justify-left rounded">
-            Program Name</label>
-          <input type="text" class="form-control"
-                 [(ngModel)]="program.name" id="programName" name="name" required
-                  aria-describedby="programNameHelp" placeholder="Enter Program Name">
-          <small id="programNameHelp" class="form-text text-muted">Short Name of the Program.</small>
-        </div>
-        <div class="form-group col-md-8">
-          <label for="programDescription" class="text-white bg-gradient-dark flex-justify-left">
-            Program Description</label>
-          <input type="text" class="form-control" 
-                 [(ngModel)]="program.description" id="programDescription" name="description" required
-                 aria-describedby="programDescriptionlHelp" placeholder="Enter Program Description">
-          <small id="programDescriptionlHelp" class="form-text text-muted">Brief Description of the Program.</small>
-        </div>
+      <div class="form-group col-md-4">
+        <label for="programName" class="text-white bg-gradient-dark flex-justify-left rounded">
+          Program Name</label>
+        <input type="text" class="form-control"
+               [(ngModel)]="program.name" id="programName" name="name" required
+               aria-describedby="programNameHelp" placeholder="Enter Program Name">
+        <small id="programNameHelp" class="form-text text-muted">Short Name of the Program.</small>
       </div>
+      <div class="form-group col-md-8">
+        <label for="programDescription" class="text-white bg-gradient-dark flex-justify-left rounded">
+          Program Description</label>
+        <input type="text" class="form-control" 
+               [(ngModel)]="program.description" id="programDescription" name="description" required
+               aria-describedby="programDescriptionlHelp" placeholder="Enter Program Description">
+        <small id="programDescriptionlHelp" class="form-text text-muted">Brief Description of the Program.</small>
+      </div>
+    </div>
         
-      <span *ngIf="program.programProfile">
-        <div class="form-row" *ngFor="let profile of program.programProfile">
+    <span *ngIf="programProfiles">
+      <div class="form-row" *ngFor="let profile of programProfiles; let i = index">
 
-          <div class="form-group col-md-1">
-            <label for="defaultOptIn" class="text-white bg-gradient-dark flex-justify-center">
-              Opt In</label>
-            <select class="form-control form-control-sm flex-justify-right"
-                    [(ngModel)]="profile.defaultOptIn" id="defaultOptIn" name="defaultOptIn" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-1">
-            <label for="visibleInUi" class="text-white bg-gradient-dark flex-justify-center">
-              UI</label>
-            <select class="form-control form-control-sm"
-                    [(ngModel)]="profile.visibleInUi" id="visibleInUi" name="visibleInUi" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-  
-          <div class="form-group col-md-1">
-            <label for="chanEmail">Email</label>
-            <select class="form-control form-control-sm"
-                    [(ngModel)]="profile.chanEmail" id="chanEmail" name="chanEmail" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-1">
-            <label class="sr-only" for="chanIvr">IVR</label>
-            <select class="form-control form-control-sm"
-                    [(ngModel)]="profile.chanIvr" id="chanIvr" name="chanIvr" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-1">
-            <label for="chanSms">SMS</label>
-            <select class="form-control form-control-sm"
-                    [(ngModel)]="profile.chanSms" id="chanSms" name="chanSms" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-1">
-            <label for="chanSecure">Secure</label>
-            <select class="form-control form-control-sm"
-                    [(ngModel)]="profile.chanSecure" id="chanSecure" name="chanSecure" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-1">
-            <label for="chanMail">Mail</label>
-            <select class="form-control form-control-sm"
-                    [(ngModel)]="profile.chanMail" id="chanMail" name="chanMail" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-1">
-            <label for="chanMobile">Mobile</label>
-            <select class="form-control form-control-sm"
-                    [(ngModel)]="profile.chanMobile" id="chanMobile" name="chanMobile" required>
-              <option value="true">Y</option>
-              <option value="false">N</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-2">
-            <label for="effective">Effective</label>
-            <!--
-            <input type="text" class="form-control"
-                    [(ngModel)]="profile.effective" id="effective" name="effective" required
-                    aria-describedby="effectiveHelp" placeholder="Enter Effective Date">
-            <small id="effectiveHelp" class="form-text text-muted">Effective Date</small>-->
-            <app-date-picker-popup [dateValue]="profile.effective"
-              (newDateValue)="updateDateValue($event, profile, 'effective')"></app-date-picker-popup>
-              
-          </div>
-
-          <div class="form-group col-md-2">
-            <label for="expiration">Expiration</label>
-            <!--
-            <input type="text" class="form-control"
-                    [(ngModel)]="profile.expiration" id="expiration" name="expiration" required
-                    aria-describedby="expirationHelp" placeholder="Enter Effective Date">
-            <small id="expirationHelp" class="form-text text-muted">Expiration Date</small>-->
-            <app-date-picker-popup [dateValue]="profile.expiration"
-              (newDateValue)="updateDateValue($event, profile, 'expiration')"></app-date-picker-popup>
-          </div>
-
+        <div class="form-group col-md-1">
+            <app-select-profile-option 
+              id="defaultOptIn" name="defaultOptIn" label="Opt In"
+              [(ngModel)]="profile.defaultOptIn"
+              [actualStaticValue]="profile.defaultOptIn"
+              [firstConfigRow]="i === 0"></app-select-profile-option>
         </div>
-        <!--{{program.programProfile | json}}-->
-      </span>
+          
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="visibleInUi" name="visibleInUi" label="UI"
+            [(ngModel)]="profile.visibleInUi"
+            [actualStaticValue]="profile.visibleInUi"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanEmail" name="chanEmail" label="Email"
+            [(ngModel)]="profile.chanEmail"
+            [actualStaticValue]="profile.chanEmail"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanIvr" name="chanIvr" label="IVR"
+            [(ngModel)]="profile.chanIvr"
+            [actualStaticValue]="profile.chanIvr"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanSms" name="chanSms" label="SMS"
+            [(ngModel)]="profile.chanSms"
+            [actualStaticValue]="profile.chanSms"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanSecure" name="chanSecure" label="Secure"
+            [(ngModel)]="profile.chanSecure"
+            [actualStaticValue]="profile.chanSecure"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanMail" name="chanMail" label="Mail"
+            [(ngModel)]="profile.chanMail"
+            [actualStaticValue]="profile.chanMail"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanMobile" name="chanMobile" label="Mobile"
+            [(ngModel)]="profile.chanMobile"
+            [actualStaticValue]="profile.chanMobile"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <!-- move these into a component, the current eff/exp component only works on configs -->
+        <div class="form-group col-md-2">
+          <span *ngIf="i === 0">
+            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded">
+                Effective</label>
+            <!-- the effective date of the current effective row -->
+            <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.effective}}" readonly>
+          </span>
+          <span *ngIf="i !== 0">
+            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+              Effective</label>
+            <!-- set the effective date for the new row -->
+            <app-date-picker-popup [dateValue]="profile.effective"
+              (newDateValue)="updateDateValue($event, profile, 'effective')"></app-date-picker-popup>           
+          </span>
+        </div>
+
+        <div class="form-group col-md-2">
+          <span *ngIf="i === 0">
+            <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded">
+              Expiration</label>
+            <!-- the expiration date of the current/previous row -->
+            <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.expiration}}" readonly
+              (click)="changeProfile(profile)" >
+          </span>
+          <span *ngIf="i !== 0">
+            <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+              Expiration</label>
+            <!-- the expiration date of the current/previous row -->
+            <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.expiration}}" readonly>
+          </span>
+        </div>
+
+        <div class="form-row" *ngIf="addProfile">
+          <div class="form-group col-md-1">
+            <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
+              (click)="changeProfile(profile)" title="Modify Program Profile"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </span>
 
   </div>
     

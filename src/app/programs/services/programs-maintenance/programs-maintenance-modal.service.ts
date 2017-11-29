@@ -36,10 +36,10 @@ export class ProgramsMaintenanceModalService {
       if (!program.programProfile) {
         // hey, it could happen!
         program.programProfile = await this.findProgramProfiles(program);
-        // console.log(program.programProfile); // somehow directly inserting a value from
-        // an async method into a property lets Angular proceed without updating the val?
+        console.log(program);
       }
     }
+
     modalComp.modalInit();
 
     modalRef.result.then((result) => {
@@ -48,13 +48,19 @@ export class ProgramsMaintenanceModalService {
         this.closeResult = `Closed with: ${result.resultTxt}`;
         if (result.modalResult) {
           const modalResult: ProgramsMaintModalResult = result.modalResult;
-          // if (modalResult.prevProgConfig) {
-          //   this.updateProgramConfiguration(modalResult.prevProgConfig);
-          // }
-          // if (modalResult.newProgramConfigs) {
-          //   for (let i = 0; i < modalResult.newProgramConfigs.length; i++) {
-          //     this.addProgramConfiguration(modalResult.newProgramConfigs[i]);
-          //   }
+          if (modalResult.updateProgramProfile) {
+            this.updateProgramProfile(modalResult.updateProgramProfile);
+          }
+          if (modalResult.insertProgramProfile) {
+            this.addProgramProfile(modalResult.insertProgramProfile);
+          }
+          if (modalResult.updateProgram) {
+            this.updateProgram(modalResult.updateProgram);
+          }
+          // export class ProgramsMaintModalResult {
+          //   updateProgramProfile: ProgramProfile;
+          //   insertProgramProfile: ProgramProfile;
+          //   updateProgram: Program;
           // }
         } else {
           // this would be some kind of exception
@@ -72,16 +78,43 @@ export class ProgramsMaintenanceModalService {
     });
   }
 
+  private async addProgramProfile(programProfile: ProgramProfile) {
+    try {
+      await this.dataApiService.createProgramProfile(programProfile);
+      console.log('addProgramProfile:', programProfile, this.programProfiles);
+    } catch (error) {
+      console.log('addProgramProfile error: ', error);
+    }
+  }
+
+  private async updateProgram(program: Program) {
+    try {
+      this.program = await this.dataApiService.updateProgram(program);
+      console.log('updateProgram:', program, this.program);
+    } catch (error) {
+      console.log('updateProgram error: ', error);
+    }
+  }
+
+  private async updateProgramProfile(programProfile: ProgramProfile) {
+    try {
+      await this.dataApiService.updateProgramProfile(programProfile);
+      console.log('updateProgramProfile:', programProfile, this.programProfiles);
+    } catch (error) {
+      console.log('updateProgramProfile error: ', error);
+    }
+  }
+
   async getProgramProfiles() {
     try {
       this.programProfiles = await this.dataApiService.getProgramProfiles();
-      // return this.programProfiles;
+      return this.programProfiles;
     } catch (error) {
       console.log('getPrograms error: ', error);
     }
   }
 
-  private async findProgramProfiles(selectedProgram: Program) { // : ProgramConfiguration[] {
+  private async findProgramProfiles(selectedProgram: Program) { // : ProgramProfile[] {
     await this.getProgramProfiles();
     return this.programProfiles.filter(pp => {
       if (typeof(pp.program) === 'number') {

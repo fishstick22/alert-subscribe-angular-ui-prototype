@@ -37,7 +37,7 @@ export class ModelTestingHelper {
   }
 
   public getTestProgramProfile(): ProgramProfile {
-    const programProfile = new ProgramProfile();
+    const programProfile = new ProgramProfile(1);
 
     programProfile.id = 1;
     programProfile.defaultOptIn = true;

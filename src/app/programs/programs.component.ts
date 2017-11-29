@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Program, ProgramConfigAction } from 'app/shared/model/program';
+import { ProgramProfile } from 'app/shared/model/program-profile';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
@@ -15,6 +16,7 @@ import { ProgramsMaintenanceModalService } from './services/programs-maintenance
 export class ProgramsComponent implements OnInit {
 
   programs: Program[];
+  programProfiles: ProgramProfile[];
   selectedRow: number;
 
   constructor(
@@ -26,6 +28,17 @@ export class ProgramsComponent implements OnInit {
   async ngOnInit() {
     console.log('ProgramComponent ngOnInit...');
     await this.getPrograms();
+    await this.getProgramProfiles();
+    console.log('ProgramComponent ', this.programs, this.programProfiles);
+  }
+
+  async getProgramProfiles() {
+    try {
+      this.programProfiles = await this.dataApiService.getProgramProfiles();
+      return this.programProfiles;
+    } catch (error) {
+      console.log('getPrograms error: ', error);
+    }
   }
 
   async getPrograms() {

@@ -1,0 +1,15 @@
+<span *ngIf="firstConfigRow">
+  <label for="{{name}}" class="text-white bg-gradient-dark flex-justify-center rounded">
+    {{label}}</label>
+  <select class="form-control form-control-sm flex-justify-right"
+          id="{{id}}" name="{{name}}" value="actualStaticValue" readonly>
+          <option value="actualStaticValue">{{staticReadonlyOption}}</option>
+  </select>
+</span>
+
+<span *ngIf="!firstConfigRow">
+  <select class="form-control form-control-sm flex-justify-right"
+          [(ngModel)]="value" id="{{id}}" name="{{name}}" required (blur)="onBlur()">
+    <option *ngFor="let po of profileOpts" [ngValue]="po.val">{{po.opt}}</option>>
+  </select>
+</span>

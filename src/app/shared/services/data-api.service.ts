@@ -100,10 +100,10 @@ export class DataApiService {
   //   return program;
   // }
 
-  // public async updateProgram(program: Program): Promise<Program> {
-  //   await this.programService.updateProgramThruApi(program);
-  //   return program;
-  // }
+  public async updateProgram(program: Program): Promise<Program> {
+    await this.programsService.updateProgramThruApi(program);
+    return program;
+  }
 
   // public async deleteProgram(program: Program): Promise<Program> {
   //   await this.programService.deleteProgramThruApi(program);

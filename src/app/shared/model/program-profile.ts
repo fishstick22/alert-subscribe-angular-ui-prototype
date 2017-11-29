@@ -12,9 +12,11 @@ export class ProgramProfile {
   expiration: string;
   program: number;
 
-  constructor(programProfile?: ProgramProfile) {
+  constructor(programId: number, programProfile?: ProgramProfile) {
 
     if (programProfile) {
+      this.program      = programId;
+
       this.defaultOptIn = programProfile.defaultOptIn;
       this.visibleInUi  = programProfile.visibleInUi;
       this.chanEmail    = programProfile.chanEmail;
@@ -24,6 +26,8 @@ export class ProgramProfile {
       this.chanMail     = programProfile.chanMail;
       this.chanMobile   = programProfile.chanMobile;
     } else {
+      this.program      = programId;
+
       this.defaultOptIn = false;
       this.visibleInUi  = false;
       this.chanEmail    = false;
@@ -32,11 +36,10 @@ export class ProgramProfile {
       this.chanSecure   = false;
       this.chanMail     = false;
       this.chanMobile   = false;
-
     }
   }
 
   clone() {
-    return new ProgramProfile(this);
+    return new ProgramProfile(this.program, this);
   }
 }
