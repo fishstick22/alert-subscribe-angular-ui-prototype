@@ -1,4 +1,5 @@
 // import { IProgramConfig } from 'app/classes/model/iprog-config';
+import { ProgramProfile       } from 'app/shared/model/program-profile';
 
 // export class Program implements IProgramConfig {
 
@@ -6,12 +7,14 @@ export class Program {
   id: number;
   name: string;
   description: string;
+  programProfile: ProgramProfile[];
   programConfiguration: number[];
 
   constructor (
     id: number = 0,
     name: string = '',
     description?: string,
+    programProfile?: ProgramProfile[],
     programConfiguration?: number[],
   ) {
     const emptyNum: number[] = [];
@@ -19,12 +22,14 @@ export class Program {
     this.id = id;
     this.name = name;
     this.description = (description) ? description : '';
+    this.programProfile = (programProfile) ? programProfile : [];
     this.programConfiguration = (programConfiguration) ? programConfiguration : emptyNum;
   }
 
   clone() {
     return new Program(
       this.id, this.name, this.description,
+      this.programProfile,
       this.programConfiguration
     );
   }

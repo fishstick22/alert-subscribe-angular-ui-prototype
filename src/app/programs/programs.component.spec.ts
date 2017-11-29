@@ -8,7 +8,9 @@ import {
 } from 'app/shared/testing/shared-module-testing-helper';
 
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
-import { FakeProgramConfigurationsModalService } from './testing/fake-program-configurations-modal.service';
+import { ProgramsMaintenanceModalService } from './services/programs-maintenance/programs-maintenance-modal.service';
+import { FakeProgramConfigurationsModalService,
+         FakeProgramsMaintenanceModalService } from './testing/fake-program-configurations-modal.service';
 import { ProgramActionsPopoverStubComponent } from 'app/shared/components/testing/stub-testing-components';
 
 import { ProgramsComponent } from './programs.component';
@@ -23,8 +25,10 @@ describe('Programs: ProgramsComponent', () => {
       providers: [
         DataApiService,
         ProgramConfigurationsModalService,
+        ProgramsMaintenanceModalService,
         { provide: DataApiService, usevalue: FakeDataApiService },
         { provide: ProgramConfigurationsModalService, usevalue: FakeProgramConfigurationsModalService },
+        { provide: ProgramsMaintenanceModalService, usevalue: FakeProgramsMaintenanceModalService },
        // { provide: Router, useClass: RouterStub}
       ],
       imports: [

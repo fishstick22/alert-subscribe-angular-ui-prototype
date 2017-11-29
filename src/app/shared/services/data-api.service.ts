@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 
-import { CommunicationsService } from 'app/shared/services/communications/communications.service';
-
-import { ClientsService } from 'app/shared/services/clients/clients.service';
-import { ClientConfigurationsService } from 'app/shared/services/client-configurations/client-configurations.service';
-import { ProgramsService } from 'app/shared/services/programs/programs.service';
+import { ClientsService               } from 'app/shared/services/clients/clients.service';
+import { ClientConfigurationsService  } from 'app/shared/services/client-configurations/client-configurations.service';
+import { CommunicationsService        } from 'app/shared/services/communications/communications.service';
+import { ProgramsService              } from 'app/shared/services/programs/programs.service';
+import { ProgramProfilesService       } from 'app/shared/services/program-profiles/program-profiles.service';
 import { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
 
 // import { IProgramConfig } from 'app/classes/model/iprog-config';
 
-import { Communication } from 'app/shared/model/communication';
-import { ClientConfiguration } from 'app/shared/model/client-configuration';
-import { Program } from 'app/shared/model/program';
+import { Client               } from 'app/shared/model/client';
+import { ClientConfiguration  } from 'app/shared/model/client-configuration';
+import { Communication        } from 'app/shared/model/communication';
+import { Program              } from 'app/shared/model/program';
+import { ProgramProfile       } from 'app/shared/model/program-profile';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
-import { Client } from 'app/shared/model/client';
 
 @Injectable()
 export class DataApiService {
@@ -32,12 +33,14 @@ export class DataApiService {
   clientConfigurations: ClientConfiguration[];
   programs: Program[];
   programConfigurations: ProgramConfiguration[];
+  programProfiles: ProgramProfile[];
 
   constructor(
     protected communicationsService: CommunicationsService,
     protected clientsService: ClientsService,
     protected clientConfigurationsService: ClientConfigurationsService,
     protected programsService: ProgramsService,
+    protected programProfileService: ProgramProfilesService,
     protected programConfigurationService: ProgramConfigurationsService
   ) { }
 
@@ -81,8 +84,6 @@ export class DataApiService {
     return clientConfiguration;
   }
 
-
-
   public async getPrograms(): Promise<Program[]> {
     if (this.programs) {
       return this.programs;
@@ -99,10 +100,10 @@ export class DataApiService {
   //   return program;
   // }
 
-  // public async updateProgram(program: Program): Promise<Program> {
-  //   await this.programService.updateProgramThruApi(program);
-  //   return program;
-  // }
+  public async updateProgram(program: Program): Promise<Program> {
+    await this.programsService.updateProgramThruApi(program);
+    return program;
+  }
 
   // public async deleteProgram(program: Program): Promise<Program> {
   //   await this.programService.deleteProgramThruApi(program);
@@ -131,6 +132,26 @@ export class DataApiService {
     return programConfiguration;
   }
 
+  //
+  public async getProgramProfiles(): Promise<ProgramProfile[]> {
+    if (this.programProfiles) {
+      return this.programProfiles;
+    } else {
+      this.programProfiles = await this.programProfileService.getProgramProfilesThruApi();
+      return this.programProfiles;
+    }
+  }
+
+  public async createProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
+    programProfile = await this.programProfileService.createProgramProfileThruApi(programProfile);
+    this.insertProgramProfile(programProfile);
+    return programProfile;
+  }
+
+  public async updateProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
+    programProfile = await this.programProfileService.updateProgramProfileThruApi(programProfile);
+    return programProfile;
+  }
   // /*
   // */
   // private insertProgram(program: Program): void {
@@ -174,4 +195,8 @@ export class DataApiService {
   //   return clients;
   // }
 
+
+  protected insertProgramProfile(programProfile: ProgramProfile): void {
+    this.programProfiles.push(programProfile);
+  }
 }

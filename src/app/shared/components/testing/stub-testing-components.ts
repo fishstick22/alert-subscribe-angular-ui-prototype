@@ -98,28 +98,42 @@ export class ProgramActionsPopoverStubComponent  {
 }
 
 @Component({
-    selector: 'app-select-channel-priority',
-    template: 'dummy component for testing'
-  })
-  export class SelectChannelPriorityStubComponent {
-    @Input() id: string;
-    @Input() name: string;
-    @Input() actualStaticValue: string; // sometimes you just do stuff because
-                                        // a problem is driving you nuts
-    @Input() lastConfigRow: boolean;
-  }
+  selector: 'app-select-channel-priority',
+  template: 'dummy component for testing'
+})
+export class SelectChannelPriorityStubComponent {
+  @Input() id: string;
+  @Input() name: string;
+  @Input() actualStaticValue: string; // sometimes you just do stuff because
+                                      // a problem is driving you nuts
+  @Input() lastConfigRow: boolean;
+}
 
-  @Component({
-    selector: 'app-select-channel-mandatory',
-    template: 'dummy component for testing'
-  })
-  export class SelectChannelMandatoryStubComponent {
-    @Input() id: string;
-    @Input() name: string;
-    @Input() actualStaticValue: string; // sometimes you just do stuff because
-                                        // a problem is driving you nuts
-    @Input() lastConfigRow: boolean;
-  }
+@Component({
+  selector: 'app-select-channel-mandatory',
+  template: 'dummy component for testing'
+})
+export class SelectChannelMandatoryStubComponent {
+  @Input() id: string;
+  @Input() name: string;
+  @Input() actualStaticValue: string; // sometimes you just do stuff because
+                                      // a problem is driving you nuts
+  @Input() lastConfigRow: boolean;
+}
+
+@Component({
+  selector: 'app-select-profile-option',
+  template: 'dummy component for testing'
+})
+export class SelectProfileOptionStubComponent {
+
+  @Input() id: string;
+  @Input() name: string;
+  @Input() label: string;
+  @Input() actualStaticValue: string; // sometimes you just do stuff because
+                                      // a problem is driving you nuts
+  @Input() firstConfigRow: boolean;
+}
 
 @Component({
   selector: 'app-sortable-column',

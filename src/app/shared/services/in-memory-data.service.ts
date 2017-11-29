@@ -80,8 +80,32 @@ export class InMemoryDataService implements InMemoryDbService {
             'programConfiguration': []}
     ];
     const program = [
-      {'id': 1, 'name': 'Prescription Alerts',     'description': 'PBM Communications including Order Status and Refill Reminder alerts'},
-      {'id': 2, 'name': 'Non-Prescription Alerts', 'description': 'tired of adding a new program just to test deleting it'}
+      {'id': 1, 'name': 'Prescription Alerts',
+       'description': 'PBM Communications including Order Status and Refill Reminder alerts'
+      },
+      {'id': 2, 'name': 'Non-Prescription Alerts', 'description': 'tired of adding a new program just to test deleting it',
+       'programProfile': [
+        {'id': 2, 'defaultOptIn': true, 'visibleInUi': true,
+         'chanEmail': true, 'chanIvr': true, 'chanSms': true, 'chanSecure': true, 'chanMail': false, 'chanMobile': false,
+         'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 2
+        }
+       ]
+      }
+    ];
+    const programprofile = [
+      {'id': 1,
+       'defaultOptIn': true,
+       'visibleInUi': true,
+       'chanEmail': true,
+       'chanIvr': true,
+       'chanSms': true,
+       'chanSecure': true,
+       'chanMail': false,
+       'chanMobile': false,
+       'effective': '2017-01-01',
+       'expiration': '9999-12-31',
+       'program': 1
+      }
     ];
     const programconfiguration = [
       {'id': 1,
@@ -191,6 +215,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return {
       communication: communication,
       program: program,
+      programprofile: programprofile,
       programconfiguration: programconfiguration,
       client: client,
       clientconfiguration: clientconfiguration

@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Program, ProgramConfigAction } from 'app/shared/model/program';
+import { ProgramProfile } from 'app/shared/model/program-profile';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
+import { ProgramsMaintenanceModalService } from './services/programs-maintenance/programs-maintenance-modal.service';
 
 @Component({
   selector: 'app-programs',
@@ -14,16 +16,29 @@ import { ProgramConfigurationsModalService } from './services/program-configurat
 export class ProgramsComponent implements OnInit {
 
   programs: Program[];
+  programProfiles: ProgramProfile[];
   selectedRow: number;
 
   constructor(
     private dataApiService: DataApiService,
-    private programConfigService: ProgramConfigurationsModalService
+    private programConfigService: ProgramConfigurationsModalService,
+    private programsMaintService: ProgramsMaintenanceModalService
   ) { }
 
   async ngOnInit() {
     console.log('ProgramComponent ngOnInit...');
     await this.getPrograms();
+    await this.getProgramProfiles();
+    console.log('ProgramComponent ', this.programs, this.programProfiles);
+  }
+
+  async getProgramProfiles() {
+    try {
+      this.programProfiles = await this.dataApiService.getProgramProfiles();
+      return this.programProfiles;
+    } catch (error) {
+      console.log('getPrograms error: ', error);
+    }
   }
 
   async getPrograms() {
@@ -44,7 +59,7 @@ export class ProgramsComponent implements OnInit {
 
   configureProgram(progConfigAction: ProgramConfigAction) {
     if (progConfigAction.configType === 'edit') {
-      // this.editProgramModal(progConfigAction.progId);
+      this.editProgram(progConfigAction.progId);
     }
     if (progConfigAction.configType === 'delete') {
       // this.deleteProgramModal(progConfigAction.progId);
@@ -53,6 +68,11 @@ export class ProgramsComponent implements OnInit {
       this.configureProgramCommunications(progConfigAction.progId);
     }
     this.setClickedRow(null);
+  }
+
+  private editProgram(progId) {
+    const program: Program = this.findProgram(progId);
+    this.programsMaintService.maintainProgramModal('edit', program);
   }
 
   private configureProgramCommunications(progId) {

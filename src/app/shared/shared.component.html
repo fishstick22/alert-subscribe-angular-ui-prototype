@@ -3,6 +3,20 @@
      mostly just for showing features off -->
 <app-drag-drop-test></app-drag-drop-test>
 <app-click-outside-test></app-click-outside-test>
+
+<h4>Programs</h4>
+<span *ngIf="programs">
+  <ul *ngFor="let p of programs">
+    <li>{{p | json}}</li> 
+  </ul>
+</span>
+<h4>Program Profiles</h4>
+<span *ngIf="programProfiles">
+  <ul *ngFor="let pp of programProfiles">
+    <li>{{pp | json}}</li> 
+  </ul>
+</span>
+
 <h4>Manage Communications</h4>
 <app-comm-action-table 
   [communications]="communications"

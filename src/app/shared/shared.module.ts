@@ -28,6 +28,7 @@ import { ClientConfigurationsService  } from './services/client-configurations/c
 import { ClientsService               } from './services/clients/clients.service';
 import { CommunicationsService        } from './services/communications/communications.service';
 import { ProgramConfigurationsService } from './services/program-configurations/program-configurations.service';
+import { ProgramProfilesService       } from './services/program-profiles/program-profiles.service';
 import { ProgramsService              } from './services/programs/programs.service';
 
 // testing within shared module
@@ -43,6 +44,7 @@ import { DateEffExpComponent             } from './components/date-eff-exp/date-
 import { DatePickerPopupComponent        } from './components/date-picker-popup/date-picker-popup.component';
 import { SelectChannelMandatoryComponent } from './components/select-channel-mandatory/select-channel-mandatory.component';
 import { SelectChannelPriorityComponent  } from './components/select-channel-priority/select-channel-priority.component';
+import { SelectProfileOptionComponent    } from './components/select-profile-option/select-profile-option.component';
 import { SortableColumnComponent         } from './components/sortable-column/sortable-column.component';
 
 // exported directives
@@ -71,6 +73,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     DatePickerPopupComponent,
     SelectChannelMandatoryComponent,
     SelectChannelPriorityComponent,
+    SelectProfileOptionComponent,
     SortableColumnComponent,
     // local testing components
     ClickOutsideComponent,
@@ -79,16 +82,17 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     ClickOutsideDirective,
     DraggableDirective,
     DroppableDirective,
-    SortableTableDirective
+    SortableTableDirective,
   ],
   providers: [
     HttpClientModule,
     // services used by DataApiService
-    ClientsService,
     ClientConfigurationsService,
+    ClientsService,
     CommunicationsService,
-    ProgramsService,
-    ProgramConfigurationsService
+    ProgramConfigurationsService,
+    ProgramProfilesService,
+    ProgramsService
   ],
   exports: [
     CommonModule,
@@ -103,7 +107,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     DatePickerPopupComponent,
     SelectChannelMandatoryComponent,
     SelectChannelPriorityComponent,
-    SortableColumnComponent,
+    SelectProfileOptionComponent,
     // directives
     ClickOutsideDirective,
     DraggableDirective,

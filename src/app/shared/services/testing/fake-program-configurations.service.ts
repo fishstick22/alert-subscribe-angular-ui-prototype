@@ -20,12 +20,12 @@ export const PROGCONFIGS: ProgramConfiguration[] = [programConfig];
 
 export class FakeProgramConfigurationsService extends ProgramConfigurationsService {
 
-  programs = PROGCONFIGS.map(pc => pc.clone());
+  programConfigs = PROGCONFIGS.map(pc => pc.clone());
   lastPromise: Promise<any>;  // remember so we can spy on promise calls
 
   async getProgramConfigurationsThruApi(): Promise<ProgramConfiguration[]> {
     try {
-      return this.lastPromise = Promise.resolve<ProgramConfiguration[]>(this.programs);
+      return this.lastPromise = Promise.resolve<ProgramConfiguration[]>(this.programConfigs);
     } catch (error) {
       this.handleError(error);
     }

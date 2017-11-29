@@ -1,0 +1,157 @@
+<form #programMaintenanceForm="ngForm" 
+      (ngSubmit)="saveProgram()" >
+
+  <div class="modal-header bg-gradient-dark">
+    <h4 class="modal-title text-white">
+      <span *ngIf="configType === 'edit'">
+        Edit Program <small>{{program.name}} (ProgramId: {{program.id}}) profile</small></span>
+    </h4>
+    <button type="button" class="close text-white" aria-label="Close" (click)="maintainProgramModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="programName" class="text-white bg-gradient-dark flex-justify-left rounded">
+          Program Name</label>
+        <input type="text" class="form-control"
+               [(ngModel)]="program.name" id="programName" name="name" required
+               aria-describedby="programNameHelp" placeholder="Enter Program Name">
+        <small id="programNameHelp" class="form-text text-muted">Short Name of the Program.</small>
+      </div>
+      <div class="form-group col-md-8">
+        <label for="programDescription" class="text-white bg-gradient-dark flex-justify-left rounded">
+          Program Description</label>
+        <input type="text" class="form-control" 
+               [(ngModel)]="program.description" id="programDescription" name="description" required
+               aria-describedby="programDescriptionlHelp" placeholder="Enter Program Description">
+        <small id="programDescriptionlHelp" class="form-text text-muted">Brief Description of the Program.</small>
+      </div>
+    </div>
+        
+    <span *ngIf="programProfiles">
+      <div class="form-row" *ngFor="let profile of programProfiles; let i = index">
+
+        <div class="form-group col-md-1">
+            <app-select-profile-option 
+              id="defaultOptIn" name="defaultOptIn" label="Opt In"
+              [(ngModel)]="profile.defaultOptIn"
+              [actualStaticValue]="profile.defaultOptIn"
+              [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+          
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="visibleInUi" name="visibleInUi" label="UI"
+            [(ngModel)]="profile.visibleInUi"
+            [actualStaticValue]="profile.visibleInUi"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanEmail" name="chanEmail" label="Email"
+            [(ngModel)]="profile.chanEmail"
+            [actualStaticValue]="profile.chanEmail"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanIvr" name="chanIvr" label="IVR"
+            [(ngModel)]="profile.chanIvr"
+            [actualStaticValue]="profile.chanIvr"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanSms" name="chanSms" label="SMS"
+            [(ngModel)]="profile.chanSms"
+            [actualStaticValue]="profile.chanSms"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanSecure" name="chanSecure" label="Secure"
+            [(ngModel)]="profile.chanSecure"
+            [actualStaticValue]="profile.chanSecure"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanMail" name="chanMail" label="Mail"
+            [(ngModel)]="profile.chanMail"
+            [actualStaticValue]="profile.chanMail"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <div class="form-group col-md-1">
+          <app-select-profile-option 
+            id="chanMobile" name="chanMobile" label="Mobile"
+            [(ngModel)]="profile.chanMobile"
+            [actualStaticValue]="profile.chanMobile"
+            [firstConfigRow]="i === 0"></app-select-profile-option>
+        </div>
+
+        <!-- move these into a component, the current eff/exp component only works on configs -->
+        <div class="form-group col-md-2">
+          <span *ngIf="i === 0">
+            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded">
+                Effective</label>
+            <!-- the effective date of the current effective row -->
+            <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.effective}}" readonly>
+          </span>
+          <span *ngIf="i !== 0">
+            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+              Effective</label>
+            <!-- set the effective date for the new row -->
+            <app-date-picker-popup [dateValue]="profile.effective"
+              (newDateValue)="updateDateValue($event, profile, 'effective')"></app-date-picker-popup>           
+          </span>
+        </div>
+
+        <div class="form-group col-md-2">
+          <span *ngIf="i === 0">
+            <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded">
+              Expiration</label>
+            <!-- the expiration date of the current/previous row -->
+            <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.expiration}}" readonly
+              (click)="changeProfile(profile)" >
+          </span>
+          <span *ngIf="i !== 0">
+            <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+              Expiration</label>
+            <!-- the expiration date of the current/previous row -->
+            <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.expiration}}" readonly>
+          </span>
+        </div>
+
+        <div class="form-row" *ngIf="addProfile">
+          <div class="form-group col-md-1">
+            <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
+              (click)="changeProfile(profile)" title="Modify Program Profile"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </span>
+
+  </div>
+    
+  <div class="modal-footer">
+    <div class="w-100">
+      <span class="float-left">Some instructional content or condition message goes here: </span>
+      <div class="float-right">
+          <button type="submit" class="btn btn-outline-dark" [disabled]="!programMaintenanceForm.valid">Save</button>
+          <button type="button" class="btn btn-outline-dark" (click)="maintainProgramModal.close('Close click')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</form>      
