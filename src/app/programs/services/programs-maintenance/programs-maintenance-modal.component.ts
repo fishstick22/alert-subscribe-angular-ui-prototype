@@ -39,8 +39,8 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     this.tomorrow.setDate(this.today.getDate() + 1);
 
     if (this.configType === 'add') {
-      this.programProfiles = [new ProgramProfile(null)];
-      this.programProfiles[0].program = this.program.id;
+      this.programProfiles = [new ProgramProfile(this.program.id)];
+
       this.programProfiles[0].effective =
         this.tomorrow.getFullYear() + '-' +
        (this.tomorrow.getMonth() + 1) + '-' +
@@ -48,7 +48,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
       this.programProfiles[0].expiration = this.UNEXPIRED;
       this.newProgram = true;
     }
-    
+
     if (this.configType === 'edit') {
       // editing a program actually means creating a new row from
       // the current row, setting expiration on current

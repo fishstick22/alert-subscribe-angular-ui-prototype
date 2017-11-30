@@ -95,9 +95,14 @@ export class DataApiService {
   }
 
   public async createProgram(program: Program): Promise<Program> {
-    program = await this.programsService.createProgramThruApi(program);
-    this.insertProgram(program);
-    return program;
+    try {
+      program = await this.programsService.createProgramThruApi(program);
+      this.insertProgram(program);
+      return program;
+    } catch (error) {
+      return Promise.reject(error.message || error);
+    }
+
   }
 
   public async updateProgram(program: Program): Promise<Program> {
@@ -155,7 +160,9 @@ export class DataApiService {
   /*
   */
   private insertProgram(program: Program): void {
-    this.programs.push(program);
+    if (program && this.programs) {
+      this.programs.push(program);
+    }
   }
 
   // private removeProgram(program: Program): void {

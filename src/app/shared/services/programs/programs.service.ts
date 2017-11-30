@@ -31,15 +31,7 @@ export class ProgramsService {
   async createProgramThruApi(program: Program): Promise<Program> {
     try {
       const response = await this.http.post(this.progApiEndpoint, program).toPromise();
-      try {
-        return response as Program;
-      } catch (error) {
-        // some reason spring is returning only headers
-        // if (response.url) {
-        //  console.log('createProgramThruApi: ', response.url)
-        // }
-        return program;
-      }
+      return response as Program;
     } catch (error) {
       this.handleError(error);
     }

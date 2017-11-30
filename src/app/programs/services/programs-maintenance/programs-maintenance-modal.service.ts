@@ -37,10 +37,15 @@ export class ProgramsMaintenanceModalService {
     }
     if (configType === 'edit') {
       modalComp.program = program;
-      if (!program.programProfile) {
+      if (!program.programProfile || program.programProfile.length === 0) {
         // hey, it could happen!
         program.programProfile = await this.findProgramProfiles(program);
         console.log(program);
+        if (program.programProfile.length === 0) {
+          // but if it still doesn't have one (shouldn't happen)
+          program.programProfile = [new ProgramProfile(program.id)];
+          program.programProfile[0].expiration = '9999-12-31';
+        }
       }
     }
 
