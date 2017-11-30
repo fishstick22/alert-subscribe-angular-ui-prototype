@@ -28,22 +28,22 @@ export class ProgramsService {
     }
   }
 
-  // async createProgramThruApi(program: Program): Promise<Program> {
-  //   try {
-  //     const response = await this.http.post(this.progApiEndpoint, JSON.stringify(program), {headers: this.headers}).toPromise();
-  //     try {
-  //       return response as Program;
-  //     } catch (error) {
-  //       // some reason spring is returning only headers
-  //       // if (response.url) {
-  //       //  console.log('createProgramThruApi: ', response.url)
-  //       // }
-  //       return program;
-  //     }
-  //   } catch (error) {
-  //     this.handleError(error);
-  //   }
-  // }
+  async createProgramThruApi(program: Program): Promise<Program> {
+    try {
+      const response = await this.http.post(this.progApiEndpoint, program).toPromise();
+      try {
+        return response as Program;
+      } catch (error) {
+        // some reason spring is returning only headers
+        // if (response.url) {
+        //  console.log('createProgramThruApi: ', response.url)
+        // }
+        return program;
+      }
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
 
   async updateProgramThruApi(program: Program): Promise<Program> {
     const url = `${this.progApiEndpoint}/${program.id}`;

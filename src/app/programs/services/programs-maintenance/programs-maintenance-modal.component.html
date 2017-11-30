@@ -100,14 +100,15 @@
 
         <!-- move these into a component, the current eff/exp component only works on configs -->
         <div class="form-group col-md-2">
-          <span *ngIf="i === 0">
+          <span *ngIf="i === 0 && !newProgram">
             <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded">
                 Effective</label>
             <!-- the effective date of the current effective row -->
             <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.effective}}" readonly>
           </span>
-          <span *ngIf="i !== 0">
-            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+          <span *ngIf="newProgram || i !== 0">
+            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded"
+              [ngClass]="{'sr-only': !newProgram}">
               Effective</label>
             <!-- set the effective date for the new row -->
             <app-date-picker-popup [dateValue]="profile.effective"

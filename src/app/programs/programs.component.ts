@@ -57,7 +57,7 @@ export class ProgramsComponent implements OnInit {
     }
   }
 
-  configureProgram(progConfigAction: ProgramConfigAction) {
+  private configureProgram(progConfigAction: ProgramConfigAction) {
     if (progConfigAction.configType === 'edit') {
       this.editProgram(progConfigAction.progId);
     }
@@ -70,9 +70,14 @@ export class ProgramsComponent implements OnInit {
     this.setClickedRow(null);
   }
 
+  private addProgram() {
+    const nextProgramId = this.programs.length + 1;
+    this.programsMaintService.maintainProgramModal('add', nextProgramId);
+  }
+
   private editProgram(progId) {
     const program: Program = this.findProgram(progId);
-    this.programsMaintService.maintainProgramModal('edit', program);
+    this.programsMaintService.maintainProgramModal('edit', null, program);
   }
 
   private configureProgramCommunications(progId) {

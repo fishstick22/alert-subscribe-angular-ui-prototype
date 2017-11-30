@@ -23,7 +23,7 @@ export class ProgramsMaintenanceModalService {
     private modalService: NgbModal
   ) { }
 
-  async maintainProgramModal(configType, program?: Program) {
+  async maintainProgramModal(configType, nextId?: number, program?: Program) {
     const modalOpts: NgbModalOptions = {
       size: 'lg'
     };
@@ -31,6 +31,10 @@ export class ProgramsMaintenanceModalService {
     const modalComp: ProgramsMaintenanceModalComponent  = modalRef.componentInstance;
 
     modalComp.configType = configType;
+
+    if (configType === 'add' && nextId) {
+      modalComp.program = new Program(nextId, '');
+    }
     if (configType === 'edit') {
       modalComp.program = program;
       if (!program.programProfile) {
@@ -42,26 +46,37 @@ export class ProgramsMaintenanceModalService {
 
     modalComp.modalInit();
 
+    // so up until now using @JsonIdentityReference(alwaysAsId = true) on related entites in the JPA
+    // so the json coming back doesn't have full related objects, just id references
+    // but with Program/ProgramProfile didn't so code is dealing with responses that include the Profile
+    // and the requests back to store can be Program with Profile inside
+    // or, separate requests for the Profiles
+    // but not both -- have to decide to stick with the original approach, which works fine for
+    // everything else, or do this differently by saving the Program entirely which
+    // then can include additions and updates to Profile related entities
     modalRef.result.then((result) => {
       if (result.resultTxt === modalComp.SAVESUCCESS) {
         console.log('configureProgramModal result: ', result.modalResult);
         this.closeResult = `Closed with: ${result.resultTxt}`;
         if (result.modalResult) {
           const modalResult: ProgramsMaintModalResult = result.modalResult;
-          if (modalResult.updateProgramProfile) {
-            this.updateProgramProfile(modalResult.updateProgramProfile);
+          // if (modalResult.updateProgramProfile) {
+          //   this.updateProgramProfile(modalResult.updateProgramProfile);
+          // }
+          // if (modalResult.insertProgramProfile) {
+          //   this.addProgramProfile(modalResult.insertProgramProfile);
+          // }
+          if (configType === 'add' && modalResult.insertProgram) {
+            // except for a new add, the Profile creates an unresolved forward reference
+            // the Program must be saved first, then the Profile will reference a valid entity
+            // this.addProgram(modalResult.insertProgram);
+            // this.addProgramProfile(modalResult.insertProgramProfile);
+            this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
           }
-          if (modalResult.insertProgramProfile) {
-            this.addProgramProfile(modalResult.insertProgramProfile);
-          }
-          if (modalResult.updateProgram) {
+          if (configType === 'edit' && modalResult.updateProgram) {
             this.updateProgram(modalResult.updateProgram);
           }
-          // export class ProgramsMaintModalResult {
-          //   updateProgramProfile: ProgramProfile;
-          //   insertProgramProfile: ProgramProfile;
-          //   updateProgram: Program;
-          // }
+
         } else {
           // this would be some kind of exception
           console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
@@ -78,12 +93,34 @@ export class ProgramsMaintenanceModalService {
     });
   }
 
+  private async addProgramAndProfile(program: Program, programProfile: ProgramProfile) {
+    // have to single thread these so they are done in the right order
+    try {
+      this.program = await this.dataApiService.createProgram(program);
+      const pp = await this.dataApiService.createProgramProfile(programProfile);
+      this.program.programProfile = [pp];
+      console.log('addProgramAndProfile:', program, this.program);
+      return this.program;
+    } catch (error) {
+      console.log('addProgramAndProfile error: ', error);
+    }
+  }
+
   private async addProgramProfile(programProfile: ProgramProfile) {
     try {
       await this.dataApiService.createProgramProfile(programProfile);
       console.log('addProgramProfile:', programProfile, this.programProfiles);
     } catch (error) {
       console.log('addProgramProfile error: ', error);
+    }
+  }
+
+  private async addProgram(program: Program) {
+    try {
+      this.program = await this.dataApiService.createProgram(program);
+      console.log('addProgram:', program, this.program);
+    } catch (error) {
+      console.log('addProgram error: ', error);
     }
   }
 

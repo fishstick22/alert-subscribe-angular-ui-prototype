@@ -94,11 +94,11 @@ export class DataApiService {
     }
   }
 
-  // public async createProgram(program: Program): Promise<Program> {
-  //   program = await this.programService.createProgramThruApi(program);
-  //   this.insertProgram(program);
-  //   return program;
-  // }
+  public async createProgram(program: Program): Promise<Program> {
+    program = await this.programsService.createProgramThruApi(program);
+    this.insertProgram(program);
+    return program;
+  }
 
   public async updateProgram(program: Program): Promise<Program> {
     await this.programsService.updateProgramThruApi(program);
@@ -152,11 +152,11 @@ export class DataApiService {
     programProfile = await this.programProfileService.updateProgramProfileThruApi(programProfile);
     return programProfile;
   }
-  // /*
-  // */
-  // private insertProgram(program: Program): void {
-  //   this.programs.push(program);
-  // }
+  /*
+  */
+  private insertProgram(program: Program): void {
+    this.programs.push(program);
+  }
 
   // private removeProgram(program: Program): void {
   //   const index = this.programs.indexOf(program);
