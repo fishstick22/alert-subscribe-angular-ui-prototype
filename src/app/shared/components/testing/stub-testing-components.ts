@@ -98,6 +98,15 @@ export class ProgramActionsPopoverStubComponent  {
 }
 
 @Component({
+  selector: 'app-program-status',
+  template: 'dummy component for testing'
+})
+export class ProgramStatusStubComponent {
+  @Input() program;
+  @Input() detectChanges;
+}
+
+@Component({
   selector: 'app-select-channel-priority',
   template: 'dummy component for testing'
 })
@@ -130,9 +139,10 @@ export class SelectProfileOptionStubComponent {
   @Input() id: string;
   @Input() name: string;
   @Input() label: string;
-  @Input() actualStaticValue: string; // sometimes you just do stuff because
-                                      // a problem is driving you nuts
-  @Input() firstConfigRow: boolean;
+  @Input() staticValue: string;
+  @Input() showHeader: boolean;
+  @Input() staticReadOnly: boolean;
+  @Input() dynamicPicker: string;
 }
 
 @Component({

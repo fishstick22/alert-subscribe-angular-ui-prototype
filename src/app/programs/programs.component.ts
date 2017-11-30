@@ -18,6 +18,7 @@ export class ProgramsComponent implements OnInit {
   programs: Program[];
   programProfiles: ProgramProfile[];
   selectedRow: number;
+  detectChanges: any = '';
 
   constructor(
     private dataApiService: DataApiService,
@@ -55,14 +56,19 @@ export class ProgramsComponent implements OnInit {
     } else {
       this.selectedRow = index;
     }
+    this.detectChanges = index;
+  }
+
+  private updateProgramStatus(status, program) {
+    program.status = status;
   }
 
   private configureProgram(progConfigAction: ProgramConfigAction) {
     if (progConfigAction.configType === 'edit') {
       this.editProgram(progConfigAction.progId);
     }
-    if (progConfigAction.configType === 'delete') {
-      // this.deleteProgramModal(progConfigAction.progId);
+    if (progConfigAction.configType === 'expire') {
+      this.expireProgram(progConfigAction.progId);
     }
     if (progConfigAction.configType === 'communications') {
       this.configureProgramCommunications(progConfigAction.progId);
@@ -73,11 +79,19 @@ export class ProgramsComponent implements OnInit {
   private addProgram() {
     const nextProgramId = this.programs.length + 1;
     this.programsMaintService.maintainProgramModal('add', nextProgramId);
+    this.detectChanges = 'add';
   }
 
   private editProgram(progId) {
     const program: Program = this.findProgram(progId);
     this.programsMaintService.maintainProgramModal('edit', null, program);
+    this.detectChanges = 'edit';
+  }
+
+  private expireProgram(progId) {
+    const program: Program = this.findProgram(progId);
+    this.programsMaintService.maintainProgramModal('expire', null, program);
+    this.detectChanges = 'expire';
   }
 
   private configureProgramCommunications(progId) {
@@ -85,6 +99,7 @@ export class ProgramsComponent implements OnInit {
     // configure the program-level communication configurations
     const program: Program = this.findProgram(progId);
     this.programConfigService.configureProgramModal(program);
+    this.detectChanges = 'communications';
   }
 
   private findProgram(id): Program {

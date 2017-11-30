@@ -35,7 +35,7 @@ export class ProgramsMaintenanceModalService {
     if (configType === 'add' && nextId) {
       modalComp.program = new Program(nextId, '');
     }
-    if (configType === 'edit') {
+    if (configType === 'edit' || configType === 'expire') {
       modalComp.program = program;
       if (!program.programProfile || program.programProfile.length === 0) {
         // hey, it could happen!
@@ -79,6 +79,9 @@ export class ProgramsMaintenanceModalService {
             this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
           }
           if (configType === 'edit' && modalResult.updateProgram) {
+            this.updateProgram(modalResult.updateProgram);
+          }
+          if (configType === 'expire' && modalResult.updateProgram) {
             this.updateProgram(modalResult.updateProgram);
           }
 

@@ -29,14 +29,10 @@ export class SelectProfileOptionComponent implements OnInit, ControlValueAccesso
   @Input() id: string;
   @Input() name: string;
   @Input() label: string;
-  @Input() actualStaticValue: string; // sometimes you just do stuff because
-                                      // a problem is driving you nuts
-  // @Input() lastConfigRow: boolean;
-  // this one is a bit trickier with bootstrap form grids instead of tables
-  // always show the labels on the first row
-  // disable the first row
-  // allow editing in second row
-  @Input() firstConfigRow: boolean;
+  @Input() staticValue: string;
+  @Input() showHeader: boolean;
+  @Input() staticReadOnly: boolean;
+  @Input() dynamicPicker: string;
 
   profileOpts: Object[] = [{opt: 'Y', val: true}, {opt: 'N', val: false}];
   staticReadonlyOption: string;
@@ -47,7 +43,7 @@ export class SelectProfileOptionComponent implements OnInit, ControlValueAccesso
   constructor() { }
 
   ngOnInit() {
-   this.staticReadonlyOption = this.actualStaticValue ? 'Y' : 'N';
+   this.staticReadonlyOption = this.staticValue ? 'Y' : 'N';
   }
 
   // get accessor
