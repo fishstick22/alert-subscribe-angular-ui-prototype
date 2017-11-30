@@ -56,10 +56,10 @@ export class ProgramsComponent implements OnInit {
     } else {
       this.selectedRow = index;
     }
-    this.detectChanges = index;
+    // this.detectChanges = index;
   }
 
-  private updateProgramStatus(status, program) {
+  private updateProgramStatus(status, program: Program) {
     program.status = status;
   }
 
@@ -76,22 +76,22 @@ export class ProgramsComponent implements OnInit {
     this.setClickedRow(null);
   }
 
-  private addProgram() {
+  private async addProgram() {
     const nextProgramId = this.programs.length + 1;
-    this.programsMaintService.maintainProgramModal('add', nextProgramId);
-    this.detectChanges = 'add';
+    this.detectChanges = await this.programsMaintService.maintainProgramModal('add', nextProgramId);
+    // this.detectChanges = 'add';
   }
 
-  private editProgram(progId) {
+  private async editProgram(progId) {
     const program: Program = this.findProgram(progId);
-    this.programsMaintService.maintainProgramModal('edit', null, program);
-    this.detectChanges = 'edit';
+    this.detectChanges = await this.programsMaintService.maintainProgramModal('edit', null, program);
+    // this.detectChanges = 'edit';
   }
 
-  private expireProgram(progId) {
+  private async expireProgram(progId) {
     const program: Program = this.findProgram(progId);
-    this.programsMaintService.maintainProgramModal('expire', null, program);
-    this.detectChanges = 'expire';
+    this.detectChanges = await this.programsMaintService.maintainProgramModal('expire', null, program);
+    // await (this.detectChanges = 'expire');
   }
 
   private configureProgramCommunications(progId) {

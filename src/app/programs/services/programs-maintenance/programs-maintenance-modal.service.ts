@@ -84,7 +84,7 @@ export class ProgramsMaintenanceModalService {
           if (configType === 'expire' && modalResult.updateProgram) {
             this.updateProgram(modalResult.updateProgram);
           }
-
+          return configType;
         } else {
           // this would be some kind of exception
           console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
