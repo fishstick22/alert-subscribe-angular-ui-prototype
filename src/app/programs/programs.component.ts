@@ -18,6 +18,7 @@ export class ProgramsComponent implements OnInit {
   programs: Program[];
   programProfiles: ProgramProfile[];
   selectedRow: number;
+  detectChanges: any = '';
 
   constructor(
     private dataApiService: DataApiService,
@@ -55,14 +56,19 @@ export class ProgramsComponent implements OnInit {
     } else {
       this.selectedRow = index;
     }
+    // this.detectChanges = index;
   }
 
-  configureProgram(progConfigAction: ProgramConfigAction) {
+  private updateProgramStatus(status, program: Program) {
+    program.status = status;
+  }
+
+  private configureProgram(progConfigAction: ProgramConfigAction) {
     if (progConfigAction.configType === 'edit') {
       this.editProgram(progConfigAction.progId);
     }
-    if (progConfigAction.configType === 'delete') {
-      // this.deleteProgramModal(progConfigAction.progId);
+    if (progConfigAction.configType === 'expire') {
+      this.expireProgram(progConfigAction.progId);
     }
     if (progConfigAction.configType === 'communications') {
       this.configureProgramCommunications(progConfigAction.progId);
@@ -70,9 +76,22 @@ export class ProgramsComponent implements OnInit {
     this.setClickedRow(null);
   }
 
-  private editProgram(progId) {
+  private async addProgram() {
+    const nextProgramId = this.programs.length + 1;
+    this.detectChanges = await this.programsMaintService.maintainProgramModal('add', nextProgramId);
+    // this.detectChanges = 'add';
+  }
+
+  private async editProgram(progId) {
     const program: Program = this.findProgram(progId);
-    this.programsMaintService.maintainProgramModal('edit', program);
+    this.detectChanges = await this.programsMaintService.maintainProgramModal('edit', null, program);
+    // this.detectChanges = 'edit';
+  }
+
+  private async expireProgram(progId) {
+    const program: Program = this.findProgram(progId);
+    this.detectChanges = await this.programsMaintService.maintainProgramModal('expire', null, program);
+    // await (this.detectChanges = 'expire');
   }
 
   private configureProgramCommunications(progId) {
@@ -80,6 +99,7 @@ export class ProgramsComponent implements OnInit {
     // configure the program-level communication configurations
     const program: Program = this.findProgram(progId);
     this.programConfigService.configureProgramModal(program);
+    this.detectChanges = 'communications';
   }
 
   private findProgram(id): Program {

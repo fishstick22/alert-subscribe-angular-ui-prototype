@@ -9,6 +9,7 @@ export class Program {
   description: string;
   programProfile: ProgramProfile[];
   programConfiguration: number[];
+  status: any; // not saved to DB, only used in the UI
 
   constructor (
     id: number = 0,

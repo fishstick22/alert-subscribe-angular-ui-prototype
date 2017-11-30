@@ -10,6 +10,7 @@
       <th>ID</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,22 +23,28 @@
       <td><span>{{program.name}}</span></td>
       <td><span>{{program.description}}</span></td>
       <td>
+        <app-program-status
+          [program]="program"
+          [detectChanges]="detectChanges"
+          (statusUpdate)="updateProgramStatus($event, program)"></app-program-status>
+      </td>
+      <td>
         <app-program-actions-popover
           [progId]="program.id"
           [progName]="program.name"
           (configAction)="configureProgram($event)">
-          <i class="fa fa-pencil-square-o clickable" aria-hidden="true" title="Click to configure Program {{program.name}}"></i>
+          <i class="fa fa-pencil-square-o clickable" 
+             [ngClass]="{'sr-only': program.status === 'expired'}"
+             aria-hidden="true" title="Click to configure Program {{program.name}}"></i>
         </app-program-actions-popover>
       </td>
     </tr>
     <tr>
       <td>
         <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
-          (click)="addProgramModal()"title="Add New Program"></i>
+          (click)="addProgram()"title="Add New Program"></i>
       </td>
-      <td></td>
-      <td></td>
-      <td></td>
+
     </tr>
   </tbody>
   <tfoot></tfoot>

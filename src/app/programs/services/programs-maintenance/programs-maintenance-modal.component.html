@@ -5,6 +5,8 @@
     <h4 class="modal-title text-white">
       <span *ngIf="configType === 'edit'">
         Edit Program <small>{{program.name}} (ProgramId: {{program.id}}) profile</small></span>
+      <span *ngIf="configType === 'add'">
+        Add New Program</span>
     </h4>
     <button type="button" class="close text-white" aria-label="Close" (click)="maintainProgramModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
@@ -38,76 +40,93 @@
             <app-select-profile-option 
               id="defaultOptIn" name="defaultOptIn" label="Opt In"
               [(ngModel)]="profile.defaultOptIn"
-              [actualStaticValue]="profile.defaultOptIn"
-              [firstConfigRow]="i === 0"></app-select-profile-option>
+              [staticValue]="profile.defaultOptIn"
+              [showHeader]="i === 0"
+              [staticReadOnly]="i === 0 && !newProgram"
+              [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
           
         <div class="form-group col-md-1">
           <app-select-profile-option 
             id="visibleInUi" name="visibleInUi" label="UI"
             [(ngModel)]="profile.visibleInUi"
-            [actualStaticValue]="profile.visibleInUi"
-            [firstConfigRow]="i === 0"></app-select-profile-option>
+            [staticValue]="profile.visibleInUi"
+            [showHeader]="i === 0"
+            [staticReadOnly]="i === 0 && !newProgram"
+            [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
 
         <div class="form-group col-md-1">
           <app-select-profile-option 
             id="chanEmail" name="chanEmail" label="Email"
             [(ngModel)]="profile.chanEmail"
-            [actualStaticValue]="profile.chanEmail"
-            [firstConfigRow]="i === 0"></app-select-profile-option>
+            [staticValue]="profile.chanEmail"
+            [showHeader]="i === 0"
+            [staticReadOnly]="i === 0 && !newProgram"
+            [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
 
         <div class="form-group col-md-1">
           <app-select-profile-option 
             id="chanIvr" name="chanIvr" label="IVR"
             [(ngModel)]="profile.chanIvr"
-            [actualStaticValue]="profile.chanIvr"
-            [firstConfigRow]="i === 0"></app-select-profile-option>
+            [staticValue]="profile.chanIvr"
+            [showHeader]="i === 0"
+            [staticReadOnly]="i === 0 && !newProgram"
+            [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
 
         <div class="form-group col-md-1">
           <app-select-profile-option 
             id="chanSms" name="chanSms" label="SMS"
             [(ngModel)]="profile.chanSms"
-            [actualStaticValue]="profile.chanSms"
-            [firstConfigRow]="i === 0"></app-select-profile-option>
+            [staticValue]="profile.chanSms"
+            [showHeader]="i === 0"
+            [staticReadOnly]="i === 0 && !newProgram"
+            [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
 
         <div class="form-group col-md-1">
           <app-select-profile-option 
             id="chanSecure" name="chanSecure" label="Secure"
             [(ngModel)]="profile.chanSecure"
-            [actualStaticValue]="profile.chanSecure"
-            [firstConfigRow]="i === 0"></app-select-profile-option>
+            [staticValue]="profile.chanSecure"
+            [showHeader]="i === 0"
+            [staticReadOnly]="i === 0 && !newProgram"
+            [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
 
         <div class="form-group col-md-1">
           <app-select-profile-option 
             id="chanMail" name="chanMail" label="Mail"
             [(ngModel)]="profile.chanMail"
-            [actualStaticValue]="profile.chanMail"
-            [firstConfigRow]="i === 0"></app-select-profile-option>
+            [staticValue]="profile.chanMail"
+            [showHeader]="i === 0"
+            [staticReadOnly]="i === 0 && !newProgram"
+            [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
 
         <div class="form-group col-md-1">
           <app-select-profile-option 
             id="chanMobile" name="chanMobile" label="Mobile"
             [(ngModel)]="profile.chanMobile"
-            [actualStaticValue]="profile.chanMobile"
-            [firstConfigRow]="i === 0"></app-select-profile-option>
+            [staticValue]="profile.chanMobile"
+            [showHeader]="i === 0"
+            [staticReadOnly]="i === 0 && !newProgram"
+            [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
 
         <!-- move these into a component, the current eff/exp component only works on configs -->
         <div class="form-group col-md-2">
-          <span *ngIf="i === 0">
+          <span *ngIf="i === 0 && !newProgram">
             <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded">
                 Effective</label>
             <!-- the effective date of the current effective row -->
             <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.effective}}" readonly>
           </span>
-          <span *ngIf="i !== 0">
-            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+          <span *ngIf="newProgram || i !== 0">
+            <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded"
+              [ngClass]="{'sr-only': !newProgram}">
               Effective</label>
             <!-- set the effective date for the new row -->
             <app-date-picker-popup [dateValue]="profile.effective"
@@ -116,7 +135,14 @@
         </div>
 
         <div class="form-group col-md-2">
-          <span *ngIf="i === 0">
+          <span *ngIf="i === 0 && expireProgram">
+            <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded">
+              Expiration</label>
+            <!-- the expiration date of the current/previous row -->
+            <app-date-picker-popup [dateValue]="profile.expiration"
+              (newDateValue)="updateDateValue($event, profile, 'expiration')"></app-date-picker-popup> 
+          </span>
+          <span *ngIf="i === 0 && !expireProgram">
             <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded">
               Expiration</label>
             <!-- the expiration date of the current/previous row -->
@@ -139,9 +165,7 @@
         </div>
 
       </div>
-
     </span>
-
   </div>
     
   <div class="modal-footer">

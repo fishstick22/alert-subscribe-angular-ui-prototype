@@ -1,0 +1,6 @@
+<span *ngIf="progressVisible">
+    <i class="fa fa-refresh fa-pulse "></i>
+</span>
+<span *ngIf="!progressVisible && lastProfile && lastProfile.expiration && expiredProgram">
+  <small>exp {{lastProfile.expiration}}</small>
+</span>

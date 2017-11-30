@@ -21,6 +21,9 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   public UNEXPIRED: string = '9999-12-31';
 
   addProfile: boolean = false;
+  newProgram: boolean = false;
+  expireProgram: boolean = false;
+
   today = new Date();
   tomorrow = new Date();
 
@@ -36,6 +39,18 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     console.log(this.program);
 
     this.tomorrow.setDate(this.today.getDate() + 1);
+
+    if (this.configType === 'add') {
+      this.programProfiles = [new ProgramProfile(this.program.id)];
+
+      this.programProfiles[0].effective =
+        this.tomorrow.getFullYear() + '-' +
+       (this.tomorrow.getMonth() + 1) + '-' +
+        this.tomorrow.getDate();
+      this.programProfiles[0].expiration = this.UNEXPIRED;
+      this.newProgram = true;
+    }
+
     if (this.configType === 'edit') {
       // editing a program actually means creating a new row from
       // the current row, setting expiration on current
@@ -44,7 +59,17 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
       this.programProfiles = this.getCurrentEffectiveProfile(this.program);
       this.addProfile = true;
     }
-    // this.supressComm = this.findExistingConfiguredComms();
+
+    if (this.configType === 'expire') {
+      this.programProfiles = [];
+      this.programProfiles = this.getCurrentEffectiveProfile(this.program);
+      this.programProfiles[0].expiration =
+        this.tomorrow.getFullYear() + '-' +
+       (this.tomorrow.getMonth() + 1) + '-' +
+        this.tomorrow.getDate();
+      this.expireProgram = true;
+    }
+
   }
 
   getCurrentEffectiveProfile(program): ProgramProfile[] {
@@ -81,6 +106,14 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   saveProgram() {
     const modalResult: ProgramsMaintModalResult = new ProgramsMaintModalResult();
 
+    if (this.configType === 'add') {
+      if (this.programProfiles.length === 1 &&
+          this.programProfiles[0].expiration === this.UNEXPIRED) {
+        modalResult.insertProgramProfile = this.programProfiles[0];
+      }
+      modalResult.insertProgram = this.program;
+    }
+
     if (this.configType === 'edit') {
       // if profile changed (added), first update previous, add new
       // then go ahead and update the program
@@ -90,24 +123,34 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
 
         if (this.programProfiles[0].expiration !== this.UNEXPIRED) {
           modalResult.updateProgramProfile = this.programProfiles[0];
-        } // else something went wrong
-        if (this.programProfiles[0].expiration !== this.UNEXPIRED) {
+        } // else something went wrong, report error, abort save
+        if (this.programProfiles[1].expiration === this.UNEXPIRED) {
           modalResult.insertProgramProfile = this.programProfiles[1];
           this.program.programProfile.push(this.programProfiles[1]);
-        } // else something went wrong
+        } // else something went wrong, report error, abort save
         modalResult.updateProgram = this.program;
       }
     }
+
+    if (this.configType === 'expire') {
+      if (this.programProfiles.length === 1 &&
+        this.programProfiles[0].expiration !== this.UNEXPIRED) {
+        modalResult.updateProgramProfile = this.programProfiles[0];
+      } // else something went wrong, report error, abort save
+      modalResult.updateProgram = this.program;
+    }
+
     this.maintainProgramModal.close({resultTxt: this.SAVESUCCESS, modalResult: modalResult});
   }
 
-  private updateDateValue(newDateValue, pp: ProgramProfile, dateType: string) {
-    console.log('ProgramsMaintenanceModalComponent updateDateValue: ', newDateValue, pp, dateType);
+  private updateDateValue(newDate, pp: ProgramProfile, dateType: string) {
+    console.log('ProgramsMaintenanceModalComponent updateDateValue: ', newDate, pp, dateType);
     if (dateType === 'effective') {
-      pp.effective = newDateValue;
+      pp.effective = newDate.newDateValue;
+      // TODO adjust the expiration date of previous row if applicable
     }
     if (dateType === 'expiration') {
-      pp.expiration = newDateValue;
+      pp.expiration = newDate.newDateValue;
     }
   }
 
@@ -117,4 +160,5 @@ export class ProgramsMaintModalResult {
   updateProgramProfile: ProgramProfile;
   insertProgramProfile: ProgramProfile;
   updateProgram: Program;
+  insertProgram: Program;
 }

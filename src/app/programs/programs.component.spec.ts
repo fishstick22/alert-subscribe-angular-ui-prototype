@@ -11,7 +11,8 @@ import { ProgramConfigurationsModalService } from './services/program-configurat
 import { ProgramsMaintenanceModalService } from './services/programs-maintenance/programs-maintenance-modal.service';
 import { FakeProgramConfigurationsModalService,
          FakeProgramsMaintenanceModalService } from './testing/fake-program-configurations-modal.service';
-import { ProgramActionsPopoverStubComponent } from 'app/shared/components/testing/stub-testing-components';
+import { ProgramActionsPopoverStubComponent,
+         ProgramStatusStubComponent } from 'app/shared/components/testing/stub-testing-components';
 
 import { ProgramsComponent } from './programs.component';
 
@@ -21,7 +22,7 @@ describe('Programs: ProgramsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramsComponent, ProgramActionsPopoverStubComponent ],
+      declarations: [ ProgramsComponent, ProgramActionsPopoverStubComponent, ProgramStatusStubComponent ],
       providers: [
         DataApiService,
         ProgramConfigurationsModalService,

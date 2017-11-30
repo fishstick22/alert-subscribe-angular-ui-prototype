@@ -7,10 +7,11 @@ import { routedComponents,
          ProgramsRoutingModule               } from './programs-routing.module';
 
 import { ProgramActionsPopoverComponent      } from './program-actions-popover/program-actions-popover.component';
+import { ProgramStatusComponent              } from './program-status/program-status.component';
+
 import { ProgramConfigurationsModalService   } from './services/program-configurations/program-configurations-modal.service';
 import { ProgramConfigurationsModalComponent } from './services/program-configurations/program-configurations-modal.component';
 import { ProgramsMaintenanceModalComponent   } from './services/programs-maintenance/programs-maintenance-modal.component';
-
 import { ProgramsMaintenanceModalService     } from './services/programs-maintenance/programs-maintenance-modal.service';
 
 // shared
@@ -27,7 +28,8 @@ import { SharedModule } from 'app/shared/shared.module';
     routedComponents,
     ProgramActionsPopoverComponent,
     ProgramConfigurationsModalComponent,
-    ProgramsMaintenanceModalComponent
+    ProgramsMaintenanceModalComponent,
+    ProgramStatusComponent
   ],
   entryComponents: [ProgramConfigurationsModalComponent, ProgramsMaintenanceModalComponent],
   providers: [ProgramConfigurationsModalService, ProgramsMaintenanceModalService],
