@@ -91,7 +91,7 @@ var AppRoutingModule = (function () {
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Sarting with basic \"Bootstrap starter\" template\r\n     https://getbootstrap.com/docs/4.0/examples/starter-template/-->\r\n  <app-navbar [customLogoTitle]=[title]></app-navbar>   \r\n     \r\n  <div class=\"container-fluid\">\r\n    <div class=\"starter-template\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n   \r\n  <app-footer [customFooterText]=[title]></app-footer>"
+module.exports = "<!-- Sarting with basic \"Bootstrap starter\" template\n     https://getbootstrap.com/docs/4.0/examples/starter-template/-->\n  <app-navbar [customLogoTitle]=[title]></app-navbar>   \n     \n  <main role=\"main\" class=\"container\">\n    <div class=\"starter-template\">\n      <router-outlet></router-outlet>\n    </div>\n  </main>\n   \n  <app-footer [customFooterText]=[title]></app-footer>"
 
 /***/ }),
 
@@ -265,7 +265,7 @@ var AppModule = (function () {
 /***/ "../../../../../src/app/core/footer/footer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Yes, I totally stole this from Bram Borggreve\r\n  https://medium.com/@beeman/tutorial-add-bootstrap-to-angular-cli-apps-b0a652f2eb2\r\n-->\r\n<footer class=\"footer\">\r\n  <div class=\"container\">\r\n    <span class=\"text-muted\">\r\n      {{customFooterText}} made with \r\n      <img src=\"assets/images/angular.svg\" style=\"width: 25px;\" title=\"Angular\"/>\r\n      <img src=\"assets/images/bootstrap-components.svg\" style=\"width: 25px;\" title=\"Bootstrap\"/>\r\n      <img src=\"assets/images/spring-leaf.png\" style=\"width: 20px;\" title=\"Spring Boot\"/>\r\n      and \r\n      <i class=\"fa fa-heart\" aria-hidden=\"true\" style=\"color: red;\"></i> \r\n      by \r\n      <a href=\"https://github.com/fishstick22\" target=\"_blank\">\r\n        <img class=\"rounded\" src=\"assets/images/fishstick22.jpg\" \r\n          style=\"width: 20px;\" title=\"fishstick22\"/>\r\n    </a>\r\n    </span>\r\n  </div>\r\n</footer>\r\n"
+module.exports = "<!-- Yes, I totally stole this from Bram Borggreve\n  https://medium.com/@beeman/tutorial-add-bootstrap-to-angular-cli-apps-b0a652f2eb2\n-->\n<footer class=\"footer\">\n  <div class=\"container\">\n    <span class=\"text-muted\">\n      {{customFooterText}} made with \n      <img src=\"assets/images/angular.svg\" style=\"width: 25px;\" title=\"Angular\"/>\n      <img src=\"assets/images/bootstrap-components.svg\" style=\"width: 25px;\" title=\"Bootstrap\"/>\n      <img src=\"assets/images/spring-leaf.png\" style=\"width: 20px;\" title=\"Spring Boot\"/>\n      and \n      <i class=\"fa fa-heart\" aria-hidden=\"true\" style=\"color: red;\"></i> \n      by \n      <a href=\"https://github.com/fishstick22\" target=\"_blank\">\n        <img class=\"rounded\" src=\"assets/images/fishstick22.jpg\" \n          style=\"width: 20px;\" title=\"fishstick22\"/>\n    </a>\n    </span>\n  </div>\n</footer>\n"
 
 /***/ }),
 
@@ -331,7 +331,7 @@ var FooterComponent = (function () {
 /***/ "../../../../../src/app/core/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Welcome</h2>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\r\n<hr>\r\n"
+module.exports = "<h2>Welcome</h2>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n<hr>\n"
 
 /***/ }),
 
@@ -393,7 +393,7 @@ var HomeComponent = (function () {
 /***/ "../../../../../src/app/core/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-gradient-dark\">\r\n  <a class=\"navbar-brand\" href=\"/\" title='{{customLogoTitle}}'>\r\n    <img src='assets/images/cvs.png' alt='{{customLogoTitle}}' width=50>\r\n  </a>\r\n  <button class=\"navbar-toggler\" type=\"button\" \r\n          data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" \r\n          (click)=\"toggleCollapse()\"\r\n          aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <div class=\"collapse navbar-collapse\" [class.show]=\"show\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/home\" >Home</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/dashboard\" >Dashboard</a></li>    \r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/communications\" >Communications</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/programs\" >Programs</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/clients\" >Clients</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" href=\"#\">Contact</a></li>\r\n    </ul>\r\n    <ul class=\"nav navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">\r\n          <i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i>\r\n          Login\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-gradient-dark\">\n  <a class=\"navbar-brand\" href=\"/\" title='{{customLogoTitle}}'>\n    <img src='assets/images/cvs.png' alt='{{customLogoTitle}}' width=50>\n  </a>\n  <button class=\"navbar-toggler\" type=\"button\" \n          data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" \n          (click)=\"toggleCollapse()\"\n          aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" [class.show]=\"show\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/home\" >Home</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/dashboard\" >Dashboard</a></li>    \n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/communications\" >Communications</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/programs\" >Programs</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/clients\" >Clients</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" href=\"#\">Contact</a></li>\n    </ul>\n    <ul class=\"nav navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">\n          <i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i>\n          Login\n        </a>\n      </li>\n    </ul>\n  </div>\n</nav>"
 
 /***/ }),
 
@@ -466,7 +466,7 @@ var NavbarComponent = (function () {
 /***/ "../../../../../src/app/core/page-not-found/page-not-found.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>\r\n  Page Not Found!\r\n</h2>"
+module.exports = "<h2>\n  Page Not Found!\n</h2>"
 
 /***/ }),
 
@@ -528,7 +528,7 @@ var PageNotFoundComponent = (function () {
 /***/ "../../../../../src/app/shared/components/client-action-table/client-action-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\"\r\nappSortableTable (sorted)=\"onSorted($event)\">\r\n<caption><span *ngIf=\"displayClientStartEmpty\">\r\n  Clients List begins empty: start typing in the search boxes to find Clients  \r\n</span></caption>\r\n<thead>\r\n<tr class=\"bg-gradient-dark text-white\"><!-- column sorting header row -->\r\n  <th *ngIf=\"showClientId\"><app-sortable-column columnName=\"id\" sortDirection=\"asc\">ID</app-sortable-column></th>\r\n  <th *ngIf=\"showClientCode\"><app-sortable-column columnName=\"code\">Code</app-sortable-column></th>\r\n  <th *ngIf=\"showClientName\"><app-sortable-column columnName=\"name\">Name</app-sortable-column></th>\r\n  <th *ngIf=\"showStatus\">Status</th>\r\n  <th *ngIf=\"showAction\">Actions</th>\r\n</tr>\r\n<tr class=\"thead-light\"><!-- search/filter header row -->\r\n  <th width=\"10%\" *ngIf=\"showClientId\">\r\n    <input type=\"text\" id=\"seachClientId\" class=\"form-control form-control-sm\" placeholder=\"search\"\r\n           name=\"clientId\" [(ngModel)]=\"clientIdSearch\" (keyup)=\"searchClientId()\"/>\r\n  </th>\r\n  <th width=\"15%\" *ngIf=\"showClientCode\">\r\n    <input type=\"text\" id=\"seachDescription\" class=\"form-control form-control-sm\" placeholder=\"search Code\"\r\n           name=\"clientCode\" [(ngModel)]=\"clientCodeSearch\" (keyup)=\"searchClientCode()\"/>\r\n  </th>\r\n  <th *ngIf=\"showClientName\">\r\n    <input type=\"text\" id=\"seachName\" class=\"form-control form-control-sm\" placeholder=\"search Name\"\r\n           name=\"clientName\" [(ngModel)]=\"clientNameSearch\" (keyup)=\"searchClientName()\"/>\r\n  </th>\r\n  <th *ngIf=\"showStatus\"></th>\r\n  <th *ngIf=\"showAction\"></th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr appDraggable\r\n    [draggable] *ngFor=\"let client of displayClient; let i = index\"\r\n    [dragData]=\"client\" [dragClass]=\"'drag-over'\"  \r\n    (click)=\"setClickedRow(i); \" [class.table-info]=\"i == selectedRow\"\r\n     title=\"Click or Drag to configure {{client.name}} for Communication {{displayCommunication}}\" >\r\n  <td *ngIf=\"showClientId\">\r\n    <span class=\"badge badge-secondary clickable\"\r\n      (click)=\"selectClient(client)\">{{client.id}}</span></td>\r\n  <td *ngIf=\"showClientCode\"><span>{{client.code}}</span></td>\r\n  <td *ngIf=\"showClientName\"><span>{{client.name}}</span></td>\r\n  <td *ngIf=\"showStatus\"><span *ngIf=\"client.id === 142\"><i class=\"fa fa-check\" aria-hidden=\"true\" title=\"{{client.name}} Configured (Date)\"></i></span></td>\r\n  <td *ngIf=\"showAction\">\r\n    <app-client-actions-popover\r\n      [clientId]=\"client.id\"\r\n      [clientName]=\"client.name\"\r\n      (configAction)=\"configureClient($event)\">\r\n      <i class=\"fa fa-pencil-square-o clickable\" aria-hidden=\"true\" title=\"Click to configure {{client.name}} Communication settings\"></i>\r\n  </app-client-actions-popover>\r\n  </td>\r\n</tr>\r\n</tbody>\r\n<tfoot></tfoot>\r\n</table>"
+module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\"\nappSortableTable (sorted)=\"onSorted($event)\">\n<caption><span *ngIf=\"displayClientStartEmpty\">\n  Clients List begins empty: start typing in the search boxes to find Clients  \n</span></caption>\n<thead>\n<tr class=\"bg-gradient-dark text-white\"><!-- column sorting header row -->\n  <th *ngIf=\"showClientId\"><app-sortable-column columnName=\"id\" sortDirection=\"asc\">ID</app-sortable-column></th>\n  <th *ngIf=\"showClientCode\"><app-sortable-column columnName=\"code\">Code</app-sortable-column></th>\n  <th *ngIf=\"showClientName\"><app-sortable-column columnName=\"name\">Name</app-sortable-column></th>\n  <th *ngIf=\"showStatus\">Status</th>\n  <th *ngIf=\"showAction\">Actions</th>\n</tr>\n<tr class=\"thead-light\"><!-- search/filter header row -->\n  <th width=\"10%\" *ngIf=\"showClientId\">\n    <input type=\"text\" id=\"seachClientId\" class=\"form-control form-control-sm\" placeholder=\"search\"\n           name=\"clientId\" [(ngModel)]=\"clientIdSearch\" (keyup)=\"searchClientId()\"/>\n  </th>\n  <th width=\"15%\" *ngIf=\"showClientCode\">\n    <input type=\"text\" id=\"seachDescription\" class=\"form-control form-control-sm\" placeholder=\"search Code\"\n           name=\"clientCode\" [(ngModel)]=\"clientCodeSearch\" (keyup)=\"searchClientCode()\"/>\n  </th>\n  <th *ngIf=\"showClientName\">\n    <input type=\"text\" id=\"seachName\" class=\"form-control form-control-sm\" placeholder=\"search Name\"\n           name=\"clientName\" [(ngModel)]=\"clientNameSearch\" (keyup)=\"searchClientName()\"/>\n  </th>\n  <th *ngIf=\"showStatus\"></th>\n  <th *ngIf=\"showAction\"></th>\n</tr>\n</thead>\n<tbody>\n<tr appDraggable\n    [draggable] *ngFor=\"let client of displayClient; let i = index\"\n    [dragData]=\"client\" [dragClass]=\"'drag-over'\"  \n    (click)=\"setClickedRow(i); \" [class.table-info]=\"i == selectedRow\"\n     title=\"Click or Drag to configure {{client.name}} for Communication {{displayCommunication}}\" >\n  <td *ngIf=\"showClientId\">\n    <span class=\"badge badge-secondary clickable\"\n      (click)=\"selectClient(client)\">{{client.id}}</span></td>\n  <td *ngIf=\"showClientCode\"><span>{{client.code}}</span></td>\n  <td *ngIf=\"showClientName\"><span>{{client.name}}</span></td>\n  <td *ngIf=\"showStatus\"><span *ngIf=\"client.id === 142\"><i class=\"fa fa-check\" aria-hidden=\"true\" title=\"{{client.name}} Configured (Date)\"></i></span></td>\n  <td *ngIf=\"showAction\">\n    <app-client-actions-popover\n      [clientId]=\"client.id\"\n      [clientName]=\"client.name\"\n      (configAction)=\"configureClient($event)\">\n      <i class=\"fa fa-pencil-square-o clickable\" aria-hidden=\"true\" title=\"Click to configure {{client.name}} Communication settings\"></i>\n  </app-client-actions-popover>\n  </td>\n</tr>\n</tbody>\n<tfoot></tfoot>\n</table>"
 
 /***/ }),
 
@@ -810,7 +810,7 @@ var ClientActionTableComponent = (function () {
 /***/ "../../../../../src/app/shared/components/client-actions-popover/client-actions-popover.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<ng-template #popContent>\r\n  <div class=\"w-100 outer-popover\"\r\n    (click)=\"onClick($event)\"\r\n    (appClickOutside)=\"onClickedOutside($event, p)\"\r\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\r\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\r\n    [clickOutsideEvents]=\"clickOutsideEvents\"\r\n    [exclude]=\"exclude\"\r\n    [excludeBeforeClick]=\"excludeBeforeClick\">\r\n\r\n    <div class=\"float-left inner-popover\">\r\n        <span class=\"badge badge-success clickable\"\r\n             (click)=\"configure(clientId, 'communications'); p.close();\"\r\n              title=\"Configure Communications for  {{clientId}}: {{clientName}} \">\r\n          Communications</span></div>\r\n  </div>\r\n</ng-template>\r\n<div [ngbPopover]=\"popContent\"\r\n     #p=\"ngbPopover\"\r\n     popoverTitle=\"\"\r\n     placement=\"left\">\r\n  <ng-content></ng-content>\r\n</div>\r\n"
+module.exports = "\n<ng-template #popContent>\n  <div class=\"w-100 outer-popover\"\n    (click)=\"onClick($event)\"\n    (appClickOutside)=\"onClickedOutside($event, p)\"\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\n    [clickOutsideEvents]=\"clickOutsideEvents\"\n    [exclude]=\"exclude\"\n    [excludeBeforeClick]=\"excludeBeforeClick\">\n\n    <div class=\"float-left inner-popover\">\n        <span class=\"badge badge-success clickable\"\n             (click)=\"configure(clientId, 'communications'); p.close();\"\n              title=\"Configure Communications for  {{clientId}}: {{clientName}} \">\n          Communications</span></div>\n  </div>\n</ng-template>\n<div [ngbPopover]=\"popContent\"\n     #p=\"ngbPopover\"\n     popoverTitle=\"\"\n     placement=\"left\">\n  <ng-content></ng-content>\n</div>\n"
 
 /***/ }),
 
@@ -1281,7 +1281,7 @@ var CommActionsPopoverComponent = (function () {
 /***/ "../../../../../src/app/shared/components/date-eff-exp/date-eff-exp.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!lastConfigRow\">\r\n  <!-- not the last (new) row, this could be the current effective row -->\r\n\r\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\r\n    <!-- the effective date of the current effective row -->\r\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.effective}}\" readonly>\r\n  </div>\r\n\r\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\r\n    <!-- the expiration date of the current/previous row -->\r\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"lastConfigRow\" >\r\n  <!-- this _is_ the last (new) row that will be inserted -->\r\n\r\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\r\n    <!-- set the effective date for the new row -->\r\n    <app-date-picker-popup [dateValue]=\"commConfig.effective\"\r\n      (newDateValue)=\"updateDateValue($event)\"></app-date-picker-popup></div>\r\n\r\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\r\n    <!-- the expiration date of the new row -->\r\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\r\n  </div>\r\n</div>"
+module.exports = "<div *ngIf=\"!lastConfigRow\">\n  <!-- not the last (new) row, this could be the current effective row -->\n\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\n    <!-- the effective date of the current effective row -->\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.effective}}\" readonly>\n  </div>\n\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\n    <!-- the expiration date of the current/previous row -->\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\n  </div>\n</div>\n\n<div *ngIf=\"lastConfigRow\" >\n  <!-- this _is_ the last (new) row that will be inserted -->\n\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\n    <!-- set the effective date for the new row -->\n    <app-date-picker-popup [dateValue]=\"commConfig.effective\"\n      (newDateValue)=\"updateDateValue($event)\"></app-date-picker-popup></div>\n\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\n    <!-- the expiration date of the new row -->\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1293,7 +1293,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n\n.date-eff-exp-input {\n  width: 80px; }\n", ""]);
+exports.push([module.i, ".flex-justify-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: left;\n      -ms-flex-align: left;\n          align-items: left;\n  padding: 0 0 0 10px; }\n\n.flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n\n.date-eff-exp-input {\n  width: 80px; }\n", ""]);
 
 // exports
 
@@ -1364,7 +1364,7 @@ var DateEffExpComponent = (function () {
 /***/ "../../../../../src/app/shared/components/date-picker-popup/date-picker-popup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"col-xs-2\"\r\n  (click)=\"onClick($event)\"\r\n  (appClickOutside)=\"onClickedOutside($event, d)\"\r\n  [attachOutsideOnClick]=\"attachOutsideOnClick\"\r\n  [delayClickOutsideInit]=\"delayClickOutsideInit\"\r\n  [clickOutsideEvents]=\"clickOutsideEvents\"\r\n  [exclude]=\"exclude\"\r\n  [excludeBeforeClick]=\"excludeBeforeClick\">\r\n\r\n  <input name=\"dp\" [(ngModel)]=\"dateModel\" class=\"form-control form-control-sm date-eff-exp-input\" placeholder=\"yyyy-mm-dd\"\r\n         (click)=\"d.toggle()\" (ngModelChange)=\"saveDate($event)\" ngbDatepicker #d=\"ngbDatepicker\"\r\n         [required]=\"required\">\r\n\r\n </div>\r\n"
+module.exports = "\n<div class=\"col-xs-2\"\n  (click)=\"onClick($event)\"\n  (appClickOutside)=\"onClickedOutside($event, d)\"\n  [attachOutsideOnClick]=\"attachOutsideOnClick\"\n  [delayClickOutsideInit]=\"delayClickOutsideInit\"\n  [clickOutsideEvents]=\"clickOutsideEvents\"\n  [exclude]=\"exclude\"\n  [excludeBeforeClick]=\"excludeBeforeClick\">\n\n  <input name=\"dp\" [(ngModel)]=\"dateModel\" class=\"form-control form-control-sm date-eff-exp-input\" placeholder=\"yyyy-mm-dd\"\n         (click)=\"d.toggle()\" (ngModelChange)=\"saveDate($event)\" ngbDatepicker #d=\"ngbDatepicker\"\n         [required]=\"required\">\n\n </div>\n"
 
 /***/ }),
 
@@ -1376,7 +1376,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n\n.date-eff-exp-input {\n  width: 80px; }\n", ""]);
+exports.push([module.i, ".flex-justify-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: left;\n      -ms-flex-align: left;\n          align-items: left;\n  padding: 0 0 0 10px; }\n\n.flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n\n.date-eff-exp-input {\n  width: 80px; }\n", ""]);
 
 // exports
 
@@ -1463,7 +1463,7 @@ var DatePickerPopupComponent = (function () {
 /***/ "../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\r\n    class=\"form-control form-control-sm\" readonly>\r\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\r\n  </select>\r\n</div>\r\n<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\r\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\r\n    <option *ngFor=\"let cmo of chanMandatoryOpts\" [ngValue]=\"cmo\">{{cmo}}</option>\r\n  </select>\r\n</div>"
+module.exports = "<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\n    class=\"form-control form-control-sm\" readonly>\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\n  </select>\n</div>\n<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\n    <option *ngFor=\"let cmo of chanMandatoryOpts\" [ngValue]=\"cmo\">{{cmo}}</option>\n  </select>\n</div>"
 
 /***/ }),
 
@@ -1475,7 +1475,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n", ""]);
+exports.push([module.i, ".flex-justify-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: left;\n      -ms-flex-align: left;\n          align-items: left;\n  padding: 0 0 0 10px; }\n\n.flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n", ""]);
 
 // exports
 
@@ -1594,7 +1594,7 @@ var SelectChannelMandatoryComponent = (function () {
 /***/ "../../../../../src/app/shared/components/select-channel-priority/select-channel-priority.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\r\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\r\n    <option *ngFor=\"let cpo of channelPriortyOpts\" [ngValue]=\"cpo\">{{cpo}}</option>\r\n  </select>\r\n</div>\r\n<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\r\n    class=\"form-control form-control-sm\" disabled>\r\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\r\n  </select>\r\n</div>"
+module.exports = "<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\n    <option *ngFor=\"let cpo of channelPriortyOpts\" [ngValue]=\"cpo\">{{cpo}}</option>\n  </select>\n</div>\n<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\n    class=\"form-control form-control-sm\" disabled>\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\n  </select>\n</div>"
 
 /***/ }),
 
@@ -1606,7 +1606,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n", ""]);
+exports.push([module.i, ".flex-justify-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: left;\n      -ms-flex-align: left;\n          align-items: left;\n  padding: 0 0 0 10px; }\n\n.flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n", ""]);
 
 // exports
 
@@ -1722,6 +1722,151 @@ var SelectChannelPriorityComponent = (function () {
         __metadata("design:paramtypes", [])
     ], SelectChannelPriorityComponent);
     return SelectChannelPriorityComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<span *ngIf=\"showHeader\">\n  <label for=\"{{name}}\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\n    {{label}}</label>\n</span>\n\n<span *ngIf=\"staticReadOnly\">\n  <select class=\"form-control form-control-sm flex-justify-right\"\n          id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" readonly>\n          <option value=\"actualStaticValue\">{{staticReadonlyOption}}</option>\n  </select>\n</span>\n\n<span *ngIf=\"dynamicPicker\">\n  <select class=\"form-control form-control-sm flex-justify-right\"\n          [(ngModel)]=\"value\" id=\"{{id}}\" name=\"{{name}}\" required (blur)=\"onBlur()\">\n    <option *ngFor=\"let po of profileOpts\" [ngValue]=\"po.val\">{{po.opt}}</option>>\n  </select>\n</span>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flex-justify-left {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  -webkit-box-align: left;\n      -ms-flex-align: left;\n          align-items: left;\n  padding: 0 0 0 10px; }\n\n.flex-justify-center {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center; }\n\n.flex-justify-right {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: end;\n      -ms-flex-pack: end;\n          justify-content: flex-end;\n  -webkit-box-align: right;\n      -ms-flex-align: right;\n          align-items: right; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelectProfileOptionComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var noop = function () {
+};
+/* tslint:disable:no-use-before-declare */
+var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
+    provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */],
+    useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* forwardRef */])(function () { return SelectProfileOptionComponent; }),
+    multi: true
+};
+/* tslint:enable:no-use-before-declare */
+var SelectProfileOptionComponent = (function () {
+    function SelectProfileOptionComponent() {
+        // Placeholders for the callbacks which are later providesd
+        // by the Control Value Accessor
+        this.onTouchedCallback = noop;
+        this.onChangeCallback = noop;
+        this.profileOpts = [{ opt: 'Y', val: true }, { opt: 'N', val: false }];
+        // http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
+        // The internal data model
+        this.innerValue = '';
+    }
+    SelectProfileOptionComponent.prototype.ngOnInit = function () {
+        this.staticReadonlyOption = this.staticValue ? 'Y' : 'N';
+    };
+    Object.defineProperty(SelectProfileOptionComponent.prototype, "value", {
+        // get accessor
+        get: function () {
+            return this.innerValue;
+        },
+        // set accessor including call the onchange callback
+        set: function (v) {
+            if (v !== this.innerValue) {
+                this.innerValue = v;
+                this.onChangeCallback(v);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // Set touched on blur
+    SelectProfileOptionComponent.prototype.onBlur = function () {
+        this.onTouchedCallback();
+    };
+    // From ControlValueAccessor interface
+    SelectProfileOptionComponent.prototype.writeValue = function (value) {
+        if (value !== this.innerValue) {
+            this.innerValue = value;
+        }
+    };
+    // From ControlValueAccessor interface
+    SelectProfileOptionComponent.prototype.registerOnChange = function (fn) {
+        this.onChangeCallback = fn;
+    };
+    // From ControlValueAccessor interface
+    SelectProfileOptionComponent.prototype.registerOnTouched = function (fn) {
+        this.onTouchedCallback = fn;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", String)
+    ], SelectProfileOptionComponent.prototype, "id", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", String)
+    ], SelectProfileOptionComponent.prototype, "name", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", String)
+    ], SelectProfileOptionComponent.prototype, "label", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", String)
+    ], SelectProfileOptionComponent.prototype, "staticValue", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", Boolean)
+    ], SelectProfileOptionComponent.prototype, "showHeader", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", Boolean)
+    ], SelectProfileOptionComponent.prototype, "staticReadOnly", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", String)
+    ], SelectProfileOptionComponent.prototype, "dynamicPicker", void 0);
+    SelectProfileOptionComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-select-profile-option',
+            template: __webpack_require__("../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.scss")],
+            providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
+        }),
+        __metadata("design:paramtypes", [])
+    ], SelectProfileOptionComponent);
+    return SelectProfileOptionComponent;
 }());
 
 
@@ -3281,11 +3426,12 @@ var CommunicationsService = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataApiService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_services_communications_communications_service__ = __webpack_require__("../../../../../src/app/shared/services/communications/communications.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_services_clients_clients_service__ = __webpack_require__("../../../../../src/app/shared/services/clients/clients.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_services_client_configurations_client_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/client-configurations/client-configurations.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_services_clients_clients_service__ = __webpack_require__("../../../../../src/app/shared/services/clients/clients.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_services_client_configurations_client_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/client-configurations/client-configurations.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_services_communications_communications_service__ = __webpack_require__("../../../../../src/app/shared/services/communications/communications.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_programs_programs_service__ = __webpack_require__("../../../../../src/app/shared/services/programs/programs.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_services_program_configurations_program_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/program-configurations/program-configurations.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_services_program_profiles_program_profiles_service__ = __webpack_require__("../../../../../src/app/shared/services/program-profiles/program-profiles.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_shared_services_program_configurations_program_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/program-configurations/program-configurations.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3336,12 +3482,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var DataApiService = (function () {
-    function DataApiService(communicationsService, clientsService, clientConfigurationsService, programsService, programConfigurationService) {
+    function DataApiService(communicationsService, clientsService, clientConfigurationsService, programsService, programProfileService, programConfigurationService) {
         this.communicationsService = communicationsService;
         this.clientsService = clientsService;
         this.clientConfigurationsService = clientConfigurationsService;
         this.programsService = programsService;
+        this.programProfileService = programProfileService;
         this.programConfigurationService = programConfigurationService;
     }
     DataApiService.prototype.getCommunications = function () {
@@ -3443,15 +3591,38 @@ var DataApiService = (function () {
             });
         });
     };
-    // public async createProgram(program: Program): Promise<Program> {
-    //   program = await this.programService.createProgramThruApi(program);
-    //   this.insertProgram(program);
-    //   return program;
-    // }
-    // public async updateProgram(program: Program): Promise<Program> {
-    //   await this.programService.updateProgramThruApi(program);
-    //   return program;
-    // }
+    DataApiService.prototype.createProgram = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.programsService.createProgramThruApi(program)];
+                    case 1:
+                        program = _a.sent();
+                        this.insertProgram(program);
+                        return [2 /*return*/, program];
+                    case 2:
+                        error_1 = _a.sent();
+                        return [2 /*return*/, Promise.reject(error_1.message || error_1)];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    DataApiService.prototype.updateProgram = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.programsService.updateProgramThruApi(program)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, program];
+                }
+            });
+        });
+    };
     // public async deleteProgram(program: Program): Promise<Program> {
     //   await this.programService.deleteProgramThruApi(program);
     //   this.removeProgram(program);
@@ -3501,11 +3672,57 @@ var DataApiService = (function () {
             });
         });
     };
-    // /*
-    // */
-    // private insertProgram(program: Program): void {
-    //   this.programs.push(program);
-    // }
+    //
+    DataApiService.prototype.getProgramProfiles = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!this.programProfiles) return [3 /*break*/, 1];
+                        return [2 /*return*/, this.programProfiles];
+                    case 1:
+                        _a = this;
+                        return [4 /*yield*/, this.programProfileService.getProgramProfilesThruApi()];
+                    case 2:
+                        _a.programProfiles = _b.sent();
+                        return [2 /*return*/, this.programProfiles];
+                }
+            });
+        });
+    };
+    DataApiService.prototype.createProgramProfile = function (programProfile) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.programProfileService.createProgramProfileThruApi(programProfile)];
+                    case 1:
+                        programProfile = _a.sent();
+                        this.insertProgramProfile(programProfile);
+                        return [2 /*return*/, programProfile];
+                }
+            });
+        });
+    };
+    DataApiService.prototype.updateProgramProfile = function (programProfile) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.programProfileService.updateProgramProfileThruApi(programProfile)];
+                    case 1:
+                        programProfile = _a.sent();
+                        return [2 /*return*/, programProfile];
+                }
+            });
+        });
+    };
+    /*
+    */
+    DataApiService.prototype.insertProgram = function (program) {
+        if (program && this.programs) {
+            this.programs.push(program);
+        }
+    };
     // private removeProgram(program: Program): void {
     //   const index = this.programs.indexOf(program);
     //   if (index > -1) {
@@ -3528,13 +3745,27 @@ var DataApiService = (function () {
     DataApiService.prototype.insertClientConfiguration = function (clientConfiguration) {
         this.clientConfigurations.push(clientConfiguration);
     };
+    // private removeClientConfigurationCruft(clients: Client[]): Client[] {
+    //   // some reason spring rest is giving empty array objects of programConfiguration property
+    //   // get rid of them all
+    //   // for (let i = 0, len = clients.length; i < len; i++) {
+    //   //   if (clients[i].programConfiguration && clients[i].programConfiguration.length) {
+    //   //     clients[i].programConfiguration = [];
+    //   //   }
+    //   // }
+    //   return clients;
+    // }
+    DataApiService.prototype.insertProgramProfile = function (programProfile) {
+        this.programProfiles.push(programProfile);
+    };
     DataApiService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_app_shared_services_communications_communications_service__["a" /* CommunicationsService */],
-            __WEBPACK_IMPORTED_MODULE_2_app_shared_services_clients_clients_service__["a" /* ClientsService */],
-            __WEBPACK_IMPORTED_MODULE_3_app_shared_services_client_configurations_client_configurations_service__["a" /* ClientConfigurationsService */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_app_shared_services_communications_communications_service__["a" /* CommunicationsService */],
+            __WEBPACK_IMPORTED_MODULE_1_app_shared_services_clients_clients_service__["a" /* ClientsService */],
+            __WEBPACK_IMPORTED_MODULE_2_app_shared_services_client_configurations_client_configurations_service__["a" /* ClientConfigurationsService */],
             __WEBPACK_IMPORTED_MODULE_4_app_shared_services_programs_programs_service__["a" /* ProgramsService */],
-            __WEBPACK_IMPORTED_MODULE_5_app_shared_services_program_configurations_program_configurations_service__["a" /* ProgramConfigurationsService */]])
+            __WEBPACK_IMPORTED_MODULE_5_app_shared_services_program_profiles_program_profiles_service__["a" /* ProgramProfilesService */],
+            __WEBPACK_IMPORTED_MODULE_6_app_shared_services_program_configurations_program_configurations_service__["a" /* ProgramConfigurationsService */]])
     ], DataApiService);
     return DataApiService;
 }());
@@ -3665,8 +3896,32 @@ var InMemoryDataService = (function () {
                 'programConfiguration': [] }
         ];
         var program = [
-            { 'id': 1, 'name': 'Prescription Alerts', 'description': 'PBM Communications including Order Status and Refill Reminder alerts' },
-            { 'id': 2, 'name': 'Non-Prescription Alerts', 'description': 'tired of adding a new program just to test deleting it' }
+            { 'id': 1, 'name': 'Prescription Alerts',
+                'description': 'PBM Communications including Order Status and Refill Reminder alerts'
+            },
+            { 'id': 2, 'name': 'Non-Prescription Alerts', 'description': 'tired of adding a new program just to test deleting it',
+                'programProfile': [
+                    { 'id': 2, 'defaultOptIn': true, 'visibleInUi': true,
+                        'chanEmail': true, 'chanIvr': true, 'chanSms': true, 'chanSecure': true, 'chanMail': false, 'chanMobile': false,
+                        'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 2
+                    }
+                ]
+            }
+        ];
+        var programprofile = [
+            { 'id': 1,
+                'defaultOptIn': true,
+                'visibleInUi': true,
+                'chanEmail': true,
+                'chanIvr': true,
+                'chanSms': true,
+                'chanSecure': true,
+                'chanMail': false,
+                'chanMobile': false,
+                'effective': '2017-01-01',
+                'expiration': '9999-12-31',
+                'program': 1
+            }
         ];
         var programconfiguration = [
             { 'id': 1,
@@ -3772,6 +4027,7 @@ var InMemoryDataService = (function () {
         return {
             communication: communication,
             program: program,
+            programprofile: programprofile,
             programconfiguration: programconfiguration,
             client: client,
             clientconfiguration: clientconfiguration
@@ -3929,6 +4185,150 @@ var ProgramConfigurationsService = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/shared/services/program-profiles/program-profiles.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramProfilesService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_config__ = __webpack_require__("../../../../../src/app/app.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+var ProgramProfilesService = (function () {
+    function ProgramProfilesService(config, http) {
+        this.config = config;
+        this.http = http;
+        this.progProfileApiEndpoint = this.config.apiEndpoint + 'api/programprofile'; // URL to web api
+    }
+    ProgramProfilesService.prototype.getProgramProfilesThruApi = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.http.get(this.progProfileApiEndpoint).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 2:
+                        error_1 = _a.sent();
+                        this.handleError(error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramProfilesService.prototype.createProgramProfileThruApi = function (programProfile) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.http.post(this.progProfileApiEndpoint, programProfile).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 2:
+                        error_2 = _a.sent();
+                        this.handleError(error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramProfilesService.prototype.updateProgramProfileThruApi = function (programProfile) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        url = this.progProfileApiEndpoint + "/" + programProfile.id;
+                        return [4 /*yield*/, this.http.put(url, programProfile).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 2:
+                        error_3 = _a.sent();
+                        this.handleError(error_3);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramProfilesService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    };
+    ProgramProfilesService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2_app_app_config__["a" /* APP_CONFIG */])),
+        __metadata("design:paramtypes", [Object, __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
+    ], ProgramProfilesService);
+    return ProgramProfilesService;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/shared/services/programs/programs.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4017,31 +4417,49 @@ var ProgramsService = (function () {
             });
         });
     };
-    // async createProgramThruApi(program: Program): Promise<Program> {
-    //   try {
-    //     const response = await this.http.post(this.progApiEndpoint, JSON.stringify(program), {headers: this.headers}).toPromise();
-    //     try {
-    //       return response as Program;
-    //     } catch (error) {
-    //       // some reason spring is returning only headers
-    //       // if (response.url) {
-    //       //  console.log('createProgramThruApi: ', response.url)
-    //       // }
-    //       return program;
-    //     }
-    //   } catch (error) {
-    //     this.handleError(error);
-    //   }
-    // }
-    // async updateProgramThruApi(program: Program): Promise<Program> {
-    //   const url = `${this.progApiEndpoint}/${program.id}`;
-    //   try {
-    //     const response = await this.http.put(url, JSON.stringify(program), {headers: this.headers}).toPromise();
-    //     return response as Program;
-    //   } catch (error) {
-    //     this.handleError(error);
-    //   }
-    // }
+    ProgramsService.prototype.createProgramThruApi = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.http.post(this.progApiEndpoint, program).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 2:
+                        error_2 = _a.sent();
+                        this.handleError(error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramsService.prototype.updateProgramThruApi = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        url = this.progApiEndpoint + "/" + program.id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.put(url, program).toPromise()];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 3:
+                        error_3 = _a.sent();
+                        this.handleError(error_3);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     // async deleteProgramThruApi(program: Program): Promise<Program> {
     //   const url = `${this.progApiEndpoint}/${program.id}`;
     //   try {
@@ -4145,7 +4563,7 @@ var SharedRoutingModule = (function () {
 /***/ "../../../../../src/app/shared/shared.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Shared Module Tests</h2>\r\n<!-- this stuff can all go once refactoring is complete\r\n     mostly just for showing features off -->\r\n<app-drag-drop-test></app-drag-drop-test>\r\n<app-click-outside-test></app-click-outside-test>\r\n<h4>Manage Communications</h4>\r\n<app-comm-action-table \r\n  [communications]=\"communications\"\r\n  [displayComm]=\"displayComm\"\r\n  [displayCommStartEmpty]=\"false\"\r\n  [showCommId]=\"true\"\r\n  [showCommName]=\"true\"\r\n  [showCommDesc]=\"true\"\r\n  [showStatus]=\"true\"\r\n  [showAction]=\"true\"\r\n  (selRowOut)=\"setClickedRow($event)\"\r\n  (commConfigAction)=\"configureCommunication($event)\">\r\n</app-comm-action-table>"
+module.exports = "<h2>Shared Module Tests</h2>\n<!-- this stuff can all go once refactoring is complete\n     mostly just for showing features off -->\n<app-drag-drop-test></app-drag-drop-test>\n<app-click-outside-test></app-click-outside-test>\n\n<h4>Programs</h4>\n<span *ngIf=\"programs\">\n  <ul *ngFor=\"let p of programs\">\n    <li>{{p | json}}</li> \n  </ul>\n</span>\n<h4>Program Profiles</h4>\n<span *ngIf=\"programProfiles\">\n  <ul *ngFor=\"let pp of programProfiles\">\n    <li>{{pp | json}}</li> \n  </ul>\n</span>\n\n<h4>Manage Communications</h4>\n<app-comm-action-table \n  [communications]=\"communications\"\n  [displayComm]=\"displayComm\"\n  [displayCommStartEmpty]=\"false\"\n  [showCommId]=\"true\"\n  [showCommName]=\"true\"\n  [showCommDesc]=\"true\"\n  [showStatus]=\"true\"\n  [showAction]=\"true\"\n  (selRowOut)=\"setClickedRow($event)\"\n  (commConfigAction)=\"configureCommunication($event)\">\n</app-comm-action-table>"
 
 /***/ }),
 
@@ -4231,7 +4649,13 @@ var SharedComponent = (function () {
                     case 0: return [4 /*yield*/, this.getCommunications()];
                     case 1:
                         _a.sent();
-                        console.log('SharedComponent ngOnInit', this.communications);
+                        return [4 /*yield*/, this.getPrograms()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.getProgramProfiles()];
+                    case 3:
+                        _a.sent();
+                        console.log('SharedComponent ngOnInit', this.communications, this.programs, this.programProfiles);
                         return [2 /*return*/];
                 }
             });
@@ -4253,6 +4677,48 @@ var SharedComponent = (function () {
                     case 2:
                         error_1 = _b.sent();
                         console.log('getCommunications error: ', error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    SharedComponent.prototype.getPrograms = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, error_2;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = this;
+                        return [4 /*yield*/, this.dataApiService.getPrograms()];
+                    case 1:
+                        _a.programs = _b.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _b.sent();
+                        console.log('getPrograms error: ', error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    SharedComponent.prototype.getProgramProfiles = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, error_3;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = this;
+                        return [4 /*yield*/, this.dataApiService.getProgramProfiles()];
+                    case 1:
+                        _a.programProfiles = _b.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_3 = _b.sent();
+                        console.log('getPrograms error: ', error_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -4294,22 +4760,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_clients_clients_service__ = __webpack_require__("../../../../../src/app/shared/services/clients/clients.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_communications_communications_service__ = __webpack_require__("../../../../../src/app/shared/services/communications/communications.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_program_configurations_program_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/program-configurations/program-configurations.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_programs_programs_service__ = __webpack_require__("../../../../../src/app/shared/services/programs/programs.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_test_click_outside_click_outside_component__ = __webpack_require__("../../../../../src/app/shared/components/test/click-outside/click-outside.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_test_drag_drop_drag_drop_component__ = __webpack_require__("../../../../../src/app/shared/components/test/drag-drop/drag-drop.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_client_actions_popover_client_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/client-actions-popover/client-actions-popover.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_client_action_table_client_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/client-action-table/client-action-table.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_comm_actions_popover_comm_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-actions-popover/comm-actions-popover.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_comm_action_table_comm_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-action-table/comm-action-table.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_date_eff_exp_date_eff_exp_component__ = __webpack_require__("../../../../../src/app/shared/components/date-eff-exp/date-eff-exp.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_date_picker_popup_date_picker_popup_component__ = __webpack_require__("../../../../../src/app/shared/components/date-picker-popup/date-picker-popup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_select_channel_mandatory_select_channel_mandatory_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_select_channel_priority_select_channel_priority_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-priority/select-channel-priority.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_sortable_column_sortable_column_component__ = __webpack_require__("../../../../../src/app/shared/components/sortable-column/sortable-column.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__directives_click_outside_directive__ = __webpack_require__("../../../../../src/app/shared/directives/click-outside.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__directives_drag_drop_draggable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/draggable.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__directives_drag_drop_droppable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/droppable.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__directives_sortable_table_directive__ = __webpack_require__("../../../../../src/app/shared/directives/sortable-table.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_program_profiles_program_profiles_service__ = __webpack_require__("../../../../../src/app/shared/services/program-profiles/program-profiles.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_programs_programs_service__ = __webpack_require__("../../../../../src/app/shared/services/programs/programs.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_test_click_outside_click_outside_component__ = __webpack_require__("../../../../../src/app/shared/components/test/click-outside/click-outside.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_test_drag_drop_drag_drop_component__ = __webpack_require__("../../../../../src/app/shared/components/test/drag-drop/drag-drop.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_client_actions_popover_client_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/client-actions-popover/client-actions-popover.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_client_action_table_client_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/client-action-table/client-action-table.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_comm_actions_popover_comm_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-actions-popover/comm-actions-popover.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_comm_action_table_comm_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-action-table/comm-action-table.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_date_eff_exp_date_eff_exp_component__ = __webpack_require__("../../../../../src/app/shared/components/date-eff-exp/date-eff-exp.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_date_picker_popup_date_picker_popup_component__ = __webpack_require__("../../../../../src/app/shared/components/date-picker-popup/date-picker-popup.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_select_channel_mandatory_select_channel_mandatory_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_select_channel_priority_select_channel_priority_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-priority/select-channel-priority.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_select_profile_option_select_profile_option_component__ = __webpack_require__("../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_sortable_column_sortable_column_component__ = __webpack_require__("../../../../../src/app/shared/components/sortable-column/sortable-column.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__directives_click_outside_directive__ = __webpack_require__("../../../../../src/app/shared/directives/click-outside.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__directives_drag_drop_draggable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/draggable.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_droppable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/droppable.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__directives_sortable_table_directive__ = __webpack_require__("../../../../../src/app/shared/directives/sortable-table.directive.ts");
 // Angular Style Guide https://angular.io/guide/styleguide#import-line-spacing
 // Compromise, one space between bracket and from, but align the brackets
 // and put each imported item on separate line when coming from single source
@@ -4340,10 +4808,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 // testing within shared module
 
 
 // exported components
+
 
 
 
@@ -4374,52 +4844,54 @@ var SharedModule = (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_5__shared_routing_module__["b" /* routedComponents */],
                 // exported components
-                __WEBPACK_IMPORTED_MODULE_16__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_select_channel_mandatory_select_channel_mandatory_component__["a" /* SelectChannelMandatoryComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_sortable_column_sortable_column_component__["a" /* SortableColumnComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_select_channel_mandatory_select_channel_mandatory_component__["a" /* SelectChannelMandatoryComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_select_profile_option_select_profile_option_component__["a" /* SelectProfileOptionComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__components_sortable_column_sortable_column_component__["a" /* SortableColumnComponent */],
                 // local testing components
-                __WEBPACK_IMPORTED_MODULE_14__components_test_click_outside_click_outside_component__["a" /* ClickOutsideComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__components_test_drag_drop_drag_drop_component__["a" /* DragDropComponent */],
+                __WEBPACK_IMPORTED_MODULE_15__components_test_click_outside_click_outside_component__["a" /* ClickOutsideComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__components_test_drag_drop_drag_drop_component__["a" /* DragDropComponent */],
                 // exported directives
-                __WEBPACK_IMPORTED_MODULE_25__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
-                __WEBPACK_IMPORTED_MODULE_26__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
-                __WEBPACK_IMPORTED_MODULE_27__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
-                __WEBPACK_IMPORTED_MODULE_28__directives_sortable_table_directive__["a" /* SortableTableDirective */]
+                __WEBPACK_IMPORTED_MODULE_27__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
+                __WEBPACK_IMPORTED_MODULE_28__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
+                __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
+                __WEBPACK_IMPORTED_MODULE_30__directives_sortable_table_directive__["a" /* SortableTableDirective */],
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpClientModule */],
                 // services used by DataApiService
-                __WEBPACK_IMPORTED_MODULE_10__services_clients_clients_service__["a" /* ClientsService */],
                 __WEBPACK_IMPORTED_MODULE_9__services_client_configurations_client_configurations_service__["a" /* ClientConfigurationsService */],
+                __WEBPACK_IMPORTED_MODULE_10__services_clients_clients_service__["a" /* ClientsService */],
                 __WEBPACK_IMPORTED_MODULE_11__services_communications_communications_service__["a" /* CommunicationsService */],
-                __WEBPACK_IMPORTED_MODULE_13__services_programs_programs_service__["a" /* ProgramsService */],
-                __WEBPACK_IMPORTED_MODULE_12__services_program_configurations_program_configurations_service__["a" /* ProgramConfigurationsService */]
+                __WEBPACK_IMPORTED_MODULE_12__services_program_configurations_program_configurations_service__["a" /* ProgramConfigurationsService */],
+                __WEBPACK_IMPORTED_MODULE_13__services_program_profiles_program_profiles_service__["a" /* ProgramProfilesService */],
+                __WEBPACK_IMPORTED_MODULE_14__services_programs_programs_service__["a" /* ProgramsService */]
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* ReactiveFormsModule */],
                 // shared components
-                __WEBPACK_IMPORTED_MODULE_16__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_select_channel_mandatory_select_channel_mandatory_component__["a" /* SelectChannelMandatoryComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_sortable_column_sortable_column_component__["a" /* SortableColumnComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_select_channel_mandatory_select_channel_mandatory_component__["a" /* SelectChannelMandatoryComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_select_profile_option_select_profile_option_component__["a" /* SelectProfileOptionComponent */],
                 // directives
-                __WEBPACK_IMPORTED_MODULE_25__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
-                __WEBPACK_IMPORTED_MODULE_26__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
-                __WEBPACK_IMPORTED_MODULE_27__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
-                __WEBPACK_IMPORTED_MODULE_28__directives_sortable_table_directive__["a" /* SortableTableDirective */]
+                __WEBPACK_IMPORTED_MODULE_27__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
+                __WEBPACK_IMPORTED_MODULE_28__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
+                __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
+                __WEBPACK_IMPORTED_MODULE_30__directives_sortable_table_directive__["a" /* SortableTableDirective */]
             ]
         })
     ], SharedModule);

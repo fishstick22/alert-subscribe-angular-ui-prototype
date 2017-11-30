@@ -41,7 +41,7 @@ var DashboardRoutingModule = (function () {
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  dashboard works!\r\n</p>\r\n"
+module.exports = "<p>\n  dashboard works!\n</p>\n"
 
 /***/ }),
 
