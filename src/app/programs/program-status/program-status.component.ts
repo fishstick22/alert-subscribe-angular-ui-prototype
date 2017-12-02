@@ -23,38 +23,43 @@ export class ProgramStatusComponent implements OnInit, OnChanges {
   progressVisible: boolean = false;
   lastProfile: ProgramProfile;
   expiredProgram: boolean = false;
-  lastStatus: any = {};
+  lastStatus: any = false;
 
   constructor() { }
 
   ngOnInit() {
-    // if (this.program.programProfile) {
-    //   this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
-    //   this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
-    // } else {
-    //   this.lastProfile =  new ProgramProfile(null);
-    //   this.lastProfile.expiration = '';
-    // }
-
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-
+    console.log('ProgramStatusComponent OnInit', this.program);
     if (this.program.programProfile && this.program.programProfile.length > 0) {
       this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
       this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
       this.program.status = this.expiredProgram ? 'expired' : 'active';
     } else {
-      this.lastProfile =  new ProgramProfile(null);
-      this.lastProfile.expiration = '';
-      this.program.status = '';
+      this.program.status = 'undetermined';
     }
+    this.lastStatus = this.program.status;
+    this.showProgress();
+  }
 
-    if (this.program.status && this.lastStatus !== this.program.status) {
-      this.showProgress();
-      this.lastStatus = this.program.status;
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ProgramStatusComponent OnChanges', changes);
+    // OnChanges happens before OnInit -- just bypass that call here
+    if (!this.lastStatus) {
+      return;
     }
+    // if (this.program.programProfile && this.program.programProfile.length > 0) {
+    //   this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
+    //   this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
+    //   this.program.status = this.expiredProgram ? 'expired' : 'active';
+    // } else {
+    //   this.lastProfile =  new ProgramProfile(null);
+    //   this.lastProfile.expiration = '';
+    //   this.program.status = '';
+    // }
+
+    // if (this.program.status && this.lastStatus !== this.program.status) {
+    //   this.showProgress();
+    //   this.lastStatus = this.program.status;
+    // }
   }
 
   private showProgress() {
