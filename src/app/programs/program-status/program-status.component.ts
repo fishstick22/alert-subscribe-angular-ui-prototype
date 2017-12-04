@@ -3,7 +3,7 @@ import { Component, OnInit, OnChanges,
   Input, Output, EventEmitter,
   ViewEncapsulation } from '@angular/core';
 
-import { Program, ProgramConfigAction } from 'app/shared/model/program';
+import { Program, ProgramConfigAction, ProgramStatus } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 
 @Component({
@@ -16,35 +16,33 @@ export class ProgramStatusComponent implements OnInit, OnChanges {
 
   @Input() program: Program;
   @Input() detectChanges: any = '';
-  @Output() statusUpdate = new EventEmitter<any>();
+  // @Output() statusUpdate = new EventEmitter<any>();
 
   public UNEXPIRED: string = '9999-12-31';
 
   progressVisible: boolean = false;
-  lastProfile: ProgramProfile;
-  expiredProgram: boolean = false;
-  lastStatus: any = false;
+  prevStatus: any = false;
 
   constructor() { }
 
   ngOnInit() {
     console.log('ProgramStatusComponent OnInit', this.program);
-    if (this.program.programProfile && this.program.programProfile.length > 0) {
-      this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
-      this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
-      this.program.status = this.expiredProgram ? 'expired' : 'active';
-    } else {
-      this.program.status = 'undetermined';
-    }
-    this.lastStatus = this.program.status;
+    this.program.status = new ProgramStatus(this.program);
     this.showProgress();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
     console.log('ProgramStatusComponent OnChanges', changes);
     // OnChanges happens before OnInit -- just bypass that call here
-    if (!this.lastStatus) {
+    if (!this.prevStatus) {
       return;
+    } else if (changes.detectChanges &&  changes.detectChanges.currentValue) {
+      console.log(changes.detectChanges);
+      if (changes.detectChanges.currentValue === 'expired') {
+        // this.program.status = new ProgramStatus(this.program);
+        this.program.status.update(this.program);
+        this.showProgress();
+      }
     }
     // if (this.program.programProfile && this.program.programProfile.length > 0) {
     //   this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
@@ -65,7 +63,8 @@ export class ProgramStatusComponent implements OnInit, OnChanges {
   private showProgress() {
     this.progressVisible = true;
     setTimeout(function() {
-      this.statusUpdate.emit(this.program.status);
+      // this.statusUpdate.emit(this.program.status);
+      this.prevStatus = this.program.status;
       this.progressVisible = false;
     }.bind(this), 3000);
   }

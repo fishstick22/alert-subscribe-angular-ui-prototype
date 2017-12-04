@@ -25,8 +25,8 @@
       <td>
         <app-program-status
           [program]="program"
-          [detectChanges]="detectChanges"
-          (statusUpdate)="updateProgramStatus($event, program)"></app-program-status>
+          [detectChanges]="program.detectChanges"></app-program-status>
+          <!--(statusUpdate)="updateProgramStatus($event, program)"-->
       </td>
       <td>
         <app-program-actions-popover
@@ -34,7 +34,7 @@
           [progName]="program.name"
           (configAction)="configureProgram($event)">
           <i class="fa fa-pencil-square-o clickable" 
-             [ngClass]="{'sr-only': program.status === 'expired'}"
+             [ngClass]="{'sr-only': program.status.expiredProgram}"
              aria-hidden="true" title="Click to configure Program {{program.name}}"></i>
         </app-program-actions-popover>
       </td>

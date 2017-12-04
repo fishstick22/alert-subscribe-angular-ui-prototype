@@ -4,7 +4,7 @@ import { NgbModal,
          ModalDismissReasons,
          NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
-import { Program } from 'app/shared/model/program';
+import { Program, ProgramStatus } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 
 import { ProgramsMaintenanceModalComponent,
@@ -47,6 +47,9 @@ export class ProgramsMaintenanceModalService {
           program.programProfile[0].expiration = '9999-12-31';
         }
       }
+      if (program.status) {
+        program.status.statusText = configType;
+      }
     }
 
     modalComp.modalInit();
@@ -59,7 +62,7 @@ export class ProgramsMaintenanceModalService {
     // but not both -- have to decide to stick with the original approach, which works fine for
     // everything else, or do this differently by saving the Program entirely which
     // then can include additions and updates to Profile related entities
-    modalRef.result.then((result) => {
+    modalRef.result.then( async (result) => {
       if (result.resultTxt === modalComp.SAVESUCCESS) {
         console.log('configureProgramModal result: ', result.modalResult);
         this.closeResult = `Closed with: ${result.resultTxt}`;
@@ -76,7 +79,14 @@ export class ProgramsMaintenanceModalService {
             // the Program must be saved first, then the Profile will reference a valid entity
             // this.addProgram(modalResult.insertProgram);
             // this.addProgramProfile(modalResult.insertProgramProfile);
-            this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
+            const newProgram = await this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
+            if (newProgram.status && newProgram.status.statusText === 'undetermined') {
+              newProgram.detectChanges = 'added';
+              newProgram.status.update(newProgram);
+            } else {
+              newProgram.status = new ProgramStatus(this.program);
+              newProgram.detectChanges = newProgram.status.statusText;
+            }
           }
           if (configType === 'edit' && modalResult.updateProgram) {
             this.updateProgram(modalResult.updateProgram);
@@ -84,20 +94,23 @@ export class ProgramsMaintenanceModalService {
           if (configType === 'expire' && modalResult.updateProgram) {
             this.updateProgram(modalResult.updateProgram);
           }
-          return configType;
+          // return configType;
         } else {
           // this would be some kind of exception
           console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
         }
+        return modalComp.SAVESUCCESS;
       } else {
         this.closeResult = `Closed with: ${result}`;
       }
       // this.setClickedRow(null);
       console.log('configureProgramModal result: ', this.closeResult);
+      return this.closeResult;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       // this.setClickedRow(null);
       console.log('configureProgramModal result: ', this.closeResult);
+      return this.closeResult;
     });
   }
 
