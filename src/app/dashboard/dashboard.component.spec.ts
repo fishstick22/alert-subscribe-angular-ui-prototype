@@ -1,4 +1,8 @@
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { DataApiService, FakeDataApiService,
+         ShowProgramProfileOptionsStubComponent } from 'app/shared/testing/shared-module-testing-helper';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -8,7 +12,14 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [ DashboardComponent, ShowProgramProfileOptionsStubComponent ],
+      providers: [
+        DataApiService,
+        { provide: DataApiService, usevalue: FakeDataApiService },
+      ],
+      imports: [
+        FormsModule
+      ]
     })
     .compileComponents();
   }));

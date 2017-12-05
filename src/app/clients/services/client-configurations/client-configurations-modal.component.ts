@@ -6,6 +6,10 @@ import { Communication } from 'app/shared/model/communication';
 import { Client } from 'app/shared/model/client';
 import { ClientConfiguration } from 'app/shared/model/client-configuration';
 
+export class ClientConfigModalResult {
+  newClientConfigs: ClientConfiguration[];
+}
+
 @Component({
   selector: 'app-client-configurations-modal',
   templateUrl: './client-configurations-modal.component.html',
@@ -136,8 +140,4 @@ export class ClientConfigurationsModalComponent implements OnInit {
     }
   }
 
-}
-
-export class ClientConfigModalResult {
-  newClientConfigs: ClientConfiguration[];
 }

@@ -6,6 +6,10 @@ import { Client } from 'app/shared/model/client';
 import { ClientConfiguration } from 'app/shared/model/client-configuration';
 import { Communication } from 'app/shared/model/communication';
 
+export class ClientConfigModalResult {
+  newClientConfigs: ClientConfiguration[];
+}
+
 @Component({
   selector: 'app-client-configs-by-comm-modal',
   templateUrl: './client-configs-by-comm-modal.component.html',
@@ -135,8 +139,4 @@ export class ClientConfigsByCommModalComponent implements OnInit {
       cc.expiration = newDateValue;
     }
   }
-}
-
-export class ClientConfigModalResult {
-  newClientConfigs: ClientConfiguration[];
 }

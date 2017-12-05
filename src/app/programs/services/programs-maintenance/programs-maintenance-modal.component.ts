@@ -5,6 +5,14 @@ import { AppConstants } from 'app/app-constants';
 import { Program } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 
+
+export class ProgramsMaintModalResult {
+  updateProgramProfile: ProgramProfile;
+  insertProgramProfile: ProgramProfile;
+  updateProgram: Program;
+  insertProgram: Program;
+}
+
 @Component({
   selector: 'app-programs-maintenance-modal',
   templateUrl: './programs-maintenance-modal.component.html',
@@ -154,9 +162,3 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
 
 }
 
-export class ProgramsMaintModalResult {
-  updateProgramProfile: ProgramProfile;
-  insertProgramProfile: ProgramProfile;
-  updateProgram: Program;
-  insertProgram: Program;
-}

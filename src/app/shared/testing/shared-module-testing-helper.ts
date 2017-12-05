@@ -19,6 +19,7 @@ import { ClientActionsPopoverStubComponent,
          SelectChannelPriorityStubComponent,
          SelectChannelMandatoryStubComponent,
          SelectProfileOptionStubComponent,
+         ShowProgramProfileOptionsStubComponent,
          SortableColumnStubComponent } from 'app/shared/components/testing/stub-testing-components';
 
 import { ClientConfigurationsService,

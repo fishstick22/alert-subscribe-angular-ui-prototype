@@ -146,6 +146,17 @@ export class SelectProfileOptionStubComponent {
 }
 
 @Component({
+  selector: 'app-show-program-profile-options',
+  template: 'dummy component for testing'
+})
+export class ShowProgramProfileOptionsStubComponent {
+
+  @Input() profile;
+  @Input() profileProperty;
+  @Input() profileOptionLabel;
+}
+
+@Component({
   selector: 'app-sortable-column',
   template: 'dummy component for testing'
 })
