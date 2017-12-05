@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppConstants } from 'app/app-constants';
 import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
@@ -16,8 +17,6 @@ export class ProgramConfigurationsModalComponent implements OnInit {
   @Input() communications: Communication[];
   @Input() program: Program = new Program(); // just becasue service inits whenever
   @Input() programConfigurations: ProgramConfiguration[] = [] ;
-
-  public SAVESUCCESS: string = 'Close on succesful save';
 
   displayComm: Communication[];
   displayCommStartEmpty: boolean;
@@ -88,7 +87,7 @@ export class ProgramConfigurationsModalComponent implements OnInit {
       }
       this.programConfigurations[this.programConfigurations.length] = this.newProgramConfig;
       this.newProgramConfigs[this.newProgramConfigs.length] = this.newProgramConfig;
-      this.newProgramConfig.expiration = '9999-12-31';
+      this.newProgramConfig.expiration = AppConstants.UNEXPIRED;
       this.newProgramConfig.program = this.program;
 
       this.newProgramConfig.communication = new Communication();
@@ -129,7 +128,7 @@ export class ProgramConfigurationsModalComponent implements OnInit {
       newProgramConfigs: this.newProgramConfigs
     };
 
-    this.configureProgramModal.close({resultTxt: this.SAVESUCCESS, modalResult: modalResult});
+    this.configureProgramModal.close({resultTxt: AppConstants.SAVESUCCESS, modalResult: modalResult});
   }
 
   private updateDateValue(newDateValue, pc: ProgramConfiguration, dateType: string) {

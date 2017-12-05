@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppConstants } from 'app/app-constants';
 import { Communication } from 'app/shared/model/communication';
 import { Client } from 'app/shared/model/client';
 import { ClientConfiguration } from 'app/shared/model/client-configuration';
@@ -16,8 +17,6 @@ export class ClientConfigurationsModalComponent implements OnInit {
   @Input() communications: Communication[];
   @Input() client: Client = new Client(); // just becasue service inits whenever
   @Input() clientConfigurations: ClientConfiguration[] = [] ;
-
-  public SAVESUCCESS: string = 'Close on succesful save';
 
   displayComm: Communication[];
   displayCommStartEmpty: boolean;
@@ -83,7 +82,7 @@ export class ClientConfigurationsModalComponent implements OnInit {
       }
       this.clientConfigurations[this.clientConfigurations.length] = this.newClientConfig;
       this.newClientConfigs[this.newClientConfigs.length] = this.newClientConfig;
-      this.newClientConfig.expiration = '9999-12-31';
+      this.newClientConfig.expiration = AppConstants.UNEXPIRED;
       this.newClientConfig.client = this.client;
 
       this.newClientConfig.communication = new Communication();
@@ -124,7 +123,7 @@ export class ClientConfigurationsModalComponent implements OnInit {
       newClientConfigs: this.newClientConfigs
     };
 
-    this.configureClientModal.close({resultTxt: this.SAVESUCCESS, modalResult: modalResult});
+    this.configureClientModal.close({resultTxt: AppConstants.SAVESUCCESS, modalResult: modalResult});
   }
 
   private updateDateValue(newDateValue, cc: ClientConfiguration, dateType: string) {

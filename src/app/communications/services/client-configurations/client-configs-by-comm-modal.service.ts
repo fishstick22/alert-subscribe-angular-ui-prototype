@@ -4,6 +4,7 @@ import { NgbModal,
          ModalDismissReasons,
          NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppConstants } from 'app/app-constants';
 import { Communication } from 'app/shared/model/communication';
 import { Client } from 'app/shared/model/client';
 import { ClientConfiguration } from 'app/shared/model/client-configuration';
@@ -44,7 +45,7 @@ export class ClientConfigsByCommModalService {
     modalComp.modalInit();
 
     modalRef.result.then((result) => {
-      if (result.resultTxt === modalComp.SAVESUCCESS) {
+      if (result.resultTxt === AppConstants.SAVESUCCESS) {
         console.log('configureClientModal result: ', result.modalResult);
         this.closeResult = `Closed with: ${result.resultTxt}`;
         if (result.modalResult) {

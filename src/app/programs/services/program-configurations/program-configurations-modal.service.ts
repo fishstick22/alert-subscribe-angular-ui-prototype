@@ -4,6 +4,7 @@ import { NgbModal,
          ModalDismissReasons,
          NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppConstants } from 'app/app-constants';
 import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
@@ -45,7 +46,7 @@ export class ProgramConfigurationsModalService {
     modalComp.modalInit();
 
     modalRef.result.then((result) => {
-      if (result.resultTxt === modalComp.SAVESUCCESS) {
+      if (result.resultTxt === AppConstants.SAVESUCCESS) {
         console.log('configureProgramModal result: ', result.modalResult);
         this.closeResult = `Closed with: ${result.resultTxt}`;
         if (result.modalResult) {

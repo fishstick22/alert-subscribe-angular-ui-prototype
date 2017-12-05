@@ -4,6 +4,7 @@ import { NgbModal,
          ModalDismissReasons,
          NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppConstants } from 'app/app-constants';
 import { Program, ProgramStatus } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 
@@ -44,7 +45,7 @@ export class ProgramsMaintenanceModalService {
         if (program.programProfile.length === 0) {
           // but if it still doesn't have one (shouldn't happen)
           program.programProfile = [new ProgramProfile(program.id)];
-          program.programProfile[0].expiration = '9999-12-31';
+          program.programProfile[0].expiration = AppConstants.UNEXPIRED;
         }
       }
       if (program.status) {
@@ -63,7 +64,7 @@ export class ProgramsMaintenanceModalService {
     // everything else, or do this differently by saving the Program entirely which
     // then can include additions and updates to Profile related entities
     modalRef.result.then( async (result) => {
-      if (result.resultTxt === modalComp.SAVESUCCESS) {
+      if (result.resultTxt === AppConstants.SAVESUCCESS) {
         console.log('configureProgramModal result: ', result.modalResult);
         this.closeResult = `Closed with: ${result.resultTxt}`;
         if (result.modalResult) {
@@ -103,7 +104,7 @@ export class ProgramsMaintenanceModalService {
           // this would be some kind of exception
           console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
         }
-        return modalComp.SAVESUCCESS;
+        return AppConstants.SAVESUCCESS;
       } else {
         this.closeResult = `Closed with: ${result}`;
       }

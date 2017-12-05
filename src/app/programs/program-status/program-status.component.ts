@@ -19,8 +19,6 @@ export class ProgramStatusComponent implements OnInit, OnChanges {
   @Input() detectChanges: any = '';
   // @Output() statusUpdate = new EventEmitter<any>();
 
-  public UNEXPIRED: string = '9999-12-31';
-
   progressVisible: boolean = false;
   prevStatus: any = false;
 
