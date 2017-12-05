@@ -95,7 +95,6 @@ export class ProgramsComponent implements OnInit {
   private async expireProgram(progId) {
     const program: Program = this.findProgram(progId);
     await this.programsMaintService.maintainProgramModal('expire', null, program);
-    program.detectChanges = 'expired';
     // await (this.detectChanges = 'expire');
   }
 

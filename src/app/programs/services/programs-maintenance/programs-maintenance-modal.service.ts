@@ -89,10 +89,14 @@ export class ProgramsMaintenanceModalService {
             }
           }
           if (configType === 'edit' && modalResult.updateProgram) {
-            this.updateProgram(modalResult.updateProgram);
+            const editProgram = await this.updateProgram(modalResult.updateProgram);
+            editProgram.detectChanges = 'edited';
+            editProgram.status.update(editProgram);
           }
           if (configType === 'expire' && modalResult.updateProgram) {
-            this.updateProgram(modalResult.updateProgram);
+            const expireProgram = await this.updateProgram(modalResult.updateProgram);
+            expireProgram.detectChanges = 'expired';
+            expireProgram.status.update(expireProgram);
           }
           // return configType;
         } else {
@@ -149,6 +153,7 @@ export class ProgramsMaintenanceModalService {
     try {
       this.program = await this.dataApiService.updateProgram(program);
       console.log('updateProgram:', program, this.program);
+      return program;
     } catch (error) {
       console.log('updateProgram error: ', error);
     }
