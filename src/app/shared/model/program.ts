@@ -1,4 +1,5 @@
 // import { IProgramConfig } from 'app/classes/model/iprog-config';
+import { AppConstants } from 'app/app-constants';
 import { ProgramProfile       } from 'app/shared/model/program-profile';
 
 // export class Program implements IProgramConfig {
@@ -10,6 +11,7 @@ export class Program {
   programProfile: ProgramProfile[];
   programConfiguration: number[];
   status: any; // not saved to DB, only used in the UI
+  detectChanges: any;
 
   constructor (
     id: number = 0,
@@ -37,10 +39,42 @@ export class Program {
 }
 
 export class ProgramConfigAction {
+  progId: string;
+  configType: string;
+
   constructor(id: string, type: string) {
     this.progId = id;
     this.configType = type;
   }
-  progId: string;
-  configType: string;
+}
+
+export class ProgramStatus {
+
+  lastProfile: ProgramProfile;
+  expiredProgram: boolean;
+  statusText: string;
+  effExpDateText: string;
+
+  constructor (program: Program) {
+    this.setStatus(program);
+    // program.detectChanges = 'new';
+  }
+
+  update(program: Program) {
+    this.setStatus(program);
+  }
+
+  private setStatus(program: Program) {
+    if (program.programProfile && program.programProfile.length > 0) {
+      this.lastProfile = program.programProfile[program.programProfile.length - 1];
+      this.expiredProgram = (this.lastProfile.expiration !== AppConstants.UNEXPIRED);
+      this.statusText = this.expiredProgram ? 'expired' : 'active';
+      this.effExpDateText =
+        (this.expiredProgram ? 'exp ' : 'eff ') +
+        (this.expiredProgram ? this.lastProfile.expiration : this.lastProfile.effective);
+    } else {
+      this.statusText = 'undetermined';
+      this.effExpDateText = '???';
+    }
+  }
 }

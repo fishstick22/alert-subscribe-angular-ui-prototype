@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { Program, ProgramConfigAction } from 'app/shared/model/program';
+import { Program, ProgramConfigAction, ProgramStatus } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
@@ -18,7 +18,7 @@ export class ProgramsComponent implements OnInit {
   programs: Program[];
   programProfiles: ProgramProfile[];
   selectedRow: number;
-  detectChanges: any = '';
+  // detectChanges: any = '';
 
   constructor(
     private dataApiService: DataApiService,
@@ -59,9 +59,13 @@ export class ProgramsComponent implements OnInit {
     // this.detectChanges = index;
   }
 
-  private updateProgramStatus(status, program: Program) {
-    program.status = status;
-  }
+  // private updateProgramStatus(status: ProgramStatus, program: Program) {
+  //   // program.status = status;
+  //   // hmm, might not need to do this now, might be overkill
+  //   // .. in fact casues ExpressionChangedAfterItHasBeenCheckedError
+  //   // https://stackoverflow.com/questions/44691745/angular-4-expressionchangedafterithasbeencheckederror
+  //   program.detectChanges = status.statusText;
+  // }
 
   private configureProgram(progConfigAction: ProgramConfigAction) {
     if (progConfigAction.configType === 'edit') {
@@ -78,19 +82,19 @@ export class ProgramsComponent implements OnInit {
 
   private async addProgram() {
     const nextProgramId = this.programs.length + 1;
-    this.detectChanges = await this.programsMaintService.maintainProgramModal('add', nextProgramId);
+    await this.programsMaintService.maintainProgramModal('add', nextProgramId);
     // this.detectChanges = 'add';
   }
 
   private async editProgram(progId) {
     const program: Program = this.findProgram(progId);
-    this.detectChanges = await this.programsMaintService.maintainProgramModal('edit', null, program);
-    // this.detectChanges = 'edit';
+    await this.programsMaintService.maintainProgramModal('edit', null, program);
+    // await (this.detectChanges = 'edit');
   }
 
   private async expireProgram(progId) {
     const program: Program = this.findProgram(progId);
-    this.detectChanges = await this.programsMaintService.maintainProgramModal('expire', null, program);
+    await this.programsMaintService.maintainProgramModal('expire', null, program);
     // await (this.detectChanges = 'expire');
   }
 
@@ -99,7 +103,7 @@ export class ProgramsComponent implements OnInit {
     // configure the program-level communication configurations
     const program: Program = this.findProgram(progId);
     this.programConfigService.configureProgramModal(program);
-    this.detectChanges = 'communications';
+    // this.detectChanges = 'communications';
   }
 
   private findProgram(id): Program {

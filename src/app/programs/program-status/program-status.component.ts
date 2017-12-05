@@ -3,7 +3,7 @@ import { Component, OnInit, OnChanges,
   Input, Output, EventEmitter,
   ViewEncapsulation } from '@angular/core';
 
-import { Program, ProgramConfigAction } from 'app/shared/model/program';
+import { Program, ProgramConfigAction, ProgramStatus } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 
 @Component({
@@ -13,55 +13,46 @@ import { ProgramProfile } from 'app/shared/model/program-profile';
   encapsulation: ViewEncapsulation.None
 })
 export class ProgramStatusComponent implements OnInit, OnChanges {
+// mostly totally unnecessary, was thinking though how this could be done
 
   @Input() program: Program;
   @Input() detectChanges: any = '';
-  @Output() statusUpdate = new EventEmitter<any>();
-
-  public UNEXPIRED: string = '9999-12-31';
+  // @Output() statusUpdate = new EventEmitter<any>();
 
   progressVisible: boolean = false;
-  lastProfile: ProgramProfile;
-  expiredProgram: boolean = false;
-  lastStatus: any = {};
+  prevStatus: any = false;
 
   constructor() { }
 
   ngOnInit() {
-    // if (this.program.programProfile) {
-    //   this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
-    //   this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
-    // } else {
-    //   this.lastProfile =  new ProgramProfile(null);
-    //   this.lastProfile.expiration = '';
-    // }
-
+    console.log('ProgramStatusComponent OnInit', this.program);
+    this.program.status = new ProgramStatus(this.program);
+    this.showProgress();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-
-    if (this.program.programProfile && this.program.programProfile.length > 0) {
-      this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
-      this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
-      this.program.status = this.expiredProgram ? 'expired' : 'active';
-    } else {
-      this.lastProfile =  new ProgramProfile(null);
-      this.lastProfile.expiration = '';
-      this.program.status = '';
+  async ngOnChanges(changes: SimpleChanges) {
+    console.log('ProgramStatusComponent OnChanges', changes);
+    // OnChanges happens before OnInit -- just bypass that call here
+    if (!this.prevStatus) {
+      return;
+    } else if (changes.detectChanges &&  changes.detectChanges.currentValue) {
+      console.log(changes.detectChanges);
+      if (changes.detectChanges.currentValue === 'expired' ||
+          changes.detectChanges.currentValue === 'edited') {
+        // this.program.status = new ProgramStatus(this.program);
+        // this.program.status.update(this.program);
+        this.showProgress();
+      }
     }
 
-    if (this.program.status && this.lastStatus !== this.program.status) {
-      this.showProgress();
-      this.lastStatus = this.program.status;
-    }
   }
 
   private showProgress() {
     this.progressVisible = true;
     setTimeout(function() {
-      this.statusUpdate.emit(this.program.status);
+      // this.statusUpdate.emit(this.program.status);
+      this.prevStatus = this.program.status;
       this.progressVisible = false;
-    }.bind(this), 3000);
+    }.bind(this), 1000);
   }
 }

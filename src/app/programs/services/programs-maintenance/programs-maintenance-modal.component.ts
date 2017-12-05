@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppConstants } from 'app/app-constants';
 import { Program } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 
@@ -16,9 +17,6 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   @Input() program: Program = new Program(); // just becasue service inits whenever
 
   programProfiles: ProgramProfile[] = [];
-
-  public SAVESUCCESS: string = 'Close on succesful save';
-  public UNEXPIRED: string = '9999-12-31';
 
   addProfile: boolean = false;
   newProgram: boolean = false;
@@ -47,7 +45,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
         this.tomorrow.getFullYear() + '-' +
        (this.tomorrow.getMonth() + 1) + '-' +
         this.tomorrow.getDate();
-      this.programProfiles[0].expiration = this.UNEXPIRED;
+      this.programProfiles[0].expiration = AppConstants.UNEXPIRED;
       this.newProgram = true;
     }
 
@@ -74,7 +72,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
 
   getCurrentEffectiveProfile(program): ProgramProfile[] {
     return this.program.programProfile.filter(pp => {
-      if ( pp.expiration === this.UNEXPIRED) {
+      if ( pp.expiration === AppConstants.UNEXPIRED) {
         return true;
       }
     });
@@ -96,7 +94,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
        (this.tomorrow.getMonth() + 1) + '-' +
         this.tomorrow.getDate();
 
-      newProfile.expiration = this.UNEXPIRED;
+      newProfile.expiration = AppConstants.UNEXPIRED;
       this.programProfiles.push(newProfile);
     }
 
@@ -108,7 +106,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
 
     if (this.configType === 'add') {
       if (this.programProfiles.length === 1 &&
-          this.programProfiles[0].expiration === this.UNEXPIRED) {
+          this.programProfiles[0].expiration === AppConstants.UNEXPIRED) {
         modalResult.insertProgramProfile = this.programProfiles[0];
       }
       modalResult.insertProgram = this.program;
@@ -121,10 +119,10 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
         console.log(this.programProfiles);
         console.log(this.program);
 
-        if (this.programProfiles[0].expiration !== this.UNEXPIRED) {
+        if (this.programProfiles[0].expiration !== AppConstants.UNEXPIRED) {
           modalResult.updateProgramProfile = this.programProfiles[0];
         } // else something went wrong, report error, abort save
-        if (this.programProfiles[1].expiration === this.UNEXPIRED) {
+        if (this.programProfiles[1].expiration === AppConstants.UNEXPIRED) {
           modalResult.insertProgramProfile = this.programProfiles[1];
           this.program.programProfile.push(this.programProfiles[1]);
         } // else something went wrong, report error, abort save
@@ -134,13 +132,13 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
 
     if (this.configType === 'expire') {
       if (this.programProfiles.length === 1 &&
-        this.programProfiles[0].expiration !== this.UNEXPIRED) {
+        this.programProfiles[0].expiration !== AppConstants.UNEXPIRED) {
         modalResult.updateProgramProfile = this.programProfiles[0];
       } // else something went wrong, report error, abort save
       modalResult.updateProgram = this.program;
     }
 
-    this.maintainProgramModal.close({resultTxt: this.SAVESUCCESS, modalResult: modalResult});
+    this.maintainProgramModal.close({resultTxt: AppConstants.SAVESUCCESS, modalResult: modalResult});
   }
 
   private updateDateValue(newDate, pp: ProgramProfile, dateType: string) {
