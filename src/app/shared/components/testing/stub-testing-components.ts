@@ -105,6 +105,11 @@ export class ProgramStatusStubComponent {
   @Input() program;
   @Input() detectChanges;
 }
+@Component({
+  selector: 'app-programs-maintenance-panel',
+  template: 'dummy component for testing'
+})
+export class ProgramsMaintenancePanelStubComponent { }
 
 @Component({
   selector: 'app-select-channel-priority',

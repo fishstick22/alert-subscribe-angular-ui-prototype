@@ -1,0 +1,43 @@
+<div class="card-title text-center">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <select class="form-control form-control-sm"
+        id="program" name="program" [(ngModel)]="selectedProgram"
+        (change)="onProgramSelect($event)" required>
+        <option *ngFor="let p of programs" [ngValue]="p">Program {{p.id}}: {{p.name}}</option>
+      </select>
+    </div>
+    <h5 class="col-md-4">Program Maintenance</h5>
+  </div>
+</div>
+
+<div class="card-body">
+  <div class="form-row">
+    <div class="form-group col-md-1" *ngFor="let ppo of programProfileOptions">
+      <app-show-program-profile-options *ngIf="selectedProgramProfile"
+        [profile]="selectedProgramProfile"
+        [profileProperty]="ppo.property"
+        [profileOptionLabel]="ppo.label"></app-show-program-profile-options>
+      <!--{{ppo.label}}: {{ppo.property}}: -->
+    </div>
+
+    <div class="form-group col-md-2">
+      <span *ngIf="selectedProgramProfile">
+        <label for="effective" class="flex-justify-left rounded">
+          <small>Effective</small></label>
+          <!-- the effective date of the current effective row -->
+        <input class="form-control form-control-sm" value="{{selectedProgramProfile.effective}}" readonly>
+      </span>
+    </div>
+
+    <div class="form-group col-md-2">
+      <span *ngIf="selectedProgramProfile">
+        <label for="expiration" class="flex-justify-left rounded">
+          <small>Expiration</small></label>
+          <!-- the expiration date of the current effective row -->
+        <input class="form-control form-control-sm" value="{{selectedProgramProfile.expiration}}" readonly>
+      </span>
+    </div>
+
+  </div><!--form-row-->
+</div><!--card-body-->

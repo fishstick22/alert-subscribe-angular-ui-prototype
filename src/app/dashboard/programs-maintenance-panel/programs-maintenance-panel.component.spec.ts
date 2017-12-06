@@ -5,15 +5,15 @@ import { DataApiService, FakeDataApiService,
          ProgramsMaintenancePanelStubComponent,
          ShowProgramProfileOptionsStubComponent } from 'app/shared/testing/shared-module-testing-helper';
 
-import { DashboardComponent } from './dashboard.component';
+import { ProgramsMaintenancePanelComponent } from './programs-maintenance-panel.component';
 
-describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+describe('ProgramsMaintenancePanelComponent', () => {
+  let component: ProgramsMaintenancePanelComponent;
+  let fixture: ComponentFixture<ProgramsMaintenancePanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent, ProgramsMaintenancePanelStubComponent, ShowProgramProfileOptionsStubComponent ],
+      declarations: [ ProgramsMaintenancePanelComponent, ShowProgramProfileOptionsStubComponent ],
       providers: [
         DataApiService,
         { provide: DataApiService, usevalue: FakeDataApiService },
@@ -26,7 +26,7 @@ describe('DashboardComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(ProgramsMaintenancePanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
