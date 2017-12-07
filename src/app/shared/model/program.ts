@@ -9,6 +9,7 @@ export class Program {
   name: string;
   description: string;
   programProfile: ProgramProfile[];
+  programProfileClientException: number[];
   programConfiguration: number[];
   status: any; // not saved to DB, only used in the UI
   detectChanges: any;
@@ -18,6 +19,7 @@ export class Program {
     name: string = '',
     description?: string,
     programProfile?: ProgramProfile[],
+    programProfileClientException?: number[],
     programConfiguration?: number[],
   ) {
     const emptyNum: number[] = [];
@@ -26,6 +28,7 @@ export class Program {
     this.name = name;
     this.description = (description) ? description : '';
     this.programProfile = (programProfile) ? programProfile : [];
+    this.programProfileClientException = (programProfileClientException) ? programProfileClientException : emptyNum;
     this.programConfiguration = (programConfiguration) ? programConfiguration : emptyNum;
   }
 
@@ -33,6 +36,7 @@ export class Program {
     return new Program(
       this.id, this.name, this.description,
       this.programProfile,
+      this.programProfileClientException,
       this.programConfiguration
     );
   }

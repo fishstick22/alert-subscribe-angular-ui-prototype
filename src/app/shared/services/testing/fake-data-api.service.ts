@@ -7,7 +7,8 @@ import { ModelTestingHelper,
          CommunicationConfiguration,
          Program, TEST_PROGRAM,
          ProgramConfiguration,
-         ProgramProfile } from 'app/shared/model/testing/model-testing-helper';
+         ProgramProfile,
+         ProgramProfileClientException } from 'app/shared/model/testing/model-testing-helper';
 
 import { FakeClientsService,
          ClientsService               } from './fake-clients.service';
@@ -22,6 +23,10 @@ import { FakeProgramConfigurationsService,
 import { FakeProgramProfilesService,
          ProgramProfilesService       } from './fake-program-profiles.service';
 
+import { FakeProgramProfileClientExceptionsService,
+          ProgramProfileClientExceptionsService
+                                      } from './fake-program-profile-client-exceptions.service';
+
 import { DataApiService               } from 'app/shared/services/data-api.service';
 
 // re-export for tester convenience
@@ -31,6 +36,7 @@ export * from './fake-program-profiles.service';
 export * from './fake-program-configurations.service';
 export * from './fake-clients.service';
 export * from './fake-client-configurations.service';
+export * from './fake-program-profile-client-exceptions.service';
 
 export { DataApiService } from 'app/shared/services/data-api.service';
 
@@ -46,7 +52,8 @@ export class FakeDataApiService extends DataApiService {
     clientConfigurationsService: ClientConfigurationsService,
     programsService: FakeProgramsService,
     programProfilesService: FakeProgramProfilesService,
-    programConfigurationsService: FakeProgramConfigurationsService
+    programConfigurationsService: FakeProgramConfigurationsService,
+    programProfileClientExceptionsService: FakeProgramProfileClientExceptionsService
   ) {
     super(
       communicationsService,
@@ -54,7 +61,8 @@ export class FakeDataApiService extends DataApiService {
       clientConfigurationsService,
       programsService,
       programProfilesService,
-      programConfigurationsService
+      programConfigurationsService,
+      programProfileClientExceptionsService
     );
   }
 

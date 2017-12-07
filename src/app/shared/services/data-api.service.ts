@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { ClientsService               } from 'app/shared/services/clients/clients.service';
-import { ClientConfigurationsService  } from 'app/shared/services/client-configurations/client-configurations.service';
-import { CommunicationsService        } from 'app/shared/services/communications/communications.service';
-import { ProgramsService              } from 'app/shared/services/programs/programs.service';
-import { ProgramProfilesService       } from 'app/shared/services/program-profiles/program-profiles.service';
-import { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
+import { ClientsService               } from './clients/clients.service';
+import { ClientConfigurationsService  } from './client-configurations/client-configurations.service';
+import { CommunicationsService        } from './communications/communications.service';
+import { ProgramsService              } from './programs/programs.service';
+import { ProgramProfilesService       } from './program-profiles/program-profiles.service';
+import { ProgramConfigurationsService } from './program-configurations/program-configurations.service';
+import { ProgramProfileClientExceptionsService
+                                      } from './program-profile-client-exceptions/program-profile-client-exceptions.service';
 
 // import { IProgramConfig } from 'app/classes/model/iprog-config';
 
@@ -15,6 +17,8 @@ import { Communication        } from 'app/shared/model/communication';
 import { Program              } from 'app/shared/model/program';
 import { ProgramProfile       } from 'app/shared/model/program-profile';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
+import { ProgramProfileClientException
+                              } from 'app/shared/model/program-profile-client-exception';
 
 @Injectable()
 export class DataApiService {
@@ -34,14 +38,16 @@ export class DataApiService {
   programs: Program[];
   programConfigurations: ProgramConfiguration[];
   programProfiles: ProgramProfile[];
+  programProfileClientExceptions: ProgramProfileClientException[];
 
   constructor(
     protected communicationsService: CommunicationsService,
     protected clientsService: ClientsService,
     protected clientConfigurationsService: ClientConfigurationsService,
     protected programsService: ProgramsService,
-    protected programProfileService: ProgramProfilesService,
-    protected programConfigurationService: ProgramConfigurationsService
+    protected programProfilesService: ProgramProfilesService,
+    protected programConfigurationService: ProgramConfigurationsService,
+    protected programProfileClientExceptionsService: ProgramProfileClientExceptionsService
   ) { }
 
   public async getCommunications(): Promise<Communication[]> {
@@ -142,20 +148,49 @@ export class DataApiService {
     if (this.programProfiles) {
       return this.programProfiles;
     } else {
-      this.programProfiles = await this.programProfileService.getProgramProfilesThruApi();
+      this.programProfiles = await this.programProfilesService.getProgramProfilesThruApi();
       return this.programProfiles;
     }
   }
 
   public async createProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
-    programProfile = await this.programProfileService.createProgramProfileThruApi(programProfile);
+    programProfile = await this.programProfilesService.createProgramProfileThruApi(programProfile);
     this.insertProgramProfile(programProfile);
     return programProfile;
   }
 
   public async updateProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
-    programProfile = await this.programProfileService.updateProgramProfileThruApi(programProfile);
+    programProfile = await this.programProfilesService.updateProgramProfileThruApi(programProfile);
     return programProfile;
+  }
+
+  //
+  public async getProgramProfileClientExceptions(): Promise<ProgramProfileClientException[]> {
+    if (this.programProfileClientExceptions) {
+      return this.programProfileClientExceptions;
+    } else {
+      this.programProfileClientExceptions = await this.programProfileClientExceptionsService.getProgramProfileClientExceptionsThruApi();
+      return this.programProfileClientExceptions;
+    }
+  }
+
+  public async createProgramProfileClientException(
+    programProfileClientException: ProgramProfileClientException
+  ): Promise<ProgramProfileClientException> {
+
+    programProfileClientException =
+      await this.programProfileClientExceptionsService.createProgramProfileClientExceptionThruApi(programProfileClientException);
+    this.insertProgramProfileClientException(programProfileClientException);
+    return programProfileClientException;
+  }
+
+  public async updateProgramProfileClientException(
+    programProfileClientException: ProgramProfileClientException
+  ): Promise<ProgramProfileClientException> {
+
+    programProfileClientException =
+      await this.programProfileClientExceptionsService.updateProgramProfileClientExceptionThruApi(programProfileClientException);
+    return programProfileClientException;
   }
   /*
   */
@@ -205,5 +240,8 @@ export class DataApiService {
 
   protected insertProgramProfile(programProfile: ProgramProfile): void {
     this.programProfiles.push(programProfile);
+  }
+  protected insertProgramProfileClientException(programProfileClientException: ProgramProfileClientException): void {
+    this.programProfileClientExceptions.push(programProfileClientException);
   }
 }

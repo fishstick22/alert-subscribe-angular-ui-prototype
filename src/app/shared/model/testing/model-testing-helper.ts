@@ -7,6 +7,8 @@ import { CommunicationConfiguration
                               } from 'app/shared/model/communication-configuration';
 import { Program              } from 'app/shared/model/program';
 import { ProgramProfile       } from 'app/shared/model/program-profile';
+import { ProgramProfileClientException
+                              } from 'app/shared/model/program-profile-client-exception';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
 export { Client               } from 'app/shared/model/client';
@@ -15,6 +17,8 @@ export { Communication        } from 'app/shared/model/communication';
 export { CommunicationConfiguration
                               } from 'app/shared/model/communication-configuration';
 export { Program              } from 'app/shared/model/program';
+export { ProgramProfileClientException
+                              } from 'app/shared/model/program-profile-client-exception';
 export { ProgramProfile       } from 'app/shared/model/program-profile';
 export { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
@@ -53,6 +57,25 @@ export class ModelTestingHelper {
     programProfile.program = 1;
 
     return programProfile;
+  }
+
+  public getTestProgramProfileClientException(): ProgramProfileClientException {
+    const programProfileClientException = new ProgramProfileClientException(1, 142);
+
+    programProfileClientException.id = 1;
+    programProfileClientException.defaultOptIn = true;
+    programProfileClientException.visibleInUi = true;
+    programProfileClientException.chanEmail = true;
+    programProfileClientException.chanIvr = true;
+    programProfileClientException.chanSms = true;
+    programProfileClientException.chanSecure = true;
+    programProfileClientException.chanMail = false;
+    programProfileClientException.chanMobile = false;
+    programProfileClientException.effective = '2017-01-01';
+    programProfileClientException.expiration = '9999-12-31';
+    programProfileClientException.program = 1;
+
+    return programProfileClientException;
   }
 
   public getTestClientConfiguration(): ClientConfiguration {

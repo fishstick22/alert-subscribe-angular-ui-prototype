@@ -68,10 +68,14 @@ export class ProgramsMaintenancePanelComponent implements OnInit {
     if (this.selectedProgram &&
         this.selectedProgram.programProfile) {
 
-      const profiles = this.selectedProgram.programProfile;
+      let profiles = this.selectedProgram.programProfile;
       if (profiles.length !== 0 &&
           profiles[profiles.length - 1].expiration === AppConstants.UNEXPIRED) {
 
+        if (typeof profiles[profiles.length - 1] === 'number') {
+          // really only happens in the in-memory-api exception case
+          profiles = await this.findProgramProfiles(program);
+        }
         return profiles[profiles.length - 1];
       }
       return profiles[profiles.length - 1]; // ok, the last one may be expired

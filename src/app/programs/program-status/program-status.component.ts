@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges,
-  SimpleChanges, SimpleChange,
-  Input, Output, EventEmitter,
-  ViewEncapsulation } from '@angular/core';
+         SimpleChanges, SimpleChange,
+         Input, Output, EventEmitter,
+         ViewEncapsulation } from '@angular/core';
 
 import { Program, ProgramConfigAction, ProgramStatus } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';

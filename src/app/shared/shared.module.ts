@@ -29,6 +29,8 @@ import { ClientsService               } from './services/clients/clients.service
 import { CommunicationsService        } from './services/communications/communications.service';
 import { ProgramConfigurationsService } from './services/program-configurations/program-configurations.service';
 import { ProgramProfilesService       } from './services/program-profiles/program-profiles.service';
+import { ProgramProfileClientExceptionsService
+                                      } from './services/program-profile-client-exceptions/program-profile-client-exceptions.service';
 import { ProgramsService              } from './services/programs/programs.service';
 
 // testing within shared module
@@ -92,7 +94,8 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     CommunicationsService,
     ProgramConfigurationsService,
     ProgramProfilesService,
-    ProgramsService
+    ProgramsService,
+    ProgramProfileClientExceptionsService
   ],
   exports: [
     CommonModule,
