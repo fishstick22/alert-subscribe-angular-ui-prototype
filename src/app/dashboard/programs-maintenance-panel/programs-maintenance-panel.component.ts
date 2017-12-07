@@ -65,25 +65,22 @@ export class ProgramsMaintenancePanelComponent implements OnInit {
   async findEffectiveProgramProfile(program: Program) {
     // all of this because some odd data in the in-memory-api
     // seems like a good idea to handle this case, tho
-    if (this.selectedProgram &&
-        this.selectedProgram.programProfile) {
-
+    if (program && program.programProfile) {
       let profiles = this.selectedProgram.programProfile;
-      if (profiles.length !== 0 &&
-          profiles[profiles.length - 1].expiration === AppConstants.UNEXPIRED) {
-
-        if (typeof profiles[profiles.length - 1] === 'number') {
-          // really only happens in the in-memory-api exception case
-          profiles = await this.findProgramProfiles(program);
-        }
+      if (profiles.length !== 0 && typeof profiles[profiles.length - 1].expiration !== 'undefined') {
         return profiles[profiles.length - 1];
       }
-      return profiles[profiles.length - 1]; // ok, the last one may be expired
-    } else {
-      const profiles = await this.findProgramProfiles(program);
-      return profiles[profiles.length - 1];
+      if (profiles.length !== 0 && typeof profiles[profiles.length - 1] === 'number') {
+        // really only happens in the in-memory-api exception case
+         profiles = await this.findProgramProfiles(program);
+         // yes, this is a side-effect
+         program.programProfile = profiles;
+         return profiles[profiles.length - 1];
+      }
     }
-
+    // this should never happen, should throw an exception
+    // but that is a whole different endeavor
+    return null;
   }
 
   async getProgramProfiles() {
