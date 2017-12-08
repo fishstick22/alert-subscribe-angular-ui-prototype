@@ -80,17 +80,17 @@ export class InMemoryDataService implements InMemoryDbService {
             'programConfiguration': [], 'clientConfiguration': []}
     ];
     const program = [
-      {'id': 1, 'name': 'Prescription Alerts',
+      {'id': 101, 'name': 'Prescription Alerts',
        'description': 'PBM Communications including Order Status and Refill Reminder alerts',
        'programProfile': [1],
        'programProfileClientException': [1]
       },
-      {'id': 2, 'name': 'Non-Prescription Alerts',
+      {'id': 102, 'name': 'Non-Prescription Alerts',
       'description': 'PBM non-transactional Communications like Portal Registration, Password Recovery',
        'programProfile': [
         {'id': 2, 'defaultOptIn': true, 'visibleInUi': false,
          'chanEmail': true, 'chanIvr': true, 'chanSms': true, 'chanSecure': true, 'chanMail': false, 'chanMobile': false,
-         'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 2
+         'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 102
         }
        ],
        'programProfileClientException': []
@@ -108,7 +108,7 @@ export class InMemoryDataService implements InMemoryDbService {
        'chanMobile': false,
        'effective': '2017-01-01',
        'expiration': '9999-12-31',
-       'program': 1
+       'program': 101
       }
     ];
     const programprofileclientexception = [

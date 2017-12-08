@@ -110,7 +110,7 @@ export class ProgramsComponent implements OnInit {
   }
 
   private async addProgram() {
-    const nextProgramId = this.programs.length + 1;
+    const nextProgramId = this.programs[this.programs.length - 1].id + 1;
     await this.programsMaintService.maintainProgramModal('add', nextProgramId);
     // this.detectChanges = 'add';
   }

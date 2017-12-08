@@ -19,7 +19,7 @@
         <label for="programName" class="text-white bg-gradient-dark flex-justify-left rounded">
           Program Name</label>
         <input type="text" class="form-control"
-               [(ngModel)]="program.name" id="programName" name="name" required
+               [(ngModel)]="programForForm.name" id="programName" name="name" required
                aria-describedby="programNameHelp" placeholder="Enter Program Name">
         <small id="programNameHelp" class="form-text text-muted">Short Name of the Program.</small>
       </div>
@@ -27,7 +27,7 @@
         <label for="programDescription" class="text-white bg-gradient-dark flex-justify-left rounded">
           Program Description</label>
         <input type="text" class="form-control" 
-               [(ngModel)]="program.description" id="programDescription" name="description" required
+               [(ngModel)]="programForForm.description" id="programDescription" name="description" required
                aria-describedby="programDescriptionlHelp" placeholder="Enter Program Description">
         <small id="programDescriptionlHelp" class="form-text text-muted">Brief Description of the Program.</small>
       </div>

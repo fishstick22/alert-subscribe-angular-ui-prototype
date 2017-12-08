@@ -112,7 +112,7 @@ export class DataApiService {
   }
 
   public async updateProgram(program: Program): Promise<Program> {
-    await this.programsService.updateProgramThruApi(program);
+    program = await this.programsService.updateProgramThruApi(program);
     return program;
   }
 

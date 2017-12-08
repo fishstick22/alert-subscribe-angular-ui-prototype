@@ -23,6 +23,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   @Input() configType: string = '';
   @Input() program: Program = new Program(); // just becasue service inits whenever
 
+  programForForm: Program = new Program();
   programProfiles: ProgramProfile[] = [];
 
   addProfile: boolean = false;
@@ -43,6 +44,14 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     console.log('ProgramsMaintenanceModalComponent init: ');
     console.log(this.program);
 
+    // don't want to use the passed-in Program directly in the form
+    // user could make modifications then cancel/dismiss and the changes would
+    // persist in the object even tho not saved to api
+    // clone a separate object to use on the form, then update the changes to
+    // the real object once user hits save, else revert to unmodified Program
+
+    this.programForForm = new Program(this.program.id, this.program.name, this.program.description);
+
     this.tomorrow.setDate(this.today.getDate() + 1);
 
     if (this.configType === 'add') {
@@ -61,13 +70,15 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
       // the current row, setting expiration on current
       // show only the current effective Profile row
       this.programProfiles = [];
-      this.programProfiles = this.getCurrentEffectiveProfile(this.program);
+      const currentEffectiveProfile: ProgramProfile = this.getCurrentEffectiveProfile(this.program)[0];
+      this.programProfiles = [new ProgramProfile(this.program.id, currentEffectiveProfile, true)];
       this.addProfile = true;
     }
 
     if (this.configType === 'expire') {
       this.programProfiles = [];
-      this.programProfiles = this.getCurrentEffectiveProfile(this.program);
+      const currentEffectiveProfile: ProgramProfile = this.getCurrentEffectiveProfile(this.program)[0];
+      this.programProfiles = [new ProgramProfile(this.program.id, currentEffectiveProfile, true)];
       this.programProfiles[0].expiration =
         this.tomorrow.getFullYear() + '-' +
        (this.tomorrow.getMonth() + 1) + '-' +
@@ -122,6 +133,8 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     if (this.configType === 'edit') {
       // if profile changed (added), first update previous, add new
       // then go ahead and update the program
+      this.updateProgramFromForm();
+      modalResult.updateProgram = this.program;
       if (this.programProfiles.length === 2) {
         console.log(this.programProfiles);
         console.log(this.program);
@@ -133,8 +146,9 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
           modalResult.insertProgramProfile = this.programProfiles[1];
           this.program.programProfile.push(this.programProfiles[1]);
         } // else something went wrong, report error, abort save
-        modalResult.updateProgram = this.program;
+
       }
+
     }
 
     if (this.configType === 'expire') {
@@ -146,6 +160,22 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     }
 
     this.maintainProgramModal.close({resultTxt: AppConstants.SAVESUCCESS, modalResult: modalResult});
+  }
+
+  private updateProgramFromForm() {
+    if (this.program.id === this.programForForm.id) {
+      if (this.program.name !== this.programForForm.name) {
+        this.program.name = this.programForForm.name;
+      }
+      if (this.program.description !== this.programForForm.description) {
+        this.program.description = this.programForForm.description;
+      }
+      for (let i = 0; i < this.program.programProfile.length; i++) {
+        if (this.program.programProfile[i].id === this.programProfiles[0].id) {
+          this.program.programProfile[i] = this.programProfiles[0];
+        }
+      }
+    }
   }
 
   private updateDateValue(newDate, pp: ProgramProfile, dateType: string) {
