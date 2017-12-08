@@ -1,0 +1,69 @@
+<form #programClientExceptionForm="ngForm" 
+(ngSubmit)="saveProgramClientExceptions()" >
+
+<div class="modal-header bg-gradient-dark">
+<h4 class="modal-title text-white">
+  Configure Client Exceptions
+  <small>for ProgramId {{program.id}}: {{program.name}}</small>
+</h4>
+<button type="button" class="close text-white" aria-label="Close" (click)="configureProgramClientExcModal.dismiss('Cross click')">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+<div class="modal-body">
+  <div id="configuredClients">
+    <table class="table table-responsive table-sm table-striped table-bordered table-hover">
+      <caption></caption>
+      <thead class="bg-gradient-dark text-white">
+        <tr>
+          <th>ID</th>
+          <th>C<small>ode</small></th>
+          <th>N<small>ame</small></th>
+          <th><small>OptIn Def</small></th>
+          <th><small>UI Visible</small></th>
+          <th>E<small>mail</small></th>
+          <th>IVR</th>
+          <th>SMS</th>
+          <th>S<small>ecure</small></th>
+          <th>M<small>ail</small></th>
+          <th>M<small>obile</small></th>
+          <th>E<small>ffective</small></th>
+          <th>E<small>xpiration</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pce of programClientExceptions; let i = index">
+          <td>
+              <span *ngIf="pce.client.id" class="badge badge-secondary">{{pce.client.id}}</span>
+          </td>
+          <td><span >{{pce.client.code}}</span></td>
+          <td width="18%"><span >{{pce.client.name}}</span></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+<div class="modal-footer">
+  <div class="w-100">
+    <span class="float-left">Some instructional content or condition message goes here: </span>
+    <div class="float-right">
+        <button type="submit" class="btn btn-outline-dark" [disabled]="!programClientExceptionForm.valid">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="configureProgramClientExcModal.close('Close click')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+</form> 

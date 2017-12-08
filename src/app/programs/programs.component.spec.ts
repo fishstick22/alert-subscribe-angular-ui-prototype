@@ -7,9 +7,11 @@ import {
   Program, ProgramsService, FakeProgramsService
 } from 'app/shared/testing/shared-module-testing-helper';
 
+import { ProgramClientExceptionsModalService } from './services/program-client-exceptions/program-client-exceptions-modal.service';
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
 import { ProgramsMaintenanceModalService } from './services/programs-maintenance/programs-maintenance-modal.service';
-import { FakeProgramConfigurationsModalService,
+import { FakeProgramClientExceptionsModalService,
+         FakeProgramConfigurationsModalService,
          FakeProgramsMaintenanceModalService } from './testing/fake-program-configurations-modal.service';
 import { ProgramActionsPopoverStubComponent,
          ProgramStatusStubComponent } from 'app/shared/components/testing/stub-testing-components';
@@ -25,9 +27,11 @@ describe('Programs: ProgramsComponent', () => {
       declarations: [ ProgramsComponent, ProgramActionsPopoverStubComponent, ProgramStatusStubComponent ],
       providers: [
         DataApiService,
+        ProgramClientExceptionsModalService,
         ProgramConfigurationsModalService,
         ProgramsMaintenanceModalService,
         { provide: DataApiService, usevalue: FakeDataApiService },
+        { provide: ProgramClientExceptionsModalService, usevalue: FakeProgramClientExceptionsModalService },
         { provide: ProgramConfigurationsModalService, usevalue: FakeProgramConfigurationsModalService },
         { provide: ProgramsMaintenanceModalService, usevalue: FakeProgramsMaintenanceModalService },
        // { provide: Router, useClass: RouterStub}

@@ -69,17 +69,7 @@ export class ProgramsMaintenanceModalService {
         this.closeResult = `Closed with: ${result.resultTxt}`;
         if (result.modalResult) {
           const modalResult: ProgramsMaintModalResult = result.modalResult;
-          // if (modalResult.updateProgramProfile) {
-          //   this.updateProgramProfile(modalResult.updateProgramProfile);
-          // }
-          // if (modalResult.insertProgramProfile) {
-          //   this.addProgramProfile(modalResult.insertProgramProfile);
-          // }
           if (configType === 'add' && modalResult.insertProgram) {
-            // except for a new add, the Profile creates an unresolved forward reference
-            // the Program must be saved first, then the Profile will reference a valid entity
-            // this.addProgram(modalResult.insertProgram);
-            // this.addProgramProfile(modalResult.insertProgramProfile);
             const newProgram = await this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
             if (newProgram.status && newProgram.status.statusText === 'undetermined') {
               newProgram.detectChanges = 'added';

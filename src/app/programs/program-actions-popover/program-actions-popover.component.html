@@ -9,20 +9,25 @@
     [excludeBeforeClick]="excludeBeforeClick">
 
   <div class="float-left inner-popover">
-    <span class="badge badge-success clickable"
+    <span class="badge badge-info clickable"
          (click)="configure(progId, 'edit'); p.close();"
           title="Configure/Edit Program {{progId}}: {{progName}} ">
       Edit</span></div>
   <div class="float-left inner-popover">
-    <span class="badge badge-success clickable"
+    <span class="badge badge-info clickable"
          (click)="configure(progId, 'expire'); p.close();"
           title="Expire Program {{progId}}: {{progName}} ">
       Expire</span></div>
+  <div class="float-left inner-popover">
+    <span class="badge badge-info clickable"
+         (click)="configure(progId, 'client'); p.close();"
+          title="Configure Client Exceptions for Program {{progId}}: {{progName}} ">
+      Client<br/>Exceptions</span></div>
   <div class="float-right inner-popover">
-    <span class="badge badge-success clickable"
+    <span class="badge badge-info clickable"
          (click)="configure(progId, 'communications'); p.close();"
           title="Configure Communications for Program {{progId}}: {{progName}} ">
-      Communications</span></div>
+      Configure<br/>Communications</span></div>
 </div>
 </ng-template>
 <div [ngbPopover]="popContent"

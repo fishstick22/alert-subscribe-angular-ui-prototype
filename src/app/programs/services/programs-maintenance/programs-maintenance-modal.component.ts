@@ -5,7 +5,6 @@ import { AppConstants } from 'app/app-constants';
 import { Program } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 
-
 export class ProgramsMaintModalResult {
   updateProgramProfile: ProgramProfile;
   insertProgramProfile: ProgramProfile;

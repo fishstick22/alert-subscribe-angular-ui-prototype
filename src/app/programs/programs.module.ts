@@ -9,8 +9,11 @@ import { routedComponents,
 import { ProgramActionsPopoverComponent      } from './program-actions-popover/program-actions-popover.component';
 import { ProgramStatusComponent              } from './program-status/program-status.component';
 
-import { ProgramConfigurationsModalService   } from './services/program-configurations/program-configurations-modal.service';
+import { ProgramClientExceptionsModalComponent
+                                             } from './services/program-client-exceptions/program-client-exceptions-modal.component';
+import { ProgramClientExceptionsModalService } from './services/program-client-exceptions/program-client-exceptions-modal.service';
 import { ProgramConfigurationsModalComponent } from './services/program-configurations/program-configurations-modal.component';
+import { ProgramConfigurationsModalService   } from './services/program-configurations/program-configurations-modal.service';
 import { ProgramsMaintenanceModalComponent   } from './services/programs-maintenance/programs-maintenance-modal.component';
 import { ProgramsMaintenanceModalService     } from './services/programs-maintenance/programs-maintenance-modal.service';
 
@@ -27,11 +30,20 @@ import { SharedModule } from 'app/shared/shared.module';
   declarations: [
     routedComponents,
     ProgramActionsPopoverComponent,
+    ProgramClientExceptionsModalComponent,
     ProgramConfigurationsModalComponent,
     ProgramsMaintenanceModalComponent,
     ProgramStatusComponent
   ],
-  entryComponents: [ProgramConfigurationsModalComponent, ProgramsMaintenanceModalComponent],
-  providers: [ProgramConfigurationsModalService, ProgramsMaintenanceModalService],
+  entryComponents: [
+    ProgramClientExceptionsModalComponent,
+    ProgramConfigurationsModalComponent,
+    ProgramsMaintenanceModalComponent
+  ],
+  providers: [
+    ProgramClientExceptionsModalService,
+    ProgramConfigurationsModalService,
+    ProgramsMaintenanceModalService,
+  ],
 })
 export class ProgramsModule { }

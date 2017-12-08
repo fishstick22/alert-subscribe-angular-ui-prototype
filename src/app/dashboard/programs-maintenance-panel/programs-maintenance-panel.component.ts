@@ -66,7 +66,7 @@ export class ProgramsMaintenancePanelComponent implements OnInit {
     // all of this because some odd data in the in-memory-api
     // seems like a good idea to handle this case, tho
     if (program && program.programProfile) {
-      let profiles = this.selectedProgram.programProfile;
+      let profiles = program.programProfile;
       if (profiles.length !== 0 && typeof profiles[profiles.length - 1].expiration !== 'undefined') {
         return profiles[profiles.length - 1];
       }

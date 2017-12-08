@@ -124,7 +124,11 @@ export class InMemoryDataService implements InMemoryDbService {
        'effective': '2017-01-01',
        'expiration': '9999-12-31',
        'program': 1,
-       'client': 142
+       'client':
+         {'id': 142, 'code': 'AMD', 'name': 'AT&T INC.',
+          'programProfileClientException': [1],
+          'clientConfiguration': [1]
+         }
       }
     ];
     const programconfiguration = [
