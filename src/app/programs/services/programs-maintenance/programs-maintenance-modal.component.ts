@@ -152,11 +152,13 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     }
 
     if (this.configType === 'expire') {
+      this.updateProgramFromForm();
+      modalResult.updateProgram = this.program;
       if (this.programProfiles.length === 1 &&
         this.programProfiles[0].expiration !== AppConstants.UNEXPIRED) {
         modalResult.updateProgramProfile = this.programProfiles[0];
       } // else something went wrong, report error, abort save
-      modalResult.updateProgram = this.program;
+
     }
 
     this.maintainProgramModal.close({resultTxt: AppConstants.SAVESUCCESS, modalResult: modalResult});

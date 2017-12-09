@@ -16,7 +16,10 @@ export class ProgramProfile {
 
     if (programProfile) {
 
-      this.id = inclId ? programProfile.id : undefined;
+      // this.id = inclId ? programProfile.id : undefined;
+      if (inclId) {
+        this.id = programProfile.id;
+      }
 
       this.defaultOptIn = programProfile.defaultOptIn;
       this.visibleInUi  = programProfile.visibleInUi;

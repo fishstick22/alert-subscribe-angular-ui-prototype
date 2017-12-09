@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   envName: 'dev',
   inMemAPI: true,
-  apiEndpoint: ''
+  apiEndpoint: '',
+  cachePrograms: true
 };

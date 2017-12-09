@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { APP_CONFIG, IAppConfig } from 'app/app.config';
+
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
          ClientConfiguration,
@@ -45,8 +47,9 @@ export class FakeDataApiService extends DataApiService {
 
   communications: Communication[];
   // private communicationService = new FakeCommunicationsService();
+  config: IAppConfig;
 
-  constructor(
+  constructor(config: IAppConfig,
     communicationsService: FakeCommunicationsService,
     clientsService: ClientsService,
     clientConfigurationsService: ClientConfigurationsService,
@@ -55,7 +58,7 @@ export class FakeDataApiService extends DataApiService {
     programConfigurationsService: FakeProgramConfigurationsService,
     programProfileClientExceptionsService: FakeProgramProfileClientExceptionsService
   ) {
-    super(
+    super(config,
       communicationsService,
       clientsService,
       clientConfigurationsService,

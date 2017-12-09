@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+
+import { APP_CONFIG, IAppConfig } from 'app/app.config';
 
 import { ClientsService               } from './clients/clients.service';
 import { ClientConfigurationsService  } from './client-configurations/client-configurations.service';
@@ -40,7 +42,7 @@ export class DataApiService {
   programProfiles: ProgramProfile[];
   programProfileClientExceptions: ProgramProfileClientException[];
 
-  constructor(
+  constructor(@Inject(APP_CONFIG) protected config: IAppConfig,
     protected communicationsService: CommunicationsService,
     protected clientsService: ClientsService,
     protected clientConfigurationsService: ClientConfigurationsService,
@@ -91,7 +93,7 @@ export class DataApiService {
   }
 
   public async getPrograms(): Promise<Program[]> {
-    if (this.programs) {
+    if (this.config.cachePrograms && this.programs) {
       return this.programs;
     } else {
       this.programs = await this.programsService.getProgramsThruApi();
@@ -109,6 +111,11 @@ export class DataApiService {
       return Promise.reject(error.message || error);
     }
 
+  }
+
+  public async getProgramById(programId: number): Promise<Program> {
+    const program: Program = await this.programsService.getProgramByIdThruApi(programId);
+    return program;
   }
 
   public async updateProgram(program: Program): Promise<Program> {

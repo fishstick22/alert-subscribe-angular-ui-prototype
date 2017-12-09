@@ -15,7 +15,7 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 @Injectable()
 export class ProgramsMaintenanceModalService {
 
-  program: Program;
+  // program: Program;
   programProfiles: ProgramProfile[];
   closeResult: string;
 
@@ -37,6 +37,8 @@ export class ProgramsMaintenanceModalService {
       modalComp.program = new Program(nextId, '');
     }
     if (configType === 'edit' || configType === 'expire') {
+      // fetch it again to make sure it is fresh
+      program = await this.getProgramById(program.id);
       modalComp.program = program;
       if (!program.programProfile || program.programProfile.length === 0) {
         // hey, it could happen!
@@ -75,19 +77,27 @@ export class ProgramsMaintenanceModalService {
               newProgram.detectChanges = 'added';
               newProgram.status.update(newProgram);
             } else {
-              newProgram.status = new ProgramStatus(this.program);
+              newProgram.status = new ProgramStatus(program);
               newProgram.detectChanges = newProgram.status.statusText;
             }
           }
           if (configType === 'edit' && modalResult.updateProgram) {
             const editProgram = await this.updateProgram(modalResult.updateProgram);
+            if (!editProgram.status) {
+              editProgram.status = new ProgramStatus(editProgram);
+            } else {
+              editProgram.status.update(editProgram);
+            }
             editProgram.detectChanges = 'edited';
-            editProgram.status.update(editProgram);
           }
           if (configType === 'expire' && modalResult.updateProgram) {
             const expireProgram = await this.updateProgram(modalResult.updateProgram);
+            if (!expireProgram.status) {
+              expireProgram.status = new ProgramStatus(expireProgram);
+            } else {
+              expireProgram.status.update(expireProgram);
+            }
             expireProgram.detectChanges = 'expired';
-            expireProgram.status.update(expireProgram);
           }
           // return configType;
         } else {
@@ -112,11 +122,11 @@ export class ProgramsMaintenanceModalService {
   private async addProgramAndProfile(program: Program, programProfile: ProgramProfile) {
     // have to single thread these so they are done in the right order
     try {
-      this.program = await this.dataApiService.createProgram(program);
+      program = await this.dataApiService.createProgram(program);
       const pp = await this.dataApiService.createProgramProfile(programProfile);
-      this.program.programProfile = [pp];
-      console.log('addProgramAndProfile:', program, this.program);
-      return this.program;
+      program.programProfile = [pp];
+      console.log('addProgramAndProfile:', program);
+      return program;
     } catch (error) {
       console.log('addProgramAndProfile error: ', error);
     }
@@ -133,17 +143,27 @@ export class ProgramsMaintenanceModalService {
 
   private async addProgram(program: Program) {
     try {
-      this.program = await this.dataApiService.createProgram(program);
-      console.log('addProgram:', program, this.program);
+      program = await this.dataApiService.createProgram(program);
+      console.log('addProgram:', program);
     } catch (error) {
       console.log('addProgram error: ', error);
     }
   }
 
+  private async getProgramById(programId: number) {
+    try {
+      const program: Program = await this.dataApiService.getProgramById(programId);
+      console.log('getProgramById:', program);
+      return program;
+    } catch (error) {
+      console.log('getProgramById error: ', error);
+    }
+  }
+
   private async updateProgram(program: Program) {
     try {
-      this.program = await this.dataApiService.updateProgram(program);
-      console.log('updateProgram:', program, this.program);
+      program = await this.dataApiService.updateProgram(program);
+      console.log('updateProgram:', program);
       return program;
     } catch (error) {
       console.log('updateProgram error: ', error);

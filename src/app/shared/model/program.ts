@@ -70,6 +70,7 @@ export class ProgramStatus {
 
   private setStatus(program: Program) {
     if (program.programProfile && program.programProfile.length > 0) {
+      program.programProfile.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
       this.lastProfile = program.programProfile[program.programProfile.length - 1];
       this.expiredProgram = (this.lastProfile.expiration !== AppConstants.UNEXPIRED);
       this.statusText = this.expiredProgram ? 'expired' : 'active';
