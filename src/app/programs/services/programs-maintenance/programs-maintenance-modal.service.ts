@@ -16,13 +16,11 @@ export class ModalResult {
   success: boolean = false;
   closeResult: string;
   modalOutput: any;
-  // addProgram: Program;
 }
 
 @Injectable()
 export class ProgramsMaintenanceModalService {
 
-  // program: Program;
   programProfiles: ProgramProfile[];
   closeResult: string;
 
@@ -72,6 +70,7 @@ export class ProgramsMaintenanceModalService {
     }
     if (configType === 'edit' && modalResult.updateProgram) {
       if (modalResult.updateProgramProfile || modalResult.insertProgramProfile) {
+        // means a new profile was added (prev one expired)
         modalResult.resultProgram =
           await this.updateProgramAndProfiles(
             modalResult.updateProgram,
@@ -167,133 +166,6 @@ export class ProgramsMaintenanceModalService {
     return null;
   }
 
-  // async maintainProgramModalOld(configType, nextId?: number, program?: Program) {
-  //   // it got too large, refactoring
-  //   const modalOpts: NgbModalOptions = {
-  //     size: 'lg'
-  //   };
-  //   const modalRef = this.modalService.open(ProgramsMaintenanceModalComponent, modalOpts);
-  //   const modalComp: ProgramsMaintenanceModalComponent  = modalRef.componentInstance;
-
-  //   modalComp.configType = configType;
-  //   // don't want to use the passed-in Program directly in the form
-  //   // user could make modifications then cancel/dismiss and the changes would
-  //   // persist in the object even tho not saved to api
-  //   // clone a separate object to use on the form, then update the changes to
-  //   // the real object once user hits save, else revert to unmodified Program
-
-  //   // this.programForForm = new Program(this.program.id, this.program.name, this.program.description);
-  //   if (configType === 'add' && nextId) {
-  //     modalComp.programForForm = new Program(nextId, '');
-  //   }
-  //   if (program && (configType === 'edit' || configType === 'expire')) {
-  //     modalComp.program = program;
-  //     // fetch it again to make sure it is fresh
-  //     const programForForm = await this.getProgramById(program.id);
-
-  //     if (!programForForm.programProfile || programForForm.programProfile.length === 0 ||
-  //       (programForForm.programProfile.length !== 0 && typeof (programForForm.programProfile[0]) === 'number')) {
-  //       // hey, it could happen!
-  //       programForForm.programProfile = await this.findProgramProfiles(program);
-  //       console.log(program);
-  //       // if (programForForm.programProfile.length === 0) {
-  //       //   // but if it still doesn't have one (shouldn't happen)
-  //       //   programForForm.programProfile = [new ProgramProfile(programForForm.id)];
-  //       //   programForForm.programProfile[0].expiration = AppConstants.UNEXPIRED;
-  //       // }
-  //     }
-  //     modalComp.programForForm = programForForm;
-  //     // if (program.status) {
-  //     //   program.status.statusText = configType;
-  //     // }
-  //   }
-
-  //   modalComp.modalInit();
-
-  //   // so up until now using @JsonIdentityReference(alwaysAsId = true) on related entites in the JPA
-  //   // so the json coming back doesn't have full related objects, just id references
-  //   // but with Program/ProgramProfile didn't so code is dealing with responses that include the Profile
-  //   // and the requests back to store can be Program with Profile inside
-  //   // or, separate requests for the Profiles
-  //   // but not both -- have to decide to stick with the original approach, which works fine for
-  //   // everything else, or do this differently by saving the Program entirely which
-  //   // then can include additions and updates to Profile related entities
-  //   modalRef.result.then( async (result) => {
-  //     if (result.resultTxt === AppConstants.SAVESUCCESS) {
-  //       console.log('configureProgramModal result: ', result.modalResult);
-  //       this.closeResult = `Closed with: ${result.resultTxt}`;
-  //       if (result.modalResult) {
-  //         const modalResult: ProgramsMaintModalResult = result.modalResult;
-  //         if (configType === 'add' && modalResult.insertProgram) {
-  //           const newProgram = await this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
-  //           // force refresh
-  //           // await this.dataApiService.getPrograms();
-  //           // if (newProgram.status && newProgram.status.statusText === 'undetermined') {
-  //           //   newProgram.detectChanges = 'added';
-  //           //   newProgram.status.update(newProgram);
-  //           // } else {
-  //           //   newProgram.status = new ProgramStatus(program);
-  //           //   newProgram.detectChanges = newProgram.status.statusText;
-  //           // }
-  //         }
-  //         if (configType === 'edit' && modalResult.updateProgram) {
-  //           if (modalResult.updateProgramProfile || modalResult.insertProgramProfile) {
-  //             const updateProgram =
-  //               await this.updateProgramAndProfiles(
-  //                 modalResult.updateProgram,
-  //                 modalResult.updateProgramProfile,
-  //                 modalResult.insertProgramProfile);
-  //             // force refresh
-  //             // await this.dataApiService.getPrograms();
-  //           } else {
-  //             const updateProgram = await this.updateProgram(modalResult.updateProgram);
-  //             // force refresh
-  //             // this.dataApiService.getPrograms();
-  //           }
-  //           // if (!editProgram.status) {
-  //           //   editProgram.status = new ProgramStatus(editProgram);
-  //           // } else {
-  //           //   editProgram.status.update(editProgram);
-  //           // }
-  //           // program = editProgram;
-  //           // program.detectChanges = 'edited';
-  //         }
-  //         if (configType === 'expire' && modalResult.updateProgram) {
-  //           const expireProgram =
-  //             await this.updateProgramAndProfiles(
-  //               modalResult.updateProgram,
-  //               modalResult.updateProgramProfile);
-  //           // force refresh
-  //           // await this.dataApiService.getPrograms();
-  //           // if (!expireProgram.status) {
-  //           //   expireProgram.status = new ProgramStatus(expireProgram);
-  //           // } else {
-  //           //   expireProgram.status.update(expireProgram);
-  //           // }
-  //           // expireProgram.detectChanges = 'expired';
-  //         }
-  //         return configType;
-  //       } else {
-  //         // this would be some kind of exception
-  //         console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
-  //       }
-  //       return AppConstants.SAVESUCCESS;
-  //     } else {
-  //       this.closeResult = `Closed with: ${result}`;
-  //     }
-  //     // this.setClickedRow(null);
-  //     console.log('configureProgramModal result: ', this.closeResult);
-  //     return this.closeResult;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //     // this.setClickedRow(null);
-  //     console.log('configureProgramModal result: ', this.closeResult);
-  //     return this.closeResult;
-  //   });
-  // }
-
-
-
   private async addProgramProfile(programProfile: ProgramProfile) {
     try {
       await this.dataApiService.createProgramProfile(programProfile);
@@ -355,18 +227,9 @@ export class ProgramsMaintenanceModalService {
     return this.programProfiles.filter(pp => {
       if (typeof(pp.program) === 'number') {
         if (pp.program === selectedProgram.id) {
-          // pc.program = selectedProgram;
-          // if (typeof(pc.communication) === 'number') {
-          //   pc.communication = this.findCommunication(<number>pc.communication);
-          // }
           return true;
         } else { return false; }
-      } // else if (pp.program.id === selectedProgram.id) {
-      //   if (typeof(pc.communication) === 'number') {
-      //     pc.communication = this.findCommunication(<number>pc.communication);
-      //   }
-      //   return true;
-      // }
+      }
     });
   }
 

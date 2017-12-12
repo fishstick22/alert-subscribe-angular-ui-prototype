@@ -24,7 +24,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   @Input() configType: string = '';
   @Input() program: Program = new Program();
   @Input() programForForm: Program = new Program(); // just becasue service inits whenever
-  @Input()  programProfiles: ProgramProfile[] = [];
+  @Input() programProfiles: ProgramProfile[] = [];
 
   addProfile: boolean = false;
   newProgram: boolean = false;
@@ -136,7 +136,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
         } // else something went wrong, report error, abort save
         if (this.programProfiles[1].expiration === AppConstants.UNEXPIRED) {
            modalResult.insertProgramProfile = this.programProfiles[1];
-           this.programForForm.programProfile.push(this.programProfiles[1]);
+           // this.programForForm.programProfile.push(this.programProfiles[1]);
         } // else something went wrong, report error, abort save
 
       }
@@ -155,22 +155,6 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
 
     this.maintainProgramModal.close({resultTxt: AppConstants.SAVESUCCESS, modalResult: modalResult});
   }
-
-  // private updateProgramFromForm() {
-  //   if (this.program.id === this.programForForm.id) {
-  //     if (this.program.name !== this.programForForm.name) {
-  //       this.program.name = this.programForForm.name;
-  //     }
-  //     if (this.program.description !== this.programForForm.description) {
-  //       this.program.description = this.programForForm.description;
-  //     }
-  //     for (let i = 0; i < this.program.programProfile.length; i++) {
-  //       if (this.program.programProfile[i].id === this.programProfiles[0].id) {
-  //         this.program.programProfile[i] = this.programProfiles[0];
-  //       }
-  //     }
-  //   }
-  // }
 
   private updateDateValue(newDate, pp: ProgramProfile, dateType: string) {
     console.log('ProgramsMaintenanceModalComponent updateDateValue: ', newDate, pp, dateType);

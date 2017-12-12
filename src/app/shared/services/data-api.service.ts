@@ -159,18 +159,20 @@ export class DataApiService {
 
   //
   public async getProgramProfiles(): Promise<ProgramProfile[]> {
-    if (this.programProfiles) {
+    if (this.config.cacheProgramProfiles && this.programProfiles) {
+      console.log('getProgramProfiles', this.config.cacheProgramProfiles);
       return this.programProfiles;
     } else {
+      console.log('getProgramProfiles', this.config.cacheProgramProfiles);
       this.programProfiles = await this.programProfilesService.getProgramProfilesThruApi();
       return this.programProfiles;
     }
   }
 
   public async createProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
-    programProfile = await this.programProfilesService.createProgramProfileThruApi(programProfile);
-    this.insertProgramProfile(programProfile);
-    return programProfile;
+    const newProgramProfile = await this.programProfilesService.createProgramProfileThruApi(programProfile);
+    this.insertProgramProfile(newProgramProfile);
+    return newProgramProfile;
   }
 
   public async getProgramProfileById(programProfileId: number): Promise<ProgramProfile> {

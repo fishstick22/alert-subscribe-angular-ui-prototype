@@ -3,5 +3,6 @@ export const environment = {
   envName: 'dev-api',
   inMemAPI: false,
   apiEndpoint: 'http://localhost:8080/AlertSubscribeServicesPOC/',
-  cachePrograms: false
+  cachePrograms: false,
+  cacheProgramProfiles: false
 };
