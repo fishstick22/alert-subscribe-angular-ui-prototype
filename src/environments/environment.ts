@@ -8,5 +8,5 @@ export const environment = {
   envName: 'dev',
   inMemAPI: true,
   apiEndpoint: '',
-  cachePrograms: true
+  cachePrograms: false
 };

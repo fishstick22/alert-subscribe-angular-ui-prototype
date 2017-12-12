@@ -94,8 +94,10 @@ export class DataApiService {
 
   public async getPrograms(): Promise<Program[]> {
     if (this.config.cachePrograms && this.programs) {
+      console.log('getPrograms', this.config.cachePrograms);
       return this.programs;
     } else {
+      console.log('getPrograms', this.config.cachePrograms);
       this.programs = await this.programsService.getProgramsThruApi();
       return this.programs;
       // return this.removeProgramConfigurationCruft(this.programs);
@@ -119,8 +121,13 @@ export class DataApiService {
   }
 
   public async updateProgram(program: Program): Promise<Program> {
-    program = await this.programsService.updateProgramThruApi(program);
-    return program;
+    const updateProgram = await this.programsService.updateProgramThruApi(program);
+    console.log('DataApiService updateProgram:', updateProgram);
+    // in-memory-web-api returning null even tough update works?
+    if (updateProgram) {
+      return updateProgram;
+    }
+    return this.getProgramById(program.id);
   }
 
   // public async deleteProgram(program: Program): Promise<Program> {
@@ -166,9 +173,18 @@ export class DataApiService {
     return programProfile;
   }
 
-  public async updateProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
-    programProfile = await this.programProfilesService.updateProgramProfileThruApi(programProfile);
+  public async getProgramProfileById(programProfileId: number): Promise<ProgramProfile> {
+    const programProfile: ProgramProfile = await this.programProfilesService.getProgramProfileByIdThruApi(programProfileId);
     return programProfile;
+  }
+
+  public async updateProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
+    const updateProgramProfile = await this.programProfilesService.updateProgramProfileThruApi(programProfile);
+    // in-memory-web-api returning null even tough update works?
+    if (updateProgramProfile) {
+      return updateProgramProfile;
+    }
+    return this.getProgramProfileById(programProfile.id);
   }
 
   //

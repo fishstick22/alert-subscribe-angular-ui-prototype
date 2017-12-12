@@ -51,6 +51,7 @@ export class ProgramsService {
     const url = `${this.progApiEndpoint}/${program.id}`;
     try {
       const response = await this.http.put(url, program).toPromise();
+      console.log('updateProgramThruApi response:', response);
       return response as Program;
     } catch (error) {
       this.handleError(error);

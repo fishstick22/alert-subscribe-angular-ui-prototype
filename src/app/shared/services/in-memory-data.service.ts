@@ -79,6 +79,8 @@ export class InMemoryDataService implements InMemoryDbService {
             'description': 'Notifies a member when one or more of their Rx\'s has no more refills available',
             'programConfiguration': [], 'clientConfiguration': []}
     ];
+    // real API configured to return the programProfile as an object, not ID
+    // but in case it does come as id it is handled
     const program = [
       {'id': 101, 'name': 'Prescription Alerts',
        'description': 'PBM Communications including Order Status and Refill Reminder alerts',
@@ -109,7 +111,20 @@ export class InMemoryDataService implements InMemoryDbService {
        'effective': '2017-01-01',
        'expiration': '9999-12-31',
        'program': 101
-      }
+      },
+      {'id': 2,
+      'defaultOptIn': true,
+      'visibleInUi': false,
+      'chanEmail': true,
+      'chanIvr': true,
+      'chanSms': true,
+      'chanSecure': true,
+      'chanMail': false,
+      'chanMobile': false,
+      'effective': '2017-01-01',
+      'expiration': '9999-12-31',
+      'program': 102
+     }
     ];
     const programprofileclientexception = [
       {'id': 1,

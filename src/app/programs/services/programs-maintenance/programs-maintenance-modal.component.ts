@@ -10,6 +10,7 @@ export class ProgramsMaintModalResult {
   insertProgramProfile: ProgramProfile;
   updateProgram: Program;
   insertProgram: Program;
+  resultProgram: Program;
 }
 
 @Component({
@@ -21,10 +22,9 @@ export class ProgramsMaintModalResult {
 export class ProgramsMaintenanceModalComponent implements OnInit {
 
   @Input() configType: string = '';
-  @Input() program: Program = new Program(); // just becasue service inits whenever
-
-  programForForm: Program = new Program();
-  programProfiles: ProgramProfile[] = [];
+  @Input() program: Program = new Program();
+  @Input() programForForm: Program = new Program(); // just becasue service inits whenever
+  @Input()  programProfiles: ProgramProfile[] = [];
 
   addProfile: boolean = false;
   newProgram: boolean = false;
@@ -42,20 +42,12 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
 
   modalInit() {
     console.log('ProgramsMaintenanceModalComponent init: ');
-    console.log(this.program);
-
-    // don't want to use the passed-in Program directly in the form
-    // user could make modifications then cancel/dismiss and the changes would
-    // persist in the object even tho not saved to api
-    // clone a separate object to use on the form, then update the changes to
-    // the real object once user hits save, else revert to unmodified Program
-
-    this.programForForm = new Program(this.program.id, this.program.name, this.program.description);
+    console.log(this.programForForm);
 
     this.tomorrow.setDate(this.today.getDate() + 1);
 
     if (this.configType === 'add') {
-      this.programProfiles = [new ProgramProfile(this.program.id)];
+      this.programProfiles = [new ProgramProfile(this.programForForm.id)];
 
       this.programProfiles[0].effective =
         this.tomorrow.getFullYear() + '-' +
@@ -70,15 +62,15 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
       // the current row, setting expiration on current
       // show only the current effective Profile row
       this.programProfiles = [];
-      const currentEffectiveProfile: ProgramProfile = this.getCurrentEffectiveProfile(this.program)[0];
-      this.programProfiles = [new ProgramProfile(this.program.id, currentEffectiveProfile, true)];
+      const currentEffectiveProfile: ProgramProfile = this.getCurrentEffectiveProfile(this.programForForm)[0];
+      this.programProfiles = [new ProgramProfile(this.programForForm.id, currentEffectiveProfile, true)];
       this.addProfile = true;
     }
 
     if (this.configType === 'expire') {
       this.programProfiles = [];
-      const currentEffectiveProfile: ProgramProfile = this.getCurrentEffectiveProfile(this.program)[0];
-      this.programProfiles = [new ProgramProfile(this.program.id, currentEffectiveProfile, true)];
+      const currentEffectiveProfile: ProgramProfile = this.getCurrentEffectiveProfile(this.programForForm)[0];
+      this.programProfiles = [new ProgramProfile(this.programForForm.id, currentEffectiveProfile, true)];
       this.programProfiles[0].expiration =
         this.tomorrow.getFullYear() + '-' +
        (this.tomorrow.getMonth() + 1) + '-' +
@@ -89,7 +81,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   }
 
   getCurrentEffectiveProfile(program): ProgramProfile[] {
-    return this.program.programProfile.filter(pp => {
+    return program.programProfile.filter(pp => {
       if ( pp.expiration === AppConstants.UNEXPIRED) {
         return true;
       }
@@ -105,7 +97,7 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
         this.today.getDate();
 
       // insert a new profile row with tommorow effective
-      const newProfile = new ProgramProfile(this.program.id, currProfile);
+      const newProfile = new ProgramProfile(this.programForForm.id, currProfile);
 
       newProfile.effective = // TODO shared util method
         this.tomorrow.getFullYear() + '-' +
@@ -127,24 +119,24 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
           this.programProfiles[0].expiration === AppConstants.UNEXPIRED) {
         modalResult.insertProgramProfile = this.programProfiles[0];
       }
-      modalResult.insertProgram = this.program;
+      modalResult.insertProgram = this.programForForm;
     }
 
     if (this.configType === 'edit') {
       // if profile changed (added), first update previous, add new
       // then go ahead and update the program
-      this.updateProgramFromForm();
-      modalResult.updateProgram = this.program;
+      // this.updateProgramFromForm();
+      modalResult.updateProgram = this.programForForm;
       if (this.programProfiles.length === 2) {
-        console.log(this.programProfiles);
-        console.log(this.program);
+        // console.log(this.programProfiles);
+        // console.log(this.programForForm);
 
         if (this.programProfiles[0].expiration !== AppConstants.UNEXPIRED) {
-          modalResult.updateProgramProfile = this.programProfiles[0];
+           modalResult.updateProgramProfile = this.programProfiles[0];
         } // else something went wrong, report error, abort save
         if (this.programProfiles[1].expiration === AppConstants.UNEXPIRED) {
-          modalResult.insertProgramProfile = this.programProfiles[1];
-          this.program.programProfile.push(this.programProfiles[1]);
+           modalResult.insertProgramProfile = this.programProfiles[1];
+           this.programForForm.programProfile.push(this.programProfiles[1]);
         } // else something went wrong, report error, abort save
 
       }
@@ -152,8 +144,8 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     }
 
     if (this.configType === 'expire') {
-      this.updateProgramFromForm();
-      modalResult.updateProgram = this.program;
+      // this.updateProgramFromForm();
+      modalResult.updateProgram = this.programForForm;
       if (this.programProfiles.length === 1 &&
         this.programProfiles[0].expiration !== AppConstants.UNEXPIRED) {
         modalResult.updateProgramProfile = this.programProfiles[0];
@@ -164,21 +156,21 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     this.maintainProgramModal.close({resultTxt: AppConstants.SAVESUCCESS, modalResult: modalResult});
   }
 
-  private updateProgramFromForm() {
-    if (this.program.id === this.programForForm.id) {
-      if (this.program.name !== this.programForForm.name) {
-        this.program.name = this.programForForm.name;
-      }
-      if (this.program.description !== this.programForForm.description) {
-        this.program.description = this.programForForm.description;
-      }
-      for (let i = 0; i < this.program.programProfile.length; i++) {
-        if (this.program.programProfile[i].id === this.programProfiles[0].id) {
-          this.program.programProfile[i] = this.programProfiles[0];
-        }
-      }
-    }
-  }
+  // private updateProgramFromForm() {
+  //   if (this.program.id === this.programForForm.id) {
+  //     if (this.program.name !== this.programForForm.name) {
+  //       this.program.name = this.programForForm.name;
+  //     }
+  //     if (this.program.description !== this.programForForm.description) {
+  //       this.program.description = this.programForForm.description;
+  //     }
+  //     for (let i = 0; i < this.program.programProfile.length; i++) {
+  //       if (this.program.programProfile[i].id === this.programProfiles[0].id) {
+  //         this.program.programProfile[i] = this.programProfiles[0];
+  //       }
+  //     }
+  //   }
+  // }
 
   private updateDateValue(newDate, pp: ProgramProfile, dateType: string) {
     console.log('ProgramsMaintenanceModalComponent updateDateValue: ', newDate, pp, dateType);

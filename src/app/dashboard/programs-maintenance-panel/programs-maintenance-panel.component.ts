@@ -43,8 +43,8 @@ export class ProgramsMaintenancePanelComponent implements OnInit {
     private dataApiService: DataApiService
   ) { }
 
-  ngOnInit() {
-    this.getPrograms();
+  async ngOnInit() {
+    await this.getPrograms();
   }
 
   async getPrograms() {
@@ -62,15 +62,17 @@ export class ProgramsMaintenancePanelComponent implements OnInit {
     this.programSelected.emit(this.selectedProgram);
   }
 
-  async findEffectiveProgramProfile(program: Program) {
+  async findEffectiveProgramProfile(program: Program): Promise<ProgramProfile> {
     // all of this because some odd data in the in-memory-api
     // seems like a good idea to handle this case, tho
+    // TODO duplicated from programs component, should be one version shared
     if (program && program.programProfile) {
       let profiles = program.programProfile;
       if (profiles.length !== 0 && typeof profiles[profiles.length - 1].expiration !== 'undefined') {
         return profiles[profiles.length - 1];
       }
-      if (profiles.length !== 0 && typeof profiles[profiles.length - 1] === 'number') {
+      if (profiles.length === 0 ||
+         (profiles.length !== 0 && typeof profiles[profiles.length - 1] === 'number')) {
         // really only happens in the in-memory-api exception case
          profiles = await this.findProgramProfiles(program);
          // yes, this is a side-effect

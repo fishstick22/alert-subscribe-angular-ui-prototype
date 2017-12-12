@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
     console.log('onProgramSelect:', program, (program instanceof Program));
 
     // if (program instanceof Program) {
-      this.selectedProgram = program;
+    this.selectedProgram = program;
 
     // }
 

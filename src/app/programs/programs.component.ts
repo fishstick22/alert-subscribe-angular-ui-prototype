@@ -6,7 +6,7 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 
 import { ProgramClientExceptionsModalService } from './services/program-client-exceptions/program-client-exceptions-modal.service';
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
-import { ProgramsMaintenanceModalService } from './services/programs-maintenance/programs-maintenance-modal.service';
+import { ProgramsMaintenanceModalService, ModalResult } from './services/programs-maintenance/programs-maintenance-modal.service';
 
 @Component({
   selector: 'app-programs',
@@ -19,7 +19,7 @@ export class ProgramsComponent implements OnInit {
   programs: Program[];
   programProfiles: ProgramProfile[];
   selectedRow: number;
-  // detectChanges: any = '';
+  detectChanges: any = '';
 
   constructor(
     private dataApiService: DataApiService,
@@ -28,9 +28,9 @@ export class ProgramsComponent implements OnInit {
     private programsMaintService: ProgramsMaintenanceModalService
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     console.log('ProgramComponent ngOnInit...');
-    await this.getPrograms();
+    this.getPrograms();
     console.log('ProgramComponent ', this.programs, this.programProfiles);
   }
 
@@ -61,7 +61,8 @@ export class ProgramsComponent implements OnInit {
       if (profiles.length !== 0 && typeof profiles[profiles.length - 1].expiration !== 'undefined') {
         return; // do nothing, everything is cool
       }
-      if (profiles.length !== 0 && typeof profiles[profiles.length - 1] === 'number') {
+      if (profiles.length === 0 ||
+         (profiles.length !== 0 && typeof profiles[profiles.length - 1] === 'number')) {
         // really only happens in the in-memory-api exception case
         profiles = this.findProgramProfiles(program);
         // yes, this is a side-effect
@@ -93,52 +94,74 @@ export class ProgramsComponent implements OnInit {
     // this.detectChanges = index;
   }
 
-  private configureProgram(progConfigAction: ProgramConfigAction) {
+  private async configureProgram(progConfigAction: ProgramConfigAction) {
     if (progConfigAction.configType === 'edit') {
-      this.editProgram(progConfigAction.progId);
+      this.editProgram(progConfigAction.progId).then((editResult: ModalResult) => {
+        console.log('ProgramsComponent editProgram:', editResult);
+        if (editResult.success) {
+          // easy way out, just refresh all programs
+          this.getPrograms();
+          // pro-level, find the one program that was updated and replace it in the array
+        }
+      });
+      // const editResult = this.editProgram(progConfigAction.progId);
+      // console.log('ProgramsComponent editProgram:', editResult);
     }
     if (progConfigAction.configType === 'expire') {
-      this.expireProgram(progConfigAction.progId);
+      const expireResult: ModalResult = await this.expireProgram(progConfigAction.progId);
+      if (expireResult.success) {
+        await this.getPrograms();
+      }
+
     }
-    if (progConfigAction.configType === 'client') {
-      this.configureProgramClientExceptions(progConfigAction.progId);
-    }
-    if (progConfigAction.configType === 'communications') {
-      this.configureProgramCommunications(progConfigAction.progId);
-    }
+    // if (progConfigAction.configType === 'client') {
+    //   this.configureProgramClientExceptions(progConfigAction.progId);
+    // }
+    // if (progConfigAction.configType === 'communications') {
+    //   this.configureProgramCommunications(progConfigAction.progId);
+    // }
     this.setClickedRow(null);
   }
 
   private async addProgram() {
     const nextProgramId = this.programs[this.programs.length - 1].id + 1;
-    await this.programsMaintService.maintainProgramModal('add', nextProgramId);
-    // this.detectChanges = 'add';
+    const addResult: ModalResult = await this.programsMaintService.maintainProgram('add', nextProgramId);
+    const addedProgram = addResult.modalOutput.resultProgram;
+    console.log('ProgramsComponent addProgram:', addResult, addedProgram);
+
+    if (addedProgram && !addedProgram.status) {
+      addedProgram.status = new ProgramStatus(addedProgram);
+
+    } else {
+      addedProgram.status.update(addedProgram);
+    }
+    // this.detectChanges = await this.getPrograms();
   }
 
-  private async editProgram(progId) {
-    const program: Program = this.findProgram(progId);
-    await this.programsMaintService.maintainProgramModal('edit', null, program);
-    // await (this.detectChanges = 'edit');
+  private async editProgram(progId): Promise<ModalResult> {
+    const updateProgram: Program = this.findProgram(progId);
+    const result: ModalResult = await this.programsMaintService.maintainProgram('edit', null, updateProgram);
+    return result;
   }
 
-  private async expireProgram(progId) {
-    const program: Program = this.findProgram(progId);
-    await this.programsMaintService.maintainProgramModal('expire', null, program);
-    // await (this.detectChanges = 'expire');
+  private async expireProgram(progId): Promise<ModalResult> {
+    const expireProgram: Program = this.findProgram(progId);
+    const result: ModalResult = await this.programsMaintService.maintainProgram('expire', null, expireProgram);
+    return result;
   }
 
-  private configureProgramClientExceptions(progId) {
-    const program: Program = this.findProgram(progId);
-    this.programClientExcService.configureProgramClientExcModal(program);
-  }
+  // private configureProgramClientExceptions(progId) {
+  //   const program: Program = this.findProgram(progId);
+  //   this.programClientExcService.configureProgramClientExcModal(program);
+  // }
 
-  private configureProgramCommunications(progId) {
-    // invoke service to manage a modal dialog allowing user to
-    // configure the program-level communication configurations
-    const program: Program = this.findProgram(progId);
-    this.programConfigService.configureProgramModal(program);
-    // this.detectChanges = 'communications';
-  }
+  // private configureProgramCommunications(progId) {
+  //   // invoke service to manage a modal dialog allowing user to
+  //   // configure the program-level communication configurations
+  //   const program: Program = this.findProgram(progId);
+  //   this.programConfigService.configureProgramModal(program);
+  //   // this.detectChanges = 'communications';
+  // }
 
   private findProgram(id): Program {
     return this.programs.find(p => p.id === id);
