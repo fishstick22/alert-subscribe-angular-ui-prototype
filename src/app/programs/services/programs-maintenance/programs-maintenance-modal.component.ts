@@ -123,20 +123,13 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     }
 
     if (this.configType === 'edit') {
-      // if profile changed (added), first update previous, add new
-      // then go ahead and update the program
-      // this.updateProgramFromForm();
       modalResult.updateProgram = this.programForForm;
       if (this.programProfiles.length === 2) {
-        // console.log(this.programProfiles);
-        // console.log(this.programForForm);
-
         if (this.programProfiles[0].expiration !== AppConstants.UNEXPIRED) {
            modalResult.updateProgramProfile = this.programProfiles[0];
         } // else something went wrong, report error, abort save
         if (this.programProfiles[1].expiration === AppConstants.UNEXPIRED) {
            modalResult.insertProgramProfile = this.programProfiles[1];
-           // this.programForForm.programProfile.push(this.programProfiles[1]);
         } // else something went wrong, report error, abort save
 
       }
@@ -144,7 +137,6 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
     }
 
     if (this.configType === 'expire') {
-      // this.updateProgramFromForm();
       modalResult.updateProgram = this.programForForm;
       if (this.programProfiles.length === 1 &&
         this.programProfiles[0].expiration !== AppConstants.UNEXPIRED) {

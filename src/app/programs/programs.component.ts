@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { ModalStaticHelper, ModalResult } from 'app/shared/classes/modal-helpers';
 import { Program, ProgramConfigAction, ProgramStatus } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
-import { ProgramClientExceptionsModalService } from './services/program-client-exceptions/program-client-exceptions-modal.service';
+import { ProgramClientExceptionsModalService,
+         ProgramClientExceptionsModalResult } from './services/program-client-exceptions/program-client-exceptions-modal.service';
 import { ProgramConfigurationsModalService } from './services/program-configurations/program-configurations-modal.service';
-import { ProgramsMaintenanceModalService, ModalResult } from './services/programs-maintenance/programs-maintenance-modal.service';
+import { ProgramsMaintenanceModalService,
+         ProgramsMaintModalResult } from './services/programs-maintenance/programs-maintenance-modal.service';
 
 @Component({
   selector: 'app-programs',
@@ -28,9 +31,9 @@ export class ProgramsComponent implements OnInit {
     private programsMaintService: ProgramsMaintenanceModalService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log('ProgramComponent ngOnInit...');
-    this.getPrograms();
+    await this.getPrograms();
     console.log('ProgramComponent ', this.programs, this.programProfiles);
   }
 
@@ -86,41 +89,7 @@ export class ProgramsComponent implements OnInit {
   }
 
   private setClickedRow(index) {
-    if (this.selectedRow === index || this.selectedRow === null ) {
-      this.selectedRow = null;
-    } else {
-      this.selectedRow = index;
-    }
-    // this.detectChanges = index;
-  }
-
-  private async configureProgram(progConfigAction: ProgramConfigAction) {
-    if (progConfigAction.configType === 'edit') {
-      this.editProgram(progConfigAction.progId).then((editResult: ModalResult) => {
-        console.log('ProgramsComponent editProgram:', editResult);
-        if (editResult.success) {
-          // easy way out, just refresh all programs
-          this.getPrograms();
-          // pro-level, find the one program that was updated and replace it in the array
-        }
-      });
-      // const editResult = this.editProgram(progConfigAction.progId);
-      // console.log('ProgramsComponent editProgram:', editResult);
-    }
-    if (progConfigAction.configType === 'expire') {
-      const expireResult: ModalResult = await this.expireProgram(progConfigAction.progId);
-      if (expireResult.success) {
-        await this.getPrograms();
-      }
-
-    }
-    // if (progConfigAction.configType === 'client') {
-    //   this.configureProgramClientExceptions(progConfigAction.progId);
-    // }
-    // if (progConfigAction.configType === 'communications') {
-    //   this.configureProgramCommunications(progConfigAction.progId);
-    // }
-    this.setClickedRow(null);
+    this.selectedRow = (this.selectedRow === index) ? null : index;
   }
 
   private async addProgram() {
@@ -135,7 +104,41 @@ export class ProgramsComponent implements OnInit {
     } else {
       addedProgram.status.update(addedProgram);
     }
-    // this.detectChanges = await this.getPrograms();
+
+  }
+
+  private async configureProgram(progConfigAction: ProgramConfigAction) {
+    if (progConfigAction.configType === 'edit') {
+      this.editProgram(progConfigAction.progId).then( async (editResult: ModalResult) => {
+        console.log('ProgramsComponent editProgram:', editResult);
+        if (editResult.success) {
+          // easy way out, just refresh all programs
+          // await this.getPrograms();
+          // pro-level, find the one program that was updated and replace it in the array
+          const modalOutput: ProgramsMaintModalResult = editResult.modalOutput;
+          const editProgram: Program = modalOutput.resultProgram;
+          await this.replaceUpdatedProgram(editProgram);
+        }
+      });
+    }
+    if (progConfigAction.configType === 'expire') {
+      const expireResult: ModalResult = await this.expireProgram(progConfigAction.progId);
+      if (expireResult.success) {
+        // await this.getPrograms();
+        const modalOutput: ProgramsMaintModalResult = expireResult.modalOutput;
+        const expireProgram: Program = modalOutput.resultProgram;
+        await this.replaceUpdatedProgram(expireProgram);
+      }
+
+    }
+    if (progConfigAction.configType === 'client') {
+      const clientResult: ModalResult = await this.configureProgramClientExceptions(progConfigAction.progId);
+      // nothing in this component view should change as a result
+    }
+    // if (progConfigAction.configType === 'communications') {
+    //   this.configureProgramCommunications(progConfigAction.progId);
+    // }
+    this.setClickedRow(null);
   }
 
   private async editProgram(progId): Promise<ModalResult> {
@@ -150,10 +153,11 @@ export class ProgramsComponent implements OnInit {
     return result;
   }
 
-  // private configureProgramClientExceptions(progId) {
-  //   const program: Program = this.findProgram(progId);
-  //   this.programClientExcService.configureProgramClientExcModal(program);
-  // }
+  private async configureProgramClientExceptions(progId): Promise<ModalResult> {
+    const program: Program = this.findProgram(progId);
+    const result: ModalResult = await this.programClientExcService.configureProgramClientExceptions(program);
+    return result;
+  }
 
   // private configureProgramCommunications(progId) {
   //   // invoke service to manage a modal dialog allowing user to
@@ -166,44 +170,22 @@ export class ProgramsComponent implements OnInit {
   private findProgram(id): Program {
     return this.programs.find(p => p.id === id);
   }
+
+  private replaceUpdatedProgram(updatedProgram: Program) {
+    // Angular change detection should be taking care of this
+    // must be missing something...
+    const replaceProgram = this.findProgram(updatedProgram.id);
+    // replaceProgram = null;
+    replaceProgram.name = updatedProgram.name;
+    replaceProgram.description = updatedProgram.description;
+    replaceProgram.programProfile = updatedProgram.programProfile;
+    replaceProgram.detectChanges = 'edited';
+    if (replaceProgram && !replaceProgram.status) {
+      replaceProgram.status = new ProgramStatus(replaceProgram);
+
+    } else {
+      replaceProgram.status.update(replaceProgram);
+    }
+
+  }
 }
-
-// async findEffectiveProgramProfile(program: Program) {
-//   // all of this because some odd data in the in-memory-api
-//   // seems like a good idea to handle this case, tho
-//   if (program && program.programProfile) {
-//     let profiles = this.selectedProgram.programProfile;
-//     if (profiles.length !== 0 && typeof profiles[profiles.length - 1].expiration !== 'undefined') {
-//       return profiles[profiles.length - 1];
-//     }
-//     if (profiles.length !== 0 && typeof profiles[profiles.length - 1] === 'number') {
-//       // really only happens in the in-memory-api exception case
-//        profiles = await this.findProgramProfiles(program);
-//        // yes, this is a side-effect
-//        program.programProfile = profiles;
-//        return profiles[profiles.length - 1];
-//     }
-//   }
-//   // this should never happen, should throw an exception
-//   // but that is a whole different endeavor
-//   return null;
-// }
-
-// async getProgramProfiles() {
-//   try {
-//     this.programProfiles = await this.dataApiService.getProgramProfiles();
-//   } catch (error) {
-//     console.log('getPrograms error: ', error);
-//   }
-// }
-
-// private async findProgramProfiles(selectedProgram: Program) { // : ProgramProfile[] {
-//   await this.getProgramProfiles();
-//   return this.programProfiles.filter(pp => {
-//     if (typeof(pp.program) === 'number') {
-//       if (pp.program === selectedProgram.id) {
-//         return true;
-//       } else { return false; }
-//     }
-//   });
-// }

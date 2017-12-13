@@ -96,6 +96,13 @@ export class ProgramActionsPopoverStubComponent  {
   @Input() progId: string;
   @Input() progName: string;
 }
+@Component({
+  selector: 'app-program-client-exceptions-maintenance-panel',
+  template: 'dummy component for testing'
+})
+export class ProgramClientExceptionsMaintenancePanelStubComponent {
+  @Input() selectedProgram: Program;
+}
 
 @Component({
   selector: 'app-program-status',
@@ -105,6 +112,7 @@ export class ProgramStatusStubComponent {
   @Input() program;
   @Input() detectChanges;
 }
+
 @Component({
   selector: 'app-programs-maintenance-panel',
   template: 'dummy component for testing'

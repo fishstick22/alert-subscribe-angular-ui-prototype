@@ -32,7 +32,10 @@ describe('ProgramClientExceptionsModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramClientExceptionsModalComponent ],
+      declarations: [
+        ProgramClientExceptionsModalComponent,
+        DatePickerPopupStubComponent,
+        SelectProfileOptionStubComponent ],
       imports: [ FormsModule ],
       providers: [
         NgbActiveModal,

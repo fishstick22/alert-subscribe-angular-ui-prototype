@@ -84,7 +84,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     ClickOutsideDirective,
     DraggableDirective,
     DroppableDirective,
-    SortableTableDirective,
+    SortableTableDirective
   ],
   providers: [
     HttpClientModule,

@@ -138,7 +138,7 @@ export class InMemoryDataService implements InMemoryDbService {
        'chanMobile': false,
        'effective': '2017-01-01',
        'expiration': '9999-12-31',
-       'program': 1,
+       'program': 101,
        'client':
          {'id': 142, 'code': 'AMD', 'name': 'AT&T INC.',
           'programProfileClientException': [1],
@@ -158,7 +158,7 @@ export class InMemoryDataService implements InMemoryDbService {
        'chanMandatory': 'Email',
        'effective': '2017-1-1',
        'expiration': '9999-12-31',
-       'program': 1,
+       'program': 101,
        'communication': 261
       },
       {'id': 2,
@@ -172,7 +172,7 @@ export class InMemoryDataService implements InMemoryDbService {
        'chanMandatory': 'Email',
        'effective': '2017-1-1',
        'expiration': '9999-12-31',
-       'program': 1,
+       'program': 101,
        'communication': 264
       }
     ];

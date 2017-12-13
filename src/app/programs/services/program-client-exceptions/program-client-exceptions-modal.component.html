@@ -26,8 +26,8 @@
           <th>IVR</th>
           <th>SMS</th>
           <th>S<small>ecure</small></th>
-          <th>M<small>ail</small></th>
-          <th>M<small>obile</small></th>
+<!--           <th>M<small>ail</small></th>
+          <th>M<small>obile</small></th> -->
           <th>E<small>ffective</small></th>
           <th>E<small>xpiration</small></th>
         </tr>
@@ -39,16 +39,85 @@
           </td>
           <td><span >{{pce.client.code}}</span></td>
           <td width="18%"><span >{{pce.client.name}}</span></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>
+            <app-select-profile-option 
+              id="defaultOptIn" name="defaultOptIn" label="Opt In"
+              [(ngModel)]="pce.defaultOptIn"
+              [staticValue]="pce.defaultOptIn"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td>
+          <td>
+            <app-select-profile-option 
+              id="visibleInUi" name="visibleInUi" label="UI"
+              [(ngModel)]="pce.visibleInUi"
+              [staticValue]="pce.visibleInUi"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td>
+          <td>
+            <app-select-profile-option 
+              id="chanEmail" name="chanEmail" label="Email"
+              [(ngModel)]="pce.chanEmail"
+              [staticValue]="pce.chanEmail"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td>
+          <td>
+            <app-select-profile-option 
+              id="chanIvr" name="chanIvr" label="IVR"
+              [(ngModel)]="pce.chanIvr"
+              [staticValue]="pce.chanIvr"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td>
+          <td>
+            <app-select-profile-option 
+              id="chanSms" name="chanSms" label="SMS"
+              [(ngModel)]="pce.chanSms"
+              [staticValue]="pce.chanSms"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td>
+          <td>
+            <app-select-profile-option 
+              id="chanMail" name="chanMail" label="Secure"
+              [(ngModel)]="pce.chanMail"
+              [staticValue]="pce.chanMail"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td>
+<!--          <td>
+            <app-select-profile-option 
+              id="chanMail" name="chanMail" label="Mail"
+              [(ngModel)]="pce.chanMail"
+              [staticValue]="pce.chanMail"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td>
+          <td>
+            <app-select-profile-option 
+              id="chanMobile" name="chanMobile" label="Mobile"
+              [(ngModel)]="pce.chanMobile"
+              [staticValue]="pce.chanMobile"
+              [showHeader]="false"
+              [staticReadOnly]="true"
+              [dynamicPicker]="false"></app-select-profile-option>
+          </td> -->
+          <td>
+            <app-date-picker-popup [dateValue]="pce.effective"
+              (newDateValue)="updateDateValue($event, profile, 'effective')"></app-date-picker-popup>    
+          </td>
+          <td>
+            <input class="form-control form-control-sm date-eff-exp-input" value="{{pce.expiration}}" readonly>
+          </td>
           
         </tr>
       </tbody>

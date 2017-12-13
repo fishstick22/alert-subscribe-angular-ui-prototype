@@ -6,7 +6,7 @@ import { Program } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
 import { ProgramProfileClientException } from 'app/shared/model/program-profile-client-exception';
 
-export class ProgramClientExceptionsResult {
+export class ProgramClientExceptionsModalResult {
 
   updateProgramProfileClientException: ProgramProfileClientException;
   insertProgramProfileClientException: ProgramProfileClientException;

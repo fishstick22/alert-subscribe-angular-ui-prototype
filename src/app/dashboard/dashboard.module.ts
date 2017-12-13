@@ -5,8 +5,10 @@ import { NgModule } from '@angular/core';
 
 import { routedComponents,
          DashboardRoutingModule } from './dashboard-routing.module';
-import { ShowProgramProfileOptionsComponent } from './show-program-profile-options/show-program-profile-options.component';
+import { ProgramClientExceptionsMaintenancePanelComponent
+                                          } from './client-maintenance-panel/program-client-exceptions-maintenance-panel.component';
 import { ProgramsMaintenancePanelComponent } from './programs-maintenance-panel/programs-maintenance-panel.component';
+import { ShowProgramProfileOptionsComponent } from './show-program-profile-options/show-program-profile-options.component';
 
 // shared
 import { SharedModule } from 'app/shared/shared.module';
@@ -17,6 +19,11 @@ import { SharedModule } from 'app/shared/shared.module';
     DashboardRoutingModule,
     SharedModule
   ],
-  declarations: [routedComponents, ShowProgramProfileOptionsComponent, ProgramsMaintenancePanelComponent]
+  declarations: [
+    routedComponents,
+    ProgramClientExceptionsMaintenancePanelComponent,
+    ProgramsMaintenancePanelComponent,
+    ShowProgramProfileOptionsComponent,
+  ]
 })
 export class DashboardModule { }

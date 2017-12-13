@@ -37,7 +37,8 @@ export class ProgramStatusComponent implements OnInit, OnChanges {
       return;
     } else if (changes.detectChanges &&  changes.detectChanges.currentValue) {
       console.log(changes.detectChanges);
-      if (changes.detectChanges.currentValue === 'expired' ||
+      if (changes.detectChanges.currentValue === 'saving' ||
+          changes.detectChanges.currentValue === 'expired' ||
           changes.detectChanges.currentValue === 'edited') {
         // this.program.status = new ProgramStatus(this.program);
         // this.program.status.update(this.program);

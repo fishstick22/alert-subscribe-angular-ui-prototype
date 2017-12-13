@@ -11,12 +11,9 @@ import { ProgramProfile } from 'app/shared/model/program-profile';
 import { ProgramsMaintenanceModalComponent,
          ProgramsMaintModalResult } from './programs-maintenance-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
+import { ModalStaticHelper, ModalResult } from 'app/shared/classes/modal-helpers';
 
-export class ModalResult {
-  success: boolean = false;
-  closeResult: string;
-  modalOutput: any;
-}
+export { ProgramsMaintModalResult } from './programs-maintenance-modal.component';
 
 @Injectable()
 export class ProgramsMaintenanceModalService {
@@ -37,6 +34,10 @@ export class ProgramsMaintenanceModalService {
       .then( async (result) => { // hmm, mixed syntax
         if (result.resultTxt === AppConstants.SAVESUCCESS) {
           try {
+            if (program && program.status) {
+              program.detectChanges = 'saving';
+              program.status.update(program);
+            }
             modalResult.modalOutput = await this.fulfillProgramMaintenance(result, configType);
             modalResult.success = true;
           } catch (error) {
@@ -50,7 +51,7 @@ export class ProgramsMaintenanceModalService {
         console.log('maintainProgram', modalResult);
         resolve(modalResult);
       }, (reason) => {
-        modalResult.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        modalResult.closeResult = `Dismissed ${ModalStaticHelper.getDismissReason(reason)}`;
         reject(modalResult);
       }).catch((error) => {
         console.log('maintainProgram', error);
@@ -61,7 +62,7 @@ export class ProgramsMaintenanceModalService {
     return promise;
   }
 
-  async fulfillProgramMaintenance(result, configType): Promise<ProgramsMaintModalResult> {
+  private async fulfillProgramMaintenance(result, configType): Promise<ProgramsMaintModalResult> {
     const modalResult: ProgramsMaintModalResult = result.modalResult;
     if (configType === 'add' && modalResult.insertProgram) {
       const newProgram = await this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
@@ -130,7 +131,7 @@ export class ProgramsMaintenanceModalService {
     }
   }
 
-  async maintainProgramModal(configType, nextId?: number, program?: Program): Promise<any> {
+  private async maintainProgramModal(configType, nextId?: number, program?: Program): Promise<any> {
 
     const modalOpts: NgbModalOptions = {
       size: 'lg'
@@ -184,7 +185,7 @@ export class ProgramsMaintenanceModalService {
     }
   }
 
-  private async getProgramById(programId: number) {
+  private async getProgramById(programId: number): Promise<Program> {
     try {
       const program: Program = await this.dataApiService.getProgramById(programId);
       console.log('getProgramById:', program);
@@ -194,26 +195,27 @@ export class ProgramsMaintenanceModalService {
     }
   }
 
-  private async updateProgram(program: Program) {
+  private async updateProgram(program: Program): Promise<Program> {
     try {
-      program = await this.dataApiService.updateProgram(program);
+      const updateProgram = await this.dataApiService.updateProgram(program);
       console.log('updateProgram:', program);
-      return program;
+      return updateProgram;
     } catch (error) {
       console.log('updateProgram error: ', error);
     }
   }
 
-  private async updateProgramProfile(programProfile: ProgramProfile) {
+  private async updateProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
     try {
-      await this.dataApiService.updateProgramProfile(programProfile);
+      const updateProgramProfile = await this.dataApiService.updateProgramProfile(programProfile);
       console.log('updateProgramProfile:', programProfile, this.programProfiles);
+      return updateProgramProfile;
     } catch (error) {
       console.log('updateProgramProfile error: ', error);
     }
   }
 
-  async getProgramProfiles() {
+  async getProgramProfiles(): Promise<ProgramProfile[]> {
     try {
       this.programProfiles = await this.dataApiService.getProgramProfiles();
       return this.programProfiles;
@@ -222,7 +224,7 @@ export class ProgramsMaintenanceModalService {
     }
   }
 
-  private async findProgramProfiles(selectedProgram: Program) { // : ProgramProfile[] {
+  private async findProgramProfiles(selectedProgram: Program): Promise<ProgramProfile[]> {
     await this.getProgramProfiles();
     return this.programProfiles.filter(pp => {
       if (typeof(pp.program) === 'number') {
@@ -231,15 +233,5 @@ export class ProgramsMaintenanceModalService {
         } else { return false; }
       }
     });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
   }
 }
