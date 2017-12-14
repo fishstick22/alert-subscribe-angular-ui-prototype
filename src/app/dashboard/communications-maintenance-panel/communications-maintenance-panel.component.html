@@ -1,0 +1,45 @@
+<table class="table table-responsive table-sm table-striped table-bordered table-hover">
+    <caption></caption>
+    <thead class="bg-gradient-light">
+      <tr *ngIf="selectedProgramConfigurations && selectedProgramConfigurations.length !== 0">
+        <th><small>ID</small></th>
+        <th><small>Name</small></th>
+        <th *ngFor="let pco of programConfigurationOptions"><small title="{{pco.title}}">{{pco.label}}</small></th>
+        <th><small>Default</small></th>
+        <th><small>Required</small></th>
+        <th><small>Mandatory</small></th>
+        <th><small>Effective</small></th>
+        <th><small>Expiration</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="selectedProgramConfigurations && selectedProgramConfigurations.length === 0">
+        <td colspan="10">No Communications configured for Program</td>
+      </tr>
+      <tr *ngFor="let progConfig of selectedProgramConfigurations; let i = index">
+        <td>
+            <span *ngIf="progConfig.communication" class="badge badge-secondary">{{progConfig.communication.id}}</span>
+        </td>
+        <td width="20%"><span *ngIf="progConfig.communication">{{progConfig.communication.name}}</span></td>
+        <td *ngFor="let pco of programConfigurationOptions">
+            <app-show-communication-configuration-options
+              [configuration]="progConfig"
+              [configurationProperty]="pco.property"
+              [configurationOptionLabel]="pco.label"
+              [configurationOptionLabelHidden]="true"></app-show-communication-configuration-options>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+          <label for="effective" class="sr-only"><small>Effective</small></label>
+          <input class="form-control form-control-sm date-eff-exp-input" value="{{progConfig.effective}}" readonly></td>
+        <td>
+          <label for="expiration" class="sr-only"><small>Expiration</small></label>
+          <input class="form-control form-control-sm date-eff-exp-input" value="{{progConfig.expiration}}" readonly></td>
+      </tr>
+    </tbody>
+  </table>

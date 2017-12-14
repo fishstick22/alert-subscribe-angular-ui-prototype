@@ -5,9 +5,12 @@ import { NgModule } from '@angular/core';
 
 import { routedComponents,
          DashboardRoutingModule } from './dashboard-routing.module';
+import { CommunicationsMaintenancePanelComponent } from './communications-maintenance-panel/communications-maintenance-panel.component';
 import { ProgramClientExceptionsMaintenancePanelComponent
-                                          } from './client-maintenance-panel/program-client-exceptions-maintenance-panel.component';
+       } from './client-maintenance-panel/program-client-exceptions-maintenance-panel.component';
 import { ProgramsMaintenancePanelComponent } from './programs-maintenance-panel/programs-maintenance-panel.component';
+import { ShowCommunicationConfigurationOptionsComponent
+       } from './show-communication-configuration-options/show-communication-configuration-options.component';
 import { ShowProgramProfileOptionsComponent } from './show-program-profile-options/show-program-profile-options.component';
 
 // shared
@@ -21,8 +24,10 @@ import { SharedModule } from 'app/shared/shared.module';
   ],
   declarations: [
     routedComponents,
+    CommunicationsMaintenancePanelComponent,
     ProgramClientExceptionsMaintenancePanelComponent,
     ProgramsMaintenancePanelComponent,
+    ShowCommunicationConfigurationOptionsComponent,
     ShowProgramProfileOptionsComponent,
   ]
 })

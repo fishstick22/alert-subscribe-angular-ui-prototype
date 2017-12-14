@@ -50,6 +50,15 @@ export class CommActionsPopoverStubComponent {
 }
 
 @Component({
+  selector: 'app-communications-maintenance-panel',
+  template: 'dummy component for testing'
+})
+export class CommunicationsMaintenancePanelStubComponent {
+
+  @Input() selectedProgram: Program;
+}
+
+@Component({
   selector: 'app-comm-action-table',
   template: 'dummy component for testing'
 })
@@ -156,6 +165,19 @@ export class SelectProfileOptionStubComponent {
   @Input() showHeader: boolean;
   @Input() staticReadOnly: boolean;
   @Input() dynamicPicker: string;
+}
+
+@Component({
+  selector: 'app-show-communication-configuration-options',
+  template: 'dummy component for testing'
+})
+export class ShowCommunicationConfigurationOptionsStubComponent {
+
+  @Input() configuration;
+  @Input() configurationProperty;
+  @Input() configurationOptionLabel;
+  @Input() configurationOptionLabelHidden = false;
+  @Input() configurationOptionTitle = '';
 }
 
 @Component({

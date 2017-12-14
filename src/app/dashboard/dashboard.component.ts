@@ -18,37 +18,17 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 })
 export class DashboardComponent implements OnInit {
 
-  programs: Program[];
-  programProfiles: ProgramProfile[];
-  programConfigurations: ProgramConfiguration[];
-
   selectedProgram: Program;
-  selectedProgramProfile: ProgramProfile;
 
   constructor(
     private dataApiService: DataApiService
   ) { }
 
   ngOnInit() {
-    // this.getPrograms();
   }
 
-  async getPrograms() {
-    try {
-      this.programs = await this.dataApiService.getPrograms();
-    } catch (error) {
-      console.log('getPrograms error: ', error);
-    }
-  }
-
-  async onProgramSelect(program: Program) {
+  onProgramSelect(program: Program) {
     console.log('onProgramSelect:', program, (program instanceof Program));
-
-    // if (program instanceof Program) {
     this.selectedProgram = program;
-
-    // }
-
-    // this.selectedProgramProfile = await this.findEffectiveProgramProfile(this.selectedProgram);
   }
 }

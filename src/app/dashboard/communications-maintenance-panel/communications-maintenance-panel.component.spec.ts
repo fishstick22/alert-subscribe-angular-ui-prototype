@@ -2,25 +2,20 @@ import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataApiService, FakeDataApiService,
-         CommunicationsMaintenancePanelStubComponent,
-         ProgramClientExceptionsMaintenancePanelStubComponent,
-         ProgramsMaintenancePanelStubComponent,
+         ShowCommunicationConfigurationOptionsStubComponent,
          ShowProgramProfileOptionsStubComponent } from 'app/shared/testing/shared-module-testing-helper';
 
-import { DashboardComponent } from './dashboard.component';
+import { CommunicationsMaintenancePanelComponent } from './communications-maintenance-panel.component';
 
-describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+describe('CommunicationsMaintenancePanelComponent', () => {
+  let component: CommunicationsMaintenancePanelComponent;
+  let fixture: ComponentFixture<CommunicationsMaintenancePanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        DashboardComponent,
-        CommunicationsMaintenancePanelStubComponent,
-        ProgramClientExceptionsMaintenancePanelStubComponent,
-        ProgramsMaintenancePanelStubComponent,
-        ShowProgramProfileOptionsStubComponent
+        CommunicationsMaintenancePanelComponent,
+        ShowCommunicationConfigurationOptionsStubComponent
       ],
       providers: [
         DataApiService,
@@ -34,7 +29,7 @@ describe('DashboardComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(CommunicationsMaintenancePanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
