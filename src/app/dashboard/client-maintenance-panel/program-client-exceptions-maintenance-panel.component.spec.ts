@@ -13,7 +13,10 @@ describe('ProgramClientExceptionsMaintenancePanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramClientExceptionsMaintenancePanelComponent ],
+      declarations: [
+        ProgramClientExceptionsMaintenancePanelComponent,
+        ShowProgramProfileOptionsStubComponent
+      ],
       providers: [
         DataApiService,
         { provide: DataApiService, usevalue: FakeDataApiService },

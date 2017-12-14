@@ -167,6 +167,9 @@ export class ShowProgramProfileOptionsStubComponent {
   @Input() profile;
   @Input() profileProperty;
   @Input() profileOptionLabel;
+  @Input() profileOptionLabelHidden = false;
+  @Input() profileOptionTitle = '';
+
 }
 
 @Component({
