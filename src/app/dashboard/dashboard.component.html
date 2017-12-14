@@ -12,16 +12,18 @@
         <!--</div>card-->
 
         <div class="card border-secondary mb-3 text-center">
-          <span *ngIf="selectedProgram">
-            <h5 class="card-title bg-gradient-secondary text-white text-center">
-              Program ({{selectedProgram.id}}) &mdash; Client Exceptions</h5>
-              <div class="card-body text-center">
-                  <app-program-client-exceptions-maintenance-panel
-                    [selectedProgram]="selectedProgram">
+          <h5 class="card-title bg-gradient-secondary text-white text-center">
+            Program (
+            <span *ngIf="selectedProgram">
+                {{selectedProgram.id}}</span>
+            ) &mdash; Client Exceptions</h5>
+          <div class="card-body text-center">
+              <app-program-client-exceptions-maintenance-panel
+                [selectedProgram]="selectedProgram">
 
-                  </app-program-client-exceptions-maintenance-panel>
-              </div>              
-          </span>
+              </app-program-client-exceptions-maintenance-panel>
+          </div>              
+
 
         </div>
 

@@ -1,3 +1,38 @@
-<p>
-  program-client-exceptions-maintenance-panel works!
-</p>
+<table class="table table-responsive table-sm table-striped table-bordered table-hover">
+    <caption></caption>
+    <thead class="bg-gradient-light">
+      <tr *ngIf="selectedProgramProfileClientExceptions && selectedProgramProfileClientExceptions.length !== 0">
+        <th><small>ID</small></th>
+        <th><small>Code</small></th>
+        <th><small>Name</small></th>
+        <th *ngFor="let ppo of programProfileOptions"><small title="{{ppo.title}}">{{ppo.label}}</small></th>
+        <th><small>Effective</small></th>
+        <th><small>Expiration</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="selectedProgramProfileClientExceptions && selectedProgramProfileClientExceptions.length === 0">
+        <td colspan="10">No Client Exceptions for Program</td>
+      </tr>
+      <tr *ngFor="let pce of selectedProgramProfileClientExceptions; let i = index">
+        <td>
+            <span *ngIf="pce.client.id" class="badge badge-secondary">{{pce.client.id}}</span>
+        </td>
+        <td><span >{{pce.client.code}}</span></td>
+        <td width="18%"><span >{{pce.client.name}}</span></td>
+        <td *ngFor="let ppo of programProfileOptions">
+            <app-show-program-profile-options
+            [profile]="pce"
+            [profileProperty]="ppo.property"
+            [profileOptionLabel]="ppo.label"
+            [profileOptionLabelHidden]="true"></app-show-program-profile-options>
+        </td>
+        <td>
+          <label for="effective" class="sr-only"><small>Effective</small></label>
+          <input class="form-control form-control-sm date-eff-exp-input" value="{{pce.effective}}" readonly></td>
+        <td>
+          <label for="expiration" class="sr-only"><small>Expiration</small></label>
+          <input class="form-control form-control-sm date-eff-exp-input" value="{{pce.expiration}}" readonly></td>
+      </tr>
+    </tbody>
+  </table>

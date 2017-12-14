@@ -12,32 +12,31 @@
 </div>
 
 <div class="card-body">
-  <div class="form-row">
-    <div class="form-group col-md-1" *ngFor="let ppo of programProfileOptions">
-      <app-show-program-profile-options *ngIf="selectedProgramProfile"
-        [profile]="selectedProgramProfile"
-        [profileProperty]="ppo.property"
-        [profileOptionLabel]="ppo.label"></app-show-program-profile-options>
-      <!--{{ppo.label}}: {{ppo.property}}: -->
-    </div>
-
-    <div class="form-group col-md-2">
-      <span *ngIf="selectedProgramProfile">
-        <label for="effective" class="flex-justify-left rounded">
-          <small>Effective</small></label>
-          <!-- the effective date of the current effective row -->
-        <input class="form-control form-control-sm" value="{{selectedProgramProfile.effective}}" readonly>
-      </span>
-    </div>
-
-    <div class="form-group col-md-2">
-      <span *ngIf="selectedProgramProfile">
-        <label for="expiration" class="flex-justify-left rounded">
-          <small>Expiration</small></label>
-          <!-- the expiration date of the current effective row -->
-        <input class="form-control form-control-sm" value="{{selectedProgramProfile.expiration}}" readonly>
-      </span>
-    </div>
-
-  </div><!--form-row-->
+    <table *ngIf="selectedProgramProfile" class="table table-responsive table-sm table-striped table-bordered table-hover">
+        <caption></caption>
+        <thead class="bg-gradient-light">
+          <tr>
+            <th *ngFor="let ppo of programProfileOptions"><small title="{{ppo.title}}">{{ppo.label}}</small></th>
+            <th><small>Effective</small></th>
+            <th><small>Expiration</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngFor="let ppo of programProfileOptions">
+                <app-show-program-profile-options
+                [profile]="selectedProgramProfile"
+                [profileProperty]="ppo.property"
+                [profileOptionLabel]="ppo.label"
+                [profileOptionLabelHidden]="true"></app-show-program-profile-options>
+            </td>
+            <td>
+              <label for="effective" class="sr-only"><small>Effective</small></label>
+              <input class="form-control form-control-sm date-eff-exp-input" value="{{selectedProgramProfile.effective}}" readonly></td>
+            <td>
+              <label for="expiration" class="sr-only"><small>Expiration</small></label>
+              <input class="form-control form-control-sm date-eff-exp-input" value="{{selectedProgramProfile.expiration}}" readonly></td>
+          </tr>
+        </tbody>
+      </table>
 </div><!--card-body-->

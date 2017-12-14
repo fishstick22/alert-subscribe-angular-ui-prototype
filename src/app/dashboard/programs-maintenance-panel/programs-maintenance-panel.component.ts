@@ -26,18 +26,7 @@ export class ProgramsMaintenancePanelComponent implements OnInit {
   selectedProgram: Program;
   selectedProgramProfile: ProgramProfile;
 
-  programProfileOptions = [
-    {'property': 'defaultOptIn', 'label': 'OptIn Def'},
-    {'property': 'visibleInUi',  'label': 'UI Visible'},
-    {'property': 'chanEmail',    'label': 'Email'},
-    {'property': 'chanIvr',      'label': 'IVR'},
-    {'property': 'chanSms',      'label': 'SMS'},
-    {'property': 'chanSecure',   'label': 'Secure'},
-    {'property': 'chanMail',     'label': 'Mail'},
-    {'property': 'chanMobile',   'label': 'Mobile'},
-    // {'property': 'effective',    'label': 'Effective'},
-    // {'property': 'expiration',   'label': 'Expiration'}
-  ];
+  programProfileOptions = AppConstants.PROGRAMPROFILEOPTIONS;
 
   constructor(
     private dataApiService: DataApiService

@@ -20,8 +20,8 @@ export class ProgramClientExceptionsMaintenancePanelComponent implements OnInit,
   @Input() selectedProgram: Program;
 
   programProfileClientExceptions: ProgramProfileClientException[];
+  programProfileOptions = AppConstants.PROGRAMPROFILEOPTIONS;
   selectedProgramProfileClientExceptions: ProgramProfileClientException[];
-  closeResult: string;
 
   constructor(
     private dataApiService: DataApiService
@@ -29,16 +29,18 @@ export class ProgramClientExceptionsMaintenancePanelComponent implements OnInit,
 
   async ngOnInit() {
     await this.getProgramProfileClientExceptions();
-    this.selectedProgramProfileClientExceptions = await this.findClientExceptions(this.selectedProgram);
+    // this.selectedProgramProfileClientExceptions = this.findClientExceptions(this.selectedProgram);
   }
 
-  async ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     console.log('ProgramClientExceptionsMaintenancePanel OnChanges', changes);
+    if (changes.selectedProgram && !changes.selectedProgram.firstChange) {
+      this.selectedProgramProfileClientExceptions = this.findClientExceptions(this.selectedProgram);
+    }
   }
-  private async findClientExceptions(program: Program) {
+  private findClientExceptions(program: Program) {
     // TODO well, here's where we want to go get one at a time or
     // a query that gets them by program id in the API...
-    await this.getProgramProfileClientExceptions();
     return this.programProfileClientExceptions.filter(ppce => ppce.program === program.id);
   }
 

@@ -11,6 +11,8 @@ export class ShowProgramProfileOptionsComponent implements OnInit {
   @Input() profile;
   @Input() profileProperty;
   @Input() profileOptionLabel;
+  @Input() profileOptionLabelHidden = false;
+  @Input() profileOptionTitle = '';
 
   staticReadonlyOption: string = '';
 
