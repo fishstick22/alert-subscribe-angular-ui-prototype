@@ -12,6 +12,9 @@ import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 import { ProgramConfigurationsModalComponent,
           ProgramConfigModalResult } from './program-configurations-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
+import { ModalStaticHelper, ModalResult } from 'app/shared/classes/modal-helpers';
+
+export { ProgramConfigModalResult } from './program-configurations-modal.component';
 
 @Injectable()
 export class ProgramConfigurationsModalService {
@@ -27,13 +30,43 @@ export class ProgramConfigurationsModalService {
     private modalService: NgbModal
   ) { }
 
-  private addProgramConfiguration(programConfiguration: ProgramConfiguration): void {
-    this.dataApiService.createProgramConfiguration(programConfiguration)
-      .then(pc => console.log('addProgramConfiguration:', programConfiguration, this.programConfigurations))
-      .catch(error =>  console.log('addProgramConfiguration error: ', error));
+  public async configureProgram(program: Program): Promise<ModalResult> {
+    const modalResult = new ModalResult();
+
+    const promise = new Promise<ModalResult>((resolve, reject) => {
+      this.configureProgramModal(program)
+      .then( async (result) => { // hmm, mixed syntax
+        if (result.resultTxt === AppConstants.SAVESUCCESS) {
+          try {
+            // if (program && program.status) {
+            //   program.detectChanges = 'saving';
+            //   program.status.update(program);
+            // }
+            // modalResult.modalOutput = await this.fulfillProgramConfiguration(result);
+            modalResult.success = true;
+          } catch (error) {
+            // TODO part of larger error handling effort
+          }
+
+          modalResult.closeResult = `Closed with: ${result.resultTxt}`;
+        } else {
+          modalResult.closeResult = `Closed with: ${result}`;
+        }
+        console.log('maintainProgram', modalResult);
+        resolve(modalResult);
+      }, (reason) => {
+        modalResult.closeResult = `Dismissed ${ModalStaticHelper.getDismissReason(reason)}`;
+        reject(modalResult);
+      }).catch((error) => {
+        console.log('maintainProgram', error);
+        reject(error);
+      });
+    });
+
+    return promise;
   }
 
-  async configureProgramModal(program: Program) {
+  private async configureProgramModal(program: Program) {
     const modalOpts: NgbModalOptions = {
       size: 'lg'
     };
@@ -43,37 +76,60 @@ export class ProgramConfigurationsModalService {
     modalComp.communications = await this.getCommunications();
     modalComp.program = program;
     modalComp.programConfigurations = await this.findProgramConfigurations(program);
+
+    // OnInit has likely fired previously, invoke some initialization code
     modalComp.modalInit();
 
-    modalRef.result.then((result) => {
-      if (result.resultTxt === AppConstants.SAVESUCCESS) {
-        console.log('configureProgramModal result: ', result.modalResult);
-        this.closeResult = `Closed with: ${result.resultTxt}`;
-        if (result.modalResult) {
-          const modalResult: ProgramConfigModalResult = result.modalResult;
-          // if (modalResult.prevProgConfig) {
-          //   this.updateProgramConfiguration(modalResult.prevProgConfig);
-          // }
-          if (modalResult.newProgramConfigs) {
-            for (let i = 0; i < modalResult.newProgramConfigs.length; i++) {
-              this.addProgramConfiguration(modalResult.newProgramConfigs[i]);
-            }
-          }
-        } else {
-          // this would be some kind of exception
-          console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
-        }
-      } else {
-        this.closeResult = `Closed with: ${result}`;
-      }
-      // this.setClickedRow(null);
-      console.log('configureProgramModal result: ', this.closeResult);
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      // this.setClickedRow(null);
-      console.log('configureProgramModal result: ', this.closeResult);
-    });
+    return modalRef.result;
   }
+
+  private addProgramConfiguration(programConfiguration: ProgramConfiguration): void {
+    this.dataApiService.createProgramConfiguration(programConfiguration)
+      .then(pc => console.log('addProgramConfiguration:', programConfiguration, this.programConfigurations))
+      .catch(error =>  console.log('addProgramConfiguration error: ', error));
+  }
+
+  // async configureProgramModalOld(program: Program) {
+  //   const modalOpts: NgbModalOptions = {
+  //     size: 'lg'
+  //   };
+  //   const modalRef = this.modalService.open(ProgramConfigurationsModalComponent, modalOpts);
+  //   const modalComp: ProgramConfigurationsModalComponent  = modalRef.componentInstance;
+
+  //   modalComp.communications = await this.getCommunications();
+  //   modalComp.program = program;
+  //   modalComp.programConfigurations = await this.findProgramConfigurations(program);
+  //   modalComp.modalInit();
+
+  //   modalRef.result.then((result) => {
+  //     if (result.resultTxt === AppConstants.SAVESUCCESS) {
+  //       console.log('configureProgramModal result: ', result.modalResult);
+  //       this.closeResult = `Closed with: ${result.resultTxt}`;
+  //       if (result.modalResult) {
+  //         const modalResult: ProgramConfigModalResult = result.modalResult;
+  //         // if (modalResult.prevProgConfig) {
+  //         //   this.updateProgramConfiguration(modalResult.prevProgConfig);
+  //         // }
+  //         if (modalResult.newProgramConfigs) {
+  //           for (let i = 0; i < modalResult.newProgramConfigs.length; i++) {
+  //             this.addProgramConfiguration(modalResult.newProgramConfigs[i]);
+  //           }
+  //         }
+  //       } else {
+  //         // this would be some kind of exception
+  //         console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
+  //       }
+  //     } else {
+  //       this.closeResult = `Closed with: ${result}`;
+  //     }
+  //     // this.setClickedRow(null);
+  //     console.log('configureProgramModal result: ', this.closeResult);
+  //   }, (reason) => {
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //     // this.setClickedRow(null);
+  //     console.log('configureProgramModal result: ', this.closeResult);
+  //   });
+  // }
 
   private findCommunication(id: number): Communication {
     return this.communications.find(c => c.id === id);

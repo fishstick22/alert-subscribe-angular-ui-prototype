@@ -1,25 +1,27 @@
 import { Component, OnInit, Input, ViewEncapsulation, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
+import { AppConstants } from 'app/app-constants';
+
 const noop = () => {
 };
 
 /* tslint:disable:no-use-before-declare */
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SelectChannelMandatoryComponent),
+    useExisting: forwardRef(() => SelectChannelDefaultComponent),
     multi: true
 };
 /* tslint:enable:no-use-before-declare */
 
 @Component({
-  selector: 'app-select-channel-mandatory',
-  templateUrl: './select-channel-mandatory.component.html',
-  styleUrls: ['./select-channel-mandatory.component.scss'],
+  selector: 'app-select-channel-default',
+  templateUrl: './select-channel-default.component.html',
+  styleUrls: ['./select-channel-default.component.scss'],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })
-export class SelectChannelMandatoryComponent implements OnInit, ControlValueAccessor {
+export class SelectChannelDefaultComponent implements OnInit, ControlValueAccessor {
 
   // Placeholders for the callbacks which are later providesd
   // by the Control Value Accessor
@@ -31,13 +33,13 @@ export class SelectChannelMandatoryComponent implements OnInit, ControlValueAcce
   @Input() actualStaticValue: string;
   @Input() lastConfigRow: number;
 
-  chanMandatoryOpts: string[] = ['No', 'Email', 'IVR', 'SMS'];
+  chanDefaultOpts = AppConstants.CHANDEFAULTOPTS;
   private innerValue: any = '';
 
   constructor() { }
 
   ngOnInit() {
-    console.log('SelectChannelMandatoryComponent:', this.id, this.name);
+    console.log('SelectChannelDefaultComponent:', this.id, this.name);
   }
 
   // get accessor

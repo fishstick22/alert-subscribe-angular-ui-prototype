@@ -14,7 +14,7 @@ import {
 import {
   FakeNgbActiveModal,
   SelectChannelPriorityStubComponent,
-  SelectChannelMandatoryStubComponent,
+  SelectChannelDefaultStubComponent,
   DateEffExpStubComponent,
   CommActionTableStubComponent,
   DraggableDirective,
@@ -35,7 +35,7 @@ describe('ProgramConfigurationsModalComponent', () => {
       declarations: [
         ProgramConfigsByCommModalComponent,
         SelectChannelPriorityStubComponent,
-        SelectChannelMandatoryStubComponent,
+        SelectChannelDefaultStubComponent,
         DateEffExpStubComponent
        ],
       imports: [ FormsModule ], // NgbModule.forRoot() ],

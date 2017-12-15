@@ -9,7 +9,7 @@ import { ClientConfigurationsModalService } from './services/client-configuratio
 import { FakeClientConfigurationsModalService } from './testing/fake-client-configurations-modal.service';
 
 import {
-  // SelectChannelMandatoryStubComponent,
+  // SelectChannelDefaultStubComponent,
   // DateEffExpStubComponent,
   FakeNgbActiveModal,
   // ClientActionTableStubComponent,

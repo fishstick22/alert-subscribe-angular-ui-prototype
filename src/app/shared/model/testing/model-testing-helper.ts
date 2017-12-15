@@ -89,7 +89,9 @@ export class ModelTestingHelper {
     clientConfig.chanSmsPriority = 1,
     clientConfig.chanMailPriority = 0,
     clientConfig.chanMobilePriority = 0,
-    clientConfig.chanMandatory = 'Email',
+    clientConfig.chanDefault = 'Email',
+    clientConfig.required = true,
+    clientConfig.mandatory = true,
     clientConfig.effective = '2017-1-1',
     clientConfig.expiration = '9999-12-31',
     clientConfig.client = this.getTestClient();
@@ -109,7 +111,9 @@ export class ModelTestingHelper {
     programConfig.chanSmsPriority = 1,
     programConfig.chanMailPriority = 0,
     programConfig.chanMobilePriority = 0,
-    programConfig.chanMandatory = 'Email',
+    programConfig.chanDefault = 'Email',
+    programConfig.required = true,
+    programConfig.mandatory = true,
     programConfig.effective = '2017-1-1',
     programConfig.expiration = '9999-12-31',
     programConfig.program = this.getTestProgram();

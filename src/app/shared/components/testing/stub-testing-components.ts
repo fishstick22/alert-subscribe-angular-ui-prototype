@@ -141,10 +141,10 @@ export class SelectChannelPriorityStubComponent {
 }
 
 @Component({
-  selector: 'app-select-channel-mandatory',
+  selector: 'app-select-channel-default',
   template: 'dummy component for testing'
 })
-export class SelectChannelMandatoryStubComponent {
+export class SelectChannelDefaultStubComponent {
   @Input() id: string;
   @Input() name: string;
   @Input() actualStaticValue: string; // sometimes you just do stuff because

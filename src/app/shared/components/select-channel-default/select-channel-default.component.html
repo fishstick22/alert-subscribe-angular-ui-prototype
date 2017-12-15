@@ -7,6 +7,6 @@
 <div *ngIf="lastConfigRow" class="flex-justify-right">
   <select id="{{id}}_{{name}}" name="{{name}}" [(ngModel)]="value" required
     class="form-control form-control-sm" (blur)="onBlur()">
-    <option *ngFor="let cmo of chanMandatoryOpts" [ngValue]="cmo">{{cmo}}</option>
+    <option *ngFor="let cdo of chanDefaultOpts" [ngValue]="cdo">{{cdo}}</option>
   </select>
 </div>

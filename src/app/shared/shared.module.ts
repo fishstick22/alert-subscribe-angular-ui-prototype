@@ -44,7 +44,7 @@ import { CommActionsPopoverComponent     } from './components/comm-actions-popov
 import { CommActionTableComponent        } from './components/comm-action-table/comm-action-table.component';
 import { DateEffExpComponent             } from './components/date-eff-exp/date-eff-exp.component';
 import { DatePickerPopupComponent        } from './components/date-picker-popup/date-picker-popup.component';
-import { SelectChannelMandatoryComponent } from './components/select-channel-mandatory/select-channel-mandatory.component';
+import { SelectChannelDefaultComponent   } from './components/select-channel-default/select-channel-default.component';
 import { SelectChannelPriorityComponent  } from './components/select-channel-priority/select-channel-priority.component';
 import { SelectProfileOptionComponent    } from './components/select-profile-option/select-profile-option.component';
 import { SortableColumnComponent         } from './components/sortable-column/sortable-column.component';
@@ -73,7 +73,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     CommActionTableComponent,
     DateEffExpComponent,
     DatePickerPopupComponent,
-    SelectChannelMandatoryComponent,
+    SelectChannelDefaultComponent,
     SelectChannelPriorityComponent,
     SelectProfileOptionComponent,
     SortableColumnComponent,
@@ -108,7 +108,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     CommActionTableComponent,
     DateEffExpComponent,
     DatePickerPopupComponent,
-    SelectChannelMandatoryComponent,
+    SelectChannelDefaultComponent,
     SelectChannelPriorityComponent,
     SelectProfileOptionComponent,
     // directives

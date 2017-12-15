@@ -25,7 +25,7 @@
                 <th>SMS</th>
                 <th>M<small>ail</small></th>
                 <th>M<small>obile</small></th>
-                <th>M<small>andatory</small></th>
+                <th>D<small>efault</small></th>
                 <th>E<small>ffective</small></th>
                 <th>E<small>xpiration</small></th>
               </tr>
@@ -72,11 +72,11 @@
                       [(ngModel)]="cc.chanMobilePriority"
                       [actualStaticValue]="cc.chanMobilePriority"
                       [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-priority></td> 
-                <td><app-select-channel-mandatory
-                      id="chanMandatory" name="chanMandatory" 
-                      [(ngModel)]="cc.chanMandatory"
-                      [actualStaticValue]="cc.chanMandatory"
-                      [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-mandatory></td>
+                <td><app-select-channel-default
+                      id="chanDefault" name="chanDefault" 
+                      [(ngModel)]="cc.chanDefault"
+                      [actualStaticValue]="cc.chanDefault"
+                      [lastConfigRow]="i === lastClientConfigRow" ></app-select-channel-default></td>
                 <td><app-date-eff-exp
                       dateType="effective" [commConfig]="cc"
                       [lastConfigRow]="i === lastClientConfigRow"

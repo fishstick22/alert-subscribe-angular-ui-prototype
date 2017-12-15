@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
-import { SelectChannelMandatoryComponent } from './select-channel-mandatory.component';
+import { SelectChannelDefaultComponent } from './select-channel-default.component';
 
-describe('SelectChannelMandatoryComponent', () => {
-  let component: SelectChannelMandatoryComponent;
-  let fixture: ComponentFixture<SelectChannelMandatoryComponent>;
+describe('SelectChannelDefaultComponent', () => {
+  let component: SelectChannelDefaultComponent;
+  let fixture: ComponentFixture<SelectChannelDefaultComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectChannelMandatoryComponent ],
+      declarations: [ SelectChannelDefaultComponent ],
       imports: [ FormsModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectChannelMandatoryComponent);
+    fixture = TestBed.createComponent(SelectChannelDefaultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

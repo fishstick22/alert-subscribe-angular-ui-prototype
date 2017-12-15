@@ -13,7 +13,7 @@ import {
 
 import {
   SelectChannelPriorityStubComponent,
-  SelectChannelMandatoryStubComponent,
+  SelectChannelDefaultStubComponent,
   DateEffExpStubComponent,
   FakeNgbActiveModal,
   ClientActionTableStubComponent,
@@ -34,7 +34,7 @@ describe('ClientConfigurationsModalComponent', () => {
       declarations: [
         ClientConfigurationsModalComponent,
         SelectChannelPriorityStubComponent,
-        SelectChannelMandatoryStubComponent,
+        SelectChannelDefaultStubComponent,
         DateEffExpStubComponent,
         CommActionTableStubComponent,
         DraggableDirective,

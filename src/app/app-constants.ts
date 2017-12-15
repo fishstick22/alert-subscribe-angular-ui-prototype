@@ -29,4 +29,5 @@ export class AppConstants {
   ];
 
   public static CHANNELPRIORTYOPTS: number[] = [0, 1, 2, 3];
+  public static CHANDEFAULTOPTS: string[] = ['No', 'Email', 'IVR', 'SMS'];
 }

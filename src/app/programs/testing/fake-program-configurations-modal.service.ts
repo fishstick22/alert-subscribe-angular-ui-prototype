@@ -8,7 +8,7 @@ import {
   ClientConfiguration,
   CommunicationConfiguration,
   SelectChannelPriorityStubComponent,
-  SelectChannelMandatoryStubComponent,
+  SelectChannelDefaultStubComponent,
   DateEffExpStubComponent,
   CommActionTableStubComponent,
   ClientActionTableStubComponent

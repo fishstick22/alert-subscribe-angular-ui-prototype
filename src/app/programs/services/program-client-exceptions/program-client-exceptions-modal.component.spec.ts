@@ -14,7 +14,7 @@ import {
 import {
   FakeNgbActiveModal,
   // SelectChannelPriorityStubComponent,
-  // SelectChannelMandatoryStubComponent,
+  // SelectChannelDefaultStubComponent,
   SelectProfileOptionStubComponent,
   // DateEffExpStubComponent,
   DatePickerPopupStubComponent,

@@ -135,9 +135,9 @@ export class ProgramsComponent implements OnInit {
       const clientResult: ModalResult = await this.configureProgramClientExceptions(progConfigAction.progId);
       // nothing in this component view should change as a result
     }
-    // if (progConfigAction.configType === 'communications') {
-    //   this.configureProgramCommunications(progConfigAction.progId);
-    // }
+    if (progConfigAction.configType === 'communications') {
+      const clientResult: ModalResult = await this.configureProgramCommunications(progConfigAction.progId);
+    }
     this.setClickedRow(null);
   }
 
@@ -159,13 +159,13 @@ export class ProgramsComponent implements OnInit {
     return result;
   }
 
-  // private configureProgramCommunications(progId) {
-  //   // invoke service to manage a modal dialog allowing user to
-  //   // configure the program-level communication configurations
-  //   const program: Program = this.findProgram(progId);
-  //   this.programConfigService.configureProgramModal(program);
-  //   // this.detectChanges = 'communications';
-  // }
+  private async configureProgramCommunications(progId): Promise<ModalResult> {
+    // invoke service to manage a modal dialog allowing user to
+    // configure the program-level communication configurations
+    const program: Program = this.findProgram(progId);
+    const result: ModalResult = await this.programConfigService.configureProgram(program);
+    return result;
+  }
 
   private findProgram(id): Program {
     return this.programs.find(p => p.id === id);
