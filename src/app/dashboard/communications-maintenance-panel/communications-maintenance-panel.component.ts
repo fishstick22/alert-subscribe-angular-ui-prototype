@@ -38,7 +38,7 @@ export class CommunicationsMaintenancePanelComponent implements OnInit, OnChange
     console.log('CommunicationsMaintenancePanelComponent OnChanges', changes);
     if (changes.selectedProgram && !changes.selectedProgram.firstChange) {
       this.selectedProgramConfigurations = this.findProgramConfigurations(this.selectedProgram);
-
+      console.log(this.selectedProgramConfigurations);
     }
   }
 
@@ -70,13 +70,13 @@ export class CommunicationsMaintenancePanelComponent implements OnInit, OnChange
           if (typeof(pc.communication) === 'number') {
             pc.communication = this.findCommunication(<number> pc.communication);
           }
-          return true;
+          return AppConstants.UNEXPIRED === pc.expiration;
         } else { return false; }
-      } else if (pc.communication.id === selectedProgram.id) {
+      } else if (pc.program.id === selectedProgram.id) {
         if (typeof(pc.communication) === 'number') {
           pc.communication = this.findCommunication(<number> pc.communication);
         }
-        return true;
+        return AppConstants.UNEXPIRED === pc.expiration;
       }
       return false;
     });

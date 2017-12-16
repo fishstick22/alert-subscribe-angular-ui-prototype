@@ -92,7 +92,7 @@ export class ModelTestingHelper {
     clientConfig.chanDefault = 'Email',
     clientConfig.required = true,
     clientConfig.mandatory = true,
-    clientConfig.effective = '2017-1-1',
+    clientConfig.effective = '2017-01-01',
     clientConfig.expiration = '9999-12-31',
     clientConfig.client = this.getTestClient();
     clientConfig.communication = this.getTestCommunication();
@@ -114,7 +114,7 @@ export class ModelTestingHelper {
     programConfig.chanDefault = 'Email',
     programConfig.required = true,
     programConfig.mandatory = true,
-    programConfig.effective = '2017-1-1',
+    programConfig.effective = '2017-01-01',
     programConfig.expiration = '9999-12-31',
     programConfig.program = this.getTestProgram();
     programConfig.communication = this.getTestCommunication();

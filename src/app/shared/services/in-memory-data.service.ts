@@ -158,7 +158,7 @@ export class InMemoryDataService implements InMemoryDbService {
        'chanDefault': 'Email',
        'required': true,
        'mandatory': true,
-       'effective': '2017-1-1',
+       'effective': '2017-01-01',
        'expiration': '9999-12-31',
        'program': 101,
        'communication': 261
@@ -174,7 +174,7 @@ export class InMemoryDataService implements InMemoryDbService {
        'chanDefault': 'Email',
        'required': true,
        'mandatory': true,
-       'effective': '2017-1-1',
+       'effective': '2017-01-01',
        'expiration': '9999-12-31',
        'program': 101,
        'communication': 264

@@ -10,7 +10,7 @@ import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
 import { ProgramConfigurationsModalComponent,
-          ProgramConfigModalResult } from './program-configurations-modal.component';
+         ProgramConfigModalResult } from './program-configurations-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
 import { ModalStaticHelper, ModalResult } from 'app/shared/classes/modal-helpers';
 
@@ -20,9 +20,10 @@ export { ProgramConfigModalResult } from './program-configurations-modal.compone
 export class ProgramConfigurationsModalService {
 
   communications: Communication[];
-  program: Program;
-  programs: Program[];
+  // program: Program;
+  // programs: Program[];
   programConfigurations: ProgramConfiguration[];
+
   closeResult: string;
 
   constructor(
@@ -42,7 +43,7 @@ export class ProgramConfigurationsModalService {
             //   program.detectChanges = 'saving';
             //   program.status.update(program);
             // }
-            // modalResult.modalOutput = await this.fulfillProgramConfiguration(result);
+            modalResult.modalOutput = await this.fulfillProgramConfiguration(result);
             modalResult.success = true;
           } catch (error) {
             // TODO part of larger error handling effort
@@ -66,6 +67,29 @@ export class ProgramConfigurationsModalService {
     return promise;
   }
 
+  private async fulfillProgramConfiguration(result): Promise<ProgramConfigModalResult> {
+    const modalResult: ProgramConfigModalResult = result.modalResult;
+
+    if (modalResult.newProgramConfigs) {
+      for (let i = 0; i < modalResult.newProgramConfigs.length; i++) {
+        await this.addProgramConfiguration(modalResult.newProgramConfigs[i]);
+      }
+    } else {
+      // TODO this would be some kind of exception
+      console.log('ProgramConfigurationsModalService fulfillProgramConfiguration bad result: ', result.modalResult);
+    }
+
+    return modalResult;
+  }
+
+  private async addProgramConfiguration(programConfiguration: ProgramConfiguration): Promise<void> {
+    try {
+      await this.dataApiService.createProgramConfiguration(programConfiguration);
+    } catch (error) {
+      console.log('addProgramConfiguration error: ', error);
+    }
+  }
+
   private async configureProgramModal(program: Program) {
     const modalOpts: NgbModalOptions = {
       size: 'lg'
@@ -73,7 +97,10 @@ export class ProgramConfigurationsModalService {
     const modalRef = this.modalService.open(ProgramConfigurationsModalComponent, modalOpts);
     const modalComp: ProgramConfigurationsModalComponent  = modalRef.componentInstance;
 
-    modalComp.communications = await this.getCommunications();
+    this.communications = await this.getCommunications();
+    this.programConfigurations = await this.getProgramConfigurations();
+
+    modalComp.communications = this.communications;
     modalComp.program = program;
     modalComp.programConfigurations = await this.findProgramConfigurations(program);
 
@@ -83,11 +110,47 @@ export class ProgramConfigurationsModalService {
     return modalRef.result;
   }
 
-  private addProgramConfiguration(programConfiguration: ProgramConfiguration): void {
-    this.dataApiService.createProgramConfiguration(programConfiguration)
-      .then(pc => console.log('addProgramConfiguration:', programConfiguration, this.programConfigurations))
-      .catch(error =>  console.log('addProgramConfiguration error: ', error));
+  private async getCommunications(): Promise<Communication[]> {
+    try {
+      return await this.dataApiService.getCommunications();
+    } catch (error) {
+      console.log('getCommunications error: ', error);
+    }
   }
+
+  private async findProgramConfigurations(selectedProgram: Program): Promise<ProgramConfiguration[]> {
+
+    return this.programConfigurations.filter(pc => {
+      if (typeof(pc.program) === 'number') {
+        if (pc.program === selectedProgram.id) {
+          pc.program = selectedProgram;
+          if (typeof(pc.communication) === 'number') {
+            pc.communication = this.findCommunication(<number>pc.communication);
+          }
+          return true;
+        } else { return false; }
+      } else if (pc.program.id === selectedProgram.id) {
+        if (typeof(pc.communication) === 'number') {
+          pc.communication = this.findCommunication(<number>pc.communication);
+        }
+        return true;
+      }
+    });
+  }
+
+  private async getProgramConfigurations(): Promise<ProgramConfiguration[]> {
+    try {
+       return await this.dataApiService.getProgramConfigurations();
+    } catch (error) {
+      console.log('getProgramConfigurations error: ', error);
+    }
+  }
+
+  private findCommunication(id: number): Communication {
+    return this.communications.find(c => c.id === id);
+  }
+
+
 
   // async configureProgramModalOld(program: Program) {
   //   const modalOpts: NgbModalOptions = {
@@ -131,64 +194,5 @@ export class ProgramConfigurationsModalService {
   //   });
   // }
 
-  private findCommunication(id: number): Communication {
-    return this.communications.find(c => c.id === id);
-  }
 
-  private async findProgramConfigurations(selectedProgram: Program) { // : ProgramConfiguration[] {
-    await this.getProgramConfigurations();
-    return this.programConfigurations.filter(pc => {
-      if (typeof(pc.program) === 'number') {
-        if (pc.program === selectedProgram.id) {
-          pc.program = selectedProgram;
-          if (typeof(pc.communication) === 'number') {
-            pc.communication = this.findCommunication(<number>pc.communication);
-          }
-          return true;
-        } else { return false; }
-      } else if (pc.program.id === selectedProgram.id) {
-        if (typeof(pc.communication) === 'number') {
-          pc.communication = this.findCommunication(<number>pc.communication);
-        }
-        return true;
-      }
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
-
-  async getCommunications() {
-    try {
-      this.communications = await this.dataApiService.getCommunications();
-      return this.communications;
-    } catch (error) {
-      console.log('getCommunications error: ', error);
-    }
-  }
-
-  async getPrograms() {
-    try {
-      this.programs = await this.dataApiService.getPrograms();
-      return this.programs;
-    } catch (error) {
-      console.log('getPrograms error: ', error);
-    }
-  }
-
-  async getProgramConfigurations() {
-    try {
-      this.programConfigurations = await this.dataApiService.getProgramConfigurations();
-      return this.programConfigurations;
-    } catch (error) {
-      console.log('getProgramConfigurations error: ', error);
-    }
-  }
 }
