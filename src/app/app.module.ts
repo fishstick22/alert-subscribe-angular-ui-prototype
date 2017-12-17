@@ -1,8 +1,8 @@
-// Angular Subscribe User Interface Prototype
+// Angular Alert Subscribe User Interface Prototype
 //
 import { NgModule      } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { Router        } from '@angular/router';
 import { NgbModule     } from '@ng-bootstrap/ng-bootstrap';
 
 // AppConfig
@@ -12,11 +12,9 @@ import { APP_CONFIG,
 import { AppComponent     } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-// application core (basic site sturcture, etc) components
-import { NavbarComponent       } from './core/navbar/navbar.component';
-import { FooterComponent       } from './core/footer/footer.component';
-import { HomeComponent         } from './core/home/home.component';
-import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+// application core (basic site sturcture, security etc) components
+import { CoreModule       } from './core/core.module';
+import { AuthService      } from './core/auth/auth.service';
 
 // feature components/modules
 // lazy loaded feature modules do not have to be explicity imported
@@ -34,18 +32,16 @@ import { SortableColumnService } from './shared/services/sortable-column.service
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    HomeComponent,
-    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CoreModule,
     NgbModule.forRoot(),
     SharedModule
   ],
   providers: [
+    AuthService,
     DataApiService,
     DragDropService,
     SortableColumnService,
@@ -53,4 +49,9 @@ import { SortableColumnService } from './shared/services/sortable-column.service
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  // Diagnostic only: inspect router configuration
+  // constructor(router: Router) {
+  //   console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  // }
+}

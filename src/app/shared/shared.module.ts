@@ -23,6 +23,9 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService  } from 'app/shared/services/in-memory-data.service';
 import { environment          } from 'environments/environment';
 
+// Services -- only DataApiService is scoped globally from AppModule,
+// DataApiService acts as facade from the numerous API services and when new one is added
+// only new methods in DataApiService are needed to limit changes in feature components
 // import { DataApiService } from './services/data-api.service';
 import { ClientConfigurationsService  } from './services/client-configurations/client-configurations.service';
 import { ClientsService               } from './services/clients/clients.service';
