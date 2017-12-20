@@ -2,7 +2,16 @@
   <h2>Shared Module Tests</h2>
   <!-- this stuff can all go once refactoring is complete
        mostly just for showing features off -->
-  
+ 
+  <h4>Authentication</h4>
+  <span *ngIf="!authService.authenticated">You are not logged in</span>
+  <span *ngIf="authService.authenticated">
+    You are logged in as 
+    <span *ngIf="authService.userProfile && authService.userProfile.name">
+      {{authService.userProfile.name}}
+    </span>
+    {{authService.userProfile | json}}
+  </span>
   <h4>Programs</h4>
   <span *ngIf="programs">
     <ul *ngFor="let p of programs">

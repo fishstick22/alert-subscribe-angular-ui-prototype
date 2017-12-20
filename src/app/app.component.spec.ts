@@ -94,6 +94,7 @@ function tests() {
     expect(
       links[HOME_ROUTE.num].linkParams
     ).toBe(HOME_ROUTE.link, '1st link should go to Home');
+    // TODO another test for AUTHenticated routes
     // expect(
     //   links[DASHBOARD_ROUTE.num].linkParams
     // ).toBe(DASHBOARD_ROUTE.link, '2nd link should go to Dashboard');

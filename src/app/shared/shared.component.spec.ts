@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Injectable } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { AuthService } from 'app/core/auth/auth.service';
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
 import { FakeDataApiService, DataApiService,
@@ -10,6 +11,22 @@ import { FakeDataApiService, DataApiService,
 
 import { SharedComponent } from './shared.component';
 
+@Injectable()
+export class MockAuthService {
+  loggedIn: boolean = true;
+
+  login() {
+    this.loggedIn = true;
+  }
+
+  logout() {
+    this.loggedIn = false;
+  }
+
+  get authenticated(): boolean {
+    return this.loggedIn;
+  }
+}
 @Component({
   selector: 'app-drag-drop-test',
   template: `dummy testing component`
@@ -54,9 +71,11 @@ describe('SharedComponent', () => {
         CommActionTableStubComponent
        ],
       providers: [
+        AuthService,
         DataApiService,
         CommunicationsService,
         { provide: APP_CONFIG, useValue: AppConfig },
+        { provide: AuthService, useClass: MockAuthService},
         { provide: CommunicationsService, usevalue: FakeCommunicationsService },
         { provide: DataApiService, usevalue: FakeDataApiService }
       ],

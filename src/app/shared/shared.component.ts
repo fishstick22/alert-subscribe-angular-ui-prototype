@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { AuthService } from 'app/core/auth/auth.service';
 import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
@@ -21,6 +22,7 @@ export class SharedComponent implements OnInit {
   displayComm: Communication[];
 
   constructor(
+    public authService: AuthService,
     private dataApiService: DataApiService
   ) { }
 
