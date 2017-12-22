@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
          ClientConfiguration,
@@ -16,6 +18,7 @@ export const PROGS: Program[] = [program];
 // export { Program } from 'app/shared/model/program';
 export { ProgramsService } from 'app/shared/services/programs/programs.service';
 
+@Injectable()
 export class FakeProgramsService extends ProgramsService {
 
   programs = PROGS.map(p => p.clone());

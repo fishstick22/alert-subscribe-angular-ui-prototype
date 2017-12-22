@@ -48,8 +48,8 @@ export class ClientConfigurationsModalComponent implements OnInit {
   }
 
   modalInit() {
-    console.log('ClientConfigComponent init: ');
-    console.log(this.client);
+    // console.log('ClientConfigComponent init: ');
+    // console.log(this.client);
     // get the list of clients to populate the dropdown (covered in @Input() clients: Client[];)
     // check if there are progConfig already (for now just checking for first one, have to check for eff dates)
     this.displayCommStartEmpty = true;

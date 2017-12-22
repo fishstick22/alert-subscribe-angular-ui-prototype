@@ -1,3 +1,8 @@
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { APP_CONFIG, IAppConfig } from 'app/app.config';
+
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
          ClientConfiguration,
@@ -17,10 +22,15 @@ const helper = new ModelTestingHelper();
 const client = helper.getTestClient();
 export const CLIENTS: Client[] = [client];
 
+@Injectable()
 export class FakeClientsService extends ClientsService {
 
   clients = CLIENTS.map(c => c.clone());
   lastPromise: Promise<any>;  // remember so we can spy on promise calls
+
+  constructor(@Inject(APP_CONFIG) config: IAppConfig, http: HttpClient) {
+    super(config, http);
+  }
 
   async getClientsThruApi(): Promise<Client[]> {
     try {

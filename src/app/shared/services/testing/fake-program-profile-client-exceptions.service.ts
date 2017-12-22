@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
          ClientConfiguration,
@@ -21,6 +23,7 @@ const helper = new ModelTestingHelper();
 const programProfileClientException: ProgramProfileClientException  = helper.getTestProgramProfileClientException();
 export const PROGPROFILECLIENTEXCEPTS: ProgramProfileClientException[] = [programProfileClientException];
 
+@Injectable()
 export class FakeProgramProfileClientExceptionsService extends ProgramProfileClientExceptionsService {
 
   programProfileClientExceptions = PROGPROFILECLIENTEXCEPTS.map(pp => pp.clone());

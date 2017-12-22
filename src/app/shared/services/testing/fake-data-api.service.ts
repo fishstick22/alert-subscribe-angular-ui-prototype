@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { APP_CONFIG, IAppConfig } from 'app/app.config';
 
@@ -45,14 +45,19 @@ export { DataApiService } from 'app/shared/services/data-api.service';
 @Injectable()
 export class FakeDataApiService extends DataApiService {
 
-  communications: Communication[];
-  // private communicationService = new FakeCommunicationsService();
   config: IAppConfig;
+  communications: Communication[];
+  clients: Client[];
+  clientConfigurations: ClientConfiguration[];
+  programs: Program[];
+  programConfigurations: ProgramConfiguration[];
+  programProfiles: ProgramProfile[];
+  programProfileClientExceptions: ProgramProfileClientException[];
 
-  constructor(config: IAppConfig,
+  constructor(@Inject(APP_CONFIG) config: IAppConfig,
     communicationsService: FakeCommunicationsService,
-    clientsService: ClientsService,
-    clientConfigurationsService: ClientConfigurationsService,
+    clientsService: FakeClientsService,
+    clientConfigurationsService: FakeClientConfigurationsService,
     programsService: FakeProgramsService,
     programProfilesService: FakeProgramProfilesService,
     programConfigurationsService: FakeProgramConfigurationsService,
@@ -69,13 +74,21 @@ export class FakeDataApiService extends DataApiService {
     );
   }
 
+  public async getClients(): Promise<Client[]> {
+    if (this.clients) {
+      return this.clients;
+    } else {
+      this.clients = await this.clientsService.getClientsThruApi();
+      return this.clients;
+    }
+  }
+
   public async getCommunications(): Promise<Communication[]> {
     if (this.communications) {
       return this.communications;
     } else {
       this.communications = await this.communicationsService.getCommunicationsThruApi();
       return this.communications;
-      // return this.removeProgramConfigurationCruft(this.communications);
     }
   }
 

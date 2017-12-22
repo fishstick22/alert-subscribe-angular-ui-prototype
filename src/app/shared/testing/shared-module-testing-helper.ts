@@ -35,13 +35,13 @@ import { ClientConfigurationsService,
          FakeClientsService,
          FakeCommunicationsService,
          FakeDataApiService,
+         FakeProgramProfileClientExceptionsService,
          FakeProgramConfigurationsService,
          FakeProgramProfilesService,
          FakeProgramsService,
          ProgramConfigurationsService,
          ProgramProfilesService,
          ProgramsService,
-         FakeProgramProfileClientExceptionsService,
          ProgramProfileClientExceptionsService } from 'app/shared/services/testing/fake-data-api.service';
 
 // re-export for tester convenience

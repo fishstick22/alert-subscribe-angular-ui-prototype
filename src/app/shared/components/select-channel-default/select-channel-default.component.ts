@@ -39,7 +39,7 @@ export class SelectChannelDefaultComponent implements OnInit, ControlValueAccess
   constructor() { }
 
   ngOnInit() {
-    console.log('SelectChannelDefaultComponent:', this.id, this.name);
+    // console.log('SelectChannelDefaultComponent:', this.id, this.name);
   }
 
   // get accessor

@@ -26,7 +26,7 @@ export class DatePickerPopupComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('DatePickerPopup datevalue: ', this.dateValue);
+    // console.log('DatePickerPopup datevalue: ', this.dateValue);
     const inputDate = new Date(this.dateValue);
     this.dateModel = { day: inputDate.getUTCDate(), month: inputDate.getUTCMonth() + 1, year: inputDate.getUTCFullYear()};
   }

@@ -55,7 +55,7 @@ export class CommActionTableComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    console.log('CommActionTableComponent:', this.communications);
+    // console.log('CommActionTableComponent:', this.communications);
   }
 
   selectCommunication(communication: Communication) {

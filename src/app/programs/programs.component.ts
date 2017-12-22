@@ -32,9 +32,9 @@ export class ProgramsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    console.log('ProgramComponent ngOnInit...');
+    // console.log('ProgramComponent ngOnInit...');
     await this.getPrograms();
-    console.log('ProgramComponent ', this.programs, this.programProfiles);
+    // console.log('ProgramComponent ', this.programs, this.programProfiles);
   }
 
   async getPrograms() {

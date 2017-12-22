@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
          ClientConfiguration,
@@ -16,6 +18,7 @@ const helper = new ModelTestingHelper();
 const communication = helper.getTestCommunication();
 export const COMMS: Communication[] = [communication];
 
+@Injectable()
 export class FakeCommunicationsService extends CommunicationsService {
 
   communications = COMMS.map(c => c.clone());

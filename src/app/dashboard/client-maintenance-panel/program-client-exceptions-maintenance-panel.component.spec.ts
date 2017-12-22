@@ -1,7 +1,16 @@
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { APP_CONFIG, AppConfig } from 'app/app.config';
 import { DataApiService, FakeDataApiService,
+         CommunicationsService, FakeCommunicationsService,
+         ClientsService, FakeClientsService,
+         ClientConfigurationsService, FakeClientConfigurationsService,
+         ProgramsService, FakeProgramsService,
+         ProgramProfilesService, FakeProgramProfilesService,
+         ProgramConfigurationsService, FakeProgramConfigurationsService,
+         ProgramProfileClientExceptionsService, FakeProgramProfileClientExceptionsService,
          ProgramsMaintenancePanelStubComponent,
          ShowProgramProfileOptionsStubComponent } from 'app/shared/testing/shared-module-testing-helper';
 
@@ -18,10 +27,21 @@ describe('ProgramClientExceptionsMaintenancePanelComponent', () => {
         ShowProgramProfileOptionsStubComponent
       ],
       providers: [
-        DataApiService,
-        { provide: DataApiService, usevalue: FakeDataApiService },
+        HttpClientModule,
+        // DataApiService,
+        FakeClientConfigurationsService,
+        FakeClientsService,
+        FakeCommunicationsService,
+        FakeDataApiService,
+        FakeProgramProfileClientExceptionsService,
+        FakeProgramConfigurationsService,
+        FakeProgramProfilesService,
+        FakeProgramsService,
+        { provide: APP_CONFIG, useValue: AppConfig },
+        { provide: DataApiService, useClass: FakeDataApiService },
       ],
       imports: [
+        HttpClientModule,
         FormsModule
       ]
     })

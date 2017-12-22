@@ -12,7 +12,7 @@ import { FooterComponent } from 'app/core/footer/footer.component';
 import { HomeComponent } from 'app/core/home/home.component';
 import { PageNotFoundComponent } from 'app/core/page-not-found/page-not-found.component';
 
-import { MockAuthService } from './core/testing/core-module-testing-helper';
+// import { MockAuthService } from './core/testing/core-module-testing-helper';
 
 import { AppComponent } from './app.component';
 
@@ -23,19 +23,40 @@ import { RouterOutletStubComponent } from '../testing';
 @Component({selector: 'app-dashboard', template: '<h1>DashboardComponent (Testing Stub)</h1>'})
 class DashboardComponent {}
 
- let comp:    AppComponent;
- let fixture: ComponentFixture<AppComponent>;
+@Injectable()
+export class MockAuthService {
+  loggedIn: boolean = false;
+  mockService = 'this is a mock of AuthService';
 
- const EXPECTED_AUTH_ROUTES = 5; // number of configured routes
- const EXPECTED_UNAUTH_ROUTES = 1; // number of configured routes
-                            // update these if the site grows
- const HOME_ROUTE =           {num: 0, link: '/home'};
- const DASHBOARD_ROUTE =      {num: 1, link: '/dashboard'};
- const COMMUNICATIONS_ROUTE = {num: 2, link: '/communications'};
- const PROGRAMS_ROUTE =       {num: 3, link: '/programs'};
- const CLIENTS_ROUTE =        {num: 4, link: '/clients'};
+  login() {
+    this.loggedIn = true;
+  }
 
- describe('AppComponent & TestModule', () => {
+  logout() {
+    this.loggedIn = false;
+  }
+
+  get authenticated(): boolean {
+    return this.loggedIn;
+  }
+}
+
+let comp:    AppComponent;
+let fixture: ComponentFixture<AppComponent>;
+
+let componentAuthService: AuthService; // the actually injected service
+let authService: MockAuthService; // the TestBed injected service
+
+const EXPECTED_AUTH_ROUTES = 5; // number of configured routes
+const EXPECTED_UNAUTH_ROUTES = 1; // number of configured routes
+                          // update these if the site grows
+const HOME_ROUTE =           {num: 0, link: '/home'};
+const DASHBOARD_ROUTE =      {num: 1, link: '/dashboard'};
+const COMMUNICATIONS_ROUTE = {num: 2, link: '/communications'};
+const PROGRAMS_ROUTE =       {num: 3, link: '/programs'};
+const CLIENTS_ROUTE =        {num: 4, link: '/clients'};
+
+describe('AppComponent & TestModule', () => {
   beforeEach( async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -47,7 +68,8 @@ class DashboardComponent {}
         RouterLinkStubDirective, RouterOutletStubComponent
       ],
       providers: [
-        AuthService,
+        // AuthService,// NO! Don't provide the real service!
+                      // Provide a test-double instead
         { provide: AuthService, useValue: MockAuthService },
         { provide: APP_BASE_HREF, useValue: '/' },
         { provide: APP_CONFIG, useValue: AppConfig }
@@ -65,20 +87,47 @@ class DashboardComponent {}
 });
 
 function tests() {
-  let links: RouterLinkStubDirective[];
-  let linkDes: DebugElement[];
+  let unauthLinks: RouterLinkStubDirective[];
+  let unauthLinkDes: DebugElement[];
+
+  let authLinks: RouterLinkStubDirective[];
+  let authLinkDes: DebugElement[];
 
   beforeEach(() => {
+    // AuthService actually injected into the component
+    componentAuthService = fixture.debugElement.injector.get(AuthService);
+    // AuthService from the root injector
+    authService = TestBed.get(AuthService);
+    // console.log(authService.mockService, authService.authenticated);
+    // console.log(authService.mockService, authService.authenticated);
+
     // trigger initial data binding
     fixture.detectChanges();
 
     // find DebugElements with an attached RouterLinkStubDirective
-    linkDes = fixture.debugElement
+    unauthLinkDes = fixture.debugElement
       .queryAll(By.directive(RouterLinkStubDirective));
 
     // get the attached link directive instances using the DebugElement injectors
-    links = linkDes
+    unauthLinks = unauthLinkDes
       .map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
+
+    // authenticate, then get routes again
+    authService.loggedIn = true;
+    // console.log(authService.authenticated);
+
+    // trigger initial data binding
+    fixture.detectChanges();
+
+    // find DebugElements with an attached RouterLinkStubDirective
+    authLinkDes = fixture.debugElement
+      .queryAll(By.directive(RouterLinkStubDirective));
+
+    // get the attached link directive instances using the DebugElement injectors
+    authLinks = authLinkDes
+      .map(de => de.injector.get(RouterLinkStubDirective) as RouterLinkStubDirective);
+
+
   });
 
   it('can instantiate it', () => {
@@ -86,13 +135,10 @@ function tests() {
   });
 
   it('can get Unauthenticated RouterLinks from template', () => {
-    // const service = fixture.debugElement.injector.get(AuthService);
-    // spyOn(service, 'login').and.returnValue(true);
 
-
-    expect(links.length).toBe(EXPECTED_UNAUTH_ROUTES, 'should have 1 links');
+    expect(unauthLinks.length).toBe(EXPECTED_UNAUTH_ROUTES, 'should have 1 links');
     expect(
-      links[HOME_ROUTE.num].linkParams
+      unauthLinks[HOME_ROUTE.num].linkParams
     ).toBe(HOME_ROUTE.link, '1st link should go to Home');
     // TODO another test for AUTHenticated routes
     // expect(
@@ -110,8 +156,8 @@ function tests() {
   });
 
   it('can click Home link in NavBar', () => {
-    const homeLinkDe = linkDes[HOME_ROUTE.num];
-    const homeLink = links[HOME_ROUTE.num];
+    const homeLinkDe = unauthLinkDes[HOME_ROUTE.num];
+    const homeLink = unauthLinks[HOME_ROUTE.num];
 
     expect(homeLink.navigatedTo).toBeNull('link should not have navigated yet');
 

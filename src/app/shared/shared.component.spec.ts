@@ -1,12 +1,19 @@
 import { Component, Input, Injectable } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthService } from 'app/core/auth/auth.service';
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
-import { FakeDataApiService, DataApiService,
-  Communication, FakeCommunicationsService, CommunicationsService
+import { DataApiService, FakeDataApiService,
+         Communication, FakeCommunicationsService, CommunicationsService,
+         ClientsService, FakeClientsService,
+         ClientConfigurationsService, FakeClientConfigurationsService,
+         ProgramsService, FakeProgramsService,
+         ProgramProfilesService, FakeProgramProfilesService,
+         ProgramConfigurationsService, FakeProgramConfigurationsService,
+         ProgramProfileClientExceptionsService, FakeProgramProfileClientExceptionsService
 } from 'app/shared/testing/shared-module-testing-helper';
 
 import { SharedComponent } from './shared.component';
@@ -72,14 +79,23 @@ describe('SharedComponent', () => {
        ],
       providers: [
         AuthService,
-        DataApiService,
+        HttpClientModule,
+        // DataApiService,
+        FakeClientConfigurationsService,
+        FakeClientsService,
+        FakeCommunicationsService,
+        FakeDataApiService,
+        FakeProgramProfileClientExceptionsService,
+        FakeProgramConfigurationsService,
+        FakeProgramProfilesService,
+        FakeProgramsService,
         CommunicationsService,
         { provide: APP_CONFIG, useValue: AppConfig },
         { provide: AuthService, useClass: MockAuthService},
-        { provide: CommunicationsService, usevalue: FakeCommunicationsService },
-        { provide: DataApiService, usevalue: FakeDataApiService }
+        { provide: CommunicationsService, useClass: FakeCommunicationsService },
+        { provide: DataApiService, useClass: FakeDataApiService }
       ],
-      imports: [ FormsModule ]
+      imports: [ HttpClientModule, FormsModule ]
     })
     .compileComponents();
   }));

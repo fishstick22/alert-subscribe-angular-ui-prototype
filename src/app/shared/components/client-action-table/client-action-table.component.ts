@@ -56,7 +56,7 @@ export class ClientActionTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('ClientActionTableComponent onInit...', this.clients, this.displayClient);
+    // console.log('ClientActionTableComponent onInit...', this.clients, this.displayClient);
     if (!this.displayClient) { // if all else fails, start with it empty
       this.displayClient = []; // instead of 'undefined'
     }

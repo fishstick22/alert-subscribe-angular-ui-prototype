@@ -26,11 +26,11 @@ export class SharedComponent implements OnInit {
     private dataApiService: DataApiService
   ) { }
 
-  ngOnInit() {
-    this.getCommunications();
-    this.getPrograms();
-    this.getProgramProfiles();
-    this.getProgramProfileClientExceptions();
+  async ngOnInit() {
+    await this.getCommunications();
+    await this.getPrograms();
+    await this.getProgramProfiles();
+    await this.getProgramProfileClientExceptions();
     console.log('SharedComponent ngOnInit', this.communications, this.programs, this.programProfiles);
   }
 
