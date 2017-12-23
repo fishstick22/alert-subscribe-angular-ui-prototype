@@ -16,7 +16,8 @@ var map = {
 	],
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module"
+		"dashboard.module",
+		"common"
 	],
 	"./programs/programs.module": [
 		"../../../../../src/app/programs/programs.module.ts",
@@ -43,6 +44,43 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
+/***/ "../../../../../src/app/app-constants.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppConstants; });
+var AppConstants = /** @class */ (function () {
+    function AppConstants() {
+    }
+    AppConstants.SAVESUCCESS = 'Close on succesful save';
+    AppConstants.UNEXPIRED = '9999-12-31';
+    AppConstants.PROGRAMPROFILEOPTIONS = [
+        { 'property': 'defaultOptIn', 'label': 'OptIn', 'title': 'Default Opt-In?' },
+        { 'property': 'visibleInUi', 'label': 'Visible', 'title': 'Visible in UI?' },
+        { 'property': 'chanEmail', 'label': 'Email', 'title': 'Program allows Email channel subscription' },
+        { 'property': 'chanIvr', 'label': 'IVR', 'title': 'Program allows IVR channel subscription' },
+        { 'property': 'chanSms', 'label': 'SMS', 'title': 'Program allows SMS channel subscription' },
+        { 'property': 'chanSecure', 'label': 'Secure', 'title': 'Program allows Secure channel subscription' },
+        { 'property': 'chanMail', 'label': 'Mail', 'title': 'Program allows Mail channel subscription' },
+        { 'property': 'chanMobile', 'label': 'Mobile', 'title': 'Program allows Mobile channel subscription' },
+    ];
+    AppConstants.PROGRAMCONFIGURATIONOPTIONS = [
+        { 'property': 'chanEmailPriority', 'label': 'Email', 'title': 'Program Email channel prority' },
+        { 'property': 'chanIvrPriority', 'label': 'IVR', 'title': 'Program IVR channel prority' },
+        { 'property': 'chanSmsPriority', 'label': 'SMS', 'title': 'Program SMS channel prority' },
+        // { 'property': 'chanSecurePriority', 'label': 'Secure', 'title': 'Program Secure channel prority' },
+        { 'property': 'chanMailPriority', 'label': 'Mail', 'title': 'Program Mail channel prority' },
+        { 'property': 'chanMobilePriority', 'label': 'Mobile', 'title': 'Program Mobile channel prority' },
+    ];
+    AppConstants.CHANNELPRIORTYOPTS = [0, 1, 2, 3];
+    AppConstants.CHANDEFAULTOPTS = ['No', 'Email', 'IVR', 'SMS'];
+    return AppConstants;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/app-routing.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -50,8 +88,10 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_page_not_found_page_not_found_component__ = __webpack_require__("../../../../../src/app/core/page-not-found/page-not-found.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_home_home_component__ = __webpack_require__("../../../../../src/app/core/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_auth_auth_guard__ = __webpack_require__("../../../../../src/app/core/auth/auth.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_auth_callback_component__ = __webpack_require__("../../../../../src/app/core/auth/callback.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_page_not_found_page_not_found_component__ = __webpack_require__("../../../../../src/app/core/page-not-found/page-not-found.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_home_home_component__ = __webpack_require__("../../../../../src/app/core/home/home.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,23 +102,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_3__core_home_home_component__["a" /* HomeComponent */] },
-    { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-    { path: 'communications', loadChildren: './communications/communications.module#CommunicationsModule' },
-    { path: 'programs', loadChildren: './programs/programs.module#ProgramsModule' },
-    { path: 'clients', loadChildren: './clients/clients.module#ClientsModule' },
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_5__core_home_home_component__["a" /* HomeComponent */] },
+    { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [__WEBPACK_IMPORTED_MODULE_2__core_auth_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'communications', loadChildren: './communications/communications.module#CommunicationsModule', canActivate: [__WEBPACK_IMPORTED_MODULE_2__core_auth_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'programs', loadChildren: './programs/programs.module#ProgramsModule', canActivate: [__WEBPACK_IMPORTED_MODULE_2__core_auth_auth_guard__["a" /* AuthGuard */]] },
+    { path: 'clients', loadChildren: './clients/clients.module#ClientsModule', canActivate: [__WEBPACK_IMPORTED_MODULE_2__core_auth_auth_guard__["a" /* AuthGuard */]] },
     { path: 'shared-test', loadChildren: './shared/shared.module#SharedModule' },
-    { path: '**', component: __WEBPACK_IMPORTED_MODULE_2__core_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] }
+    { path: 'callback', component: __WEBPACK_IMPORTED_MODULE_3__core_auth_callback_component__["a" /* CallbackComponent */] },
+    { path: '**', component: __WEBPACK_IMPORTED_MODULE_4__core_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] }
 ];
-var AppRoutingModule = (function () {
+var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forRoot(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
+            providers: [__WEBPACK_IMPORTED_MODULE_2__core_auth_auth_guard__["a" /* AuthGuard */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
@@ -91,7 +135,7 @@ var AppRoutingModule = (function () {
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Sarting with basic \"Bootstrap starter\" template\n     https://getbootstrap.com/docs/4.0/examples/starter-template/-->\n  <app-navbar [customLogoTitle]=[title]></app-navbar>   \n     \n  <main role=\"main\" class=\"container\">\n    <div class=\"starter-template\">\n      <router-outlet></router-outlet>\n    </div>\n  </main>\n   \n  <app-footer [customFooterText]=[title]></app-footer>"
+module.exports = "<!-- Sarting with basic \"Bootstrap starter\" template\r\n     https://getbootstrap.com/docs/4.0/examples/starter-template/-->\r\n  <app-navbar [customLogoTitle]=[title]></app-navbar>   \r\n     \r\n  <main role=\"main\" class=\"container\">\r\n    <div class=\"starter-template\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </main>\r\n   \r\n  <app-footer [customFooterText]=[title]></app-footer>"
 
 /***/ }),
 
@@ -120,6 +164,7 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_app_config__ = __webpack_require__("../../../../../src/app/app.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_core_auth_auth_service__ = __webpack_require__("../../../../../src/app/core/auth/auth.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,9 +180,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 // import { environment } from 'environments/environment';
 
-var AppComponent = (function () {
-    function AppComponent(config) {
+
+var AppComponent = /** @class */ (function () {
+    function AppComponent(config, authService) {
         this.config = config;
+        this.authService = authService;
         this.title = 'Alert Subscribe UI Prototype/POC (' + config.envName + ')';
     }
     AppComponent = __decorate([
@@ -147,7 +194,7 @@ var AppComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/app.component.scss")]
         }),
         __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1_app_app_config__["a" /* APP_CONFIG */])),
-        __metadata("design:paramtypes", [Object])
+        __metadata("design:paramtypes", [Object, __WEBPACK_IMPORTED_MODULE_2_app_core_auth_auth_service__["a" /* AuthService */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -171,7 +218,9 @@ var APP_CONFIG = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectio
 // https://stackoverflow.com/questions/34986922/define-global-constants-in-angular-2/40287063#40287063
 var AppConfig = {
     apiEndpoint: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].apiEndpoint,
-    envName: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].envName
+    envName: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].envName,
+    cachePrograms: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].cachePrograms,
+    cacheProgramProfiles: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].cacheProgramProfiles
 };
 
 
@@ -188,21 +237,19 @@ var AppConfig = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_config__ = __webpack_require__("../../../../../src/app/app.config.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_routing_module__ = __webpack_require__("../../../../../src/app/app-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_navbar_navbar_component__ = __webpack_require__("../../../../../src/app/core/navbar/navbar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__core_footer_footer_component__ = __webpack_require__("../../../../../src/app/core/footer/footer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__core_home_home_component__ = __webpack_require__("../../../../../src/app/core/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__core_page_not_found_page_not_found_component__ = __webpack_require__("../../../../../src/app/core/page-not-found/page-not-found.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__shared_services_drag_drop_service__ = __webpack_require__("../../../../../src/app/shared/services/drag-drop.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__shared_services_sortable_column_service__ = __webpack_require__("../../../../../src/app/shared/services/sortable-column.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_core_module__ = __webpack_require__("../../../../../src/app/core/core.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__core_auth_auth_service__ = __webpack_require__("../../../../../src/app/core/auth/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared_services_drag_drop_service__ = __webpack_require__("../../../../../src/app/shared/services/drag-drop.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_services_sortable_column_service__ = __webpack_require__("../../../../../src/app/shared/services/sortable-column.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-// Angular Subscribe User Interface Prototype
+// Angular Alert Subscribe User Interface Prototype
 //
 
 
@@ -212,9 +259,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-// application core (basic site sturcture, etc) components
-
-
+// application core (basic site sturcture, security etc) components
 
 
 // feature components/modules
@@ -228,28 +273,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__core_navbar_navbar_component__["a" /* NavbarComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__core_footer_footer_component__["a" /* FooterComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__core_home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__core_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_5__app_routing_module__["a" /* AppRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_6__core_core_module__["a" /* CoreModule */],
                 __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["d" /* NgbModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_10__shared_shared_module__["SharedModule"]
+                __WEBPACK_IMPORTED_MODULE_8__shared_shared_module__["SharedModule"]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_11__shared_services_data_api_service__["a" /* DataApiService */],
-                __WEBPACK_IMPORTED_MODULE_12__shared_services_drag_drop_service__["a" /* DragDropService */],
-                __WEBPACK_IMPORTED_MODULE_13__shared_services_sortable_column_service__["a" /* SortableColumnService */],
+                __WEBPACK_IMPORTED_MODULE_7__core_auth_auth_service__["a" /* AuthService */],
+                __WEBPACK_IMPORTED_MODULE_9__shared_services_data_api_service__["a" /* DataApiService */],
+                __WEBPACK_IMPORTED_MODULE_10__shared_services_drag_drop_service__["a" /* DragDropService */],
+                __WEBPACK_IMPORTED_MODULE_11__shared_services_sortable_column_service__["a" /* SortableColumnService */],
                 { provide: __WEBPACK_IMPORTED_MODULE_3__app_config__["a" /* APP_CONFIG */], useValue: __WEBPACK_IMPORTED_MODULE_3__app_config__["b" /* AppConfig */] }
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
@@ -262,10 +305,305 @@ var AppModule = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/core/auth/auth-config.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AUTH_CONFIG; });
+var AUTH_CONFIG = {
+    CLIENT_ID: '5dTmLzbTbdfpmJ6Zp5AH9l1ORljfOU2N',
+    CLIENT_DOMAIN: 'fishstick22.auth0.com',
+    AUDIENCE: 'http://localhost:8080',
+    REDIRECT: 'http://localhost:4200/callback',
+    SCOPE: 'openid profile email'
+};
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/auth/auth.guard.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth_service__ = __webpack_require__("../../../../../src/app/core/auth/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthGuard = /** @class */ (function () {
+    function AuthGuard(authService, router) {
+        this.authService = authService;
+        this.router = router;
+    }
+    AuthGuard.prototype.canActivate = function (next, state) {
+        if (!this.authService.authenticated) {
+            this.router.navigate(['/']);
+            return false;
+        }
+        return true;
+    };
+    AuthGuard = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
+    ], AuthGuard);
+    return AuthGuard;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/auth/auth.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_BehaviorSubject__ = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_auth0_js__ = __webpack_require__("../../../../auth0-js/src/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_auth0_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_auth0_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__auth_config__ = __webpack_require__("../../../../../src/app/core/auth/auth-config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+// https://auth0.com/blog/angular-2-authentication/
+// https://jwt.io/
+
+
+
+
+
+var AuthService = /** @class */ (function () {
+    function AuthService(router) {
+        this.router = router;
+        // Create Auth0 web auth instance
+        this.auth0 = new __WEBPACK_IMPORTED_MODULE_2_auth0_js__["WebAuth"]({
+            clientID: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].CLIENT_ID,
+            domain: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].CLIENT_DOMAIN,
+            responseType: 'token id_token',
+            redirectUri: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].REDIRECT,
+            audience: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].AUDIENCE,
+            scope: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].SCOPE
+        });
+        this.loggedIn$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_BehaviorSubject__["a" /* BehaviorSubject */](this.loggedIn);
+        // If authenticated, set local profile property and update login status subject
+        // If token is expired, log out to clear any data from localStorage
+        if (this.authenticated) {
+            this.userProfile = JSON.parse(localStorage.getItem('profile'));
+            this.setLoggedIn(true);
+        }
+        else {
+            this.logout();
+        }
+    }
+    AuthService.prototype.setLoggedIn = function (value) {
+        // Update login status subject
+        this.loggedIn$.next(value);
+        this.loggedIn = value;
+    };
+    AuthService.prototype.login = function () {
+        // Auth0 authorize request
+        console.log('attempting login...');
+        this.auth0.authorize();
+    };
+    AuthService.prototype.handleAuth = function () {
+        var _this = this;
+        // When Auth0 hash parsed, get profile
+        this.auth0.parseHash(window.location.hash, function (err, authResult) {
+            if (authResult && authResult.accessToken && authResult.idToken) {
+                window.location.hash = '';
+                _this._getProfile(authResult);
+            }
+            else if (err) {
+                console.error("Error: " + err.error);
+            }
+            _this.router.navigate(['/']);
+        });
+    };
+    AuthService.prototype._getProfile = function (authResult) {
+        var _this = this;
+        // Use access token to retrieve user's profile and set session
+        this.auth0.client.userInfo(authResult.accessToken, function (err, profile) {
+            _this._setSession(authResult, profile);
+        });
+    };
+    AuthService.prototype._setSession = function (authResult, profile) {
+        var expTime = authResult.expiresIn * 1000 + Date.now();
+        // Save session data and update login status subject
+        localStorage.setItem('token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('profile', JSON.stringify(profile));
+        localStorage.setItem('expires_at', JSON.stringify(expTime));
+        this.userProfile = profile;
+        this.setLoggedIn(true);
+    };
+    AuthService.prototype.logout = function () {
+        // Remove tokens and profile and update login status subject
+        localStorage.removeItem('token');
+        localStorage.removeItem('id_token');
+        localStorage.removeItem('profile');
+        localStorage.removeItem('expires_at');
+        this.userProfile = undefined;
+        this.setLoggedIn(false);
+    };
+    Object.defineProperty(AuthService.prototype, "authenticated", {
+        get: function () {
+            // Check if current date is greater than expiration
+            var expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+            return Date.now() < expiresAt;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AuthService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
+    ], AuthService);
+    return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/auth/callback.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CallbackComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_core_auth_auth_service__ = __webpack_require__("../../../../../src/app/core/auth/auth.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CallbackComponent = /** @class */ (function () {
+    function CallbackComponent(authService) {
+        this.authService = authService;
+    }
+    CallbackComponent.prototype.ngOnInit = function () {
+        this.authService.handleAuth();
+    };
+    CallbackComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-callback',
+            template: "\n    <p>\n      Loading...\n    </p>\n  ",
+            styles: [],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_app_core_auth_auth_service__["a" /* AuthService */]])
+    ], CallbackComponent);
+    return CallbackComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/core/core.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CoreModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__auth_callback_component__ = __webpack_require__("../../../../../src/app/core/auth/callback.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__navbar_navbar_component__ = __webpack_require__("../../../../../src/app/core/navbar/navbar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__footer_footer_component__ = __webpack_require__("../../../../../src/app/core/footer/footer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__home_home_component__ = __webpack_require__("../../../../../src/app/core/home/home.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__page_not_found_page_not_found_component__ = __webpack_require__("../../../../../src/app/core/page-not-found/page-not-found.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+// Core Module
+//
+// https://medium.com/@michelestieven/organizing-angular-applications-f0510761d65a
+//
+
+
+
+
+
+
+
+
+var CoreModule = /** @class */ (function () {
+    function CoreModule(core) {
+        if (core) {
+            throw new Error('Cannot Import and Instantiate CoreModule!');
+        }
+    }
+    CoreModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */]
+            ],
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_3__auth_callback_component__["a" /* CallbackComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__navbar_navbar_component__["a" /* NavbarComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__footer_footer_component__["a" /* FooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */],
+            ],
+            providers: [],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_3__auth_callback_component__["a" /* CallbackComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__navbar_navbar_component__["a" /* NavbarComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__footer_footer_component__["a" /* FooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */]
+            ]
+        }),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Optional */])()), __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_4" /* SkipSelf */])()),
+        __metadata("design:paramtypes", [CoreModule])
+    ], CoreModule);
+    return CoreModule;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/core/footer/footer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Yes, I totally stole this from Bram Borggreve\n  https://medium.com/@beeman/tutorial-add-bootstrap-to-angular-cli-apps-b0a652f2eb2\n-->\n<footer class=\"footer\">\n  <div class=\"container\">\n    <span class=\"text-muted\">\n      {{customFooterText}} made with \n      <img src=\"assets/images/angular.svg\" style=\"width: 25px;\" title=\"Angular\"/>\n      <img src=\"assets/images/bootstrap-components.svg\" style=\"width: 25px;\" title=\"Bootstrap\"/>\n      <img src=\"assets/images/spring-leaf.png\" style=\"width: 20px;\" title=\"Spring Boot\"/>\n      and \n      <i class=\"fa fa-heart\" aria-hidden=\"true\" style=\"color: red;\"></i> \n      by \n      <a href=\"https://github.com/fishstick22\" target=\"_blank\">\n        <img class=\"rounded\" src=\"assets/images/fishstick22.jpg\" \n          style=\"width: 20px;\" title=\"fishstick22\"/>\n    </a>\n    </span>\n  </div>\n</footer>\n"
+module.exports = "<!-- Yes, I totally stole this from Bram Borggreve\r\n  https://medium.com/@beeman/tutorial-add-bootstrap-to-angular-cli-apps-b0a652f2eb2\r\n-->\r\n<footer class=\"footer\">\r\n  <div class=\"container\">\r\n    <span class=\"text-muted\">\r\n      {{customFooterText}} made with \r\n      <img src=\"assets/images/angular.svg\" style=\"width: 25px;\" title=\"Angular\"/>\r\n      <img src=\"assets/images/bootstrap-components.svg\" style=\"width: 25px;\" title=\"Bootstrap\"/>\r\n      <img src=\"assets/images/spring-leaf.png\" style=\"width: 20px;\" title=\"Spring Boot\"/>\r\n      and \r\n      <i class=\"fa fa-heart\" aria-hidden=\"true\" style=\"color: red;\"></i> \r\n      by \r\n      <a href=\"https://github.com/fishstick22\" target=\"_blank\">\r\n        <img class=\"rounded\" src=\"assets/images/fishstick22.jpg\" \r\n          style=\"width: 20px;\" title=\"fishstick22\"/>\r\n    </a>\r\n    </span>\r\n  </div>\r\n</footer>\r\n"
 
 /***/ }),
 
@@ -303,7 +641,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var FooterComponent = (function () {
+var FooterComponent = /** @class */ (function () {
     function FooterComponent() {
     }
     FooterComponent.prototype.ngOnInit = function () {
@@ -331,7 +669,7 @@ var FooterComponent = (function () {
 /***/ "../../../../../src/app/core/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Welcome</h2>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>\n<hr>\n"
+module.exports = "<h2>Welcome</h2>\r\n<p>Alert Subscribe Maintenance Panel is an application for managing Business Rules related to \r\n    Member Subscriptions to PBM Communications.</p>\r\n<p>This Prototype is a Single-Page Application written using Angular 5 with a SpringBoot REST API \r\n    backend on top of a MySQL database.  </p> \r\n<p>The intent is to provide a tool to research both the technologies and design/development of the \r\n    application as well as a means to collaborate between Business, BA and IT on the functionality of \r\n    the production-ready implementation.</p>\r\n<hr>\r\n"
 
 /***/ }),
 
@@ -369,7 +707,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var HomeComponent = (function () {
+var HomeComponent = /** @class */ (function () {
     function HomeComponent() {
     }
     HomeComponent.prototype.ngOnInit = function () {
@@ -393,7 +731,7 @@ var HomeComponent = (function () {
 /***/ "../../../../../src/app/core/navbar/navbar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-gradient-dark\">\n  <a class=\"navbar-brand\" href=\"/\" title='{{customLogoTitle}}'>\n    <img src='assets/images/cvs.png' alt='{{customLogoTitle}}' width=50>\n  </a>\n  <button class=\"navbar-toggler\" type=\"button\" \n          data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" \n          (click)=\"toggleCollapse()\"\n          aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" [class.show]=\"show\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/home\" >Home</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/dashboard\" >Dashboard</a></li>    \n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/communications\" >Communications</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/programs\" >Programs</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" routerLink=\"/clients\" >Clients</a></li>\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\n        <a class=\"nav-link\" href=\"#\">Contact</a></li>\n    </ul>\n    <ul class=\"nav navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">\n          <i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i>\n          Login\n        </a>\n      </li>\n    </ul>\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-gradient-dark\">\r\n  <a class=\"navbar-brand\" href=\"/\" title='{{customLogoTitle}}'>\r\n    <img src='assets/images/cvs.png' alt='{{customLogoTitle}}' width=50>\r\n  </a>\r\n  <button class=\"navbar-toggler clickable\" type=\"button\" \r\n          data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" \r\n          (click)=\"toggleCollapse()\"\r\n          aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <div class=\"collapse navbar-collapse\" [class.show]=\"show\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/home\" >Home</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/dashboard\" *ngIf=\"authService.authenticated\">Dashboard</a></li>    \r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/communications\" *ngIf=\"authService.authenticated\">Communications</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/programs\" *ngIf=\"authService.authenticated\">Programs</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" routerLink=\"/clients\" *ngIf=\"authService.authenticated\">Clients</a></li>\r\n      <li class=\"nav-item\" routerLinkActive=\"active\" (click)=\"toggleCollapse()\">\r\n        <a class=\"nav-link\" href=\"#\">Contact</a></li>\r\n    </ul>\r\n    <span *ngIf=\"authService.userProfile && authService.userProfile.name\" class=\"text-white\">\r\n        {{authService.userProfile.name}}\r\n        <span *ngIf=\"authService.userProfile.picture && authService.userProfile.nickname\"></span>\r\n        <img class=\"rounded\" src=\"{{authService.userProfile.picture}}\" \r\n          style=\"width: 20px;\" title=\"Signed in as {{authService.userProfile.nickname}}\"/>\r\n    </span>\r\n    <ul class=\"nav navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link clickable\" *ngIf=\"!authService.authenticated\" (click)=\"authService.login()\">\r\n          <i class=\"fa fa-sign-in\" aria-hidden=\"true\"></i>\r\n          Login\r\n        </a>\r\n        <a class=\"nav-link\" href=\"/\" *ngIf=\"authService.authenticated\" (click)=\"authService.logout()\">\r\n          <i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i>\r\n          Logout\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -421,6 +759,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavbarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_core_auth_auth_service__ = __webpack_require__("../../../../../src/app/core/auth/auth.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -431,10 +770,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 // https://angularfirebase.com/lessons/bootstrap-4-collapsable-navbar-work-with-angular/
 // huff, the BootStrap 4 Navbar needs a little nudge to work with Angular
-var NavbarComponent = (function () {
-    function NavbarComponent() {
+var NavbarComponent = /** @class */ (function () {
+    function NavbarComponent(authService) {
+        this.authService = authService;
         this.show = false;
     }
     NavbarComponent.prototype.ngOnInit = function () {
@@ -454,7 +795,7 @@ var NavbarComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/core/navbar/navbar.component.scss")],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_app_core_auth_auth_service__["a" /* AuthService */]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -466,7 +807,7 @@ var NavbarComponent = (function () {
 /***/ "../../../../../src/app/core/page-not-found/page-not-found.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>\n  Page Not Found!\n</h2>"
+module.exports = "<h2>\r\n  Page Not Found!\r\n</h2>"
 
 /***/ }),
 
@@ -504,7 +845,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var PageNotFoundComponent = (function () {
+var PageNotFoundComponent = /** @class */ (function () {
     function PageNotFoundComponent() {
     }
     PageNotFoundComponent.prototype.ngOnInit = function () {
@@ -528,7 +869,7 @@ var PageNotFoundComponent = (function () {
 /***/ "../../../../../src/app/shared/components/client-action-table/client-action-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\"\nappSortableTable (sorted)=\"onSorted($event)\">\n<caption><span *ngIf=\"displayClientStartEmpty\">\n  Clients List begins empty: start typing in the search boxes to find Clients  \n</span></caption>\n<thead>\n<tr class=\"bg-gradient-dark text-white\"><!-- column sorting header row -->\n  <th *ngIf=\"showClientId\"><app-sortable-column columnName=\"id\" sortDirection=\"asc\">ID</app-sortable-column></th>\n  <th *ngIf=\"showClientCode\"><app-sortable-column columnName=\"code\">Code</app-sortable-column></th>\n  <th *ngIf=\"showClientName\"><app-sortable-column columnName=\"name\">Name</app-sortable-column></th>\n  <th *ngIf=\"showStatus\">Status</th>\n  <th *ngIf=\"showAction\">Actions</th>\n</tr>\n<tr class=\"thead-light\"><!-- search/filter header row -->\n  <th width=\"10%\" *ngIf=\"showClientId\">\n    <input type=\"text\" id=\"seachClientId\" class=\"form-control form-control-sm\" placeholder=\"search\"\n           name=\"clientId\" [(ngModel)]=\"clientIdSearch\" (keyup)=\"searchClientId()\"/>\n  </th>\n  <th width=\"15%\" *ngIf=\"showClientCode\">\n    <input type=\"text\" id=\"seachDescription\" class=\"form-control form-control-sm\" placeholder=\"search Code\"\n           name=\"clientCode\" [(ngModel)]=\"clientCodeSearch\" (keyup)=\"searchClientCode()\"/>\n  </th>\n  <th *ngIf=\"showClientName\">\n    <input type=\"text\" id=\"seachName\" class=\"form-control form-control-sm\" placeholder=\"search Name\"\n           name=\"clientName\" [(ngModel)]=\"clientNameSearch\" (keyup)=\"searchClientName()\"/>\n  </th>\n  <th *ngIf=\"showStatus\"></th>\n  <th *ngIf=\"showAction\"></th>\n</tr>\n</thead>\n<tbody>\n<tr appDraggable\n    [draggable] *ngFor=\"let client of displayClient; let i = index\"\n    [dragData]=\"client\" [dragClass]=\"'drag-over'\"  \n    (click)=\"setClickedRow(i); \" [class.table-info]=\"i == selectedRow\"\n     title=\"Click or Drag to configure {{client.name}} for Communication {{displayCommunication}}\" >\n  <td *ngIf=\"showClientId\">\n    <span class=\"badge badge-secondary clickable\"\n      (click)=\"selectClient(client)\">{{client.id}}</span></td>\n  <td *ngIf=\"showClientCode\"><span>{{client.code}}</span></td>\n  <td *ngIf=\"showClientName\"><span>{{client.name}}</span></td>\n  <td *ngIf=\"showStatus\"><span *ngIf=\"client.id === 142\"><i class=\"fa fa-check\" aria-hidden=\"true\" title=\"{{client.name}} Configured (Date)\"></i></span></td>\n  <td *ngIf=\"showAction\">\n    <app-client-actions-popover\n      [clientId]=\"client.id\"\n      [clientName]=\"client.name\"\n      (configAction)=\"configureClient($event)\">\n      <i class=\"fa fa-pencil-square-o clickable\" aria-hidden=\"true\" title=\"Click to configure {{client.name}} Communication settings\"></i>\n  </app-client-actions-popover>\n  </td>\n</tr>\n</tbody>\n<tfoot></tfoot>\n</table>"
+module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\"\r\nappSortableTable (sorted)=\"onSorted($event)\">\r\n<caption><span *ngIf=\"displayClientStartEmpty\">\r\n  Clients List begins empty: start typing in the search boxes to find Clients  \r\n</span></caption>\r\n<thead>\r\n<tr class=\"bg-gradient-dark text-white\"><!-- column sorting header row -->\r\n  <th *ngIf=\"showClientId\"><app-sortable-column columnName=\"id\" sortDirection=\"asc\">ID</app-sortable-column></th>\r\n  <th *ngIf=\"showClientCode\"><app-sortable-column columnName=\"code\">Code</app-sortable-column></th>\r\n  <th *ngIf=\"showClientName\"><app-sortable-column columnName=\"name\">Name</app-sortable-column></th>\r\n  <th *ngIf=\"showStatus\">Status</th>\r\n  <th *ngIf=\"showAction\">Actions</th>\r\n</tr>\r\n<tr class=\"thead-light\"><!-- search/filter header row -->\r\n  <th width=\"10%\" *ngIf=\"showClientId\">\r\n    <input type=\"text\" id=\"seachClientId\" class=\"form-control form-control-sm\" placeholder=\"search\"\r\n           name=\"clientId\" [(ngModel)]=\"clientIdSearch\" (keyup)=\"searchClientId()\"/>\r\n  </th>\r\n  <th width=\"15%\" *ngIf=\"showClientCode\">\r\n    <input type=\"text\" id=\"seachDescription\" class=\"form-control form-control-sm\" placeholder=\"search Code\"\r\n           name=\"clientCode\" [(ngModel)]=\"clientCodeSearch\" (keyup)=\"searchClientCode()\"/>\r\n  </th>\r\n  <th *ngIf=\"showClientName\">\r\n    <input type=\"text\" id=\"seachName\" class=\"form-control form-control-sm\" placeholder=\"search Name\"\r\n           name=\"clientName\" [(ngModel)]=\"clientNameSearch\" (keyup)=\"searchClientName()\"/>\r\n  </th>\r\n  <th *ngIf=\"showStatus\"></th>\r\n  <th *ngIf=\"showAction\"></th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr appDraggable\r\n    [draggable] *ngFor=\"let client of displayClient; let i = index\"\r\n    [dragData]=\"client\" [dragClass]=\"'drag-over'\"  \r\n    (click)=\"setClickedRow(i); \" [class.table-info]=\"i == selectedRow\"\r\n     title=\"Click or Drag to configure {{client.name}} for Communication {{displayCommunication}}\" >\r\n  <td *ngIf=\"showClientId\">\r\n    <span class=\"badge badge-secondary clickable\"\r\n      (click)=\"selectClient(client)\">{{client.id}}</span></td>\r\n  <td *ngIf=\"showClientCode\"><span>{{client.code}}</span></td>\r\n  <td *ngIf=\"showClientName\"><span>{{client.name}}</span></td>\r\n  <td *ngIf=\"showStatus\"><span *ngIf=\"client.id === 142\"><i class=\"fa fa-check\" aria-hidden=\"true\" title=\"{{client.name}} Configured (Date)\"></i></span></td>\r\n  <td *ngIf=\"showAction\">\r\n    <app-client-actions-popover\r\n      [clientId]=\"client.id\"\r\n      [clientName]=\"client.name\"\r\n      (configAction)=\"configureClient($event)\">\r\n      <i class=\"fa fa-pencil-square-o clickable\" aria-hidden=\"true\" title=\"Click to configure {{client.name}} Communication settings\"></i>\r\n  </app-client-actions-popover>\r\n  </td>\r\n</tr>\r\n</tbody>\r\n<tfoot></tfoot>\r\n</table>"
 
 /***/ }),
 
@@ -566,7 +907,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ClientActionTableComponent = (function () {
+var ClientActionTableComponent = /** @class */ (function () {
     function ClientActionTableComponent() {
         this.supressClient = [];
         this.displayClientStartEmpty = true;
@@ -597,7 +938,7 @@ var ClientActionTableComponent = (function () {
         }
     };
     ClientActionTableComponent.prototype.ngOnInit = function () {
-        console.log('ClientActionTableComponent onInit...', this.clients, this.displayClient);
+        // console.log('ClientActionTableComponent onInit...', this.clients, this.displayClient);
         if (!this.displayClient) {
             this.displayClient = []; // instead of 'undefined'
         }
@@ -810,7 +1151,7 @@ var ClientActionTableComponent = (function () {
 /***/ "../../../../../src/app/shared/components/client-actions-popover/client-actions-popover.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<ng-template #popContent>\n  <div class=\"w-100 outer-popover\"\n    (click)=\"onClick($event)\"\n    (appClickOutside)=\"onClickedOutside($event, p)\"\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\n    [clickOutsideEvents]=\"clickOutsideEvents\"\n    [exclude]=\"exclude\"\n    [excludeBeforeClick]=\"excludeBeforeClick\">\n\n    <div class=\"float-left inner-popover\">\n        <span class=\"badge badge-success clickable\"\n             (click)=\"configure(clientId, 'communications'); p.close();\"\n              title=\"Configure Communications for  {{clientId}}: {{clientName}} \">\n          Communications</span></div>\n  </div>\n</ng-template>\n<div [ngbPopover]=\"popContent\"\n     #p=\"ngbPopover\"\n     popoverTitle=\"\"\n     placement=\"left\">\n  <ng-content></ng-content>\n</div>\n"
+module.exports = "\r\n<ng-template #popContent>\r\n  <div class=\"w-100 outer-popover\"\r\n    (click)=\"onClick($event)\"\r\n    (appClickOutside)=\"onClickedOutside($event, p)\"\r\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\r\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\r\n    [clickOutsideEvents]=\"clickOutsideEvents\"\r\n    [exclude]=\"exclude\"\r\n    [excludeBeforeClick]=\"excludeBeforeClick\">\r\n\r\n    <div class=\"float-left inner-popover\">\r\n      <span class=\"badge badge-info clickable\"\r\n            (click)=\"configure(clientId, 'communications'); p.close();\"\r\n            title=\"Configure Communications for  {{clientId}}: {{clientName}} \">\r\n        Configure<br/>Communications</span></div>\r\n  </div>\r\n</ng-template>\r\n<div [ngbPopover]=\"popContent\"\r\n     #p=\"ngbPopover\"\r\n     popoverTitle=\"\"\r\n     placement=\"left\">\r\n  <ng-content></ng-content>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -850,7 +1191,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ClientActionsPopoverComponent = (function () {
+var ClientActionsPopoverComponent = /** @class */ (function () {
     function ClientActionsPopoverComponent() {
         this.attachOutsideOnClick = false;
         this.delayClickOutsideInit = true;
@@ -942,7 +1283,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var CommActionTableComponent = (function () {
+var CommActionTableComponent = /** @class */ (function () {
     function CommActionTableComponent() {
         this.supressComm = [];
         this.displayCommStartEmpty = true;
@@ -974,7 +1315,7 @@ var CommActionTableComponent = (function () {
         }
     };
     CommActionTableComponent.prototype.ngOnInit = function () {
-        console.log('CommActionTableComponent:', this.communications);
+        // console.log('CommActionTableComponent:', this.communications);
     };
     CommActionTableComponent.prototype.selectCommunication = function (communication) {
         this.selectedCommunication.emit(communication);
@@ -1187,7 +1528,7 @@ var CommActionTableComponent = (function () {
 /***/ "../../../../../src/app/shared/components/comm-actions-popover/comm-actions-popover.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<ng-template #popContent>\r\n  <div class=\"w-100 outer-popover\"\r\n    (click)=\"onClick($event)\"\r\n    (appClickOutside)=\"onClickedOutside($event, p)\"\r\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\r\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\r\n    [clickOutsideEvents]=\"clickOutsideEvents\"\r\n    [exclude]=\"exclude\"\r\n    [excludeBeforeClick]=\"excludeBeforeClick\">\r\n\r\n    <div class=\"float-left inner-popover\">\r\n        <span class=\"badge badge-success clickable\"\r\n             (click)=\"configure(commId, 'program'); p.close();\"\r\n              title=\"Configure Program for CommId {{commId}}: {{commName}} \">\r\n          Program</span></div>\r\n    <div class=\"float-right inner-popover\">\r\n        <span class=\"badge badge-success clickable\"\r\n             (click)=\"configure(commId, 'clients'); p.close();\"\r\n              title=\"Configure Client(s) for CommId {{commId}}: {{commName}} \">\r\n          Clients</span>\r\n      </div>\r\n  </div>\r\n</ng-template>\r\n<div [ngbPopover]=\"popContent\"\r\n     #p=\"ngbPopover\"\r\n     popoverTitle=\"\"\r\n     placement=\"left\">\r\n  <ng-content></ng-content>\r\n</div>\r\n"
+module.exports = "\r\n<ng-template #popContent>\r\n  <div class=\"w-100 outer-popover\"\r\n    (click)=\"onClick($event)\"\r\n    (appClickOutside)=\"onClickedOutside($event, p)\"\r\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\r\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\r\n    [clickOutsideEvents]=\"clickOutsideEvents\"\r\n    [exclude]=\"exclude\"\r\n    [excludeBeforeClick]=\"excludeBeforeClick\">\r\n\r\n    <div class=\"float-left inner-popover\">\r\n      <span class=\"badge badge-info clickable\"\r\n            (click)=\"configure(commId, 'program'); p.close();\"\r\n            title=\"Configure Program for CommId {{commId}}: {{commName}} \">\r\n        Configure<br/>Program</span></div>\r\n    <div class=\"float-right inner-popover\">\r\n      <span class=\"badge badge-info clickable\"\r\n            (click)=\"configure(commId, 'clients'); p.close();\"\r\n            title=\"Configure Client(s) for CommId {{commId}}: {{commName}} \">\r\n        Configure<br/>Clients</span>\r\n      </div>\r\n  </div>\r\n</ng-template>\r\n<div [ngbPopover]=\"popContent\"\r\n     #p=\"ngbPopover\"\r\n     popoverTitle=\"\"\r\n     placement=\"left\">\r\n  <ng-content></ng-content>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1228,7 +1569,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // https://ng-bootstrap.github.io/#/components/popover/examples
-var CommActionsPopoverComponent = (function () {
+var CommActionsPopoverComponent = /** @class */ (function () {
     function CommActionsPopoverComponent() {
         this.attachOutsideOnClick = false;
         this.delayClickOutsideInit = true;
@@ -1281,7 +1622,7 @@ var CommActionsPopoverComponent = (function () {
 /***/ "../../../../../src/app/shared/components/date-eff-exp/date-eff-exp.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!lastConfigRow\">\n  <!-- not the last (new) row, this could be the current effective row -->\n\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\n    <!-- the effective date of the current effective row -->\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.effective}}\" readonly>\n  </div>\n\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\n    <!-- the expiration date of the current/previous row -->\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\n  </div>\n</div>\n\n<div *ngIf=\"lastConfigRow\" >\n  <!-- this _is_ the last (new) row that will be inserted -->\n\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\n    <!-- set the effective date for the new row -->\n    <app-date-picker-popup [dateValue]=\"commConfig.effective\"\n      (newDateValue)=\"updateDateValue($event)\"></app-date-picker-popup></div>\n\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\n    <!-- the expiration date of the new row -->\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\n  </div>\n</div>"
+module.exports = "<div *ngIf=\"!lastConfigRow\">\r\n  <!-- not the last (new) row, this could be the current effective row -->\r\n\r\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\r\n    <!-- the effective date of the current effective row -->\r\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.effective}}\" readonly>\r\n  </div>\r\n\r\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\r\n    <!-- the expiration date of the current/previous row -->\r\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\r\n  </div>\r\n</div>\r\n\r\n<div *ngIf=\"lastConfigRow\" >\r\n  <!-- this _is_ the last (new) row that will be inserted -->\r\n\r\n  <div *ngIf=\"dateType === 'effective'\" class=\"flex-justify-center\">\r\n    <!-- set the effective date for the new row -->\r\n    <app-date-picker-popup [dateValue]=\"commConfig.effective\"\r\n      (newDateValue)=\"updateDateValue($event)\"></app-date-picker-popup></div>\r\n\r\n  <div *ngIf=\"dateType === 'expiration'\" class=\"flex-justify-center\">\r\n    <!-- the expiration date of the new row -->\r\n    <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{commConfig.expiration}}\" readonly>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1319,7 +1660,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var DateEffExpComponent = (function () {
+var DateEffExpComponent = /** @class */ (function () {
     function DateEffExpComponent() {
         this.newDateValue = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
     }
@@ -1364,7 +1705,7 @@ var DateEffExpComponent = (function () {
 /***/ "../../../../../src/app/shared/components/date-picker-popup/date-picker-popup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"col-xs-2\"\n  (click)=\"onClick($event)\"\n  (appClickOutside)=\"onClickedOutside($event, d)\"\n  [attachOutsideOnClick]=\"attachOutsideOnClick\"\n  [delayClickOutsideInit]=\"delayClickOutsideInit\"\n  [clickOutsideEvents]=\"clickOutsideEvents\"\n  [exclude]=\"exclude\"\n  [excludeBeforeClick]=\"excludeBeforeClick\">\n\n  <input name=\"dp\" [(ngModel)]=\"dateModel\" class=\"form-control form-control-sm date-eff-exp-input\" placeholder=\"yyyy-mm-dd\"\n         (click)=\"d.toggle()\" (ngModelChange)=\"saveDate($event)\" ngbDatepicker #d=\"ngbDatepicker\"\n         [required]=\"required\">\n\n </div>\n"
+module.exports = "\r\n<div class=\"col-xs-2\"\r\n  (click)=\"onClick($event)\"\r\n  (appClickOutside)=\"onClickedOutside($event, d)\"\r\n  [attachOutsideOnClick]=\"attachOutsideOnClick\"\r\n  [delayClickOutsideInit]=\"delayClickOutsideInit\"\r\n  [clickOutsideEvents]=\"clickOutsideEvents\"\r\n  [exclude]=\"exclude\"\r\n  [excludeBeforeClick]=\"excludeBeforeClick\">\r\n\r\n  <input name=\"dp\" [(ngModel)]=\"dateModel\" class=\"form-control form-control-sm date-eff-exp-input\" placeholder=\"yyyy-mm-dd\"\r\n         (click)=\"d.toggle()\" (ngModelChange)=\"saveDate($event)\" ngbDatepicker #d=\"ngbDatepicker\"\r\n         [required]=\"required\">\r\n\r\n </div>\r\n"
 
 /***/ }),
 
@@ -1402,7 +1743,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var DatePickerPopupComponent = (function () {
+var DatePickerPopupComponent = /** @class */ (function () {
     function DatePickerPopupComponent() {
         this.attachOutsideOnClick = true;
         this.delayClickOutsideInit = false;
@@ -1412,7 +1753,7 @@ var DatePickerPopupComponent = (function () {
         this.newDateValue = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
     }
     DatePickerPopupComponent.prototype.ngOnInit = function () {
-        console.log('DatePickerPopup datevalue: ', this.dateValue);
+        // console.log('DatePickerPopup datevalue: ', this.dateValue);
         var inputDate = new Date(this.dateValue);
         this.dateModel = { day: inputDate.getUTCDate(), month: inputDate.getUTCMonth() + 1, year: inputDate.getUTCFullYear() };
     };
@@ -1460,14 +1801,14 @@ var DatePickerPopupComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.html":
+/***/ "../../../../../src/app/shared/components/select-channel-default/select-channel-default.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\n    class=\"form-control form-control-sm\" readonly>\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\n  </select>\n</div>\n<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\n    <option *ngFor=\"let cmo of chanMandatoryOpts\" [ngValue]=\"cmo\">{{cmo}}</option>\n  </select>\n</div>"
+module.exports = "<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\r\n    class=\"form-control form-control-sm\" readonly>\r\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\r\n  </select>\r\n</div>\r\n<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}_{{name}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\r\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\r\n    <option *ngFor=\"let cdo of chanDefaultOpts\" [ngValue]=\"cdo\">{{cdo}}</option>\r\n  </select>\r\n</div>"
 
 /***/ }),
 
-/***/ "../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.scss":
+/***/ "../../../../../src/app/shared/components/select-channel-default/select-channel-default.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1485,14 +1826,15 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.ts":
+/***/ "../../../../../src/app/shared/components/select-channel-default/select-channel-default.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelectChannelMandatoryComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelectChannelDefaultComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1504,28 +1846,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var noop = function () {
 };
 /* tslint:disable:no-use-before-declare */
 var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* NG_VALUE_ACCESSOR */],
-    useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* forwardRef */])(function () { return SelectChannelMandatoryComponent; }),
+    useExisting: Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* forwardRef */])(function () { return SelectChannelDefaultComponent; }),
     multi: true
 };
 /* tslint:enable:no-use-before-declare */
-var SelectChannelMandatoryComponent = (function () {
-    function SelectChannelMandatoryComponent() {
+var SelectChannelDefaultComponent = /** @class */ (function () {
+    function SelectChannelDefaultComponent() {
         // Placeholders for the callbacks which are later providesd
         // by the Control Value Accessor
         this.onTouchedCallback = noop;
         this.onChangeCallback = noop;
-        this.chanMandatoryOpts = ['No', 'Email', 'IVR', 'SMS'];
+        this.chanDefaultOpts = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].CHANDEFAULTOPTS;
         this.innerValue = '';
     }
-    SelectChannelMandatoryComponent.prototype.ngOnInit = function () {
-        console.log('SelectChannelMandatoryComponent:', this.id, this.name);
+    SelectChannelDefaultComponent.prototype.ngOnInit = function () {
+        // console.log('SelectChannelDefaultComponent:', this.id, this.name);
     };
-    Object.defineProperty(SelectChannelMandatoryComponent.prototype, "value", {
+    Object.defineProperty(SelectChannelDefaultComponent.prototype, "value", {
         // get accessor
         get: function () {
             return this.innerValue;
@@ -1541,50 +1884,50 @@ var SelectChannelMandatoryComponent = (function () {
         configurable: true
     });
     // Set touched on blur
-    SelectChannelMandatoryComponent.prototype.onBlur = function () {
+    SelectChannelDefaultComponent.prototype.onBlur = function () {
         this.onTouchedCallback();
     };
     // From ControlValueAccessor interface
-    SelectChannelMandatoryComponent.prototype.writeValue = function (value) {
+    SelectChannelDefaultComponent.prototype.writeValue = function (value) {
         if (value !== this.innerValue) {
             this.innerValue = value;
         }
     };
     // From ControlValueAccessor interface
-    SelectChannelMandatoryComponent.prototype.registerOnChange = function (fn) {
+    SelectChannelDefaultComponent.prototype.registerOnChange = function (fn) {
         this.onChangeCallback = fn;
     };
     // From ControlValueAccessor interface
-    SelectChannelMandatoryComponent.prototype.registerOnTouched = function (fn) {
+    SelectChannelDefaultComponent.prototype.registerOnTouched = function (fn) {
         this.onTouchedCallback = fn;
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", String)
-    ], SelectChannelMandatoryComponent.prototype, "id", void 0);
+    ], SelectChannelDefaultComponent.prototype, "id", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", String)
-    ], SelectChannelMandatoryComponent.prototype, "name", void 0);
+    ], SelectChannelDefaultComponent.prototype, "name", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", String)
-    ], SelectChannelMandatoryComponent.prototype, "actualStaticValue", void 0);
+    ], SelectChannelDefaultComponent.prototype, "actualStaticValue", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", Number)
-    ], SelectChannelMandatoryComponent.prototype, "lastConfigRow", void 0);
-    SelectChannelMandatoryComponent = __decorate([
+    ], SelectChannelDefaultComponent.prototype, "lastConfigRow", void 0);
+    SelectChannelDefaultComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-select-channel-mandatory',
-            template: __webpack_require__("../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.scss")],
+            selector: 'app-select-channel-default',
+            template: __webpack_require__("../../../../../src/app/shared/components/select-channel-default/select-channel-default.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/shared/components/select-channel-default/select-channel-default.component.scss")],
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
         }),
         __metadata("design:paramtypes", [])
-    ], SelectChannelMandatoryComponent);
-    return SelectChannelMandatoryComponent;
+    ], SelectChannelDefaultComponent);
+    return SelectChannelDefaultComponent;
 }());
 
 
@@ -1594,7 +1937,7 @@ var SelectChannelMandatoryComponent = (function () {
 /***/ "../../../../../src/app/shared/components/select-channel-priority/select-channel-priority.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\n    <option *ngFor=\"let cpo of channelPriortyOpts\" [ngValue]=\"cpo\">{{cpo}}</option>\n  </select>\n</div>\n<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\n  <select id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\n    class=\"form-control form-control-sm\" disabled>\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\n  </select>\n</div>"
+module.exports = "<div *ngIf=\"lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}\" name=\"{{name}}\" [(ngModel)]=\"value\" required\r\n    class=\"form-control form-control-sm\" (blur)=\"onBlur()\">\r\n    <option *ngFor=\"let cpo of channelPriortyOpts\" [ngValue]=\"cpo\">{{cpo}}</option>\r\n  </select>\r\n</div>\r\n<div *ngIf=\"!lastConfigRow\" class=\"flex-justify-right\">\r\n  <select id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" required\r\n    class=\"form-control form-control-sm\" disabled>\r\n    <option value=\"actualStaticValue\">{{actualStaticValue}}</option>\r\n  </select>\r\n</div>"
 
 /***/ }),
 
@@ -1624,6 +1967,7 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelectChannelPriorityComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1635,6 +1979,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var noop = function () {
 };
 /* tslint:disable:no-use-before-declare */
@@ -1644,13 +1989,13 @@ var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     multi: true
 };
 /* tslint:enable:no-use-before-declare */
-var SelectChannelPriorityComponent = (function () {
+var SelectChannelPriorityComponent = /** @class */ (function () {
     function SelectChannelPriorityComponent() {
         // Placeholders for the callbacks which are later providesd
         // by the Control Value Accessor
         this.onTouchedCallback = noop;
         this.onChangeCallback = noop;
-        this.channelPriortyOpts = [0, 1, 2, 3];
+        this.channelPriortyOpts = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].CHANNELPRIORTYOPTS;
         // http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
         // The internal data model
         this.innerValue = '';
@@ -1731,7 +2076,7 @@ var SelectChannelPriorityComponent = (function () {
 /***/ "../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"showHeader\">\n  <label for=\"{{name}}\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\n    {{label}}</label>\n</span>\n\n<span *ngIf=\"staticReadOnly\">\n  <select class=\"form-control form-control-sm flex-justify-right\"\n          id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" readonly>\n          <option value=\"actualStaticValue\">{{staticReadonlyOption}}</option>\n  </select>\n</span>\n\n<span *ngIf=\"dynamicPicker\">\n  <select class=\"form-control form-control-sm flex-justify-right\"\n          [(ngModel)]=\"value\" id=\"{{id}}\" name=\"{{name}}\" required (blur)=\"onBlur()\">\n    <option *ngFor=\"let po of profileOpts\" [ngValue]=\"po.val\">{{po.opt}}</option>>\n  </select>\n</span>"
+module.exports = "<span *ngIf=\"showHeader\">\r\n  <label for=\"{{name}}\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n    {{label}}</label>\r\n</span>\r\n\r\n<span *ngIf=\"staticReadOnly\">\r\n  <select class=\"form-control form-control-sm flex-justify-right\"\r\n          id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" disabled>\r\n          <option value=\"actualStaticValue\">{{staticReadonlyOption}}</option>\r\n  </select>\r\n</span>\r\n\r\n<span *ngIf=\"dynamicPicker\">\r\n  <select class=\"form-control form-control-sm flex-justify-right\"\r\n          [(ngModel)]=\"value\" id=\"{{id}}\" name=\"{{name}}\" required (blur)=\"onBlur()\">\r\n    <option *ngFor=\"let po of profileOpts\" [ngValue]=\"po.val\">{{po.opt}}</option>>\r\n  </select>\r\n</span>"
 
 /***/ }),
 
@@ -1781,7 +2126,7 @@ var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     multi: true
 };
 /* tslint:enable:no-use-before-declare */
-var SelectProfileOptionComponent = (function () {
+var SelectProfileOptionComponent = /** @class */ (function () {
     function SelectProfileOptionComponent() {
         // Placeholders for the callbacks which are later providesd
         // by the Control Value Accessor
@@ -1917,7 +2262,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // http://www.carbonatethis.com/sort-table-columns-with-angular-and-typescript/
-var SortableColumnComponent = (function () {
+var SortableColumnComponent = /** @class */ (function () {
     function SortableColumnComponent(sortService) {
         this.sortService = sortService;
         this.sortDirection = '';
@@ -2009,7 +2354,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ClickOutsideComponent = (function () {
+var ClickOutsideComponent = /** @class */ (function () {
     function ClickOutsideComponent() {
         this.countInside = 0;
         this.countOutside = 0;
@@ -2084,7 +2429,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var DragDropComponent = (function () {
+var DragDropComponent = /** @class */ (function () {
     function DragDropComponent() {
         this.vegetables = [
             { name: 'Carrot', type: 'vegetable' },
@@ -2166,7 +2511,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 // https://github.com/arkon/ng-click-outside
-var ClickOutsideDirective = (function () {
+var ClickOutsideDirective = /** @class */ (function () {
     function ClickOutsideDirective(_el, platformId) {
         this._el = _el;
         this.platformId = platformId;
@@ -2311,7 +2656,7 @@ var ClickOutsideDirective = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DomHelper; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 
-var DomHelper = (function () {
+var DomHelper = /** @class */ (function () {
     function DomHelper() {
     }
     /**
@@ -2399,7 +2744,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DraggableDirective = (function () {
+var DraggableDirective = /** @class */ (function () {
     function DraggableDirective(el, renderer, ng2DragDropService, zone) {
         this.el = el;
         this.renderer = renderer;
@@ -2650,7 +2995,7 @@ var DraggableDirective = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropEvent; });
-var DropEvent = (function () {
+var DropEvent = /** @class */ (function () {
     function DropEvent(event, data) {
         this.nativeEvent = event;
         this.dragData = data;
@@ -2690,7 +3035,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DroppableDirective = (function () {
+var DroppableDirective = /** @class */ (function () {
     function DroppableDirective(el, renderer, ng2DragDropService, zone) {
         this.el = el;
         this.renderer = renderer;
@@ -2950,7 +3295,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // http://www.carbonatethis.com/sort-table-columns-with-angular-and-typescript/
-var SortableTableDirective = (function () {
+var SortableTableDirective = /** @class */ (function () {
     function SortableTableDirective(sortService) {
         this.sortService = sortService;
         this.sorted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
@@ -2989,8 +3334,8 @@ var SortableTableDirective = (function () {
 /* unused harmony export ClientSortCriteria */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ClientConfigAction; });
 // import { IClientConfig } from 'app/classes/model/iclient-config';
-var Client = (function () {
-    function Client(id, code, name, clientConfiguration) {
+var Client = /** @class */ (function () {
+    function Client(id, code, name, programProfileClientException, clientConfiguration) {
         if (id === void 0) { id = 0; }
         if (code === void 0) { code = ''; }
         if (name === void 0) { name = ''; }
@@ -2998,21 +3343,22 @@ var Client = (function () {
         this.id = id;
         this.code = code;
         this.name = name;
+        this.programProfileClientException = (programProfileClientException) ? programProfileClientException : emptyNum;
         this.clientConfiguration = (clientConfiguration) ? clientConfiguration : emptyNum;
     }
     Client.prototype.clone = function () {
-        return new Client(this.id, this.code, this.name, this.clientConfiguration);
+        return new Client(this.id, this.code, this.name, this.programProfileClientException, this.clientConfiguration);
     };
     return Client;
 }());
 
-var ClientSortCriteria = (function () {
+var ClientSortCriteria = /** @class */ (function () {
     function ClientSortCriteria() {
     }
     return ClientSortCriteria;
 }());
 
-var ClientConfigAction = (function () {
+var ClientConfigAction = /** @class */ (function () {
     function ClientConfigAction(id, type) {
         this.clientId = id;
         this.configType = type;
@@ -3031,7 +3377,7 @@ var ClientConfigAction = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Communication; });
 /* unused harmony export CommunicationSortCriteria */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CommunicationConfigAction; });
-var Communication = (function () {
+var Communication = /** @class */ (function () {
     function Communication(id, name, description, programConfiguration, clientConfiguration) {
         if (id === void 0) { id = 0; }
         if (name === void 0) { name = ''; }
@@ -3048,13 +3394,13 @@ var Communication = (function () {
     return Communication;
 }());
 
-var CommunicationSortCriteria = (function () {
+var CommunicationSortCriteria = /** @class */ (function () {
     function CommunicationSortCriteria() {
     }
     return CommunicationSortCriteria;
 }());
 
-var CommunicationConfigAction = (function () {
+var CommunicationConfigAction = /** @class */ (function () {
     function CommunicationConfigAction(id, type) {
         this.commId = id;
         this.configType = type;
@@ -3127,7 +3473,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientConfigurationsService = (function () {
+var ClientConfigurationsService = /** @class */ (function () {
     function ClientConfigurationsService(config, http) {
         this.config = config;
         this.http = http;
@@ -3273,7 +3619,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientsService = (function () {
+var ClientsService = /** @class */ (function () {
     function ClientsService(config, http) {
         this.config = config;
         this.http = http;
@@ -3376,7 +3722,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var CommunicationsService = (function () {
+var CommunicationsService = /** @class */ (function () {
     function CommunicationsService(config, http) {
         this.config = config;
         this.http = http;
@@ -3390,7 +3736,9 @@ var CommunicationsService = (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.http.get(this.commApiEndpoint).toPromise()];
+                        return [4 /*yield*/, this.http.get(this.commApiEndpoint, {
+                                headers: new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["d" /* HttpHeaders */]().set('Authorization', "Bearer " + localStorage.getItem('token'))
+                            }).toPromise()];
                     case 1:
                         response = _a.sent();
                         // return response.json() as Communication[];
@@ -3426,12 +3774,14 @@ var CommunicationsService = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataApiService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_services_clients_clients_service__ = __webpack_require__("../../../../../src/app/shared/services/clients/clients.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_services_client_configurations_client_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/client-configurations/client-configurations.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_services_communications_communications_service__ = __webpack_require__("../../../../../src/app/shared/services/communications/communications.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_programs_programs_service__ = __webpack_require__("../../../../../src/app/shared/services/programs/programs.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_services_program_profiles_program_profiles_service__ = __webpack_require__("../../../../../src/app/shared/services/program-profiles/program-profiles.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_shared_services_program_configurations_program_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/program-configurations/program-configurations.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_app_config__ = __webpack_require__("../../../../../src/app/app.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__clients_clients_service__ = __webpack_require__("../../../../../src/app/shared/services/clients/clients.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_configurations_client_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/client-configurations/client-configurations.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__communications_communications_service__ = __webpack_require__("../../../../../src/app/shared/services/communications/communications.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__programs_programs_service__ = __webpack_require__("../../../../../src/app/shared/services/programs/programs.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__program_profiles_program_profiles_service__ = __webpack_require__("../../../../../src/app/shared/services/program-profiles/program-profiles.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__program_configurations_program_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/program-configurations/program-configurations.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__program_profile_client_exceptions_program_profile_client_exceptions_service__ = __webpack_require__("../../../../../src/app/shared/services/program-profile-client-exceptions/program-profile-client-exceptions.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3440,6 +3790,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -3483,14 +3836,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var DataApiService = (function () {
-    function DataApiService(communicationsService, clientsService, clientConfigurationsService, programsService, programProfileService, programConfigurationService) {
+
+
+var DataApiService = /** @class */ (function () {
+    function DataApiService(config, communicationsService, clientsService, clientConfigurationsService, programsService, programProfilesService, programConfigurationService, programProfileClientExceptionsService) {
+        this.config = config;
         this.communicationsService = communicationsService;
         this.clientsService = clientsService;
         this.clientConfigurationsService = clientConfigurationsService;
         this.programsService = programsService;
-        this.programProfileService = programProfileService;
+        this.programProfilesService = programProfilesService;
         this.programConfigurationService = programConfigurationService;
+        this.programProfileClientExceptionsService = programProfileClientExceptionsService;
     }
     DataApiService.prototype.getCommunications = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -3579,9 +3936,11 @@ var DataApiService = (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (!this.programs) return [3 /*break*/, 1];
+                        if (!(this.config.cachePrograms && this.programs)) return [3 /*break*/, 1];
+                        console.log('getPrograms', this.config.cachePrograms);
                         return [2 /*return*/, this.programs];
                     case 1:
+                        console.log('getPrograms', this.config.cachePrograms);
                         _a = this;
                         return [4 /*yield*/, this.programsService.getProgramsThruApi()];
                     case 2:
@@ -3611,14 +3970,33 @@ var DataApiService = (function () {
             });
         });
     };
+    DataApiService.prototype.getProgramById = function (programId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var program;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.programsService.getProgramByIdThruApi(programId)];
+                    case 1:
+                        program = _a.sent();
+                        return [2 /*return*/, program];
+                }
+            });
+        });
+    };
     DataApiService.prototype.updateProgram = function (program) {
         return __awaiter(this, void 0, void 0, function () {
+            var updateProgram;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.programsService.updateProgramThruApi(program)];
                     case 1:
-                        _a.sent();
-                        return [2 /*return*/, program];
+                        updateProgram = _a.sent();
+                        console.log('DataApiService updateProgram:', updateProgram);
+                        // in-memory-web-api returning null even tough update works?
+                        if (updateProgram) {
+                            return [2 /*return*/, updateProgram];
+                        }
+                        return [2 /*return*/, this.getProgramById(program.id)];
                 }
             });
         });
@@ -3679,11 +4057,13 @@ var DataApiService = (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (!this.programProfiles) return [3 /*break*/, 1];
+                        if (!(this.config.cacheProgramProfiles && this.programProfiles)) return [3 /*break*/, 1];
+                        console.log('getProgramProfiles', this.config.cacheProgramProfiles);
                         return [2 /*return*/, this.programProfiles];
                     case 1:
+                        console.log('getProgramProfiles', this.config.cacheProgramProfiles);
                         _a = this;
-                        return [4 /*yield*/, this.programProfileService.getProgramProfilesThruApi()];
+                        return [4 /*yield*/, this.programProfilesService.getProgramProfilesThruApi()];
                     case 2:
                         _a.programProfiles = _b.sent();
                         return [2 /*return*/, this.programProfiles];
@@ -3693,12 +4073,26 @@ var DataApiService = (function () {
     };
     DataApiService.prototype.createProgramProfile = function (programProfile) {
         return __awaiter(this, void 0, void 0, function () {
+            var newProgramProfile;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.programProfileService.createProgramProfileThruApi(programProfile)];
+                    case 0: return [4 /*yield*/, this.programProfilesService.createProgramProfileThruApi(programProfile)];
+                    case 1:
+                        newProgramProfile = _a.sent();
+                        this.insertProgramProfile(newProgramProfile);
+                        return [2 /*return*/, newProgramProfile];
+                }
+            });
+        });
+    };
+    DataApiService.prototype.getProgramProfileById = function (programProfileId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var programProfile;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.programProfilesService.getProgramProfileByIdThruApi(programProfileId)];
                     case 1:
                         programProfile = _a.sent();
-                        this.insertProgramProfile(programProfile);
                         return [2 /*return*/, programProfile];
                 }
             });
@@ -3706,12 +4100,63 @@ var DataApiService = (function () {
     };
     DataApiService.prototype.updateProgramProfile = function (programProfile) {
         return __awaiter(this, void 0, void 0, function () {
+            var updateProgramProfile;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.programProfileService.updateProgramProfileThruApi(programProfile)];
+                    case 0: return [4 /*yield*/, this.programProfilesService.updateProgramProfileThruApi(programProfile)];
                     case 1:
-                        programProfile = _a.sent();
-                        return [2 /*return*/, programProfile];
+                        updateProgramProfile = _a.sent();
+                        // in-memory-web-api returning null even tough update works?
+                        if (updateProgramProfile) {
+                            return [2 /*return*/, updateProgramProfile];
+                        }
+                        return [2 /*return*/, this.getProgramProfileById(programProfile.id)];
+                }
+            });
+        });
+    };
+    //
+    DataApiService.prototype.getProgramProfileClientExceptions = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!this.programProfileClientExceptions) return [3 /*break*/, 1];
+                        return [2 /*return*/, this.programProfileClientExceptions];
+                    case 1:
+                        _a = this;
+                        return [4 /*yield*/, this.programProfileClientExceptionsService.getProgramProfileClientExceptionsThruApi()];
+                    case 2:
+                        _a.programProfileClientExceptions = _b.sent();
+                        return [2 /*return*/, this.programProfileClientExceptions];
+                }
+            });
+        });
+    };
+    DataApiService.prototype.createProgramProfileClientException = function (programProfileClientException) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.programProfileClientExceptionsService.createProgramProfileClientExceptionThruApi(programProfileClientException)];
+                    case 1:
+                        programProfileClientException =
+                            _a.sent();
+                        this.insertProgramProfileClientException(programProfileClientException);
+                        return [2 /*return*/, programProfileClientException];
+                }
+            });
+        });
+    };
+    DataApiService.prototype.updateProgramProfileClientException = function (programProfileClientException) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.programProfileClientExceptionsService.updateProgramProfileClientExceptionThruApi(programProfileClientException)];
+                    case 1:
+                        programProfileClientException =
+                            _a.sent();
+                        return [2 /*return*/, programProfileClientException];
                 }
             });
         });
@@ -3758,14 +4203,19 @@ var DataApiService = (function () {
     DataApiService.prototype.insertProgramProfile = function (programProfile) {
         this.programProfiles.push(programProfile);
     };
+    DataApiService.prototype.insertProgramProfileClientException = function (programProfileClientException) {
+        this.programProfileClientExceptions.push(programProfileClientException);
+    };
     DataApiService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_app_shared_services_communications_communications_service__["a" /* CommunicationsService */],
-            __WEBPACK_IMPORTED_MODULE_1_app_shared_services_clients_clients_service__["a" /* ClientsService */],
-            __WEBPACK_IMPORTED_MODULE_2_app_shared_services_client_configurations_client_configurations_service__["a" /* ClientConfigurationsService */],
-            __WEBPACK_IMPORTED_MODULE_4_app_shared_services_programs_programs_service__["a" /* ProgramsService */],
-            __WEBPACK_IMPORTED_MODULE_5_app_shared_services_program_profiles_program_profiles_service__["a" /* ProgramProfilesService */],
-            __WEBPACK_IMPORTED_MODULE_6_app_shared_services_program_configurations_program_configurations_service__["a" /* ProgramConfigurationsService */]])
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1_app_app_config__["a" /* APP_CONFIG */])),
+        __metadata("design:paramtypes", [Object, __WEBPACK_IMPORTED_MODULE_4__communications_communications_service__["a" /* CommunicationsService */],
+            __WEBPACK_IMPORTED_MODULE_2__clients_clients_service__["a" /* ClientsService */],
+            __WEBPACK_IMPORTED_MODULE_3__client_configurations_client_configurations_service__["a" /* ClientConfigurationsService */],
+            __WEBPACK_IMPORTED_MODULE_5__programs_programs_service__["a" /* ProgramsService */],
+            __WEBPACK_IMPORTED_MODULE_6__program_profiles_program_profiles_service__["a" /* ProgramProfilesService */],
+            __WEBPACK_IMPORTED_MODULE_7__program_configurations_program_configurations_service__["a" /* ProgramConfigurationsService */],
+            __WEBPACK_IMPORTED_MODULE_8__program_profile_client_exceptions_program_profile_client_exceptions_service__["a" /* ProgramProfileClientExceptionsService */]])
     ], DataApiService);
     return DataApiService;
 }());
@@ -3793,7 +4243,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // forked from https://github.com/ObaidUrRehman/ng-drag-drop
-var DragDropService = (function () {
+var DragDropService = /** @class */ (function () {
     function DragDropService() {
         this.onDragStart = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["a" /* Subject */]();
         this.onDragEnd = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["a" /* Subject */]();
@@ -3814,98 +4264,104 @@ var DragDropService = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InMemoryDataService; });
-var InMemoryDataService = (function () {
+var InMemoryDataService = /** @class */ (function () {
     function InMemoryDataService() {
     }
     InMemoryDataService.prototype.createDb = function () {
         var communication = [
             { 'id': 260, 'name': 'Refill Available Notice',
                 'description': 'Notifies a member when one or more of their Rx\'s is eligible for refill',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 261, 'name': 'Order Received',
                 'description': 'Notifies a member when their order is received',
-                'programConfiguration': [1] },
+                'programConfiguration': [1], 'clientConfiguration': [1] },
             { 'id': 263, 'name': 'Refill Expiring Notice',
                 'description': 'Notifies a member when one or more of their Rx\'s is about to expire but has at least 1 refill left',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 264, 'name': 'Order Shipped',
                 'description': 'Notifies a member when their order is shipped',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1229, 'name': 'Zero Refills Notice',
                 'description': 'Notifies a member when one or more of their Rx\s has no more refills available',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1230, 'name': 'RFM Auto Renewal ',
                 'description': 'Notifies a member when we will be reaching out to their Dr. to get a new RX',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1231, 'name': 'RFM Auto Refill ',
                 'description': 'Notifies a member when we will be automatically refilling their Rx',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1232, 'name': 'RFM MD Denied ',
                 'description': 'Notifies a member when their Dr. Denied our request for a new Rx',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1233, 'name': 'RFM MD Unresponsive ',
                 'description': 'Notifies a member when their Dr. was unresponsive to our request for a new Rx',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1341, 'name': 'RTP (Return to Participant) w/ MD Contact',
                 'description': 'Notifies a member when their order cannot be filled and we tried to contact their Doctor',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1342, 'name': 'RTP (Return to Participant) w/o MD Contact',
                 'description': 'Notifies a member when their order cannot be filled but we did not reach out to their doctor',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1343, 'name': 'Future Fill Held ',
                 'description': 'Notifies a member when their order is held due to refill too soon',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1344, 'name': 'Future Fill Split ',
                 'description': 'Notifies a member when part of their order is held due to refill too soon',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1859, 'name': 'Doctor Hold',
                 'description': 'Notifies member when Order is Held by Doctor.',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1861, 'name': 'Cannot Fill',
                 'description': 'Notifies member when Order cannot be filled (previously RTP)',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1904, 'name': 'Ship Consent Initial',
                 'description': 'Initial consent from member',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1905, 'name': 'Ship Consent Followup',
                 'description': 'Followup consent from member',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1906, 'name': 'Ship Consent Final',
                 'description': 'Final followup consent from member',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 1907, 'name': 'Future Fill Release Reminder',
                 'description': 'Notifies a member when a prescription is released from future fill',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 2514, 'name': 'Refill Available Reminder',
                 'description': 'Notifies a member when one or more of their Rx\'s is eligible for refill',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 2515, 'name': 'Refill Available Warning',
                 'description': 'Notifies a member when one or more of their Rx\'s is eligible for refill',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 2516, 'name': 'Refill Expiring Reminder',
                 'description': 'Notifies a member when one or more of their Rx\'s is about to expire but has at least 1 refill left',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 2517, 'name': 'Refill Expiring Warning',
                 'description': 'Notifies a member when one or more of their Rx\'s is about to expire but has at least 1 refill left',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 2518, 'name': 'Zero Refills Reminder',
                 'description': 'Notifies a member when one or more of their Rx\'s has no more refills available',
-                'programConfiguration': [] },
+                'programConfiguration': [], 'clientConfiguration': [] },
             { 'id': 2519, 'name': 'Zero Refills Warning',
                 'description': 'Notifies a member when one or more of their Rx\'s has no more refills available',
-                'programConfiguration': [] }
+                'programConfiguration': [], 'clientConfiguration': [] }
         ];
+        // real API configured to return the programProfile as an object, not ID
+        // but in case it does come as id it is handled
         var program = [
-            { 'id': 1, 'name': 'Prescription Alerts',
-                'description': 'PBM Communications including Order Status and Refill Reminder alerts'
+            { 'id': 101, 'name': 'Prescription Alerts',
+                'description': 'PBM Communications including Order Status and Refill Reminder alerts',
+                'programProfile': [1],
+                'programProfileClientException': [1]
             },
-            { 'id': 2, 'name': 'Non-Prescription Alerts', 'description': 'tired of adding a new program just to test deleting it',
+            { 'id': 102, 'name': 'Non-Prescription Alerts',
+                'description': 'PBM non-transactional Communications like Portal Registration, Password Recovery',
                 'programProfile': [
-                    { 'id': 2, 'defaultOptIn': true, 'visibleInUi': true,
+                    { 'id': 2, 'defaultOptIn': true, 'visibleInUi': false,
                         'chanEmail': true, 'chanIvr': true, 'chanSms': true, 'chanSecure': true, 'chanMail': false, 'chanMobile': false,
-                        'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 2
+                        'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 102
                     }
-                ]
+                ],
+                'programProfileClientException': []
             }
         ];
         var programprofile = [
@@ -3920,7 +4376,39 @@ var InMemoryDataService = (function () {
                 'chanMobile': false,
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
-                'program': 1
+                'program': 101
+            },
+            { 'id': 2,
+                'defaultOptIn': true,
+                'visibleInUi': false,
+                'chanEmail': true,
+                'chanIvr': true,
+                'chanSms': true,
+                'chanSecure': true,
+                'chanMail': false,
+                'chanMobile': false,
+                'effective': '2017-01-01',
+                'expiration': '9999-12-31',
+                'program': 102
+            }
+        ];
+        var programprofileclientexception = [
+            { 'id': 1,
+                'defaultOptIn': true,
+                'visibleInUi': true,
+                'chanEmail': true,
+                'chanIvr': true,
+                'chanSms': true,
+                'chanSecure': true,
+                'chanMail': false,
+                'chanMobile': false,
+                'effective': '2017-01-01',
+                'expiration': '9999-12-31',
+                'program': 101,
+                'client': { 'id': 142, 'code': 'AMD', 'name': 'AT&T INC.',
+                    'programProfileClientException': [1],
+                    'clientConfiguration': [1]
+                }
             }
         ];
         var programconfiguration = [
@@ -3932,19 +4420,13 @@ var InMemoryDataService = (function () {
                 'chanSmsPriority': 1,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
-                'chanMandatory': 'Email',
-                'effective': '2017-1-1',
+                'chanDefault': 'Email',
+                'required': true,
+                'mandatory': true,
+                'effective': '2017-01-01',
                 'expiration': '9999-12-31',
-                'program': { 'id': 1,
-                    'name': 'Prescription Alerts',
-                    'description': 'PBM Communications including Order Status and Refill Reminder alerts',
-                    'programConfiguration': [1]
-                },
-                'communication': { 'id': 261,
-                    'name': 'Order Received',
-                    'description': 'Notifies a member when their order is received',
-                    'programConfiguration': [1]
-                }
+                'program': 101,
+                'communication': 261
             },
             { 'id': 2,
                 'name': 'Prescription Alerts Order Status',
@@ -3954,38 +4436,65 @@ var InMemoryDataService = (function () {
                 'chanSmsPriority': 1,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
-                'chanMandatory': 'Email',
-                'effective': '2017-1-1',
+                'chanDefault': 'Email',
+                'required': true,
+                'mandatory': true,
+                'effective': '2017-01-01',
                 'expiration': '9999-12-31',
-                'program': 1,
+                'program': 101,
                 'communication': 264
             }
         ];
         var client = [
-            { 'id': 142, 'code': 'AMD', 'name': 'AT&T INC.' },
-            { 'id': 259, 'code': 'BCC', 'name': 'BLUE CROSS OF CONNECTICUT' },
-            { 'id': 339, 'code': 'BCAL', 'name': 'BLUE CROSS OF ALABAMA' },
-            { 'id': 428, 'code': 'BOH', 'name': 'BLUE CROSS OF OHIO' },
-            { 'id': 10203, 'code': 'BCBSN', 'name': 'BLUE CROSS BLUE SHIELD OF NC' },
-            { 'id': 11254, 'code': 'BCOGA', 'name': 'BLUE CROSS/BLUE SHIELD GEORGIA' },
-            { 'id': 11614, 'code': 'BCCAL', 'name': 'BLUE CROSS/BS OF CALIFORNIA' },
-            { 'id': 11643, 'code': 'BCOMI', 'name': 'BLUE CROSS OF MICHIGAN' },
-            { 'id': 12130, 'code': 'BCBSA', 'name': 'BLUE CROSS BLUE SHIELD ASSOC.' },
-            { 'id': 12675, 'code': 'BCORO', 'name': 'BLUE CROSS OF ROCHESTER' },
-            { 'id': 14481, 'code': 'ZC342', 'name': 'BLUE CROSS IDAHO-HMO' },
-            { 'id': 14482, 'code': 'ZC343', 'name': 'BLUE CROSS IDAHO-PPO' },
-            { 'id': 14606, 'code': 'ZCC01', 'name': 'BLUE CROSS BLUE SHIELD OF TENN' },
-            { 'id': 22912, 'code': 'X7700', 'name': 'AETNA-PPO' },
-            { 'id': 22913, 'code': 'X7705', 'name': 'AETNA-SRC' },
-            { 'id': 22914, 'code': 'X7710', 'name': 'AETNA-AGB' },
-            { 'id': 22915, 'code': 'X7715', 'name': 'AETNA-DISCOUNT CARE' },
-            { 'id': 22916, 'code': 'X7720', 'name': 'AETNA-ASH' },
-            { 'id': 22917, 'code': 'X7730', 'name': 'AETNA-HMO' },
-            { 'id': 22918, 'code': 'X7750', 'name': 'AETNA-MCPP - MEDICAL BNFT' },
-            { 'id': 22919, 'code': 'X7760', 'name': 'AETNA-HNO' },
-            { 'id': 22920, 'code': 'X7770', 'name': 'AETNA-MED-D PDP S5810' },
-            { 'id': 22921, 'code': 'X7771', 'name': 'AETNA-MED-D MAPD H0318' },
-            { 'id': 22922, 'code': 'X7772', 'name': 'AETNA-MED-D MAPD H0523' }
+            { 'id': 142, 'code': 'AMD', 'name': 'AT&T INC.',
+                'programProfileClientException': [1],
+                'clientConfiguration': [1] },
+            { 'id': 259, 'code': 'BCC', 'name': 'BLUE CROSS OF CONNECTICUT',
+                'programProfileClientException': [], 'clientConfiguration': [2] },
+            { 'id': 339, 'code': 'BCAL', 'name': 'BLUE CROSS OF ALABAMA',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 428, 'code': 'BOH', 'name': 'BLUE CROSS OF OHIO',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 10203, 'code': 'BCBSN', 'name': 'BLUE CROSS BLUE SHIELD OF NC',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 11254, 'code': 'BCOGA', 'name': 'BLUE CROSS/BLUE SHIELD GEORGIA',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 11614, 'code': 'BCCAL', 'name': 'BLUE CROSS/BS OF CALIFORNIA',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 11643, 'code': 'BCOMI', 'name': 'BLUE CROSS OF MICHIGAN',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 12130, 'code': 'BCBSA', 'name': 'BLUE CROSS BLUE SHIELD ASSOC.',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 12675, 'code': 'BCORO', 'name': 'BLUE CROSS OF ROCHESTER',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 14481, 'code': 'ZC342', 'name': 'BLUE CROSS IDAHO-HMO',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 14482, 'code': 'ZC343', 'name': 'BLUE CROSS IDAHO-PPO',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 14606, 'code': 'ZCC01', 'name': 'BLUE CROSS BLUE SHIELD OF TENN',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22912, 'code': 'X7700', 'name': 'AETNA-PPO',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22913, 'code': 'X7705', 'name': 'AETNA-SRC',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22914, 'code': 'X7710', 'name': 'AETNA-AGB',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22915, 'code': 'X7715', 'name': 'AETNA-DISCOUNT CARE',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22916, 'code': 'X7720', 'name': 'AETNA-ASH',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22917, 'code': 'X7730', 'name': 'AETNA-HMO',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22918, 'code': 'X7750', 'name': 'AETNA-MCPP - MEDICAL BNFT',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22919, 'code': 'X7760', 'name': 'AETNA-HNO',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22920, 'code': 'X7770', 'name': 'AETNA-MED-D PDP S5810',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22921, 'code': 'X7771', 'name': 'AETNA-MED-D MAPD H0318',
+                'programProfileClientException': [], 'clientConfiguration': [] },
+            { 'id': 22922, 'code': 'X7772', 'name': 'AETNA-MED-D MAPD H0523',
+                'programProfileClientException': [], 'clientConfiguration': [] }
         ];
         var clientconfiguration = [
             { 'id': 1,
@@ -3996,18 +4505,13 @@ var InMemoryDataService = (function () {
                 'chanSmsPriority': 1,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
-                'chanMandatory': 'Email',
+                'chanDefault': 'Email',
+                'required': false,
+                'mandatory': false,
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
-                'client': { 'id': 142,
-                    'code': 'AMD',
-                    'name': 'AT&T INC.'
-                },
-                'communication': { 'id': 261,
-                    'name': 'Order Received ',
-                    'description': 'Notifies a member when their order is received',
-                    'programConfiguration': [1]
-                }
+                'client': 142,
+                'communication': 261
             },
             { 'id': 2,
                 'name': 'Prescription Alerts Order Status',
@@ -4017,7 +4521,9 @@ var InMemoryDataService = (function () {
                 'chanSmsPriority': 2,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
-                'chanMandatory': 'No',
+                'chanDefault': 'No',
+                'required': false,
+                'mandatory': false,
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'client': 259,
@@ -4028,6 +4534,7 @@ var InMemoryDataService = (function () {
             communication: communication,
             program: program,
             programprofile: programprofile,
+            programprofileclientexception: programprofileclientexception,
             programconfiguration: programconfiguration,
             client: client,
             clientconfiguration: clientconfiguration
@@ -4102,7 +4609,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramConfigurationsService = (function () {
+var ProgramConfigurationsService = /** @class */ (function () {
     function ProgramConfigurationsService(config, http) {
         this.config = config;
         this.http = http;
@@ -4185,6 +4692,150 @@ var ProgramConfigurationsService = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/shared/services/program-profile-client-exceptions/program-profile-client-exceptions.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramProfileClientExceptionsService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_config__ = __webpack_require__("../../../../../src/app/app.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+var ProgramProfileClientExceptionsService = /** @class */ (function () {
+    function ProgramProfileClientExceptionsService(config, http) {
+        this.config = config;
+        this.http = http;
+        this.progProfileClientExceptionApiEndpoint = this.config.apiEndpoint + 'api/programprofileclientexception'; // URL to web api
+    }
+    ProgramProfileClientExceptionsService.prototype.getProgramProfileClientExceptionsThruApi = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.http.get(this.progProfileClientExceptionApiEndpoint).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 2:
+                        error_1 = _a.sent();
+                        this.handleError(error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramProfileClientExceptionsService.prototype.createProgramProfileClientExceptionThruApi = function (programProfileClientException) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.http.post(this.progProfileClientExceptionApiEndpoint, programProfileClientException).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 2:
+                        error_2 = _a.sent();
+                        this.handleError(error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramProfileClientExceptionsService.prototype.updateProgramProfileClientExceptionThruApi = function (programProfileClientException) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        url = this.progProfileClientExceptionApiEndpoint + "/" + programProfileClientException.id;
+                        return [4 /*yield*/, this.http.put(url, programProfileClientException).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 2:
+                        error_3 = _a.sent();
+                        this.handleError(error_3);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramProfileClientExceptionsService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    };
+    ProgramProfileClientExceptionsService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */])(__WEBPACK_IMPORTED_MODULE_2_app_app_config__["a" /* APP_CONFIG */])),
+        __metadata("design:paramtypes", [Object, __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]])
+    ], ProgramProfileClientExceptionsService);
+    return ProgramProfileClientExceptionsService;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/shared/services/program-profiles/program-profiles.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4246,7 +4897,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramProfilesService = (function () {
+var ProgramProfilesService = /** @class */ (function () {
     function ProgramProfilesService(config, http) {
         this.config = config;
         this.http = http;
@@ -4272,9 +4923,32 @@ var ProgramProfilesService = (function () {
             });
         });
     };
+    ProgramProfilesService.prototype.getProgramProfileByIdThruApi = function (programProfileId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url, response, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        url = this.progProfileApiEndpoint + "/" + programProfileId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.get(url).toPromise()];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 3:
+                        error_2 = _a.sent();
+                        this.handleError(error_2);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     ProgramProfilesService.prototype.createProgramProfileThruApi = function (programProfile) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, error_2;
+            var response, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -4284,8 +4958,8 @@ var ProgramProfilesService = (function () {
                         response = _a.sent();
                         return [2 /*return*/, response];
                     case 2:
-                        error_2 = _a.sent();
-                        this.handleError(error_2);
+                        error_3 = _a.sent();
+                        this.handleError(error_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -4294,7 +4968,7 @@ var ProgramProfilesService = (function () {
     };
     ProgramProfilesService.prototype.updateProgramProfileThruApi = function (programProfile) {
         return __awaiter(this, void 0, void 0, function () {
-            var url, response, error_3;
+            var url, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -4305,8 +4979,8 @@ var ProgramProfilesService = (function () {
                         response = _a.sent();
                         return [2 /*return*/, response];
                     case 2:
-                        error_3 = _a.sent();
-                        this.handleError(error_3);
+                        error_4 = _a.sent();
+                        this.handleError(error_4);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -4390,7 +5064,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramsService = (function () {
+var ProgramsService = /** @class */ (function () {
     function ProgramsService(config, http) {
         this.config = config;
         this.http = http;
@@ -4437,9 +5111,32 @@ var ProgramsService = (function () {
             });
         });
     };
-    ProgramsService.prototype.updateProgramThruApi = function (program) {
+    ProgramsService.prototype.getProgramByIdThruApi = function (programId) {
         return __awaiter(this, void 0, void 0, function () {
             var url, response, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        url = this.progApiEndpoint + "/" + programId;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.http.get(url).toPromise()];
+                    case 2:
+                        response = _a.sent();
+                        return [2 /*return*/, response];
+                    case 3:
+                        error_3 = _a.sent();
+                        this.handleError(error_3);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramsService.prototype.updateProgramThruApi = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url, response, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -4450,10 +5147,11 @@ var ProgramsService = (function () {
                         return [4 /*yield*/, this.http.put(url, program).toPromise()];
                     case 2:
                         response = _a.sent();
+                        console.log('updateProgramThruApi response:', response);
                         return [2 /*return*/, response];
                     case 3:
-                        error_3 = _a.sent();
-                        this.handleError(error_3);
+                        error_4 = _a.sent();
+                        this.handleError(error_4);
                         return [3 /*break*/, 4];
                     case 4: return [2 /*return*/];
                 }
@@ -4503,7 +5201,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var SortableColumnService = (function () {
+var SortableColumnService = /** @class */ (function () {
     function SortableColumnService() {
         this.columnSortedSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["a" /* Subject */]();
         this.columnSorted$ = this.columnSortedSource.asObservable();
@@ -4544,13 +5242,13 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__shared_component__["a" /* SharedComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__shared_component__["a" /* SharedComponent */]];
-var SharedRoutingModule = (function () {
+var SharedRoutingModule = /** @class */ (function () {
     function SharedRoutingModule() {
     }
     SharedRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
         })
     ], SharedRoutingModule);
     return SharedRoutingModule;
@@ -4563,7 +5261,7 @@ var SharedRoutingModule = (function () {
 /***/ "../../../../../src/app/shared/shared.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Shared Module Tests</h2>\n<!-- this stuff can all go once refactoring is complete\n     mostly just for showing features off -->\n<app-drag-drop-test></app-drag-drop-test>\n<app-click-outside-test></app-click-outside-test>\n\n<h4>Programs</h4>\n<span *ngIf=\"programs\">\n  <ul *ngFor=\"let p of programs\">\n    <li>{{p | json}}</li> \n  </ul>\n</span>\n<h4>Program Profiles</h4>\n<span *ngIf=\"programProfiles\">\n  <ul *ngFor=\"let pp of programProfiles\">\n    <li>{{pp | json}}</li> \n  </ul>\n</span>\n\n<h4>Manage Communications</h4>\n<app-comm-action-table \n  [communications]=\"communications\"\n  [displayComm]=\"displayComm\"\n  [displayCommStartEmpty]=\"false\"\n  [showCommId]=\"true\"\n  [showCommName]=\"true\"\n  [showCommDesc]=\"true\"\n  [showStatus]=\"true\"\n  [showAction]=\"true\"\n  (selRowOut)=\"setClickedRow($event)\"\n  (commConfigAction)=\"configureCommunication($event)\">\n</app-comm-action-table>"
+module.exports = "<div class=\"container\">\r\n  <h2>Shared Module Tests</h2>\r\n  <!-- this stuff can all go once refactoring is complete\r\n       mostly just for showing features off -->\r\n \r\n  <h4>Authentication</h4>\r\n  <span *ngIf=\"!authService.authenticated\">You are not logged in</span>\r\n  <span *ngIf=\"authService.authenticated\">\r\n    You are logged in as \r\n    <span *ngIf=\"authService.userProfile && authService.userProfile.name\">\r\n      {{authService.userProfile.name}}\r\n    </span>\r\n    {{authService.userProfile | json}}\r\n  </span>\r\n  <h4>Programs</h4>\r\n  <span *ngIf=\"programs\">\r\n    <ul *ngFor=\"let p of programs\">\r\n      <li>{{p | json}}</li> \r\n    </ul>\r\n  </span>\r\n  <h4>Program Profiles</h4>\r\n  <span *ngIf=\"programProfiles\">\r\n    <ul *ngFor=\"let pp of programProfiles\">\r\n      <li>{{pp | json}}</li> \r\n    </ul>\r\n  </span>\r\n  <h4>Program Profile Client Exceptions</h4>\r\n  <span *ngIf=\"programProfileClientExceptions\">\r\n    <ul *ngFor=\"let ppce of programProfileClientExceptions\">\r\n      <li>{{ppce | json}}</li> \r\n    </ul>\r\n  </span>\r\n  <app-drag-drop-test></app-drag-drop-test>\r\n  <app-click-outside-test></app-click-outside-test>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -4591,7 +5289,8 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SharedComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_core_auth_auth_service__ = __webpack_require__("../../../../../src/app/core/auth/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4638,8 +5337,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 
 
-var SharedComponent = (function () {
-    function SharedComponent(dataApiService) {
+
+var SharedComponent = /** @class */ (function () {
+    function SharedComponent(authService, dataApiService) {
+        this.authService = authService;
         this.dataApiService = dataApiService;
     }
     SharedComponent.prototype.ngOnInit = function () {
@@ -4654,6 +5355,9 @@ var SharedComponent = (function () {
                         _a.sent();
                         return [4 /*yield*/, this.getProgramProfiles()];
                     case 3:
+                        _a.sent();
+                        return [4 /*yield*/, this.getProgramProfileClientExceptions()];
+                    case 4:
                         _a.sent();
                         console.log('SharedComponent ngOnInit', this.communications, this.programs, this.programProfiles);
                         return [2 /*return*/];
@@ -4725,6 +5429,27 @@ var SharedComponent = (function () {
             });
         });
     };
+    SharedComponent.prototype.getProgramProfileClientExceptions = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, error_4;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = this;
+                        return [4 /*yield*/, this.dataApiService.getProgramProfileClientExceptions()];
+                    case 1:
+                        _a.programProfileClientExceptions = _b.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _b.sent();
+                        console.log('getPrograms error: ', error_4);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     SharedComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-shared',
@@ -4732,7 +5457,8 @@ var SharedComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/shared/shared.component.scss")],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_app_shared_services_data_api_service__["a" /* DataApiService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_app_core_auth_auth_service__["a" /* AuthService */],
+            __WEBPACK_IMPORTED_MODULE_2_app_shared_services_data_api_service__["a" /* DataApiService */]])
     ], SharedComponent);
     return SharedComponent;
 }());
@@ -4761,23 +5487,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_communications_communications_service__ = __webpack_require__("../../../../../src/app/shared/services/communications/communications.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__services_program_configurations_program_configurations_service__ = __webpack_require__("../../../../../src/app/shared/services/program-configurations/program-configurations.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_program_profiles_program_profiles_service__ = __webpack_require__("../../../../../src/app/shared/services/program-profiles/program-profiles.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_programs_programs_service__ = __webpack_require__("../../../../../src/app/shared/services/programs/programs.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_test_click_outside_click_outside_component__ = __webpack_require__("../../../../../src/app/shared/components/test/click-outside/click-outside.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_test_drag_drop_drag_drop_component__ = __webpack_require__("../../../../../src/app/shared/components/test/drag-drop/drag-drop.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_client_actions_popover_client_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/client-actions-popover/client-actions-popover.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_client_action_table_client_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/client-action-table/client-action-table.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_comm_actions_popover_comm_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-actions-popover/comm-actions-popover.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_comm_action_table_comm_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-action-table/comm-action-table.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_date_eff_exp_date_eff_exp_component__ = __webpack_require__("../../../../../src/app/shared/components/date-eff-exp/date-eff-exp.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_date_picker_popup_date_picker_popup_component__ = __webpack_require__("../../../../../src/app/shared/components/date-picker-popup/date-picker-popup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_select_channel_mandatory_select_channel_mandatory_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-mandatory/select-channel-mandatory.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_select_channel_priority_select_channel_priority_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-priority/select-channel-priority.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_select_profile_option_select_profile_option_component__ = __webpack_require__("../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_sortable_column_sortable_column_component__ = __webpack_require__("../../../../../src/app/shared/components/sortable-column/sortable-column.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__directives_click_outside_directive__ = __webpack_require__("../../../../../src/app/shared/directives/click-outside.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__directives_drag_drop_draggable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/draggable.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_droppable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/droppable.directive.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__directives_sortable_table_directive__ = __webpack_require__("../../../../../src/app/shared/directives/sortable-table.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_program_profile_client_exceptions_program_profile_client_exceptions_service__ = __webpack_require__("../../../../../src/app/shared/services/program-profile-client-exceptions/program-profile-client-exceptions.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_programs_programs_service__ = __webpack_require__("../../../../../src/app/shared/services/programs/programs.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_test_click_outside_click_outside_component__ = __webpack_require__("../../../../../src/app/shared/components/test/click-outside/click-outside.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_test_drag_drop_drag_drop_component__ = __webpack_require__("../../../../../src/app/shared/components/test/drag-drop/drag-drop.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_client_actions_popover_client_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/client-actions-popover/client-actions-popover.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_client_action_table_client_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/client-action-table/client-action-table.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_comm_actions_popover_comm_actions_popover_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-actions-popover/comm-actions-popover.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_comm_action_table_comm_action_table_component__ = __webpack_require__("../../../../../src/app/shared/components/comm-action-table/comm-action-table.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_date_eff_exp_date_eff_exp_component__ = __webpack_require__("../../../../../src/app/shared/components/date-eff-exp/date-eff-exp.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_date_picker_popup_date_picker_popup_component__ = __webpack_require__("../../../../../src/app/shared/components/date-picker-popup/date-picker-popup.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_select_channel_default_select_channel_default_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-default/select-channel-default.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_select_channel_priority_select_channel_priority_component__ = __webpack_require__("../../../../../src/app/shared/components/select-channel-priority/select-channel-priority.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_select_profile_option_select_profile_option_component__ = __webpack_require__("../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_sortable_column_sortable_column_component__ = __webpack_require__("../../../../../src/app/shared/components/sortable-column/sortable-column.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__directives_click_outside_directive__ = __webpack_require__("../../../../../src/app/shared/directives/click-outside.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_draggable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/draggable.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__directives_drag_drop_droppable_directive__ = __webpack_require__("../../../../../src/app/shared/directives/drag-drop/droppable.directive.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__directives_sortable_table_directive__ = __webpack_require__("../../../../../src/app/shared/directives/sortable-table.directive.ts");
 // Angular Style Guide https://angular.io/guide/styleguide#import-line-spacing
 // Compromise, one space between bracket and from, but align the brackets
 // and put each imported item on separate line when coming from single source
@@ -4802,7 +5529,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+// Services -- only DataApiService is scoped globally from AppModule,
+// DataApiService acts as facade from the numerous API services and when new one is added
+// only new methods in DataApiService are needed to limit changes in feature components
 // import { DataApiService } from './services/data-api.service';
+
 
 
 
@@ -4828,7 +5559,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SharedModule = (function () {
+var SharedModule = /** @class */ (function () {
     function SharedModule() {
     }
     SharedModule = __decorate([
@@ -4844,24 +5575,24 @@ var SharedModule = (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_5__shared_routing_module__["b" /* routedComponents */],
                 // exported components
-                __WEBPACK_IMPORTED_MODULE_17__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__components_select_channel_mandatory_select_channel_mandatory_component__["a" /* SelectChannelMandatoryComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__components_select_profile_option_select_profile_option_component__["a" /* SelectProfileOptionComponent */],
-                __WEBPACK_IMPORTED_MODULE_26__components_sortable_column_sortable_column_component__["a" /* SortableColumnComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_select_channel_default_select_channel_default_component__["a" /* SelectChannelDefaultComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__components_select_profile_option_select_profile_option_component__["a" /* SelectProfileOptionComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__components_sortable_column_sortable_column_component__["a" /* SortableColumnComponent */],
                 // local testing components
-                __WEBPACK_IMPORTED_MODULE_15__components_test_click_outside_click_outside_component__["a" /* ClickOutsideComponent */],
-                __WEBPACK_IMPORTED_MODULE_16__components_test_drag_drop_drag_drop_component__["a" /* DragDropComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__components_test_click_outside_click_outside_component__["a" /* ClickOutsideComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__components_test_drag_drop_drag_drop_component__["a" /* DragDropComponent */],
                 // exported directives
-                __WEBPACK_IMPORTED_MODULE_27__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
-                __WEBPACK_IMPORTED_MODULE_28__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
-                __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
-                __WEBPACK_IMPORTED_MODULE_30__directives_sortable_table_directive__["a" /* SortableTableDirective */],
+                __WEBPACK_IMPORTED_MODULE_28__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
+                __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
+                __WEBPACK_IMPORTED_MODULE_30__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
+                __WEBPACK_IMPORTED_MODULE_31__directives_sortable_table_directive__["a" /* SortableTableDirective */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["c" /* HttpClientModule */],
@@ -4871,27 +5602,28 @@ var SharedModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_11__services_communications_communications_service__["a" /* CommunicationsService */],
                 __WEBPACK_IMPORTED_MODULE_12__services_program_configurations_program_configurations_service__["a" /* ProgramConfigurationsService */],
                 __WEBPACK_IMPORTED_MODULE_13__services_program_profiles_program_profiles_service__["a" /* ProgramProfilesService */],
-                __WEBPACK_IMPORTED_MODULE_14__services_programs_programs_service__["a" /* ProgramsService */]
+                __WEBPACK_IMPORTED_MODULE_15__services_programs_programs_service__["a" /* ProgramsService */],
+                __WEBPACK_IMPORTED_MODULE_14__services_program_profile_client_exceptions_program_profile_client_exceptions_service__["a" /* ProgramProfileClientExceptionsService */]
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* ReactiveFormsModule */],
                 // shared components
-                __WEBPACK_IMPORTED_MODULE_17__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__components_select_channel_mandatory_select_channel_mandatory_component__["a" /* SelectChannelMandatoryComponent */],
-                __WEBPACK_IMPORTED_MODULE_24__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__components_select_profile_option_select_profile_option_component__["a" /* SelectProfileOptionComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__components_client_actions_popover_client_actions_popover_component__["a" /* ClientActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__components_client_action_table_client_action_table_component__["a" /* ClientActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__components_comm_actions_popover_comm_actions_popover_component__["a" /* CommActionsPopoverComponent */],
+                __WEBPACK_IMPORTED_MODULE_21__components_comm_action_table_comm_action_table_component__["a" /* CommActionTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__components_date_eff_exp_date_eff_exp_component__["a" /* DateEffExpComponent */],
+                __WEBPACK_IMPORTED_MODULE_23__components_date_picker_popup_date_picker_popup_component__["a" /* DatePickerPopupComponent */],
+                __WEBPACK_IMPORTED_MODULE_24__components_select_channel_default_select_channel_default_component__["a" /* SelectChannelDefaultComponent */],
+                __WEBPACK_IMPORTED_MODULE_25__components_select_channel_priority_select_channel_priority_component__["a" /* SelectChannelPriorityComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__components_select_profile_option_select_profile_option_component__["a" /* SelectProfileOptionComponent */],
                 // directives
-                __WEBPACK_IMPORTED_MODULE_27__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
-                __WEBPACK_IMPORTED_MODULE_28__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
-                __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
-                __WEBPACK_IMPORTED_MODULE_30__directives_sortable_table_directive__["a" /* SortableTableDirective */]
+                __WEBPACK_IMPORTED_MODULE_28__directives_click_outside_directive__["a" /* ClickOutsideDirective */],
+                __WEBPACK_IMPORTED_MODULE_29__directives_drag_drop_draggable_directive__["a" /* DraggableDirective */],
+                __WEBPACK_IMPORTED_MODULE_30__directives_drag_drop_droppable_directive__["a" /* DroppableDirective */],
+                __WEBPACK_IMPORTED_MODULE_31__directives_sortable_table_directive__["a" /* SortableTableDirective */]
             ]
         })
     ], SharedModule);
@@ -4911,7 +5643,9 @@ var environment = {
     production: true,
     envName: 'GitHub Pages',
     inMemAPI: true,
-    apiEndpoint: ''
+    apiEndpoint: '',
+    cachePrograms: false,
+    cacheProgramProfiles: false
 };
 
 

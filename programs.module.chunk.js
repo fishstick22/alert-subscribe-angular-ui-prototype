@@ -3,7 +3,7 @@ webpackJsonp(["programs.module"],{
 /***/ "../../../../../src/app/programs/program-actions-popover/program-actions-popover.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #popContent>\n  <div class=\"w-100 outer-popover\"\n    (click)=\"onClick($event)\"\n    (appClickOutside)=\"onClickedOutside($event, p)\"\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\n    [clickOutsideEvents]=\"clickOutsideEvents\"\n    [exclude]=\"exclude\"\n    [excludeBeforeClick]=\"excludeBeforeClick\">\n\n  <div class=\"float-left inner-popover\">\n    <span class=\"badge badge-success clickable\"\n         (click)=\"configure(progId, 'edit'); p.close();\"\n          title=\"Configure/Edit Program {{progId}}: {{progName}} \">\n      Edit</span></div>\n  <div class=\"float-left inner-popover\">\n    <span class=\"badge badge-success clickable\"\n         (click)=\"configure(progId, 'expire'); p.close();\"\n          title=\"Expire Program {{progId}}: {{progName}} \">\n      Expire</span></div>\n  <div class=\"float-right inner-popover\">\n    <span class=\"badge badge-success clickable\"\n         (click)=\"configure(progId, 'communications'); p.close();\"\n          title=\"Configure Communications for Program {{progId}}: {{progName}} \">\n      Communications</span></div>\n</div>\n</ng-template>\n<div [ngbPopover]=\"popContent\"\n      #p=\"ngbPopover\"\n      popoverTitle=\"\"\n      placement=\"left\">\n  <ng-content></ng-content>\n</div>"
+module.exports = "<ng-template #popContent>\r\n  <div class=\"w-100 outer-popover\"\r\n    (click)=\"onClick($event)\"\r\n    (appClickOutside)=\"onClickedOutside($event, p)\"\r\n    [attachOutsideOnClick]=\"attachOutsideOnClick\"\r\n    [delayClickOutsideInit]=\"delayClickOutsideInit\"\r\n    [clickOutsideEvents]=\"clickOutsideEvents\"\r\n    [exclude]=\"exclude\"\r\n    [excludeBeforeClick]=\"excludeBeforeClick\">\r\n\r\n  <div class=\"float-left inner-popover\">\r\n    <span class=\"badge badge-info clickable\"\r\n         (click)=\"configure(progId, 'edit'); p.close();\"\r\n          title=\"Configure/Edit Program {{progId}}: {{progName}} \">\r\n      Edit</span></div>\r\n  <div class=\"float-left inner-popover\">\r\n    <span class=\"badge badge-info clickable\"\r\n         (click)=\"configure(progId, 'expire'); p.close();\"\r\n          title=\"Expire Program {{progId}}: {{progName}} \">\r\n      Expire</span></div>\r\n  <div class=\"float-left inner-popover\">\r\n    <span class=\"badge badge-info clickable\"\r\n         (click)=\"configure(progId, 'client'); p.close();\"\r\n          title=\"Configure Client Exceptions for Program {{progId}}: {{progName}} \">\r\n      Client<br/>Exceptions</span></div>\r\n  <div class=\"float-right inner-popover\">\r\n    <span class=\"badge badge-info clickable\"\r\n         (click)=\"configure(progId, 'communications'); p.close();\"\r\n          title=\"Configure Communications for Program {{progId}}: {{progName}} \">\r\n      Configure<br/>Communications</span></div>\r\n</div>\r\n</ng-template>\r\n<div [ngbPopover]=\"popContent\"\r\n      #p=\"ngbPopover\"\r\n      popoverTitle=\"\"\r\n      placement=\"left\">\r\n  <ng-content></ng-content>\r\n</div>"
 
 /***/ }),
 
@@ -43,7 +43,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ProgramActionsPopoverComponent = (function () {
+var ProgramActionsPopoverComponent = /** @class */ (function () {
     function ProgramActionsPopoverComponent() {
         this.attachOutsideOnClick = false;
         this.delayClickOutsideInit = true;
@@ -97,7 +97,7 @@ var ProgramActionsPopoverComponent = (function () {
 /***/ "../../../../../src/app/programs/program-status/program-status.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"progressVisible\">\n    <i class=\"fa fa-refresh fa-pulse \"></i>\n</span>\n<span *ngIf=\"!progressVisible && lastProfile && lastProfile.expiration && expiredProgram\">\n  <small>exp {{lastProfile.expiration}}</small>\n</span>\n"
+module.exports = "<span *ngIf=\"progressVisible\">\r\n    <i class=\"fa fa-refresh fa-pulse \"></i>\r\n</span>\r\n<span *ngIf=\"!progressVisible && program.status\">\r\n  <small>{{program.status.effExpDateText}}</small>\r\n</span>\r\n"
 
 /***/ }),
 
@@ -126,7 +126,6 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramStatusComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program_profile__ = __webpack_require__("../../../../../src/app/shared/model/program-profile.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -136,50 +135,84 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 
 
-
-var ProgramStatusComponent = (function () {
+var ProgramStatusComponent = /** @class */ (function () {
     function ProgramStatusComponent() {
         this.detectChanges = '';
-        this.statusUpdate = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
-        this.UNEXPIRED = '9999-12-31';
+        // @Output() statusUpdate = new EventEmitter<any>();
         this.progressVisible = false;
-        this.expiredProgram = false;
-        this.lastStatus = {};
+        this.prevStatus = false;
     }
     ProgramStatusComponent.prototype.ngOnInit = function () {
-        // if (this.program.programProfile) {
-        //   this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
-        //   this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
-        // } else {
-        //   this.lastProfile =  new ProgramProfile(null);
-        //   this.lastProfile.expiration = '';
-        // }
+        console.log('ProgramStatusComponent OnInit', this.program);
+        this.program.status = new __WEBPACK_IMPORTED_MODULE_1_app_shared_model_program__["c" /* ProgramStatus */](this.program);
+        this.showProgress();
     };
     ProgramStatusComponent.prototype.ngOnChanges = function (changes) {
-        console.log(changes);
-        if (this.program.programProfile && this.program.programProfile.length > 0) {
-            this.lastProfile = this.program.programProfile[this.program.programProfile.length - 1];
-            this.expiredProgram = (this.lastProfile.expiration !== this.UNEXPIRED);
-            this.program.status = this.expiredProgram ? 'expired' : 'active';
-        }
-        else {
-            this.lastProfile = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program_profile__["a" /* ProgramProfile */](null);
-            this.lastProfile.expiration = '';
-            this.program.status = '';
-        }
-        if (this.program.status && this.lastStatus !== this.program.status) {
-            this.showProgress();
-            this.lastStatus = this.program.status;
-        }
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                console.log('ProgramStatusComponent OnChanges', changes);
+                // OnChanges happens before OnInit -- just bypass that call here
+                if (!this.prevStatus) {
+                    return [2 /*return*/];
+                }
+                else if (changes.detectChanges && changes.detectChanges.currentValue) {
+                    console.log(changes.detectChanges);
+                    if (changes.detectChanges.currentValue === 'saving' ||
+                        changes.detectChanges.currentValue === 'expired' ||
+                        changes.detectChanges.currentValue === 'edited') {
+                        // this.program.status = new ProgramStatus(this.program);
+                        // this.program.status.update(this.program);
+                        this.showProgress();
+                    }
+                }
+                return [2 /*return*/];
+            });
+        });
     };
     ProgramStatusComponent.prototype.showProgress = function () {
         this.progressVisible = true;
         setTimeout(function () {
-            this.statusUpdate.emit(this.program.status);
+            // this.statusUpdate.emit(this.program.status);
+            this.prevStatus = this.program.status;
             this.progressVisible = false;
-        }.bind(this), 3000);
+        }.bind(this), 1000);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -189,10 +222,6 @@ var ProgramStatusComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", Object)
     ], ProgramStatusComponent.prototype, "detectChanges", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */])(),
-        __metadata("design:type", Object)
-    ], ProgramStatusComponent.prototype, "statusUpdate", void 0);
     ProgramStatusComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-program-status',
@@ -231,13 +260,13 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__programs_component__["a" /* ProgramsComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__programs_component__["a" /* ProgramsComponent */]];
-var ProgramsRoutingModule = (function () {
+var ProgramsRoutingModule = /** @class */ (function () {
     function ProgramsRoutingModule() {
     }
     ProgramsRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
         })
     ], ProgramsRoutingModule);
     return ProgramsRoutingModule;
@@ -250,7 +279,7 @@ var ProgramsRoutingModule = (function () {
 /***/ "../../../../../src/app/programs/programs.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h4>Manage Programs</h4>\n\n<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\n  <caption>\n    Programs define collections of Communications, each with a program-level configuration that \n    specify the (default) channel priority, if the comm is mandatory, with an effective and expiration date\n  </caption>\n  <thead class=\"bg-gradient-dark text-white\">\n    <tr>\n      <th>ID</th>\n      <th>Name</th>\n      <th>Description</th>\n      <th>Status</th>\n      <th>Actions</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let program of programs; let i = index\"\n         title=\"\" \n        (click)=\"setClickedRow(i)\" \n        [class.table-success]=\"i === selectedRow\">\n      <th scope=\"row\"><span class=\"badge badge-secondary\">{{program.id}}</span></th>\n      <td><span>{{program.name}}</span></td>\n      <td><span>{{program.description}}</span></td>\n      <td>\n        <app-program-status\n          [program]=\"program\"\n          [detectChanges]=\"detectChanges\"\n          (statusUpdate)=\"updateProgramStatus($event, program)\"></app-program-status>\n      </td>\n      <td>\n        <app-program-actions-popover\n          [progId]=\"program.id\"\n          [progName]=\"program.name\"\n          (configAction)=\"configureProgram($event)\">\n          <i class=\"fa fa-pencil-square-o clickable\" \n             [ngClass]=\"{'sr-only': program.status === 'expired'}\"\n             aria-hidden=\"true\" title=\"Click to configure Program {{program.name}}\"></i>\n        </app-program-actions-popover>\n      </td>\n    </tr>\n    <tr>\n      <td>\n        <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \n          (click)=\"addProgram()\"title=\"Add New Program\"></i>\n      </td>\n\n    </tr>\n  </tbody>\n  <tfoot></tfoot>\n</table>\n"
+module.exports = "<h4>Manage Programs</h4>\r\n\r\n<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n  <caption>\r\n    Programs define collections of Communications, each with a program-level configuration that \r\n    specify the (default) channel priority, if the comm is mandatory, with an effective and expiration date\r\n  </caption>\r\n  <thead class=\"bg-gradient-dark text-white\">\r\n    <tr>\r\n      <th>ID</th>\r\n      <th>Name</th>\r\n      <th>Description</th>\r\n      <th>Status</th>\r\n      <th>Actions</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let program of programs; let i = index\"\r\n         title=\"\" \r\n        (click)=\"setClickedRow(i)\" \r\n        [class.table-info]=\"i === selectedRow\">\r\n      <th scope=\"row\"><span class=\"badge badge-secondary\">{{program.id}}</span></th>\r\n      <td><span>{{program.name}}</span></td>\r\n      <td><span>{{program.description}}</span></td>\r\n      <td>\r\n        <app-program-status\r\n          [program]=\"program\"\r\n          [detectChanges]=\"program.detectChanges\"></app-program-status>\r\n          <!--(statusUpdate)=\"updateProgramStatus($event, program)\"-->\r\n      </td>\r\n      <td>\r\n        <app-program-actions-popover\r\n          [progId]=\"program.id\"\r\n          [progName]=\"program.name\"\r\n          (configAction)=\"configureProgram($event)\">\r\n          <i class=\"fa fa-pencil-square-o clickable\" \r\n             [ngClass]=\"{'sr-only': program.status.expiredProgram}\"\r\n             aria-hidden=\"true\" title=\"Click to configure Program {{program.name}}\"></i>\r\n        </app-program-actions-popover>\r\n      </td>\r\n    </tr>\r\n    <tr>\r\n      <td>\r\n        <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n          (click)=\"addProgram()\"title=\"Add New Program\"></i>\r\n      </td>\r\n\r\n    </tr>\r\n  </tbody>\r\n  <tfoot></tfoot>\r\n</table>\r\n"
 
 /***/ }),
 
@@ -278,9 +307,11 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_program_configurations_program_configurations_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_programs_maintenance_programs_maintenance_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_program_client_exceptions_program_client_exceptions_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_program_configurations_program_configurations_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_programs_maintenance_programs_maintenance_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -329,9 +360,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramsComponent = (function () {
-    function ProgramsComponent(dataApiService, programConfigService, programsMaintService) {
+
+
+var ProgramsComponent = /** @class */ (function () {
+    function ProgramsComponent(dataApiService, programClientExcService, programConfigService, programsMaintService) {
         this.dataApiService = dataApiService;
+        this.programClientExcService = programClientExcService;
         this.programConfigService = programConfigService;
         this.programsMaintService = programsMaintService;
         this.detectChanges = '';
@@ -340,23 +374,47 @@ var ProgramsComponent = (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        console.log('ProgramComponent ngOnInit...');
-                        return [4 /*yield*/, this.getPrograms()];
+                    case 0: 
+                    // console.log('ProgramComponent ngOnInit...');
+                    return [4 /*yield*/, this.getPrograms()];
                     case 1:
+                        // console.log('ProgramComponent ngOnInit...');
                         _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramsComponent.prototype.getPrograms = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, i, error_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 3, , 4]);
+                        _a = this;
+                        return [4 /*yield*/, this.dataApiService.getPrograms()];
+                    case 1:
+                        _a.programs = _b.sent();
                         return [4 /*yield*/, this.getProgramProfiles()];
                     case 2:
-                        _a.sent();
-                        console.log('ProgramComponent ', this.programs, this.programProfiles);
-                        return [2 /*return*/];
+                        _b.sent();
+                        for (i = 0; i < this.programs.length; i++) {
+                            this.findEffectiveProgramProfile(this.programs[i]);
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _b.sent();
+                        console.log('getPrograms error: ', error_1);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
     };
     ProgramsComponent.prototype.getProgramProfiles = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, error_1;
+            var _a, error_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -367,27 +425,6 @@ var ProgramsComponent = (function () {
                         _a.programProfiles = _b.sent();
                         return [2 /*return*/, this.programProfiles];
                     case 2:
-                        error_1 = _b.sent();
-                        console.log('getPrograms error: ', error_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ProgramsComponent.prototype.getPrograms = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, error_2;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        _a = this;
-                        return [4 /*yield*/, this.dataApiService.getPrograms()];
-                    case 1:
-                        _a.programs = _b.sent();
-                        return [3 /*break*/, 3];
-                    case 2:
                         error_2 = _b.sent();
                         console.log('getPrograms error: ', error_2);
                         return [3 /*break*/, 3];
@@ -396,41 +433,113 @@ var ProgramsComponent = (function () {
             });
         });
     };
+    ProgramsComponent.prototype.findEffectiveProgramProfile = function (program) {
+        if (program && program.programProfile) {
+            var profiles = program.programProfile;
+            if (profiles.length !== 0 && typeof profiles[profiles.length - 1].expiration !== 'undefined') {
+                return; // do nothing, everything is cool
+            }
+            if (profiles.length === 0 ||
+                (profiles.length !== 0 && typeof profiles[profiles.length - 1] === 'number')) {
+                // really only happens in the in-memory-api exception case
+                profiles = this.findProgramProfiles(program);
+                // yes, this is a side-effect
+                program.programProfile = profiles;
+                if (program.status) {
+                    program.status.update(program);
+                }
+            }
+        }
+    };
+    ProgramsComponent.prototype.findProgramProfiles = function (selectedProgram) {
+        return this.programProfiles.filter(function (pp) {
+            if (typeof (pp.program) === 'number') {
+                if (pp.program === selectedProgram.id) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        });
+    };
     ProgramsComponent.prototype.setClickedRow = function (index) {
-        if (this.selectedRow === index || this.selectedRow === null) {
-            this.selectedRow = null;
-        }
-        else {
-            this.selectedRow = index;
-        }
-        // this.detectChanges = index;
-    };
-    ProgramsComponent.prototype.updateProgramStatus = function (status, program) {
-        program.status = status;
-    };
-    ProgramsComponent.prototype.configureProgram = function (progConfigAction) {
-        if (progConfigAction.configType === 'edit') {
-            this.editProgram(progConfigAction.progId);
-        }
-        if (progConfigAction.configType === 'expire') {
-            this.expireProgram(progConfigAction.progId);
-        }
-        if (progConfigAction.configType === 'communications') {
-            this.configureProgramCommunications(progConfigAction.progId);
-        }
-        this.setClickedRow(null);
+        this.selectedRow = (this.selectedRow === index) ? null : index;
     };
     ProgramsComponent.prototype.addProgram = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var nextProgramId, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var nextProgramId, addResult, addedProgram;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        nextProgramId = this.programs.length + 1;
-                        _a = this;
-                        return [4 /*yield*/, this.programsMaintService.maintainProgramModal('add', nextProgramId)];
+                        nextProgramId = this.programs[this.programs.length - 1].id + 1;
+                        return [4 /*yield*/, this.programsMaintService.maintainProgram('add', nextProgramId)];
                     case 1:
-                        _a.detectChanges = _b.sent();
+                        addResult = _a.sent();
+                        addedProgram = addResult.modalOutput.resultProgram;
+                        console.log('ProgramsComponent addProgram:', addResult, addedProgram);
+                        if (addedProgram && !addedProgram.status) {
+                            addedProgram.status = new __WEBPACK_IMPORTED_MODULE_1_app_shared_model_program__["c" /* ProgramStatus */](addedProgram);
+                        }
+                        else {
+                            addedProgram.status.update(addedProgram);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramsComponent.prototype.configureProgram = function (progConfigAction) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var expireResult, modalOutput, expireProgram, clientResult, clientResult;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (progConfigAction.configType === 'edit') {
+                            this.editProgram(progConfigAction.progId).then(function (editResult) { return __awaiter(_this, void 0, void 0, function () {
+                                var modalOutput, editProgram;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            console.log('ProgramsComponent editProgram:', editResult);
+                                            if (!editResult.success) return [3 /*break*/, 2];
+                                            modalOutput = editResult.modalOutput;
+                                            editProgram = modalOutput.resultProgram;
+                                            return [4 /*yield*/, this.replaceUpdatedProgram(editProgram)];
+                                        case 1:
+                                            _a.sent();
+                                            _a.label = 2;
+                                        case 2: return [2 /*return*/];
+                                    }
+                                });
+                            }); });
+                        }
+                        if (!(progConfigAction.configType === 'expire')) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.expireProgram(progConfigAction.progId)];
+                    case 1:
+                        expireResult = _a.sent();
+                        if (!expireResult.success) return [3 /*break*/, 3];
+                        modalOutput = expireResult.modalOutput;
+                        expireProgram = modalOutput.resultProgram;
+                        return [4 /*yield*/, this.replaceUpdatedProgram(expireProgram)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        if (!(progConfigAction.configType === 'client')) return [3 /*break*/, 5];
+                        return [4 /*yield*/, this.configureProgramClientExceptions(progConfigAction.progId)];
+                    case 4:
+                        clientResult = _a.sent();
+                        _a.label = 5;
+                    case 5:
+                        if (!(progConfigAction.configType === 'communications')) return [3 /*break*/, 7];
+                        return [4 /*yield*/, this.configureProgramCommunications(progConfigAction.progId)];
+                    case 6:
+                        clientResult = _a.sent();
+                        _a.label = 7;
+                    case 7:
+                        this.setClickedRow(null);
                         return [2 /*return*/];
                 }
             });
@@ -438,45 +547,82 @@ var ProgramsComponent = (function () {
     };
     ProgramsComponent.prototype.editProgram = function (progId) {
         return __awaiter(this, void 0, void 0, function () {
-            var program, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var updateProgram, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        program = this.findProgram(progId);
-                        _a = this;
-                        return [4 /*yield*/, this.programsMaintService.maintainProgramModal('edit', null, program)];
+                        updateProgram = this.findProgram(progId);
+                        return [4 /*yield*/, this.programsMaintService.maintainProgram('edit', null, updateProgram)];
                     case 1:
-                        _a.detectChanges = _b.sent();
-                        return [2 /*return*/];
+                        result = _a.sent();
+                        return [2 /*return*/, result];
                 }
             });
         });
     };
     ProgramsComponent.prototype.expireProgram = function (progId) {
         return __awaiter(this, void 0, void 0, function () {
-            var program, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var expireProgram, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        expireProgram = this.findProgram(progId);
+                        return [4 /*yield*/, this.programsMaintService.maintainProgram('expire', null, expireProgram)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    ProgramsComponent.prototype.configureProgramClientExceptions = function (progId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var program, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         program = this.findProgram(progId);
-                        _a = this;
-                        return [4 /*yield*/, this.programsMaintService.maintainProgramModal('expire', null, program)];
+                        return [4 /*yield*/, this.programClientExcService.configureProgramClientExceptions(program)];
                     case 1:
-                        _a.detectChanges = _b.sent();
-                        return [2 /*return*/];
+                        result = _a.sent();
+                        return [2 /*return*/, result];
                 }
             });
         });
     };
     ProgramsComponent.prototype.configureProgramCommunications = function (progId) {
-        // invoke service to manage a modal dialog allowing user to
-        // configure the program-level communication configurations
-        var program = this.findProgram(progId);
-        this.programConfigService.configureProgramModal(program);
-        this.detectChanges = 'communications';
+        return __awaiter(this, void 0, void 0, function () {
+            var program, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        program = this.findProgram(progId);
+                        return [4 /*yield*/, this.programConfigService.configureProgram(program)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
     };
     ProgramsComponent.prototype.findProgram = function (id) {
         return this.programs.find(function (p) { return p.id === id; });
+    };
+    ProgramsComponent.prototype.replaceUpdatedProgram = function (updatedProgram) {
+        // Angular change detection should be taking care of this
+        // must be missing something...
+        var replaceProgram = this.findProgram(updatedProgram.id);
+        // replaceProgram = null;
+        replaceProgram.name = updatedProgram.name;
+        replaceProgram.description = updatedProgram.description;
+        replaceProgram.programProfile = updatedProgram.programProfile;
+        replaceProgram.detectChanges = 'edited';
+        if (replaceProgram && !replaceProgram.status) {
+            replaceProgram.status = new __WEBPACK_IMPORTED_MODULE_1_app_shared_model_program__["c" /* ProgramStatus */](replaceProgram);
+        }
+        else {
+            replaceProgram.status.update(replaceProgram);
+        }
     };
     ProgramsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -485,9 +631,10 @@ var ProgramsComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/programs/programs.component.scss")],
             encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_app_shared_services_data_api_service__["a" /* DataApiService */],
-            __WEBPACK_IMPORTED_MODULE_2__services_program_configurations_program_configurations_modal_service__["a" /* ProgramConfigurationsModalService */],
-            __WEBPACK_IMPORTED_MODULE_3__services_programs_maintenance_programs_maintenance_modal_service__["a" /* ProgramsMaintenanceModalService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_app_shared_services_data_api_service__["a" /* DataApiService */],
+            __WEBPACK_IMPORTED_MODULE_3__services_program_client_exceptions_program_client_exceptions_modal_service__["a" /* ProgramClientExceptionsModalService */],
+            __WEBPACK_IMPORTED_MODULE_4__services_program_configurations_program_configurations_modal_service__["a" /* ProgramConfigurationsModalService */],
+            __WEBPACK_IMPORTED_MODULE_5__services_programs_maintenance_programs_maintenance_modal_service__["a" /* ProgramsMaintenanceModalService */]])
     ], ProgramsComponent);
     return ProgramsComponent;
 }());
@@ -507,11 +654,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__programs_routing_module__ = __webpack_require__("../../../../../src/app/programs/programs-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__program_actions_popover_program_actions_popover_component__ = __webpack_require__("../../../../../src/app/programs/program-actions-popover/program-actions-popover.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__program_status_program_status_component__ = __webpack_require__("../../../../../src/app/programs/program-status/program-status.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_program_configurations_program_configurations_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_program_configurations_program_configurations_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_programs_maintenance_programs_maintenance_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_programs_maintenance_programs_maintenance_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_app_shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_program_client_exceptions_program_client_exceptions_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_program_client_exceptions_program_client_exceptions_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_program_configurations_program_configurations_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_program_configurations_program_configurations_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_programs_maintenance_programs_maintenance_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_programs_maintenance_programs_maintenance_modal_service__ = __webpack_require__("../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_app_shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -529,9 +678,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 // shared
 
-var ProgramsModule = (function () {
+var ProgramsModule = /** @class */ (function () {
     function ProgramsModule() {
     }
     ProgramsModule = __decorate([
@@ -540,17 +691,26 @@ var ProgramsModule = (function () {
                 // CommonModule, // gets provided by shared module
                 __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["d" /* NgbModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_2__programs_routing_module__["a" /* ProgramsRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_9_app_shared_shared_module__["SharedModule"]
+                __WEBPACK_IMPORTED_MODULE_11_app_shared_shared_module__["SharedModule"]
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__programs_routing_module__["b" /* routedComponents */],
                 __WEBPACK_IMPORTED_MODULE_3__program_actions_popover_program_actions_popover_component__["a" /* ProgramActionsPopoverComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__services_programs_maintenance_programs_maintenance_modal_component__["a" /* ProgramsMaintenanceModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__services_program_client_exceptions_program_client_exceptions_modal_component__["a" /* ProgramClientExceptionsModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__services_programs_maintenance_programs_maintenance_modal_component__["a" /* ProgramsMaintenanceModalComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__program_status_program_status_component__["a" /* ProgramStatusComponent */]
             ],
-            entryComponents: [__WEBPACK_IMPORTED_MODULE_6__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */], __WEBPACK_IMPORTED_MODULE_7__services_programs_maintenance_programs_maintenance_modal_component__["a" /* ProgramsMaintenanceModalComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_5__services_program_configurations_program_configurations_modal_service__["a" /* ProgramConfigurationsModalService */], __WEBPACK_IMPORTED_MODULE_8__services_programs_maintenance_programs_maintenance_modal_service__["a" /* ProgramsMaintenanceModalService */]],
+            entryComponents: [
+                __WEBPACK_IMPORTED_MODULE_5__services_program_client_exceptions_program_client_exceptions_modal_component__["a" /* ProgramClientExceptionsModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__services_program_configurations_program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__services_programs_maintenance_programs_maintenance_modal_component__["a" /* ProgramsMaintenanceModalComponent */]
+            ],
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_6__services_program_client_exceptions_program_client_exceptions_modal_service__["a" /* ProgramClientExceptionsModalService */],
+                __WEBPACK_IMPORTED_MODULE_8__services_program_configurations_program_configurations_modal_service__["a" /* ProgramConfigurationsModalService */],
+                __WEBPACK_IMPORTED_MODULE_10__services_programs_maintenance_programs_maintenance_modal_service__["a" /* ProgramsMaintenanceModalService */],
+            ],
         })
     ], ProgramsModule);
     return ProgramsModule;
@@ -560,10 +720,334 @@ var ProgramsModule = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<form #programClientExceptionForm=\"ngForm\" \r\n(ngSubmit)=\"saveProgramClientExceptions()\" >\r\n\r\n<div class=\"modal-header bg-gradient-dark\">\r\n<h4 class=\"modal-title text-white\">\r\n  Configure Client Exceptions\r\n  <small>for ProgramId {{program.id}}: {{program.name}}</small>\r\n</h4>\r\n<button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureProgramClientExcModal.dismiss('Cross click')\">\r\n<span aria-hidden=\"true\">&times;</span>\r\n</button>\r\n</div>\r\n\r\n<div class=\"modal-body\">\r\n  <div id=\"configuredClients\">\r\n    <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n      <caption></caption>\r\n      <thead class=\"bg-gradient-dark text-white\">\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>C<small>ode</small></th>\r\n          <th>N<small>ame</small></th>\r\n          <th><small>OptIn Def</small></th>\r\n          <th><small>UI Visible</small></th>\r\n          <th>E<small>mail</small></th>\r\n          <th>IVR</th>\r\n          <th>SMS</th>\r\n          <th>S<small>ecure</small></th>\r\n<!--           <th>M<small>ail</small></th>\r\n          <th>M<small>obile</small></th> -->\r\n          <th>E<small>ffective</small></th>\r\n          <th>E<small>xpiration</small></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let pce of programClientExceptions; let i = index\">\r\n          <td>\r\n              <span *ngIf=\"pce.client.id\" class=\"badge badge-secondary\">{{pce.client.id}}</span>\r\n          </td>\r\n          <td><span >{{pce.client.code}}</span></td>\r\n          <td width=\"18%\"><span >{{pce.client.name}}</span></td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"defaultOptIn\" name=\"defaultOptIn\" label=\"Opt In\"\r\n              [(ngModel)]=\"pce.defaultOptIn\"\r\n              [staticValue]=\"pce.defaultOptIn\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"visibleInUi\" name=\"visibleInUi\" label=\"UI\"\r\n              [(ngModel)]=\"pce.visibleInUi\"\r\n              [staticValue]=\"pce.visibleInUi\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanEmail\" name=\"chanEmail\" label=\"Email\"\r\n              [(ngModel)]=\"pce.chanEmail\"\r\n              [staticValue]=\"pce.chanEmail\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanIvr\" name=\"chanIvr\" label=\"IVR\"\r\n              [(ngModel)]=\"pce.chanIvr\"\r\n              [staticValue]=\"pce.chanIvr\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanSms\" name=\"chanSms\" label=\"SMS\"\r\n              [(ngModel)]=\"pce.chanSms\"\r\n              [staticValue]=\"pce.chanSms\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanMail\" name=\"chanMail\" label=\"Secure\"\r\n              [(ngModel)]=\"pce.chanMail\"\r\n              [staticValue]=\"pce.chanMail\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n<!--          <td>\r\n            <app-select-profile-option \r\n              id=\"chanMail\" name=\"chanMail\" label=\"Mail\"\r\n              [(ngModel)]=\"pce.chanMail\"\r\n              [staticValue]=\"pce.chanMail\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanMobile\" name=\"chanMobile\" label=\"Mobile\"\r\n              [(ngModel)]=\"pce.chanMobile\"\r\n              [staticValue]=\"pce.chanMobile\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td> -->\r\n          <td>\r\n            <app-date-picker-popup [dateValue]=\"pce.effective\"\r\n              (newDateValue)=\"updateDateValue($event, profile, 'effective')\"></app-date-picker-popup>    \r\n          </td>\r\n          <td>\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{pce.expiration}}\" readonly>\r\n          </td>\r\n          \r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n  \r\n<div class=\"modal-footer\">\r\n  <div class=\"w-100\">\r\n    <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n    <div class=\"float-right\">\r\n        <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programClientExceptionForm.valid\">Save</button>\r\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureProgramClientExcModal.close('Close click')\">Cancel</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n</form> "
+
+/***/ }),
+
+/***/ "../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export ProgramClientExceptionsModalResult */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramClientExceptionsModalComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ProgramClientExceptionsModalResult = /** @class */ (function () {
+    function ProgramClientExceptionsModalResult() {
+    }
+    return ProgramClientExceptionsModalResult;
+}());
+
+var ProgramClientExceptionsModalComponent = /** @class */ (function () {
+    function ProgramClientExceptionsModalComponent(configureProgramClientExcModal) {
+        this.configureProgramClientExcModal = configureProgramClientExcModal;
+        this.configType = '';
+        this.program = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
+        this.addProfile = false;
+        this.newProgram = false;
+        this.expireProgram = false;
+        this.today = new Date();
+        this.tomorrow = new Date();
+    }
+    ProgramClientExceptionsModalComponent.prototype.ngOnInit = function () {
+    };
+    ProgramClientExceptionsModalComponent.prototype.modalInit = function () {
+        console.log(this.programClientExceptions);
+    };
+    ProgramClientExceptionsModalComponent.prototype.saveProgramClientExceptions = function () { };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", String)
+    ], ProgramClientExceptionsModalComponent.prototype, "configType", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */])
+    ], ProgramClientExceptionsModalComponent.prototype, "program", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", Array)
+    ], ProgramClientExceptionsModalComponent.prototype, "programClientExceptions", void 0);
+    ProgramClientExceptionsModalComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-program-client-exceptions-modal',
+            template: __webpack_require__("../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.scss")],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["b" /* NgbActiveModal */]])
+    ], ProgramClientExceptionsModalComponent);
+    return ProgramClientExceptionsModalComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramClientExceptionsModalService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__program_client_exceptions_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_classes_modal_helpers__ = __webpack_require__("../../../../../src/app/shared/classes/modal-helpers.ts");
+/* unused harmony reexport ProgramClientExceptionsModalResult */
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+var ProgramClientExceptionsModalService = /** @class */ (function () {
+    function ProgramClientExceptionsModalService(dataApiService, modalService) {
+        this.dataApiService = dataApiService;
+        this.modalService = modalService;
+    }
+    ProgramClientExceptionsModalService.prototype.configureProgramClientExceptions = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var modalResult, promise;
+            return __generator(this, function (_a) {
+                modalResult = new __WEBPACK_IMPORTED_MODULE_5_app_shared_classes_modal_helpers__["a" /* ModalResult */]();
+                promise = new Promise(function (resolve, reject) {
+                    _this.configureProgramClientExcModal(program)
+                        .then(function (result) { return __awaiter(_this, void 0, void 0, function () {
+                        var _a, error_1;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    if (!(result.resultTxt === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS)) return [3 /*break*/, 5];
+                                    _b.label = 1;
+                                case 1:
+                                    _b.trys.push([1, 3, , 4]);
+                                    // if (program && program.status) {
+                                    //   program.detectChanges = 'saving';
+                                    //   program.status.update(program);
+                                    // }
+                                    _a = modalResult;
+                                    return [4 /*yield*/, this.fulfillProgramClientExceptionConfiguration(result)];
+                                case 2:
+                                    // if (program && program.status) {
+                                    //   program.detectChanges = 'saving';
+                                    //   program.status.update(program);
+                                    // }
+                                    _a.modalOutput = _b.sent();
+                                    modalResult.success = true;
+                                    return [3 /*break*/, 4];
+                                case 3:
+                                    error_1 = _b.sent();
+                                    return [3 /*break*/, 4];
+                                case 4:
+                                    modalResult.closeResult = "Closed with: " + result.resultTxt;
+                                    return [3 /*break*/, 6];
+                                case 5:
+                                    modalResult.closeResult = "Closed with: " + result;
+                                    _b.label = 6;
+                                case 6:
+                                    console.log('maintainProgram', modalResult);
+                                    resolve(modalResult);
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); }, function (reason) {
+                        modalResult.closeResult = "Dismissed " + __WEBPACK_IMPORTED_MODULE_5_app_shared_classes_modal_helpers__["b" /* ModalStaticHelper */].getDismissReason(reason);
+                        reject(modalResult);
+                    }).catch(function (error) {
+                        console.log('maintainProgram', error);
+                        reject(error);
+                    });
+                });
+                return [2 /*return*/, promise];
+            });
+        });
+    };
+    ProgramClientExceptionsModalService.prototype.fulfillProgramClientExceptionConfiguration = function (result) {
+        return __awaiter(this, void 0, void 0, function () {
+            var modalResult;
+            return __generator(this, function (_a) {
+                modalResult = result.modalResult;
+                return [2 /*return*/, modalResult];
+            });
+        });
+    };
+    ProgramClientExceptionsModalService.prototype.configureProgramClientExcModal = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            var modalOpts, modalRef, modalComp, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        modalOpts = {
+                            size: 'lg'
+                        };
+                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_3__program_client_exceptions_modal_component__["a" /* ProgramClientExceptionsModalComponent */], modalOpts);
+                        modalComp = modalRef.componentInstance;
+                        modalComp.program = program;
+                        _a = modalComp;
+                        return [4 /*yield*/, this.findClientExceptions(program)];
+                    case 1:
+                        _a.programClientExceptions = _b.sent();
+                        // OnInit has likely fired previously, invoke some initialization code
+                        modalComp.modalInit();
+                        return [2 /*return*/, modalRef.result];
+                }
+            });
+        });
+    };
+    // async configureProgramClientExcModalOld(program: Program) {
+    //   const modalOpts: NgbModalOptions = {
+    //     size: 'lg'
+    //   };
+    //   const modalRef = this.modalService.open(ProgramClientExceptionsModalComponent, modalOpts);
+    //   const modalComp: ProgramClientExceptionsModalComponent  = modalRef.componentInstance;
+    //   modalComp.program = program;
+    //   modalComp.programClientExceptions = await this.findClientExceptions(program);
+    //   modalComp.modalInit();
+    //   modalRef.result.then( async (result) => {
+    //     if (result.resultTxt === AppConstants.SAVESUCCESS) {
+    //     }
+    //   }, (reason) => {
+    //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    //     // this.setClickedRow(null);
+    //     console.log('configureProgramModal result: ', this.closeResult);
+    //     return this.closeResult;
+    //   });
+    // }
+    ProgramClientExceptionsModalService.prototype.findClientExceptions = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: 
+                    // TODO well, here's where we want to go get one at a time or
+                    // a query that gets them by program id in the API...
+                    return [4 /*yield*/, this.getProgramProfileClientExceptions()];
+                    case 1:
+                        // TODO well, here's where we want to go get one at a time or
+                        // a query that gets them by program id in the API...
+                        _a.sent();
+                        return [2 /*return*/, this.programProfileClientExceptions.filter(function (ppce) { return ppce.program === program.id; })];
+                }
+            });
+        });
+    };
+    ProgramClientExceptionsModalService.prototype.getProgramProfileClientExceptions = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, error_2;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = this;
+                        return [4 /*yield*/, this.dataApiService.getProgramProfileClientExceptions()];
+                    case 1:
+                        _a.programProfileClientExceptions = _b.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _b.sent();
+                        console.log('getPrograms error: ', error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramClientExceptionsModalService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__["a" /* DataApiService */],
+            __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["c" /* NgbModal */]])
+    ], ProgramClientExceptionsModalService);
+    return ProgramClientExceptionsModalService;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/programs/services/program-configurations/program-configurations-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #programConfigurationForm=\"ngForm\" \n(ngSubmit)=\"saveProgramConfiguration()\" >\n\n  <div class=\"modal-header bg-gradient-dark\">\n    <h4 class=\"modal-title text-white\">\n      Configure Communication(s)\n      <small>for ProgramId {{program.id}}: {{program.name}}</small>\n    </h4>\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureProgramModal.dismiss('Cross click')\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n    \n  <div class=\"modal-body\">\n      <div id=\"configuredPrograms\">\n  \n        <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\n          <caption></caption>\n          <thead class=\"bg-gradient-dark text-white\">\n            <tr>\n              <th>ID</th>\n              <th>N<small>ame</small></th>\n              <th>E<small>mail</small></th>\n              <th>IVR</th>\n              <th>SMS</th>\n              <th>M<small>ail</small></th>\n              <th>M<small>obile</small></th>\n              <th>M<small>andatory</small></th>\n              <th>E<small>ffective</small></th>\n              <th>E<small>xpiration</small></th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr appDroppable *ngFor=\"let cc of programConfigurations; let i = index\"\n                [dragOverClass]=\"'drag-target-border'\" [dragHintClass]=\"'drag-hint'\"\n                [dropEnabled]=\"i === lastProgramConfigRow && !cc.communication.id\"\n                \n                (onDrop)=\"communicationDrop($event)\"\n                [class.table-info]=\"i == lastProgramConfigRow\"> \n              \n              <td>\n                <span *ngIf=\"i !== lastProgramConfigRow\" class=\"badge badge-secondary\">{{cc.communication.id}}</span>\n                <span *ngIf=\"i === lastProgramConfigRow && !cc.communication.id\">\n                  <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \n                      title=\"Pick Communication to configure for {{program.name}}\"></i></span>\n                <span *ngIf=\"i === lastProgramConfigRow && cc.communication.id\" class=\"badge badge-primary\">{{cc.communication.id}}</span>\n              </td>\n              <td width=\"20%\"><small>{{cc.communication.name}}</small></td>\n              <td><app-select-channel-priority \n                    id=\"chanEmailPriority\" name=\"chanEmailPriority\" \n                    [(ngModel)]=\"cc.chanEmailPriority\"\n                    [actualStaticValue]=\"cc.chanEmailPriority\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td>\n              <td><app-select-channel-priority \n                    id=\"chanIvrPriority\" name=\"chanIvrPriority\" \n                    [(ngModel)]=\"cc.chanIvrPriority\"\n                    [actualStaticValue]=\"cc.chanIvrPriority\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td>\n              <td><app-select-channel-priority \n                    id=\"chanSmsPriority\" name=\"chanSmsPriority\" \n                    [(ngModel)]=\"cc.chanSmsPriority\"\n                    [actualStaticValue]=\"cc.chanSmsPriority\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td>  \n              <td><app-select-channel-priority \n                    id=\"chanMailPriority\" name=\"chanMailPriority\" \n                    [(ngModel)]=\"cc.chanMailPriority\"\n                    [actualStaticValue]=\"cc.chanMailPriority\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td> \n              <td><app-select-channel-priority \n                    id=\"chanMobilePriority\" name=\"chanMobilePriority\" \n                    [(ngModel)]=\"cc.chanMobilePriority\"\n                    [actualStaticValue]=\"cc.chanMobilePriority\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td> \n              <td><app-select-channel-mandatory\n                    id=\"chanMandatory\" name=\"chanMandatory\" \n                    [(ngModel)]=\"cc.chanMandatory\"\n                    [actualStaticValue]=\"cc.chanMandatory\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-mandatory></td>\n              <td><app-date-eff-exp\n                    dateType=\"effective\" [commConfig]=\"cc\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\"\n                    (newDateValue)=\"updateDateValue($event, cc, 'effective')\"></app-date-eff-exp></td>\n              <td><app-date-eff-exp\n                    dateType=\"expiration\" [commConfig]=\"cc\"\n                    [lastConfigRow]=\"i === lastProgramConfigRow\"\n                    (newDateValue)=\"updateDateValue($event, cc, 'expiration')\"></app-date-eff-exp></td>\n            </tr>\n            <tr *ngIf=\"configureState === 'start' || configureState === 'continue'\">\n              <td>\n                <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \n                  (click)=\"addProgramConfig()\" title=\"Add New Communication to {{program.name}} Configurations\"></i>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n  \n      </div>\n  \n    </div>\n  \n  <div class=\"modal-footer\">\n    <div class=\"w-100\">\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\n      <div class=\"float-right\">\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programConfigurationForm.valid\">Save</button>\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureProgramModal.close('Close click')\">Cancel</button>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"modal-footer\">\n      <div class=\"w-100\">\n        <app-comm-action-table *ngIf=\"configureState === 'pick' || configureState === 'continue'\" \n          [configureState]=\"configureState\"\n          [communications]=\"communications\"\n          [displayComm]=\"displayComm\"\n          [supressComm]=\"supressComm\"\n          [displayCommStartEmpty]=\"true\"\n          [displayProgram]=\"program.name\"\n          [showCommId]=\"true\"\n          [showCommName]=\"true\"\n          [showCommDesc]=\"true\"\n          [showStatus]=\"false\"\n          [showAction]=\"false\"\n          (selRowOut)=\"setClickedRow($event)\"\n          (selectedCommunication)=\"addProgramConfig($event)\"\n          (commConfigAction)=\"configureCommunication($event)\">\n        </app-comm-action-table>\n      </div>\n    </div>\n  \n</form>   "
+module.exports = "<form #programConfigurationForm=\"ngForm\" \r\n(ngSubmit)=\"saveProgramConfiguration()\" >\r\n\r\n  <div class=\"modal-header bg-gradient-dark\">\r\n    <h4 class=\"modal-title text-white\">\r\n      Configure Communication(s)\r\n      <small>for ProgramId {{program.id}}: {{program.name}}</small>\r\n    </h4>\r\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureProgramModal.dismiss('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n    \r\n  <div class=\"modal-body\">\r\n      <div id=\"configuredPrograms\">\r\n  \r\n        <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n          <caption></caption>\r\n          <thead class=\"bg-gradient-dark text-white\">\r\n            <tr>\r\n              <th>ID</th>\r\n              <th>N<small>ame</small></th>\r\n              <th>E<small>mail</small></th>\r\n              <th>IVR</th>\r\n              <th>SMS</th>\r\n              <th>M<small>ail</small></th>\r\n              <th>M<small>obile</small></th>\r\n              <th>D<small>efault</small></th>\r\n              <th>E<small>ffective</small></th>\r\n              <th>E<small>xpiration</small></th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr appDroppable *ngFor=\"let cc of programConfigurations; let i = index\"\r\n                [dragOverClass]=\"'drag-target-border'\" [dragHintClass]=\"'drag-hint'\"\r\n                [dropEnabled]=\"i === lastProgramConfigRow && !cc.communication.id\"\r\n                \r\n                (onDrop)=\"communicationDrop($event)\"\r\n                [class.table-info]=\"i == lastProgramConfigRow\"> \r\n              \r\n              <td>\r\n                <span *ngIf=\"i !== lastProgramConfigRow\" class=\"badge badge-secondary\">{{cc.communication.id}}</span>\r\n                <span *ngIf=\"i === lastProgramConfigRow && !cc.communication.id\">\r\n                  <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \r\n                      title=\"Pick Communication to configure for {{program.name}}\"></i></span>\r\n                <span *ngIf=\"i === lastProgramConfigRow && cc.communication.id\" class=\"badge badge-primary\">{{cc.communication.id}}</span>\r\n              </td>\r\n              <td width=\"20%\"><small>{{cc.communication.name}}</small></td>\r\n              <td><app-select-channel-priority \r\n                    id=\"chanEmailPriority\" name=\"chanEmailPriority\" \r\n                    [(ngModel)]=\"cc.chanEmailPriority\"\r\n                    [actualStaticValue]=\"cc.chanEmailPriority\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td>\r\n              <td><app-select-channel-priority \r\n                    id=\"chanIvrPriority\" name=\"chanIvrPriority\" \r\n                    [(ngModel)]=\"cc.chanIvrPriority\"\r\n                    [actualStaticValue]=\"cc.chanIvrPriority\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td>\r\n              <td><app-select-channel-priority \r\n                    id=\"chanSmsPriority\" name=\"chanSmsPriority\" \r\n                    [(ngModel)]=\"cc.chanSmsPriority\"\r\n                    [actualStaticValue]=\"cc.chanSmsPriority\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td>  \r\n              <td><app-select-channel-priority \r\n                    id=\"chanMailPriority\" name=\"chanMailPriority\" \r\n                    [(ngModel)]=\"cc.chanMailPriority\"\r\n                    [actualStaticValue]=\"cc.chanMailPriority\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td> \r\n              <td><app-select-channel-priority \r\n                    id=\"chanMobilePriority\" name=\"chanMobilePriority\" \r\n                    [(ngModel)]=\"cc.chanMobilePriority\"\r\n                    [actualStaticValue]=\"cc.chanMobilePriority\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-priority></td> \r\n              <td><app-select-channel-default\r\n                    id=\"chanDefault\" name=\"chanDefault\" \r\n                    [(ngModel)]=\"cc.chanDefault\"\r\n                    [actualStaticValue]=\"cc.chanDefault\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\" ></app-select-channel-default></td>\r\n              <td><app-date-eff-exp\r\n                    dateType=\"effective\" [commConfig]=\"cc\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\"\r\n                    (newDateValue)=\"updateDateValue($event, cc, 'effective')\"></app-date-eff-exp></td>\r\n              <td><app-date-eff-exp\r\n                    dateType=\"expiration\" [commConfig]=\"cc\"\r\n                    [lastConfigRow]=\"i === lastProgramConfigRow\"\r\n                    (newDateValue)=\"updateDateValue($event, cc, 'expiration')\"></app-date-eff-exp></td>\r\n            </tr>\r\n            <tr *ngIf=\"configureState === 'start' || configureState === 'continue'\">\r\n              <td>\r\n                <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n                  (click)=\"addProgramConfig()\" title=\"Add New Communication to {{program.name}} Configurations\"></i>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n  \r\n      </div>\r\n  \r\n    </div>\r\n  \r\n  <div class=\"modal-footer\">\r\n    <div class=\"w-100\">\r\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n      <div class=\"float-right\">\r\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programConfigurationForm.valid\">Save</button>\r\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureProgramModal.close('Close click')\">Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"modal-footer\">\r\n      <div class=\"w-100\">\r\n        <app-comm-action-table *ngIf=\"configureState === 'pick' || configureState === 'continue'\" \r\n          [configureState]=\"configureState\"\r\n          [communications]=\"communications\"\r\n          [displayComm]=\"displayComm\"\r\n          [supressComm]=\"supressComm\"\r\n          [displayCommStartEmpty]=\"true\"\r\n          [displayProgram]=\"program.name\"\r\n          [showCommId]=\"true\"\r\n          [showCommName]=\"true\"\r\n          [showCommDesc]=\"true\"\r\n          [showStatus]=\"false\"\r\n          [showAction]=\"false\"\r\n          (selRowOut)=\"setClickedRow($event)\"\r\n          (selectedCommunication)=\"addProgramConfig($event)\"\r\n          (commConfigAction)=\"configureCommunication($event)\">\r\n        </app-comm-action-table>\r\n      </div>\r\n    </div>\r\n  \r\n</form>   "
 
 /***/ }),
 
@@ -589,13 +1073,14 @@ module.exports = module.exports.toString();
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramConfigurationsModalComponent; });
 /* unused harmony export ProgramConfigModalResult */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramConfigurationsModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_configuration__ = __webpack_require__("../../../../../src/app/shared/model/program-configuration.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_model_program_configuration__ = __webpack_require__("../../../../../src/app/shared/model/program-configuration.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -610,15 +1095,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 //
-var ProgramConfigurationsModalComponent = (function () {
+var ProgramConfigModalResult = /** @class */ (function () {
+    function ProgramConfigModalResult() {
+    }
+    return ProgramConfigModalResult;
+}());
+
+var ProgramConfigurationsModalComponent = /** @class */ (function () {
     function ProgramConfigurationsModalComponent(
         // private dataApiService: DataApiService,
         configureProgramModal) {
         this.configureProgramModal = configureProgramModal;
-        this.program = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
+        this.program = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
         this.programConfigurations = [];
-        this.SAVESUCCESS = 'Close on succesful save';
         this.programDropEnabled = false;
         this.today = new Date();
         this.tomorrow = new Date();
@@ -651,8 +1142,8 @@ var ProgramConfigurationsModalComponent = (function () {
             // first time through
             this.lastProgramConfigRow = this.programConfigurations.length;
             if (this.lastProgramConfigRow === 0) {
-                this.newProgramConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_configuration__["a" /* ProgramConfiguration */]();
-                this.newProgramConfig.effective =
+                this.newProgramConfig = new __WEBPACK_IMPORTED_MODULE_5_app_shared_model_program_configuration__["a" /* ProgramConfiguration */]();
+                this.newProgramConfig.effective = // TODO shared util method
                     this.tomorrow.getFullYear() + '-' +
                         (this.tomorrow.getMonth() + 1) + '-' +
                         this.tomorrow.getDate();
@@ -660,14 +1151,14 @@ var ProgramConfigurationsModalComponent = (function () {
             else {
                 // clone setting from previous config row
                 this.prevProgramConfig = this.programConfigurations[this.lastProgramConfigRow - 1];
-                this.newProgramConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_configuration__["a" /* ProgramConfiguration */](this.prevProgramConfig);
+                this.newProgramConfig = new __WEBPACK_IMPORTED_MODULE_5_app_shared_model_program_configuration__["a" /* ProgramConfiguration */](this.prevProgramConfig);
                 this.newProgramConfig.effective = this.prevProgramConfig.effective;
             }
             this.programConfigurations[this.programConfigurations.length] = this.newProgramConfig;
             this.newProgramConfigs[this.newProgramConfigs.length] = this.newProgramConfig;
-            this.newProgramConfig.expiration = '9999-12-31';
+            this.newProgramConfig.expiration = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED;
             this.newProgramConfig.program = this.program;
-            this.newProgramConfig.communication = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__["a" /* Communication */]();
+            this.newProgramConfig.communication = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__["a" /* Communication */]();
             this.configureState = 'pick';
             this.programDropEnabled = true;
         }
@@ -699,7 +1190,7 @@ var ProgramConfigurationsModalComponent = (function () {
         var modalResult = {
             newProgramConfigs: this.newProgramConfigs
         };
-        this.configureProgramModal.close({ resultTxt: this.SAVESUCCESS, modalResult: modalResult });
+        this.configureProgramModal.close({ resultTxt: __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS, modalResult: modalResult });
     };
     ProgramConfigurationsModalComponent.prototype.updateDateValue = function (newDateValue, pc, dateType) {
         console.log('ProgramConfigByCommComponent updateDateValue: ', newDateValue, pc, dateType);
@@ -716,7 +1207,7 @@ var ProgramConfigurationsModalComponent = (function () {
     ], ProgramConfigurationsModalComponent.prototype, "communications", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program__["a" /* Program */])
     ], ProgramConfigurationsModalComponent.prototype, "program", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -734,12 +1225,6 @@ var ProgramConfigurationsModalComponent = (function () {
     return ProgramConfigurationsModalComponent;
 }());
 
-var ProgramConfigModalResult = (function () {
-    function ProgramConfigModalResult() {
-    }
-    return ProgramConfigModalResult;
-}());
-
 
 
 /***/ }),
@@ -751,8 +1236,11 @@ var ProgramConfigModalResult = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramConfigurationsModalService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__program_configurations_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__program_configurations_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/program-configurations/program-configurations-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_classes_modal_helpers__ = __webpack_require__("../../../../../src/app/shared/classes/modal-helpers.ts");
+/* unused harmony reexport ProgramConfigModalResult */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -801,70 +1289,212 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramConfigurationsModalService = (function () {
+
+
+
+var ProgramConfigurationsModalService = /** @class */ (function () {
     function ProgramConfigurationsModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
     }
+    ProgramConfigurationsModalService.prototype.configureProgram = function (program) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var modalResult, promise;
+            return __generator(this, function (_a) {
+                modalResult = new __WEBPACK_IMPORTED_MODULE_5_app_shared_classes_modal_helpers__["a" /* ModalResult */]();
+                promise = new Promise(function (resolve, reject) {
+                    _this.configureProgramModal(program)
+                        .then(function (result) { return __awaiter(_this, void 0, void 0, function () {
+                        var _a, error_1;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    if (!(result.resultTxt === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS)) return [3 /*break*/, 5];
+                                    _b.label = 1;
+                                case 1:
+                                    _b.trys.push([1, 3, , 4]);
+                                    // if (program && program.status) {
+                                    //   program.detectChanges = 'saving';
+                                    //   program.status.update(program);
+                                    // }
+                                    _a = modalResult;
+                                    return [4 /*yield*/, this.fulfillProgramConfiguration(result)];
+                                case 2:
+                                    // if (program && program.status) {
+                                    //   program.detectChanges = 'saving';
+                                    //   program.status.update(program);
+                                    // }
+                                    _a.modalOutput = _b.sent();
+                                    modalResult.success = true;
+                                    return [3 /*break*/, 4];
+                                case 3:
+                                    error_1 = _b.sent();
+                                    return [3 /*break*/, 4];
+                                case 4:
+                                    modalResult.closeResult = "Closed with: " + result.resultTxt;
+                                    return [3 /*break*/, 6];
+                                case 5:
+                                    modalResult.closeResult = "Closed with: " + result;
+                                    _b.label = 6;
+                                case 6:
+                                    console.log('maintainProgram', modalResult);
+                                    resolve(modalResult);
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); }, function (reason) {
+                        modalResult.closeResult = "Dismissed " + __WEBPACK_IMPORTED_MODULE_5_app_shared_classes_modal_helpers__["b" /* ModalStaticHelper */].getDismissReason(reason);
+                        reject(modalResult);
+                    }).catch(function (error) {
+                        console.log('maintainProgram', error);
+                        reject(error);
+                    });
+                });
+                return [2 /*return*/, promise];
+            });
+        });
+    };
+    ProgramConfigurationsModalService.prototype.fulfillProgramConfiguration = function (result) {
+        return __awaiter(this, void 0, void 0, function () {
+            var modalResult, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        modalResult = result.modalResult;
+                        if (!modalResult.newProgramConfigs) return [3 /*break*/, 5];
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < modalResult.newProgramConfigs.length)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.addProgramConfiguration(modalResult.newProgramConfigs[i])];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [3 /*break*/, 6];
+                    case 5:
+                        // TODO this would be some kind of exception
+                        console.log('ProgramConfigurationsModalService fulfillProgramConfiguration bad result: ', result.modalResult);
+                        _a.label = 6;
+                    case 6: return [2 /*return*/, modalResult];
+                }
+            });
+        });
+    };
     ProgramConfigurationsModalService.prototype.addProgramConfiguration = function (programConfiguration) {
-        var _this = this;
-        this.dataApiService.createProgramConfiguration(programConfiguration)
-            .then(function (pc) { return console.log('addProgramConfiguration:', programConfiguration, _this.programConfigurations); })
-            .catch(function (error) { return console.log('addProgramConfiguration error: ', error); });
+        return __awaiter(this, void 0, void 0, function () {
+            var error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.dataApiService.createProgramConfiguration(programConfiguration)];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _a.sent();
+                        console.log('addProgramConfiguration error: ', error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     };
     ProgramConfigurationsModalService.prototype.configureProgramModal = function (program) {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var modalOpts, modalRef, modalComp, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var modalOpts, modalRef, modalComp, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         modalOpts = {
                             size: 'lg'
                         };
-                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_2__program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */], modalOpts);
+                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_3__program_configurations_modal_component__["a" /* ProgramConfigurationsModalComponent */], modalOpts);
                         modalComp = modalRef.componentInstance;
-                        _a = modalComp;
+                        _a = this;
                         return [4 /*yield*/, this.getCommunications()];
                     case 1:
-                        _a.communications = _c.sent();
-                        modalComp.program = program;
-                        _b = modalComp;
-                        return [4 /*yield*/, this.findProgramConfigurations(program)];
+                        _a.communications = _d.sent();
+                        _b = this;
+                        return [4 /*yield*/, this.getProgramConfigurations()];
                     case 2:
-                        _b.programConfigurations = _c.sent();
+                        _b.programConfigurations = _d.sent();
+                        modalComp.communications = this.communications;
+                        modalComp.program = program;
+                        _c = modalComp;
+                        return [4 /*yield*/, this.findProgramConfigurations(program)];
+                    case 3:
+                        _c.programConfigurations = _d.sent();
+                        // OnInit has likely fired previously, invoke some initialization code
                         modalComp.modalInit();
-                        modalRef.result.then(function (result) {
-                            if (result.resultTxt === modalComp.SAVESUCCESS) {
-                                console.log('configureProgramModal result: ', result.modalResult);
-                                _this.closeResult = "Closed with: " + result.resultTxt;
-                                if (result.modalResult) {
-                                    var modalResult = result.modalResult;
-                                    // if (modalResult.prevProgConfig) {
-                                    //   this.updateProgramConfiguration(modalResult.prevProgConfig);
-                                    // }
-                                    if (modalResult.newProgramConfigs) {
-                                        for (var i = 0; i < modalResult.newProgramConfigs.length; i++) {
-                                            _this.addProgramConfiguration(modalResult.newProgramConfigs[i]);
-                                        }
-                                    }
+                        return [2 /*return*/, modalRef.result];
+                }
+            });
+        });
+    };
+    ProgramConfigurationsModalService.prototype.getCommunications = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.dataApiService.getCommunications()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                    case 2:
+                        error_3 = _a.sent();
+                        console.log('getCommunications error: ', error_3);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramConfigurationsModalService.prototype.findProgramConfigurations = function (selectedProgram) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.programConfigurations.filter(function (pc) {
+                        if (typeof (pc.program) === 'number') {
+                            if (pc.program === selectedProgram.id) {
+                                pc.program = selectedProgram;
+                                if (typeof (pc.communication) === 'number') {
+                                    pc.communication = _this.findCommunication(pc.communication);
                                 }
-                                else {
-                                    // this would be some kind of exception
-                                    console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
-                                }
+                                return true;
                             }
                             else {
-                                _this.closeResult = "Closed with: " + result;
+                                return false;
                             }
-                            // this.setClickedRow(null);
-                            console.log('configureProgramModal result: ', _this.closeResult);
-                        }, function (reason) {
-                            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
-                            // this.setClickedRow(null);
-                            console.log('configureProgramModal result: ', _this.closeResult);
-                        });
-                        return [2 /*return*/];
+                        }
+                        else if (pc.program.id === selectedProgram.id) {
+                            if (typeof (pc.communication) === 'number') {
+                                pc.communication = _this.findCommunication(pc.communication);
+                            }
+                            return true;
+                        }
+                    })];
+            });
+        });
+    };
+    ProgramConfigurationsModalService.prototype.getProgramConfigurations = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.dataApiService.getProgramConfigurations()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                    case 2:
+                        error_4 = _a.sent();
+                        console.log('getProgramConfigurations error: ', error_4);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
@@ -872,115 +1502,9 @@ var ProgramConfigurationsModalService = (function () {
     ProgramConfigurationsModalService.prototype.findCommunication = function (id) {
         return this.communications.find(function (c) { return c.id === id; });
     };
-    ProgramConfigurationsModalService.prototype.findProgramConfigurations = function (selectedProgram) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getProgramConfigurations()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/, this.programConfigurations.filter(function (pc) {
-                                if (typeof (pc.program) === 'number') {
-                                    if (pc.program === selectedProgram.id) {
-                                        pc.program = selectedProgram;
-                                        if (typeof (pc.communication) === 'number') {
-                                            pc.communication = _this.findCommunication(pc.communication);
-                                        }
-                                        return true;
-                                    }
-                                    else {
-                                        return false;
-                                    }
-                                }
-                                else if (pc.program.id === selectedProgram.id) {
-                                    if (typeof (pc.communication) === 'number') {
-                                        pc.communication = _this.findCommunication(pc.communication);
-                                    }
-                                    return true;
-                                }
-                            })];
-                }
-            });
-        });
-    };
-    ProgramConfigurationsModalService.prototype.getDismissReason = function (reason) {
-        if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["a" /* ModalDismissReasons */].ESC) {
-            return 'by pressing ESC';
-        }
-        else if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["a" /* ModalDismissReasons */].BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        }
-        else {
-            return "with: " + reason;
-        }
-    };
-    ProgramConfigurationsModalService.prototype.getCommunications = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, error_1;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        _a = this;
-                        return [4 /*yield*/, this.dataApiService.getCommunications()];
-                    case 1:
-                        _a.communications = _b.sent();
-                        return [2 /*return*/, this.communications];
-                    case 2:
-                        error_1 = _b.sent();
-                        console.log('getCommunications error: ', error_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ProgramConfigurationsModalService.prototype.getPrograms = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, error_2;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        _a = this;
-                        return [4 /*yield*/, this.dataApiService.getPrograms()];
-                    case 1:
-                        _a.programs = _b.sent();
-                        return [2 /*return*/, this.programs];
-                    case 2:
-                        error_2 = _b.sent();
-                        console.log('getPrograms error: ', error_2);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ProgramConfigurationsModalService.prototype.getProgramConfigurations = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a, error_3;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        _a = this;
-                        return [4 /*yield*/, this.dataApiService.getProgramConfigurations()];
-                    case 1:
-                        _a.programConfigurations = _b.sent();
-                        return [2 /*return*/, this.programConfigurations];
-                    case 2:
-                        error_3 = _b.sent();
-                        console.log('getProgramConfigurations error: ', error_3);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
     ProgramConfigurationsModalService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__["a" /* DataApiService */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__["a" /* DataApiService */],
             __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["c" /* NgbModal */]])
     ], ProgramConfigurationsModalService);
     return ProgramConfigurationsModalService;
@@ -993,7 +1517,7 @@ var ProgramConfigurationsModalService = (function () {
 /***/ "../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #programMaintenanceForm=\"ngForm\" \n      (ngSubmit)=\"saveProgram()\" >\n\n  <div class=\"modal-header bg-gradient-dark\">\n    <h4 class=\"modal-title text-white\">\n      <span *ngIf=\"configType === 'edit'\">\n        Edit Program <small>{{program.name}} (ProgramId: {{program.id}}) profile</small></span>\n      <span *ngIf=\"configType === 'add'\">\n        Add New Program</span>\n    </h4>\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"maintainProgramModal.dismiss('Cross click')\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n    \n  <div class=\"modal-body\">\n    <div class=\"form-row\">\n      <div class=\"form-group col-md-4\">\n        <label for=\"programName\" class=\"text-white bg-gradient-dark flex-justify-left rounded\">\n          Program Name</label>\n        <input type=\"text\" class=\"form-control\"\n               [(ngModel)]=\"program.name\" id=\"programName\" name=\"name\" required\n               aria-describedby=\"programNameHelp\" placeholder=\"Enter Program Name\">\n        <small id=\"programNameHelp\" class=\"form-text text-muted\">Short Name of the Program.</small>\n      </div>\n      <div class=\"form-group col-md-8\">\n        <label for=\"programDescription\" class=\"text-white bg-gradient-dark flex-justify-left rounded\">\n          Program Description</label>\n        <input type=\"text\" class=\"form-control\" \n               [(ngModel)]=\"program.description\" id=\"programDescription\" name=\"description\" required\n               aria-describedby=\"programDescriptionlHelp\" placeholder=\"Enter Program Description\">\n        <small id=\"programDescriptionlHelp\" class=\"form-text text-muted\">Brief Description of the Program.</small>\n      </div>\n    </div>\n        \n    <span *ngIf=\"programProfiles\">\n      <div class=\"form-row\" *ngFor=\"let profile of programProfiles; let i = index\">\n\n        <div class=\"form-group col-md-1\">\n            <app-select-profile-option \n              id=\"defaultOptIn\" name=\"defaultOptIn\" label=\"Opt In\"\n              [(ngModel)]=\"profile.defaultOptIn\"\n              [staticValue]=\"profile.defaultOptIn\"\n              [showHeader]=\"i === 0\"\n              [staticReadOnly]=\"i === 0 && !newProgram\"\n              [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n          \n        <div class=\"form-group col-md-1\">\n          <app-select-profile-option \n            id=\"visibleInUi\" name=\"visibleInUi\" label=\"UI\"\n            [(ngModel)]=\"profile.visibleInUi\"\n            [staticValue]=\"profile.visibleInUi\"\n            [showHeader]=\"i === 0\"\n            [staticReadOnly]=\"i === 0 && !newProgram\"\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n\n        <div class=\"form-group col-md-1\">\n          <app-select-profile-option \n            id=\"chanEmail\" name=\"chanEmail\" label=\"Email\"\n            [(ngModel)]=\"profile.chanEmail\"\n            [staticValue]=\"profile.chanEmail\"\n            [showHeader]=\"i === 0\"\n            [staticReadOnly]=\"i === 0 && !newProgram\"\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n\n        <div class=\"form-group col-md-1\">\n          <app-select-profile-option \n            id=\"chanIvr\" name=\"chanIvr\" label=\"IVR\"\n            [(ngModel)]=\"profile.chanIvr\"\n            [staticValue]=\"profile.chanIvr\"\n            [showHeader]=\"i === 0\"\n            [staticReadOnly]=\"i === 0 && !newProgram\"\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n\n        <div class=\"form-group col-md-1\">\n          <app-select-profile-option \n            id=\"chanSms\" name=\"chanSms\" label=\"SMS\"\n            [(ngModel)]=\"profile.chanSms\"\n            [staticValue]=\"profile.chanSms\"\n            [showHeader]=\"i === 0\"\n            [staticReadOnly]=\"i === 0 && !newProgram\"\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n\n        <div class=\"form-group col-md-1\">\n          <app-select-profile-option \n            id=\"chanSecure\" name=\"chanSecure\" label=\"Secure\"\n            [(ngModel)]=\"profile.chanSecure\"\n            [staticValue]=\"profile.chanSecure\"\n            [showHeader]=\"i === 0\"\n            [staticReadOnly]=\"i === 0 && !newProgram\"\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n\n        <div class=\"form-group col-md-1\">\n          <app-select-profile-option \n            id=\"chanMail\" name=\"chanMail\" label=\"Mail\"\n            [(ngModel)]=\"profile.chanMail\"\n            [staticValue]=\"profile.chanMail\"\n            [showHeader]=\"i === 0\"\n            [staticReadOnly]=\"i === 0 && !newProgram\"\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n\n        <div class=\"form-group col-md-1\">\n          <app-select-profile-option \n            id=\"chanMobile\" name=\"chanMobile\" label=\"Mobile\"\n            [(ngModel)]=\"profile.chanMobile\"\n            [staticValue]=\"profile.chanMobile\"\n            [showHeader]=\"i === 0\"\n            [staticReadOnly]=\"i === 0 && !newProgram\"\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\n        </div>\n\n        <!-- move these into a component, the current eff/exp component only works on configs -->\n        <div class=\"form-group col-md-2\">\n          <span *ngIf=\"i === 0 && !newProgram\">\n            <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\n                Effective</label>\n            <!-- the effective date of the current effective row -->\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.effective}}\" readonly>\n          </span>\n          <span *ngIf=\"newProgram || i !== 0\">\n            <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded\"\n              [ngClass]=\"{'sr-only': !newProgram}\">\n              Effective</label>\n            <!-- set the effective date for the new row -->\n            <app-date-picker-popup [dateValue]=\"profile.effective\"\n              (newDateValue)=\"updateDateValue($event, profile, 'effective')\"></app-date-picker-popup>           \n          </span>\n        </div>\n\n        <div class=\"form-group col-md-2\">\n          <span *ngIf=\"i === 0 && expireProgram\">\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\n              Expiration</label>\n            <!-- the expiration date of the current/previous row -->\n            <app-date-picker-popup [dateValue]=\"profile.expiration\"\n              (newDateValue)=\"updateDateValue($event, profile, 'expiration')\"></app-date-picker-popup> \n          </span>\n          <span *ngIf=\"i === 0 && !expireProgram\">\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\n              Expiration</label>\n            <!-- the expiration date of the current/previous row -->\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly\n              (click)=\"changeProfile(profile)\" >\n          </span>\n          <span *ngIf=\"i !== 0\">\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\n              Expiration</label>\n            <!-- the expiration date of the current/previous row -->\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly>\n          </span>\n        </div>\n\n        <div class=\"form-row\" *ngIf=\"addProfile\">\n          <div class=\"form-group col-md-1\">\n            <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \n              (click)=\"changeProfile(profile)\" title=\"Modify Program Profile\"></i>\n          </div>\n        </div>\n\n      </div>\n    </span>\n  </div>\n    \n  <div class=\"modal-footer\">\n    <div class=\"w-100\">\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\n      <div class=\"float-right\">\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programMaintenanceForm.valid\">Save</button>\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"maintainProgramModal.close('Close click')\">Cancel</button>\n      </div>\n    </div>\n  </div>\n\n</form>      "
+module.exports = "<form #programMaintenanceForm=\"ngForm\" \r\n      (ngSubmit)=\"saveProgram()\" >\r\n\r\n  <div class=\"modal-header bg-gradient-dark\">\r\n    <h4 class=\"modal-title text-white\">\r\n      <span *ngIf=\"configType === 'edit'\">\r\n        Edit Program <small>{{program.name}} (ProgramId: {{program.id}}) profile</small></span>\r\n      <span *ngIf=\"configType === 'add'\">\r\n        Add New Program</span>\r\n    </h4>\r\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"maintainProgramModal.dismiss('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n    \r\n  <div class=\"modal-body\">\r\n    <div class=\"form-row\">\r\n      <div class=\"form-group col-md-4\">\r\n        <label for=\"programName\" class=\"text-white bg-gradient-dark flex-justify-left rounded\">\r\n          Program Name</label>\r\n        <input type=\"text\" class=\"form-control\"\r\n               [(ngModel)]=\"programForForm.name\" id=\"programName\" name=\"name\" required\r\n               aria-describedby=\"programNameHelp\" placeholder=\"Enter Program Name\">\r\n        <small id=\"programNameHelp\" class=\"form-text text-muted\">Short Name of the Program.</small>\r\n      </div>\r\n      <div class=\"form-group col-md-8\">\r\n        <label for=\"programDescription\" class=\"text-white bg-gradient-dark flex-justify-left rounded\">\r\n          Program Description</label>\r\n        <input type=\"text\" class=\"form-control\" \r\n               [(ngModel)]=\"programForForm.description\" id=\"programDescription\" name=\"description\" required\r\n               aria-describedby=\"programDescriptionlHelp\" placeholder=\"Enter Program Description\">\r\n        <small id=\"programDescriptionlHelp\" class=\"form-text text-muted\">Brief Description of the Program.</small>\r\n      </div>\r\n    </div>\r\n        \r\n    <span *ngIf=\"programProfiles\">\r\n      <div class=\"form-row\" *ngFor=\"let profile of programProfiles; let i = index\">\r\n\r\n        <div class=\"form-group col-md-1\">\r\n            <app-select-profile-option \r\n              id=\"defaultOptIn\" name=\"defaultOptIn\" label=\"Opt In\"\r\n              [(ngModel)]=\"profile.defaultOptIn\"\r\n              [staticValue]=\"profile.defaultOptIn\"\r\n              [showHeader]=\"i === 0\"\r\n              [staticReadOnly]=\"i === 0 && !newProgram\"\r\n              [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n          \r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"visibleInUi\" name=\"visibleInUi\" label=\"UI\"\r\n            [(ngModel)]=\"profile.visibleInUi\"\r\n            [staticValue]=\"profile.visibleInUi\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanEmail\" name=\"chanEmail\" label=\"Email\"\r\n            [(ngModel)]=\"profile.chanEmail\"\r\n            [staticValue]=\"profile.chanEmail\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanIvr\" name=\"chanIvr\" label=\"IVR\"\r\n            [(ngModel)]=\"profile.chanIvr\"\r\n            [staticValue]=\"profile.chanIvr\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanSms\" name=\"chanSms\" label=\"SMS\"\r\n            [(ngModel)]=\"profile.chanSms\"\r\n            [staticValue]=\"profile.chanSms\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanSecure\" name=\"chanSecure\" label=\"Secure\"\r\n            [(ngModel)]=\"profile.chanSecure\"\r\n            [staticValue]=\"profile.chanSecure\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanMail\" name=\"chanMail\" label=\"Mail\"\r\n            [(ngModel)]=\"profile.chanMail\"\r\n            [staticValue]=\"profile.chanMail\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanMobile\" name=\"chanMobile\" label=\"Mobile\"\r\n            [(ngModel)]=\"profile.chanMobile\"\r\n            [staticValue]=\"profile.chanMobile\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <!-- move these into a component, the current eff/exp component only works on configs -->\r\n        <div class=\"form-group col-md-2\">\r\n          <span *ngIf=\"i === 0 && !newProgram\">\r\n            <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n                Effective</label>\r\n            <!-- the effective date of the current effective row -->\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.effective}}\" readonly>\r\n          </span>\r\n          <span *ngIf=\"newProgram || i !== 0\">\r\n            <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded\"\r\n              [ngClass]=\"{'sr-only': !newProgram}\">\r\n              Effective</label>\r\n            <!-- set the effective date for the new row -->\r\n            <app-date-picker-popup [dateValue]=\"profile.effective\"\r\n              (newDateValue)=\"updateDateValue($event, profile, 'effective')\"></app-date-picker-popup>           \r\n          </span>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-2\">\r\n          <span *ngIf=\"i === 0 && expireProgram\">\r\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n              Expiration</label>\r\n            <!-- the expiration date of the current/previous row -->\r\n            <app-date-picker-popup [dateValue]=\"profile.expiration\"\r\n              (newDateValue)=\"updateDateValue($event, profile, 'expiration')\"></app-date-picker-popup> \r\n          </span>\r\n          <span *ngIf=\"i === 0 && !expireProgram\">\r\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n              Expiration</label>\r\n            <!-- the expiration date of the current/previous row -->\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly\r\n              (click)=\"changeProfile(profile)\" >\r\n          </span>\r\n          <span *ngIf=\"i !== 0\">\r\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\r\n              Expiration</label>\r\n            <!-- the expiration date of the current/previous row -->\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly>\r\n          </span>\r\n        </div>\r\n\r\n        <div class=\"form-row\" *ngIf=\"addProfile\">\r\n          <div class=\"form-group col-md-1\">\r\n            <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n              (click)=\"changeProfile(profile)\" title=\"Modify Program Profile\"></i>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n    </span>\r\n  </div>\r\n    \r\n  <div class=\"modal-footer\">\r\n    <div class=\"w-100\">\r\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n      <div class=\"float-right\">\r\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programMaintenanceForm.valid\">Save</button>\r\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"maintainProgramModal.close('Close click')\">Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</form>      "
 
 /***/ }),
 
@@ -1019,12 +1543,13 @@ module.exports = module.exports.toString();
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramsMaintenanceModalComponent; });
 /* unused harmony export ProgramsMaintModalResult */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramsMaintenanceModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_profile__ = __webpack_require__("../../../../../src/app/shared/model/program-profile.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__ = __webpack_require__("../../../../../src/app/shared/model/program-profile.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1038,14 +1563,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ProgramsMaintenanceModalComponent = (function () {
+
+var ProgramsMaintModalResult = /** @class */ (function () {
+    function ProgramsMaintModalResult() {
+    }
+    return ProgramsMaintModalResult;
+}());
+
+var ProgramsMaintenanceModalComponent = /** @class */ (function () {
     function ProgramsMaintenanceModalComponent(maintainProgramModal) {
         this.maintainProgramModal = maintainProgramModal;
         this.configType = '';
-        this.program = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
+        this.program = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */]();
+        this.programForForm = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
         this.programProfiles = [];
-        this.SAVESUCCESS = 'Close on succesful save';
-        this.UNEXPIRED = '9999-12-31';
         this.addProfile = false;
         this.newProgram = false;
         this.expireProgram = false;
@@ -1056,15 +1587,15 @@ var ProgramsMaintenanceModalComponent = (function () {
     };
     ProgramsMaintenanceModalComponent.prototype.modalInit = function () {
         console.log('ProgramsMaintenanceModalComponent init: ');
-        console.log(this.program);
+        console.log(this.programForForm);
         this.tomorrow.setDate(this.today.getDate() + 1);
         if (this.configType === 'add') {
-            this.programProfiles = [new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_profile__["a" /* ProgramProfile */](this.program.id)];
+            this.programProfiles = [new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__["a" /* ProgramProfile */](this.programForForm.id)];
             this.programProfiles[0].effective =
                 this.tomorrow.getFullYear() + '-' +
                     (this.tomorrow.getMonth() + 1) + '-' +
                     this.tomorrow.getDate();
-            this.programProfiles[0].expiration = this.UNEXPIRED;
+            this.programProfiles[0].expiration = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED;
             this.newProgram = true;
         }
         if (this.configType === 'edit') {
@@ -1072,12 +1603,14 @@ var ProgramsMaintenanceModalComponent = (function () {
             // the current row, setting expiration on current
             // show only the current effective Profile row
             this.programProfiles = [];
-            this.programProfiles = this.getCurrentEffectiveProfile(this.program);
+            var currentEffectiveProfile = this.getCurrentEffectiveProfile(this.programForForm)[0];
+            this.programProfiles = [new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__["a" /* ProgramProfile */](this.programForForm.id, currentEffectiveProfile, true)];
             this.addProfile = true;
         }
         if (this.configType === 'expire') {
             this.programProfiles = [];
-            this.programProfiles = this.getCurrentEffectiveProfile(this.program);
+            var currentEffectiveProfile = this.getCurrentEffectiveProfile(this.programForForm)[0];
+            this.programProfiles = [new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__["a" /* ProgramProfile */](this.programForForm.id, currentEffectiveProfile, true)];
             this.programProfiles[0].expiration =
                 this.tomorrow.getFullYear() + '-' +
                     (this.tomorrow.getMonth() + 1) + '-' +
@@ -1086,9 +1619,8 @@ var ProgramsMaintenanceModalComponent = (function () {
         }
     };
     ProgramsMaintenanceModalComponent.prototype.getCurrentEffectiveProfile = function (program) {
-        var _this = this;
-        return this.program.programProfile.filter(function (pp) {
-            if (pp.expiration === _this.UNEXPIRED) {
+        return program.programProfile.filter(function (pp) {
+            if (pp.expiration === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED) {
                 return true;
             }
         });
@@ -1096,17 +1628,17 @@ var ProgramsMaintenanceModalComponent = (function () {
     ProgramsMaintenanceModalComponent.prototype.changeProfile = function (currProfile) {
         if (this.addProfile) {
             // expire the current profile row
-            currProfile.expiration =
+            currProfile.expiration = // TODO shared util method
                 this.today.getFullYear() + '-' +
                     (this.today.getMonth() + 1) + '-' +
                     this.today.getDate();
             // insert a new profile row with tommorow effective
-            var newProfile = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_profile__["a" /* ProgramProfile */](this.program.id, currProfile);
-            newProfile.effective =
+            var newProfile = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__["a" /* ProgramProfile */](this.programForForm.id, currProfile);
+            newProfile.effective = // TODO shared util method
                 this.tomorrow.getFullYear() + '-' +
                     (this.tomorrow.getMonth() + 1) + '-' +
                     this.tomorrow.getDate();
-            newProfile.expiration = this.UNEXPIRED;
+            newProfile.expiration = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED;
             this.programProfiles.push(newProfile);
         }
         this.addProfile = false;
@@ -1115,35 +1647,30 @@ var ProgramsMaintenanceModalComponent = (function () {
         var modalResult = new ProgramsMaintModalResult();
         if (this.configType === 'add') {
             if (this.programProfiles.length === 1 &&
-                this.programProfiles[0].expiration === this.UNEXPIRED) {
+                this.programProfiles[0].expiration === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED) {
                 modalResult.insertProgramProfile = this.programProfiles[0];
             }
-            modalResult.insertProgram = this.program;
+            modalResult.insertProgram = this.programForForm;
         }
         if (this.configType === 'edit') {
-            // if profile changed (added), first update previous, add new
-            // then go ahead and update the program
+            modalResult.updateProgram = this.programForForm;
             if (this.programProfiles.length === 2) {
-                console.log(this.programProfiles);
-                console.log(this.program);
-                if (this.programProfiles[0].expiration !== this.UNEXPIRED) {
+                if (this.programProfiles[0].expiration !== __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED) {
                     modalResult.updateProgramProfile = this.programProfiles[0];
                 } // else something went wrong, report error, abort save
-                if (this.programProfiles[1].expiration === this.UNEXPIRED) {
+                if (this.programProfiles[1].expiration === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED) {
                     modalResult.insertProgramProfile = this.programProfiles[1];
-                    this.program.programProfile.push(this.programProfiles[1]);
                 } // else something went wrong, report error, abort save
-                modalResult.updateProgram = this.program;
             }
         }
         if (this.configType === 'expire') {
+            modalResult.updateProgram = this.programForForm;
             if (this.programProfiles.length === 1 &&
-                this.programProfiles[0].expiration !== this.UNEXPIRED) {
+                this.programProfiles[0].expiration !== __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED) {
                 modalResult.updateProgramProfile = this.programProfiles[0];
             } // else something went wrong, report error, abort save
-            modalResult.updateProgram = this.program;
         }
-        this.maintainProgramModal.close({ resultTxt: this.SAVESUCCESS, modalResult: modalResult });
+        this.maintainProgramModal.close({ resultTxt: __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS, modalResult: modalResult });
     };
     ProgramsMaintenanceModalComponent.prototype.updateDateValue = function (newDate, pp, dateType) {
         console.log('ProgramsMaintenanceModalComponent updateDateValue: ', newDate, pp, dateType);
@@ -1161,8 +1688,16 @@ var ProgramsMaintenanceModalComponent = (function () {
     ], ProgramsMaintenanceModalComponent.prototype, "configType", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */])
     ], ProgramsMaintenanceModalComponent.prototype, "program", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */])
+    ], ProgramsMaintenanceModalComponent.prototype, "programForForm", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", Array)
+    ], ProgramsMaintenanceModalComponent.prototype, "programProfiles", void 0);
     ProgramsMaintenanceModalComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-programs-maintenance-modal',
@@ -1173,12 +1708,6 @@ var ProgramsMaintenanceModalComponent = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["b" /* NgbActiveModal */]])
     ], ProgramsMaintenanceModalComponent);
     return ProgramsMaintenanceModalComponent;
-}());
-
-var ProgramsMaintModalResult = (function () {
-    function ProgramsMaintModalResult() {
-    }
-    return ProgramsMaintModalResult;
 }());
 
 
@@ -1192,10 +1721,12 @@ var ProgramsMaintModalResult = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramsMaintenanceModalService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_profile__ = __webpack_require__("../../../../../src/app/shared/model/program-profile.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__programs_maintenance_modal_component__ = __webpack_require__("../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_shared_classes_modal_helpers__ = __webpack_require__("../../../../../src/app/shared/classes/modal-helpers.ts");
+/* unused harmony reexport ProgramsMaintModalResult */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1246,14 +1777,180 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramsMaintenanceModalService = (function () {
+
+
+var ProgramsMaintenanceModalService = /** @class */ (function () {
     function ProgramsMaintenanceModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
     }
-    ProgramsMaintenanceModalService.prototype.maintainProgramModal = function (configType, nextId, program) {
+    ProgramsMaintenanceModalService.prototype.maintainProgram = function (configType, nextId, program) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
+            var modalResult, promise;
+            return __generator(this, function (_a) {
+                modalResult = new __WEBPACK_IMPORTED_MODULE_6_app_shared_classes_modal_helpers__["a" /* ModalResult */]();
+                promise = new Promise(function (resolve, reject) {
+                    _this.maintainProgramModal(configType, nextId, program)
+                        .then(function (result) { return __awaiter(_this, void 0, void 0, function () {
+                        var _a, error_1;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    if (!(result.resultTxt === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS)) return [3 /*break*/, 5];
+                                    _b.label = 1;
+                                case 1:
+                                    _b.trys.push([1, 3, , 4]);
+                                    if (program && program.status) {
+                                        program.detectChanges = 'saving';
+                                        program.status.update(program);
+                                    }
+                                    _a = modalResult;
+                                    return [4 /*yield*/, this.fulfillProgramMaintenance(result, configType)];
+                                case 2:
+                                    _a.modalOutput = _b.sent();
+                                    modalResult.success = true;
+                                    return [3 /*break*/, 4];
+                                case 3:
+                                    error_1 = _b.sent();
+                                    return [3 /*break*/, 4];
+                                case 4:
+                                    modalResult.closeResult = "Closed with: " + result.resultTxt;
+                                    return [3 /*break*/, 6];
+                                case 5:
+                                    modalResult.closeResult = "Closed with: " + result;
+                                    _b.label = 6;
+                                case 6:
+                                    console.log('maintainProgram', modalResult);
+                                    resolve(modalResult);
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); }, function (reason) {
+                        modalResult.closeResult = "Dismissed " + __WEBPACK_IMPORTED_MODULE_6_app_shared_classes_modal_helpers__["b" /* ModalStaticHelper */].getDismissReason(reason);
+                        reject(modalResult);
+                    }).catch(function (error) {
+                        console.log('maintainProgram', error);
+                        reject(error);
+                    });
+                });
+                return [2 /*return*/, promise];
+            });
+        });
+    };
+    ProgramsMaintenanceModalService.prototype.fulfillProgramMaintenance = function (result, configType) {
+        return __awaiter(this, void 0, void 0, function () {
+            var modalResult, newProgram, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        modalResult = result.modalResult;
+                        if (!(configType === 'add' && modalResult.insertProgram)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile)];
+                    case 1:
+                        newProgram = _d.sent();
+                        console.log('fulfillProgramMaintenance add', newProgram);
+                        modalResult.resultProgram = newProgram;
+                        _d.label = 2;
+                    case 2:
+                        if (!(configType === 'edit' && modalResult.updateProgram)) return [3 /*break*/, 6];
+                        if (!(modalResult.updateProgramProfile || modalResult.insertProgramProfile)) return [3 /*break*/, 4];
+                        // means a new profile was added (prev one expired)
+                        _a = modalResult;
+                        return [4 /*yield*/, this.updateProgramAndProfiles(modalResult.updateProgram, modalResult.updateProgramProfile, modalResult.insertProgramProfile)];
+                    case 3:
+                        // means a new profile was added (prev one expired)
+                        _a.resultProgram =
+                            _d.sent();
+                        return [3 /*break*/, 6];
+                    case 4:
+                        _b = modalResult;
+                        return [4 /*yield*/, this.updateProgram(modalResult.updateProgram)];
+                    case 5:
+                        _b.resultProgram = _d.sent();
+                        _d.label = 6;
+                    case 6:
+                        if (!(configType === 'expire' && modalResult.updateProgram)) return [3 /*break*/, 8];
+                        _c = modalResult;
+                        return [4 /*yield*/, this.updateProgramAndProfiles(modalResult.updateProgram, modalResult.updateProgramProfile)];
+                    case 7:
+                        _c.resultProgram =
+                            _d.sent();
+                        _d.label = 8;
+                    case 8: return [2 /*return*/, modalResult];
+                }
+            });
+        });
+    };
+    ProgramsMaintenanceModalService.prototype.addProgramAndProfile = function (program, programProfile) {
+        return __awaiter(this, void 0, void 0, function () {
+            var pp, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 4, , 5]);
+                        return [4 /*yield*/, this.dataApiService.createProgram(program)];
+                    case 1:
+                        program = _a.sent();
+                        return [4 /*yield*/, this.dataApiService.createProgramProfile(programProfile)];
+                    case 2:
+                        pp = _a.sent();
+                        return [4 /*yield*/, (program.programProfile = [pp])];
+                    case 3:
+                        _a.sent();
+                        console.log('addProgramAndProfile:', program);
+                        return [2 /*return*/, program];
+                    case 4:
+                        error_2 = _a.sent();
+                        console.log('addProgramAndProfile error: ', error_2);
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramsMaintenanceModalService.prototype.updateProgramAndProfiles = function (updateProgram, updateProgramProfile, insertProgramProfile) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ppc, pu, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 6, , 7]);
+                        if (!updateProgramProfile) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.dataApiService.updateProgramProfile(updateProgramProfile)
+                                .then(function (ppu) {
+                                for (var i = 0; i < updateProgram.programProfile.length; i++) {
+                                    if (updateProgram.programProfile[i].id === ppu.id) {
+                                        updateProgram.programProfile[i] = ppu;
+                                    }
+                                }
+                            })];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2:
+                        if (!insertProgramProfile) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.dataApiService.createProgramProfile(insertProgramProfile)];
+                    case 3:
+                        ppc = _a.sent();
+                        updateProgram.programProfile.push(ppc);
+                        _a.label = 4;
+                    case 4: return [4 /*yield*/, this.dataApiService.updateProgram(updateProgram)];
+                    case 5:
+                        pu = _a.sent();
+                        console.log('addProgramAndProfile:', updateProgram);
+                        return [2 /*return*/, updateProgram];
+                    case 6:
+                        error_3 = _a.sent();
+                        console.log('addProgramAndProfile error: ', error_3);
+                        return [3 /*break*/, 7];
+                    case 7: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramsMaintenanceModalService.prototype.maintainProgramModal = function (configType, nextId, program) {
+        return __awaiter(this, void 0, void 0, function () {
             var modalOpts, modalRef, modalComp, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
@@ -1263,112 +1960,49 @@ var ProgramsMaintenanceModalService = (function () {
                         };
                         modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_4__programs_maintenance_modal_component__["a" /* ProgramsMaintenanceModalComponent */], modalOpts);
                         modalComp = modalRef.componentInstance;
+                        // initialize all the @Inputs to the component
                         modalComp.configType = configType;
-                        if (configType === 'add' && nextId) {
-                            modalComp.program = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */](nextId, '');
-                        }
-                        if (!(configType === 'edit' || configType === 'expire')) return [3 /*break*/, 2];
-                        modalComp.program = program;
-                        if (!(!program.programProfile || program.programProfile.length === 0)) return [3 /*break*/, 2];
-                        // hey, it could happen!
-                        _a = program;
-                        return [4 /*yield*/, this.findProgramProfiles(program)];
+                        modalComp.program = (program) ? new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](program.id, program.name) : new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](); // shallow copy just to display
+                        _a = modalComp;
+                        return [4 /*yield*/, this.setupProgramForForm(configType, nextId, program)];
                     case 1:
-                        // hey, it could happen!
-                        _a.programProfile = _b.sent();
-                        console.log(program);
-                        if (program.programProfile.length === 0) {
-                            // but if it still doesn't have one (shouldn't happen)
-                            program.programProfile = [new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_profile__["a" /* ProgramProfile */](program.id)];
-                            program.programProfile[0].expiration = '9999-12-31';
-                        }
-                        _b.label = 2;
-                    case 2:
+                        _a.programForForm = _b.sent();
+                        // OnInit has likely fired previously, invoke some initialization code
                         modalComp.modalInit();
-                        // so up until now using @JsonIdentityReference(alwaysAsId = true) on related entites in the JPA
-                        // so the json coming back doesn't have full related objects, just id references
-                        // but with Program/ProgramProfile didn't so code is dealing with responses that include the Profile
-                        // and the requests back to store can be Program with Profile inside
-                        // or, separate requests for the Profiles
-                        // but not both -- have to decide to stick with the original approach, which works fine for
-                        // everything else, or do this differently by saving the Program entirely which
-                        // then can include additions and updates to Profile related entities
-                        modalRef.result.then(function (result) {
-                            if (result.resultTxt === modalComp.SAVESUCCESS) {
-                                console.log('configureProgramModal result: ', result.modalResult);
-                                _this.closeResult = "Closed with: " + result.resultTxt;
-                                if (result.modalResult) {
-                                    var modalResult = result.modalResult;
-                                    // if (modalResult.updateProgramProfile) {
-                                    //   this.updateProgramProfile(modalResult.updateProgramProfile);
-                                    // }
-                                    // if (modalResult.insertProgramProfile) {
-                                    //   this.addProgramProfile(modalResult.insertProgramProfile);
-                                    // }
-                                    if (configType === 'add' && modalResult.insertProgram) {
-                                        // except for a new add, the Profile creates an unresolved forward reference
-                                        // the Program must be saved first, then the Profile will reference a valid entity
-                                        // this.addProgram(modalResult.insertProgram);
-                                        // this.addProgramProfile(modalResult.insertProgramProfile);
-                                        _this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
-                                    }
-                                    if (configType === 'edit' && modalResult.updateProgram) {
-                                        _this.updateProgram(modalResult.updateProgram);
-                                    }
-                                    if (configType === 'expire' && modalResult.updateProgram) {
-                                        _this.updateProgram(modalResult.updateProgram);
-                                    }
-                                    return configType;
-                                }
-                                else {
-                                    // this would be some kind of exception
-                                    console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
-                                }
-                            }
-                            else {
-                                _this.closeResult = "Closed with: " + result;
-                            }
-                            // this.setClickedRow(null);
-                            console.log('configureProgramModal result: ', _this.closeResult);
-                        }, function (reason) {
-                            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
-                            // this.setClickedRow(null);
-                            console.log('configureProgramModal result: ', _this.closeResult);
-                        });
-                        return [2 /*return*/];
+                        return [2 /*return*/, modalRef.result];
                 }
             });
         });
     };
-    ProgramsMaintenanceModalService.prototype.addProgramAndProfile = function (program, programProfile) {
+    ProgramsMaintenanceModalService.prototype.setupProgramForForm = function (configType, nextId, program) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, pp, error_1;
+            var programForForm, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _b.trys.push([0, 3, , 4]);
-                        _a = this;
-                        return [4 /*yield*/, this.dataApiService.createProgram(program)];
+                        if (configType === 'add' && nextId) {
+                            return [2 /*return*/, new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](nextId, '')];
+                        }
+                        if (!(program && (configType === 'edit' || configType === 'expire'))) return [3 /*break*/, 2];
+                        programForForm = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](program.id, program.name, program.description);
+                        // don't use references from existing program
+                        _a = programForForm;
+                        return [4 /*yield*/, this.findProgramProfiles(program)];
                     case 1:
-                        _a.program = _b.sent();
-                        return [4 /*yield*/, this.dataApiService.createProgramProfile(programProfile)];
-                    case 2:
-                        pp = _b.sent();
-                        this.program.programProfile = [pp];
-                        console.log('addProgramAndProfile:', program, this.program);
-                        return [2 /*return*/, this.program];
-                    case 3:
-                        error_1 = _b.sent();
-                        console.log('addProgramAndProfile error: ', error_1);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        // don't use references from existing program
+                        _a.programProfile = _b.sent();
+                        // but ok for these...
+                        programForForm.programConfiguration = program.programConfiguration;
+                        programForForm.programProfileClientException = program.programProfileClientException;
+                        return [2 /*return*/, programForForm];
+                    case 2: return [2 /*return*/, null];
                 }
             });
         });
     };
     ProgramsMaintenanceModalService.prototype.addProgramProfile = function (programProfile) {
         return __awaiter(this, void 0, void 0, function () {
-            var error_2;
+            var error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1379,8 +2013,8 @@ var ProgramsMaintenanceModalService = (function () {
                         console.log('addProgramProfile:', programProfile, this.programProfiles);
                         return [3 /*break*/, 3];
                     case 2:
-                        error_2 = _a.sent();
-                        console.log('addProgramProfile error: ', error_2);
+                        error_4 = _a.sent();
+                        console.log('addProgramProfile error: ', error_4);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -1389,20 +2023,40 @@ var ProgramsMaintenanceModalService = (function () {
     };
     ProgramsMaintenanceModalService.prototype.addProgram = function (program) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, error_3;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        _a = this;
+                        _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.dataApiService.createProgram(program)];
                     case 1:
-                        _a.program = _b.sent();
-                        console.log('addProgram:', program, this.program);
+                        program = _a.sent();
+                        console.log('addProgram:', program);
                         return [3 /*break*/, 3];
                     case 2:
-                        error_3 = _b.sent();
-                        console.log('addProgram error: ', error_3);
+                        error_5 = _a.sent();
+                        console.log('addProgram error: ', error_5);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProgramsMaintenanceModalService.prototype.getProgramById = function (programId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var program, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.dataApiService.getProgramById(programId)];
+                    case 1:
+                        program = _a.sent();
+                        console.log('getProgramById:', program);
+                        return [2 /*return*/, program];
+                    case 2:
+                        error_6 = _a.sent();
+                        console.log('getProgramById error: ', error_6);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -1411,20 +2065,19 @@ var ProgramsMaintenanceModalService = (function () {
     };
     ProgramsMaintenanceModalService.prototype.updateProgram = function (program) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, error_4;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var updateProgram, error_7;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        _b.trys.push([0, 2, , 3]);
-                        _a = this;
+                        _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.dataApiService.updateProgram(program)];
                     case 1:
-                        _a.program = _b.sent();
-                        console.log('updateProgram:', program, this.program);
-                        return [3 /*break*/, 3];
+                        updateProgram = _a.sent();
+                        console.log('updateProgram:', program);
+                        return [2 /*return*/, updateProgram];
                     case 2:
-                        error_4 = _b.sent();
-                        console.log('updateProgram error: ', error_4);
+                        error_7 = _a.sent();
+                        console.log('updateProgram error: ', error_7);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -1433,19 +2086,19 @@ var ProgramsMaintenanceModalService = (function () {
     };
     ProgramsMaintenanceModalService.prototype.updateProgramProfile = function (programProfile) {
         return __awaiter(this, void 0, void 0, function () {
-            var error_5;
+            var updateProgramProfile, error_8;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.dataApiService.updateProgramProfile(programProfile)];
                     case 1:
-                        _a.sent();
+                        updateProgramProfile = _a.sent();
                         console.log('updateProgramProfile:', programProfile, this.programProfiles);
-                        return [3 /*break*/, 3];
+                        return [2 /*return*/, updateProgramProfile];
                     case 2:
-                        error_5 = _a.sent();
-                        console.log('updateProgramProfile error: ', error_5);
+                        error_8 = _a.sent();
+                        console.log('updateProgramProfile error: ', error_8);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -1454,7 +2107,7 @@ var ProgramsMaintenanceModalService = (function () {
     };
     ProgramsMaintenanceModalService.prototype.getProgramProfiles = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, error_6;
+            var _a, error_9;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -1465,8 +2118,8 @@ var ProgramsMaintenanceModalService = (function () {
                         _a.programProfiles = _b.sent();
                         return [2 /*return*/, this.programProfiles];
                     case 2:
-                        error_6 = _b.sent();
-                        console.log('getPrograms error: ', error_6);
+                        error_9 = _b.sent();
+                        console.log('getPrograms error: ', error_9);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -1483,36 +2136,16 @@ var ProgramsMaintenanceModalService = (function () {
                         return [2 /*return*/, this.programProfiles.filter(function (pp) {
                                 if (typeof (pp.program) === 'number') {
                                     if (pp.program === selectedProgram.id) {
-                                        // pc.program = selectedProgram;
-                                        // if (typeof(pc.communication) === 'number') {
-                                        //   pc.communication = this.findCommunication(<number>pc.communication);
-                                        // }
                                         return true;
                                     }
                                     else {
                                         return false;
                                     }
-                                } // else if (pp.program.id === selectedProgram.id) {
-                                //   if (typeof(pc.communication) === 'number') {
-                                //     pc.communication = this.findCommunication(<number>pc.communication);
-                                //   }
-                                //   return true;
-                                // }
+                                }
                             })];
                 }
             });
         });
-    };
-    ProgramsMaintenanceModalService.prototype.getDismissReason = function (reason) {
-        if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["a" /* ModalDismissReasons */].ESC) {
-            return 'by pressing ESC';
-        }
-        else if (reason === __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["a" /* ModalDismissReasons */].BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        }
-        else {
-            return "with: " + reason;
-        }
     };
     ProgramsMaintenanceModalService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
@@ -1526,15 +2159,54 @@ var ProgramsMaintenanceModalService = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/shared/classes/modal-helpers.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ModalStaticHelper; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalResult; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
+
+var ModalStaticHelper = /** @class */ (function () {
+    function ModalStaticHelper() {
+    }
+    ModalStaticHelper.getDismissReason = function (reason) {
+        if (reason === __WEBPACK_IMPORTED_MODULE_0__ng_bootstrap_ng_bootstrap__["a" /* ModalDismissReasons */].ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === __WEBPACK_IMPORTED_MODULE_0__ng_bootstrap_ng_bootstrap__["a" /* ModalDismissReasons */].BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
+    };
+    return ModalStaticHelper;
+}());
+
+var ModalResult = /** @class */ (function () {
+    function ModalResult() {
+        this.success = false;
+    }
+    return ModalResult;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/shared/model/program-profile.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramProfile; });
-var ProgramProfile = (function () {
-    function ProgramProfile(programId, programProfile) {
+var ProgramProfile = /** @class */ (function () {
+    function ProgramProfile(programId, programProfile, inclId) {
         if (programProfile) {
-            this.program = programId;
+            // this.id = inclId ? programProfile.id : undefined;
+            if (inclId) {
+                this.id = programProfile.id;
+            }
             this.defaultOptIn = programProfile.defaultOptIn;
             this.visibleInUi = programProfile.visibleInUi;
             this.chanEmail = programProfile.chanEmail;
@@ -1543,9 +2215,11 @@ var ProgramProfile = (function () {
             this.chanSecure = programProfile.chanSecure;
             this.chanMail = programProfile.chanMail;
             this.chanMobile = programProfile.chanMobile;
+            this.effective = programProfile.effective;
+            this.expiration = programProfile.expiration;
+            this.program = programId;
         }
         else {
-            this.program = programId;
             this.defaultOptIn = false;
             this.visibleInUi = false;
             this.chanEmail = false;
@@ -1554,48 +2228,13 @@ var ProgramProfile = (function () {
             this.chanSecure = false;
             this.chanMail = false;
             this.chanMobile = false;
+            this.program = programId;
         }
     }
     ProgramProfile.prototype.clone = function () {
-        return new ProgramProfile(this.program, this);
+        return new ProgramProfile(this.program, this, true);
     };
     return ProgramProfile;
-}());
-
-
-
-/***/ }),
-
-/***/ "../../../../../src/app/shared/model/program.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Program; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ProgramConfigAction; });
-// export class Program implements IProgramConfig {
-var Program = (function () {
-    function Program(id, name, description, programProfile, programConfiguration) {
-        if (id === void 0) { id = 0; }
-        if (name === void 0) { name = ''; }
-        var emptyNum = [];
-        this.id = id;
-        this.name = name;
-        this.description = (description) ? description : '';
-        this.programProfile = (programProfile) ? programProfile : [];
-        this.programConfiguration = (programConfiguration) ? programConfiguration : emptyNum;
-    }
-    Program.prototype.clone = function () {
-        return new Program(this.id, this.name, this.description, this.programProfile, this.programConfiguration);
-    };
-    return Program;
-}());
-
-var ProgramConfigAction = (function () {
-    function ProgramConfigAction(id, type) {
-        this.progId = id;
-        this.configType = type;
-    }
-    return ProgramConfigAction;
 }());
 
 

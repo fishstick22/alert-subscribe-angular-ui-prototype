@@ -22,13 +22,13 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__clients_component__["a" /* ClientsComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__clients_component__["a" /* ClientsComponent */]];
-var ClientsRoutingModule = (function () {
+var ClientsRoutingModule = /** @class */ (function () {
     function ClientsRoutingModule() {
     }
     ClientsRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
         })
     ], ClientsRoutingModule);
     return ClientsRoutingModule;
@@ -41,7 +41,7 @@ var ClientsRoutingModule = (function () {
 /***/ "../../../../../src/app/clients/clients.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h4>Manage Clients</h4>\n<app-client-action-table \n  [clients]=\"clients\"\n  [displayClient]=\"displayClient\"\n  [showClientId]=\"true\"\n  [showClientCode]=\"true\"\n  [showClientName]=\"true\"\n  [showStatus]=\"true\"\n  [showAction]=\"true\"\n  (selRowOut)=\"setClickedRow($event)\"\n  (clientConfigAction)=\"configureClient($event)\">\n</app-client-action-table>\n"
+module.exports = "<h4>Manage Clients</h4>\r\n<app-client-action-table \r\n  [clients]=\"clients\"\r\n  [displayClient]=\"displayClient\"\r\n  [showClientId]=\"true\"\r\n  [showClientCode]=\"true\"\r\n  [showClientName]=\"true\"\r\n  [showStatus]=\"true\"\r\n  [showAction]=\"true\"\r\n  (selRowOut)=\"setClickedRow($event)\"\r\n  (clientConfigAction)=\"configureClient($event)\">\r\n</app-client-action-table>\r\n"
 
 /***/ }),
 
@@ -118,7 +118,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientsComponent = (function () {
+var ClientsComponent = /** @class */ (function () {
     function ClientsComponent(dataApiService, clientConfigService) {
         this.dataApiService = dataApiService;
         this.clientConfigService = clientConfigService;
@@ -127,10 +127,11 @@ var ClientsComponent = (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        console.log('ClientComponent ngOnInit...');
-                        return [4 /*yield*/, this.getClients()];
+                    case 0: 
+                    // console.log('ClientComponent ngOnInit...');
+                    return [4 /*yield*/, this.getClients()];
                     case 1:
+                        // console.log('ClientComponent ngOnInit...');
                         _a.sent();
                         return [2 /*return*/];
                 }
@@ -223,7 +224,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // shared
 
-var ClientsModule = (function () {
+var ClientsModule = /** @class */ (function () {
     function ClientsModule() {
     }
     ClientsModule = __decorate([
@@ -253,7 +254,7 @@ var ClientsModule = (function () {
 /***/ "../../../../../src/app/clients/services/client-configurations/client-configurations-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #clientConfigurationForm=\"ngForm\" \n(ngSubmit)=\"saveClientConfiguration()\" >\n\n  <div class=\"modal-header bg-gradient-dark\">\n    <h4 class=\"modal-title text-white\">\n      Configure Communication(s)\n      <small>for ClientId {{client.id}}: {{client.name}}</small>\n    </h4>\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureClientModal.dismiss('Cross click')\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n    \n  <div class=\"modal-body\">\n    <div id=\"configuredClients\">\n      <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\n        <caption></caption>\n        <thead class=\"bg-gradient-dark text-white\">\n          <tr>\n            <th>ID</th>\n            <th>N<small>ame</small></th>\n            <th>E<small>mail</small></th>\n            <th>IVR</th>\n            <th>SMS</th>\n            <th>M<small>ail</small></th>\n            <th>M<small>obile</small></th>\n            <th>M<small>andatory</small></th>\n            <th>E<small>ffective</small></th>\n            <th>E<small>xpiration</small></th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr appDroppable *ngFor=\"let cc of clientConfigurations; let i = index\"\n              [dragOverClass]=\"'drag-target-border'\" [dragHintClass]=\"'drag-hint'\"\n              [dropEnabled]=\"i === lastClientConfigRow && !cc.communication.id\"\n              \n              (onDrop)=\"communicationDrop($event)\"\n              [class.table-info]=\"i == lastClientConfigRow\"> \n            \n            <td>\n              <span *ngIf=\"i !== lastClientConfigRow\" class=\"badge badge-secondary\">{{cc.communication.id}}</span>\n              <span *ngIf=\"i === lastClientConfigRow && !cc.communication.id\">\n                <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \n                    title=\"New Client configuration for {{cc.communication.name}}\"></i></span>\n              <span *ngIf=\"i === lastClientConfigRow && cc.communication.id\" class=\"badge badge-primary\">{{cc.communication.id}}</span>\n            </td>\n            <td width=\"18%\"><span >{{cc.communication.name}}</span></td>\n            <td><app-select-channel-priority \n                  id=\"chanEmailPriority\" name=\"chanEmailPriority\" \n                  [(ngModel)]=\"cc.chanEmailPriority\"\n                  [actualStaticValue]=\"cc.chanEmailPriority\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\n            <td><app-select-channel-priority \n                  id=\"chanIvrPriority\" name=\"chanIvrPriority\" \n                  [(ngModel)]=\"cc.chanIvrPriority\"\n                  [actualStaticValue]=\"cc.chanIvrPriority\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\n            <td><app-select-channel-priority \n                  id=\"chanSmsPriority\" name=\"chanSmsPriority\" \n                  [(ngModel)]=\"cc.chanSmsPriority\"\n                  [actualStaticValue]=\"cc.chanSmsPriority\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>  \n            <td><app-select-channel-priority \n                  id=\"chanMailPriority\" name=\"chanMailPriority\" \n                  [(ngModel)]=\"cc.chanMailPriority\"\n                  [actualStaticValue]=\"cc.chanMailPriority\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \n            <td><app-select-channel-priority \n                  id=\"chanMobilePriority\" name=\"chanMobilePriority\" \n                  [(ngModel)]=\"cc.chanMobilePriority\"\n                  [actualStaticValue]=\"cc.chanMobilePriority\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \n            <td><app-select-channel-mandatory\n                  id=\"chanMandatory\" name=\"chanMandatory\" \n                  [(ngModel)]=\"cc.chanMandatory\"\n                  [actualStaticValue]=\"cc.chanMandatory\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-mandatory></td>\n            <td><app-date-eff-exp\n                  dateType=\"effective\" [commConfig]=\"cc\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\"\n                  (newDateValue)=\"updateDateValue($event, cc, 'effective')\"></app-date-eff-exp></td>\n            <td><app-date-eff-exp\n                  dateType=\"expiration\" [commConfig]=\"cc\"\n                  [lastConfigRow]=\"i === lastClientConfigRow\"\n                  (newDateValue)=\"updateDateValue($event, cc, 'expiration')\"></app-date-eff-exp></td>\n          </tr>\n          <tr *ngIf=\"configureState === 'start' || configureState === 'continue'\">\n            <td>\n              <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \n                (click)=\"addClientConfig()\" title=\"Add New Client Configuration to {{client.name}}\"></i>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div><!--configuredClients-->\n      \n  </div>\n      \n  <div class=\"modal-footer\">\n    <div class=\"w-100\">\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\n      <div class=\"float-right\">\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!clientConfigurationForm.valid\">Save</button>\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureClientModal.close('Close click')\">Cancel</button>\n      </div>\n    </div>\n  </div>\n  \n  <div class=\"modal-footer\">\n    <div id=ActionTable>\n      <app-comm-action-table *ngIf=\"configureState === 'pick' || configureState === 'continue'\"\n        [configureState]=\"configureState\"    \n        [communications]=\"communications\"\n        [displayComm]=\"displayComm\"\n        [supressComm]=\"supressComm\"\n        [displayCommStartEmpty]=\"true\"\n        [displayClient]=\"client.name\"\n        [showCommId]=\"true\"\n        [showCommName]=\"true\"\n        [showCommDesc]=\"true\"\n        [showStatus]=\"false\"\n        [showAction]=\"false\"\n        (selRowOut)=\"setClickedRow($event)\"\n        (selectedCommunication)=\"addClientConfig($event)\"\n        (commConfigAction)=\"configureCommunication($event)\">\n      </app-comm-action-table>\n    </div>\n  </div>\n\n</form>"
+module.exports = "<form #clientConfigurationForm=\"ngForm\" \r\n(ngSubmit)=\"saveClientConfiguration()\" >\r\n\r\n  <div class=\"modal-header bg-gradient-dark\">\r\n    <h4 class=\"modal-title text-white\">\r\n      Configure Communication(s)\r\n      <small>for ClientId {{client.id}}: {{client.name}}</small>\r\n    </h4>\r\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureClientModal.dismiss('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n    \r\n  <div class=\"modal-body\">\r\n    <div id=\"configuredClients\">\r\n      <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n        <caption></caption>\r\n        <thead class=\"bg-gradient-dark text-white\">\r\n          <tr>\r\n            <th>ID</th>\r\n            <th>N<small>ame</small></th>\r\n            <th>E<small>mail</small></th>\r\n            <th>IVR</th>\r\n            <th>SMS</th>\r\n            <th>M<small>ail</small></th>\r\n            <th>M<small>obile</small></th>\r\n            <th>D<small>efault</small></th>\r\n            <th>E<small>ffective</small></th>\r\n            <th>E<small>xpiration</small></th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr appDroppable *ngFor=\"let cc of clientConfigurations; let i = index\"\r\n              [dragOverClass]=\"'drag-target-border'\" [dragHintClass]=\"'drag-hint'\"\r\n              [dropEnabled]=\"i === lastClientConfigRow && !cc.communication.id\"\r\n              \r\n              (onDrop)=\"communicationDrop($event)\"\r\n              [class.table-info]=\"i == lastClientConfigRow\"> \r\n            \r\n            <td>\r\n              <span *ngIf=\"i !== lastClientConfigRow\" class=\"badge badge-secondary\">{{cc.communication.id}}</span>\r\n              <span *ngIf=\"i === lastClientConfigRow && !cc.communication.id\">\r\n                <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \r\n                    title=\"New Client configuration for {{cc.communication.name}}\"></i></span>\r\n              <span *ngIf=\"i === lastClientConfigRow && cc.communication.id\" class=\"badge badge-primary\">{{cc.communication.id}}</span>\r\n            </td>\r\n            <td width=\"18%\"><span >{{cc.communication.name}}</span></td>\r\n            <td><app-select-channel-priority \r\n                  id=\"chanEmailPriority\" name=\"chanEmailPriority\" \r\n                  [(ngModel)]=\"cc.chanEmailPriority\"\r\n                  [actualStaticValue]=\"cc.chanEmailPriority\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\r\n            <td><app-select-channel-priority \r\n                  id=\"chanIvrPriority\" name=\"chanIvrPriority\" \r\n                  [(ngModel)]=\"cc.chanIvrPriority\"\r\n                  [actualStaticValue]=\"cc.chanIvrPriority\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\r\n            <td><app-select-channel-priority \r\n                  id=\"chanSmsPriority\" name=\"chanSmsPriority\" \r\n                  [(ngModel)]=\"cc.chanSmsPriority\"\r\n                  [actualStaticValue]=\"cc.chanSmsPriority\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>  \r\n            <td><app-select-channel-priority \r\n                  id=\"chanMailPriority\" name=\"chanMailPriority\" \r\n                  [(ngModel)]=\"cc.chanMailPriority\"\r\n                  [actualStaticValue]=\"cc.chanMailPriority\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \r\n            <td><app-select-channel-priority \r\n                  id=\"chanMobilePriority\" name=\"chanMobilePriority\" \r\n                  [(ngModel)]=\"cc.chanMobilePriority\"\r\n                  [actualStaticValue]=\"cc.chanMobilePriority\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \r\n            <td><app-select-channel-default\r\n                  id=\"chanDefault\" name=\"chanDefault\" \r\n                  [(ngModel)]=\"cc.chanDefault\"\r\n                  [actualStaticValue]=\"cc.chanDefault\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-default></td>\r\n            <td><app-date-eff-exp\r\n                  dateType=\"effective\" [commConfig]=\"cc\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\"\r\n                  (newDateValue)=\"updateDateValue($event, cc, 'effective')\"></app-date-eff-exp></td>\r\n            <td><app-date-eff-exp\r\n                  dateType=\"expiration\" [commConfig]=\"cc\"\r\n                  [lastConfigRow]=\"i === lastClientConfigRow\"\r\n                  (newDateValue)=\"updateDateValue($event, cc, 'expiration')\"></app-date-eff-exp></td>\r\n          </tr>\r\n          <tr *ngIf=\"configureState === 'start' || configureState === 'continue'\">\r\n            <td>\r\n              <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n                (click)=\"addClientConfig()\" title=\"Add New Client Configuration to {{client.name}}\"></i>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div><!--configuredClients-->\r\n      \r\n  </div>\r\n      \r\n  <div class=\"modal-footer\">\r\n    <div class=\"w-100\">\r\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n      <div class=\"float-right\">\r\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!clientConfigurationForm.valid\">Save</button>\r\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureClientModal.close('Close click')\">Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  \r\n  <div class=\"modal-footer\">\r\n    <div id=ActionTable>\r\n      <app-comm-action-table *ngIf=\"configureState === 'pick' || configureState === 'continue'\"\r\n        [configureState]=\"configureState\"    \r\n        [communications]=\"communications\"\r\n        [displayComm]=\"displayComm\"\r\n        [supressComm]=\"supressComm\"\r\n        [displayCommStartEmpty]=\"true\"\r\n        [displayClient]=\"client.name\"\r\n        [showCommId]=\"true\"\r\n        [showCommName]=\"true\"\r\n        [showCommDesc]=\"true\"\r\n        [showStatus]=\"false\"\r\n        [showAction]=\"false\"\r\n        (selRowOut)=\"setClickedRow($event)\"\r\n        (selectedCommunication)=\"addClientConfig($event)\"\r\n        (commConfigAction)=\"configureCommunication($event)\">\r\n      </app-comm-action-table>\r\n    </div>\r\n  </div>\r\n\r\n</form>"
 
 /***/ }),
 
@@ -279,13 +280,14 @@ module.exports = module.exports.toString();
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfigurationsModalComponent; });
 /* unused harmony export ClientConfigModalResult */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfigurationsModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client__ = __webpack_require__("../../../../../src/app/shared/model/client.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client_configuration__ = __webpack_require__("../../../../../src/app/shared/model/client-configuration.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client__ = __webpack_require__("../../../../../src/app/shared/model/client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_model_client_configuration__ = __webpack_require__("../../../../../src/app/shared/model/client-configuration.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -300,12 +302,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ClientConfigurationsModalComponent = (function () {
+
+var ClientConfigModalResult = /** @class */ (function () {
+    function ClientConfigModalResult() {
+    }
+    return ClientConfigModalResult;
+}());
+
+var ClientConfigurationsModalComponent = /** @class */ (function () {
     function ClientConfigurationsModalComponent(configureClientModal) {
         this.configureClientModal = configureClientModal;
-        this.client = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client__["a" /* Client */](); // just becasue service inits whenever
+        this.client = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client__["a" /* Client */](); // just becasue service inits whenever
         this.clientConfigurations = [];
-        this.SAVESUCCESS = 'Close on succesful save';
         this.clientDropEnabled = false;
         this.today = new Date();
         this.tomorrow = new Date();
@@ -313,8 +321,8 @@ var ClientConfigurationsModalComponent = (function () {
     ClientConfigurationsModalComponent.prototype.ngOnInit = function () {
     };
     ClientConfigurationsModalComponent.prototype.modalInit = function () {
-        console.log('ClientConfigComponent init: ');
-        console.log(this.client);
+        // console.log('ClientConfigComponent init: ');
+        // console.log(this.client);
         // get the list of clients to populate the dropdown (covered in @Input() clients: Client[];)
         // check if there are progConfig already (for now just checking for first one, have to check for eff dates)
         this.displayCommStartEmpty = true;
@@ -334,8 +342,8 @@ var ClientConfigurationsModalComponent = (function () {
             // first time through
             this.lastClientConfigRow = this.clientConfigurations.length;
             if (this.lastClientConfigRow === 0) {
-                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client_configuration__["a" /* ClientConfiguration */]();
-                this.newClientConfig.effective =
+                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_5_app_shared_model_client_configuration__["a" /* ClientConfiguration */]();
+                this.newClientConfig.effective = // TODO shared util method
                     this.tomorrow.getFullYear() + '-' +
                         (this.tomorrow.getMonth() + 1) + '-' +
                         this.tomorrow.getDate();
@@ -343,14 +351,14 @@ var ClientConfigurationsModalComponent = (function () {
             else {
                 // clone setting from previous config row
                 this.prevClientConfig = this.clientConfigurations[this.lastClientConfigRow - 1];
-                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client_configuration__["a" /* ClientConfiguration */](this.prevClientConfig);
+                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_5_app_shared_model_client_configuration__["a" /* ClientConfiguration */](this.prevClientConfig);
                 this.newClientConfig.effective = this.prevClientConfig.effective;
             }
             this.clientConfigurations[this.clientConfigurations.length] = this.newClientConfig;
             this.newClientConfigs[this.newClientConfigs.length] = this.newClientConfig;
-            this.newClientConfig.expiration = '9999-12-31';
+            this.newClientConfig.expiration = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED;
             this.newClientConfig.client = this.client;
-            this.newClientConfig.communication = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__["a" /* Communication */]();
+            this.newClientConfig.communication = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__["a" /* Communication */]();
             this.configureState = 'pick';
             this.clientDropEnabled = true;
         }
@@ -382,7 +390,7 @@ var ClientConfigurationsModalComponent = (function () {
         var modalResult = {
             newClientConfigs: this.newClientConfigs
         };
-        this.configureClientModal.close({ resultTxt: this.SAVESUCCESS, modalResult: modalResult });
+        this.configureClientModal.close({ resultTxt: __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS, modalResult: modalResult });
     };
     ClientConfigurationsModalComponent.prototype.updateDateValue = function (newDateValue, cc, dateType) {
         console.log('ClientConfigComponent updateDateValue: ', newDateValue, cc, dateType);
@@ -399,7 +407,7 @@ var ClientConfigurationsModalComponent = (function () {
     ], ClientConfigurationsModalComponent.prototype, "communications", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client__["a" /* Client */])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client__["a" /* Client */])
     ], ClientConfigurationsModalComponent.prototype, "client", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -417,12 +425,6 @@ var ClientConfigurationsModalComponent = (function () {
     return ClientConfigurationsModalComponent;
 }());
 
-var ClientConfigModalResult = (function () {
-    function ClientConfigModalResult() {
-    }
-    return ClientConfigModalResult;
-}());
-
 
 
 /***/ }),
@@ -434,8 +436,9 @@ var ClientConfigModalResult = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfigurationsModalService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__client_configurations_modal_component__ = __webpack_require__("../../../../../src/app/clients/services/client-configurations/client-configurations-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_configurations_modal_component__ = __webpack_require__("../../../../../src/app/clients/services/client-configurations/client-configurations-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -484,7 +487,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientConfigurationsModalService = (function () {
+
+var ClientConfigurationsModalService = /** @class */ (function () {
     function ClientConfigurationsModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -505,7 +509,7 @@ var ClientConfigurationsModalService = (function () {
                         modalOpts = {
                             size: 'lg'
                         };
-                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_2__client_configurations_modal_component__["a" /* ClientConfigurationsModalComponent */], modalOpts);
+                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_3__client_configurations_modal_component__["a" /* ClientConfigurationsModalComponent */], modalOpts);
                         modalComp = modalRef.componentInstance;
                         _a = modalComp;
                         return [4 /*yield*/, this.getCommunications()];
@@ -518,7 +522,7 @@ var ClientConfigurationsModalService = (function () {
                         _b.clientConfigurations = _c.sent();
                         modalComp.modalInit();
                         modalRef.result.then(function (result) {
-                            if (result.resultTxt === modalComp.SAVESUCCESS) {
+                            if (result.resultTxt === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS) {
                                 console.log('configureClientModal result: ', result.modalResult);
                                 _this.closeResult = "Closed with: " + result.resultTxt;
                                 if (result.modalResult) {
@@ -560,7 +564,8 @@ var ClientConfigurationsModalService = (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getClientConfigurations()];
+                    case 0: // : ClientConfiguration[] {
+                    return [4 /*yield*/, this.getClientConfigurations()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.clientConfigurations.filter(function (pc) {
@@ -663,7 +668,7 @@ var ClientConfigurationsModalService = (function () {
     };
     ClientConfigurationsModalService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__["a" /* DataApiService */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__["a" /* DataApiService */],
             __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["c" /* NgbModal */]])
     ], ClientConfigurationsModalService);
     return ClientConfigurationsModalService;

@@ -22,13 +22,13 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__communications_component__["a" /* CommunicationsComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__communications_component__["a" /* CommunicationsComponent */]];
-var CommunicationsRoutingModule = (function () {
+var CommunicationsRoutingModule = /** @class */ (function () {
     function CommunicationsRoutingModule() {
     }
     CommunicationsRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["J" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
         })
     ], CommunicationsRoutingModule);
     return CommunicationsRoutingModule;
@@ -41,7 +41,7 @@ var CommunicationsRoutingModule = (function () {
 /***/ "../../../../../src/app/communications/communications.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h4>Manage Communications</h4>\n<app-comm-action-table \n  [communications]=\"communications\"\n  [displayComm]=\"displayComm\"\n  [displayCommStartEmpty]=\"false\"\n  [showCommId]=\"true\"\n  [showCommName]=\"true\"\n  [showCommDesc]=\"true\"\n  [showStatus]=\"true\"\n  [showAction]=\"true\"\n  (selRowOut)=\"setClickedRow($event)\"\n  (commConfigAction)=\"configureCommunication($event)\">\n</app-comm-action-table>\n<!-- TODO this can probably get moved into the component -->"
+module.exports = "<h4>Manage Communications</h4>\r\n<app-comm-action-table \r\n  [communications]=\"communications\"\r\n  [displayComm]=\"displayComm\"\r\n  [displayCommStartEmpty]=\"false\"\r\n  [showCommId]=\"true\"\r\n  [showCommName]=\"true\"\r\n  [showCommDesc]=\"true\"\r\n  [showStatus]=\"true\"\r\n  [showAction]=\"true\"\r\n  (selRowOut)=\"setClickedRow($event)\"\r\n  (commConfigAction)=\"configureCommunication($event)\">\r\n</app-comm-action-table>\r\n<!-- TODO this can probably get moved into the component -->"
 
 /***/ }),
 
@@ -120,7 +120,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var CommunicationsComponent = (function () {
+var CommunicationsComponent = /** @class */ (function () {
     function CommunicationsComponent(dataApiService, programConfigurationService, clientConfigsByCommModalService) {
         this.dataApiService = dataApiService;
         this.programConfigurationService = programConfigurationService;
@@ -237,7 +237,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // shared
 
-var CommunicationsModule = (function () {
+var CommunicationsModule = /** @class */ (function () {
     function CommunicationsModule() {
     }
     CommunicationsModule = __decorate([
@@ -272,7 +272,7 @@ var CommunicationsModule = (function () {
 /***/ "../../../../../src/app/communications/services/client-configurations/client-configs-by-comm-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #clientConfigurationByCommunicationForm=\"ngForm\" \r\n(ngSubmit)=\"saveClientConfiguration()\" >\r\n\r\n  <div class=\"modal-header bg-gradient-dark\">\r\n    <h4 class=\"modal-title text-white\">\r\n      Configure Clients(s)\r\n      <small>for CommId {{communication.id}}: {{communication.name}}</small>\r\n    </h4>\r\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureClientModal.dismiss('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n    \r\n  <div class=\"modal-body\">\r\n    <div id=\"configuredClients\">\r\n        <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n            <caption></caption>\r\n            <thead class=\"bg-gradient-dark text-white\">\r\n              <tr>\r\n                <th>ID</th>\r\n                <th>C<small>ode</small></th>\r\n                <th>N<small>ame</small></th>\r\n                <th>E<small>mail</small></th>\r\n                <th>IVR</th>\r\n                <th>SMS</th>\r\n                <th>M<small>ail</small></th>\r\n                <th>M<small>obile</small></th>\r\n                <th>M<small>andatory</small></th>\r\n                <th>E<small>ffective</small></th>\r\n                <th>E<small>xpiration</small></th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr appDroppable *ngFor=\"let cc of clientConfigurations; let i = index\"\r\n                  [dragOverClass]=\"'drag-target-border'\" [dragHintClass]=\"'drag-hint'\"\r\n                  [dropEnabled]=\"i === lastClientConfigRow && !cc.client.id\"\r\n                  \r\n                  (onDrop)=\"clientDrop($event)\"\r\n                  [class.table-info]=\"i == lastClientConfigRow\"> \r\n                \r\n                <td>\r\n                  <span *ngIf=\"i !== lastClientConfigRow\" class=\"badge badge-secondary\">{{cc.client.id}}</span>\r\n                  <span *ngIf=\"i === lastClientConfigRow && !cc.client.id\">\r\n                    <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \r\n                       title=\"New Client configuration for {{communication.name}}\"></i></span>\r\n                  <span *ngIf=\"i === lastClientConfigRow && cc.client.id\" class=\"badge badge-primary\">{{cc.client.id}}</span>\r\n                </td>\r\n                <td><span >{{cc.client.code}}</span></td>\r\n                <td width=\"18%\"><span >{{cc.client.name}}</span></td>\r\n                <td><app-select-channel-priority \r\n                      id=\"chanEmailPriority\" name=\"chanEmailPriority\" \r\n                      [(ngModel)]=\"cc.chanEmailPriority\"\r\n                      [actualStaticValue]=\"cc.chanEmailPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\r\n                <td><app-select-channel-priority \r\n                      id=\"chanIvrPriority\" name=\"chanIvrPriority\" \r\n                      [(ngModel)]=\"cc.chanIvrPriority\"\r\n                      [actualStaticValue]=\"cc.chanIvrPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\r\n                <td><app-select-channel-priority \r\n                      id=\"chanSmsPriority\" name=\"chanSmsPriority\" \r\n                      [(ngModel)]=\"cc.chanSmsPriority\"\r\n                      [actualStaticValue]=\"cc.chanSmsPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>  \r\n                <td><app-select-channel-priority \r\n                      id=\"chanMailPriority\" name=\"chanMailPriority\" \r\n                      [(ngModel)]=\"cc.chanMailPriority\"\r\n                      [actualStaticValue]=\"cc.chanMailPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \r\n                <td><app-select-channel-priority \r\n                      id=\"chanMobilePriority\" name=\"chanMobilePriority\" \r\n                      [(ngModel)]=\"cc.chanMobilePriority\"\r\n                      [actualStaticValue]=\"cc.chanMobilePriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \r\n                <td><app-select-channel-mandatory\r\n                      id=\"chanMandatory\" name=\"chanMandatory\" \r\n                      [(ngModel)]=\"cc.chanMandatory\"\r\n                      [actualStaticValue]=\"cc.chanMandatory\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-mandatory></td>\r\n                <td><app-date-eff-exp\r\n                      dateType=\"effective\" [commConfig]=\"cc\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\"\r\n                      (newDateValue)=\"updateDateValue($event, cc, 'effective')\"></app-date-eff-exp></td>\r\n                <td><app-date-eff-exp\r\n                      dateType=\"expiration\" [commConfig]=\"cc\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\"\r\n                      (newDateValue)=\"updateDateValue($event, cc, 'expiration')\"></app-date-eff-exp></td>\r\n              </tr>\r\n              <tr *ngIf=\"configureState === 'start' || configureState === 'continue'\">\r\n                <td>\r\n                  <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n                    (click)=\"addClientConfig()\" title=\"Add New Client Configuration to {{communication.name}}\"></i>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n    </div><!--configuredClients-->  \r\n  </div>\r\n      \r\n  <div class=\"modal-footer\">\r\n    <div class=\"w-100\">\r\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n      <div class=\"float-right\">\r\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!clientConfigurationByCommunicationForm.valid\">Save</button>\r\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureClientModal.close('Close click')\">Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"modal-footer\">\r\n    <div id=ActionTable>\r\n      <app-client-action-table  *ngIf=\"configureState === 'pick' || configureState === 'continue'\"\r\n        [configureState]=\"configureState\"  \r\n        [clients]=\"clients\"\r\n        [displayClient]=\"displayClient\"\r\n        [supressClient]=\"supressClient\"\r\n        [displayClientStartEmpty]=\"displayClientStartEmpty\"\r\n        [displayCommunication]=\"communication.name\"\r\n        [showClientId]=\"true\"\r\n        [showClientCode]=\"true\"\r\n        [showClientName]=\"true\"\r\n        [showStatus]=\"false\"\r\n        [showAction]=\"false\"\r\n        (selRowOut)=\"setClickedRow($event)\"\r\n        (clientConfigAction)=\"configureClient($event)\"\r\n        (selectedClient)=\"addClientConfig($event)\">\r\n      </app-client-action-table>\r\n    </div>\r\n  </div>\r\n</form> "
+module.exports = "<form #clientConfigurationByCommunicationForm=\"ngForm\" \r\n(ngSubmit)=\"saveClientConfiguration()\" >\r\n\r\n  <div class=\"modal-header bg-gradient-dark\">\r\n    <h4 class=\"modal-title text-white\">\r\n      Configure Clients(s)\r\n      <small>for CommId {{communication.id}}: {{communication.name}}</small>\r\n    </h4>\r\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureClientModal.dismiss('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n    \r\n  <div class=\"modal-body\">\r\n    <div id=\"configuredClients\">\r\n        <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n            <caption></caption>\r\n            <thead class=\"bg-gradient-dark text-white\">\r\n              <tr>\r\n                <th>ID</th>\r\n                <th>C<small>ode</small></th>\r\n                <th>N<small>ame</small></th>\r\n                <th>E<small>mail</small></th>\r\n                <th>IVR</th>\r\n                <th>SMS</th>\r\n                <th>M<small>ail</small></th>\r\n                <th>M<small>obile</small></th>\r\n                <th>D<small>efault</small></th>\r\n                <th>E<small>ffective</small></th>\r\n                <th>E<small>xpiration</small></th>\r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr appDroppable *ngFor=\"let cc of clientConfigurations; let i = index\"\r\n                  [dragOverClass]=\"'drag-target-border'\" [dragHintClass]=\"'drag-hint'\"\r\n                  [dropEnabled]=\"i === lastClientConfigRow && !cc.client.id\"\r\n                  \r\n                  (onDrop)=\"clientDrop($event)\"\r\n                  [class.table-info]=\"i == lastClientConfigRow\"> \r\n                \r\n                <td>\r\n                  <span *ngIf=\"i !== lastClientConfigRow\" class=\"badge badge-secondary\">{{cc.client.id}}</span>\r\n                  <span *ngIf=\"i === lastClientConfigRow && !cc.client.id\">\r\n                    <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \r\n                       title=\"New Client configuration for {{communication.name}}\"></i></span>\r\n                  <span *ngIf=\"i === lastClientConfigRow && cc.client.id\" class=\"badge badge-primary\">{{cc.client.id}}</span>\r\n                </td>\r\n                <td><span >{{cc.client.code}}</span></td>\r\n                <td width=\"18%\"><span >{{cc.client.name}}</span></td>\r\n                <td><app-select-channel-priority \r\n                      id=\"chanEmailPriority\" name=\"chanEmailPriority\" \r\n                      [(ngModel)]=\"cc.chanEmailPriority\"\r\n                      [actualStaticValue]=\"cc.chanEmailPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\r\n                <td><app-select-channel-priority \r\n                      id=\"chanIvrPriority\" name=\"chanIvrPriority\" \r\n                      [(ngModel)]=\"cc.chanIvrPriority\"\r\n                      [actualStaticValue]=\"cc.chanIvrPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>\r\n                <td><app-select-channel-priority \r\n                      id=\"chanSmsPriority\" name=\"chanSmsPriority\" \r\n                      [(ngModel)]=\"cc.chanSmsPriority\"\r\n                      [actualStaticValue]=\"cc.chanSmsPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td>  \r\n                <td><app-select-channel-priority \r\n                      id=\"chanMailPriority\" name=\"chanMailPriority\" \r\n                      [(ngModel)]=\"cc.chanMailPriority\"\r\n                      [actualStaticValue]=\"cc.chanMailPriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \r\n                <td><app-select-channel-priority \r\n                      id=\"chanMobilePriority\" name=\"chanMobilePriority\" \r\n                      [(ngModel)]=\"cc.chanMobilePriority\"\r\n                      [actualStaticValue]=\"cc.chanMobilePriority\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-priority></td> \r\n                <td><app-select-channel-default\r\n                      id=\"chanDefault\" name=\"chanDefault\" \r\n                      [(ngModel)]=\"cc.chanDefault\"\r\n                      [actualStaticValue]=\"cc.chanDefault\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\" ></app-select-channel-default></td>\r\n                <td><app-date-eff-exp\r\n                      dateType=\"effective\" [commConfig]=\"cc\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\"\r\n                      (newDateValue)=\"updateDateValue($event, cc, 'effective')\"></app-date-eff-exp></td>\r\n                <td><app-date-eff-exp\r\n                      dateType=\"expiration\" [commConfig]=\"cc\"\r\n                      [lastConfigRow]=\"i === lastClientConfigRow\"\r\n                      (newDateValue)=\"updateDateValue($event, cc, 'expiration')\"></app-date-eff-exp></td>\r\n              </tr>\r\n              <tr *ngIf=\"configureState === 'start' || configureState === 'continue'\">\r\n                <td>\r\n                  <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n                    (click)=\"addClientConfig()\" title=\"Add New Client Configuration to {{communication.name}}\"></i>\r\n                </td>\r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n    </div><!--configuredClients-->  \r\n  </div>\r\n      \r\n  <div class=\"modal-footer\">\r\n    <div class=\"w-100\">\r\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n      <div class=\"float-right\">\r\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!clientConfigurationByCommunicationForm.valid\">Save</button>\r\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureClientModal.close('Close click')\">Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"modal-footer\">\r\n    <div id=ActionTable>\r\n      <app-client-action-table  *ngIf=\"configureState === 'pick' || configureState === 'continue'\"\r\n        [configureState]=\"configureState\"  \r\n        [clients]=\"clients\"\r\n        [displayClient]=\"displayClient\"\r\n        [supressClient]=\"supressClient\"\r\n        [displayClientStartEmpty]=\"displayClientStartEmpty\"\r\n        [displayCommunication]=\"communication.name\"\r\n        [showClientId]=\"true\"\r\n        [showClientCode]=\"true\"\r\n        [showClientName]=\"true\"\r\n        [showStatus]=\"false\"\r\n        [showAction]=\"false\"\r\n        (selRowOut)=\"setClickedRow($event)\"\r\n        (clientConfigAction)=\"configureClient($event)\"\r\n        (selectedClient)=\"addClientConfig($event)\">\r\n      </app-client-action-table>\r\n    </div>\r\n  </div>\r\n</form> "
 
 /***/ }),
 
@@ -298,13 +298,14 @@ module.exports = module.exports.toString();
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfigsByCommModalComponent; });
 /* unused harmony export ClientConfigModalResult */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfigsByCommModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_client__ = __webpack_require__("../../../../../src/app/shared/model/client.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client_configuration__ = __webpack_require__("../../../../../src/app/shared/model/client-configuration.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client__ = __webpack_require__("../../../../../src/app/shared/model/client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client_configuration__ = __webpack_require__("../../../../../src/app/shared/model/client-configuration.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -319,10 +320,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ClientConfigsByCommModalComponent = (function () {
+
+var ClientConfigModalResult = /** @class */ (function () {
+    function ClientConfigModalResult() {
+    }
+    return ClientConfigModalResult;
+}());
+
+var ClientConfigsByCommModalComponent = /** @class */ (function () {
     function ClientConfigsByCommModalComponent(configureClientModal) {
         this.configureClientModal = configureClientModal;
-        this.SAVESUCCESS = 'Close on succesful save';
         this.clientDropEnabled = false;
         this.today = new Date();
         this.tomorrow = new Date();
@@ -351,8 +358,8 @@ var ClientConfigsByCommModalComponent = (function () {
             // first time through
             this.lastClientConfigRow = this.clientConfigurations.length;
             if (this.lastClientConfigRow === 0) {
-                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client_configuration__["a" /* ClientConfiguration */]();
-                this.newClientConfig.effective =
+                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client_configuration__["a" /* ClientConfiguration */]();
+                this.newClientConfig.effective = // TODO shared util method
                     this.tomorrow.getFullYear() + '-' +
                         (this.tomorrow.getMonth() + 1) + '-' +
                         this.tomorrow.getDate();
@@ -360,14 +367,14 @@ var ClientConfigsByCommModalComponent = (function () {
             else {
                 // clone setting from previous config row
                 this.prevClientConfig = this.clientConfigurations[this.lastClientConfigRow - 1];
-                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client_configuration__["a" /* ClientConfiguration */](this.prevClientConfig);
+                this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client_configuration__["a" /* ClientConfiguration */](this.prevClientConfig);
                 this.newClientConfig.effective = this.prevClientConfig.effective;
             }
             this.clientConfigurations[this.clientConfigurations.length] = this.newClientConfig;
             this.newClientConfigs[this.newClientConfigs.length] = this.newClientConfig;
-            this.newClientConfig.expiration = '9999-12-31';
+            this.newClientConfig.expiration = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED;
             this.newClientConfig.communication = this.communication;
-            this.newClientConfig.client = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_client__["a" /* Client */]();
+            this.newClientConfig.client = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_client__["a" /* Client */]();
             this.configureState = 'pick';
             this.clientDropEnabled = true;
         }
@@ -399,7 +406,7 @@ var ClientConfigsByCommModalComponent = (function () {
         var modalResult = {
             newClientConfigs: this.newClientConfigs
         };
-        this.configureClientModal.close({ resultTxt: this.SAVESUCCESS, modalResult: modalResult });
+        this.configureClientModal.close({ resultTxt: __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS, modalResult: modalResult });
     };
     ClientConfigsByCommModalComponent.prototype.updateDateValue = function (newDateValue, cc, dateType) {
         console.log('ClientConfigComponent updateDateValue: ', newDateValue, cc, dateType);
@@ -412,7 +419,7 @@ var ClientConfigsByCommModalComponent = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_4_app_shared_model_communication__["a" /* Communication */])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_5_app_shared_model_communication__["a" /* Communication */])
     ], ClientConfigsByCommModalComponent.prototype, "communication", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -434,12 +441,6 @@ var ClientConfigsByCommModalComponent = (function () {
     return ClientConfigsByCommModalComponent;
 }());
 
-var ClientConfigModalResult = (function () {
-    function ClientConfigModalResult() {
-    }
-    return ClientConfigModalResult;
-}());
-
 
 
 /***/ }),
@@ -451,8 +452,9 @@ var ClientConfigModalResult = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfigsByCommModalService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__client_configs_by_comm_modal_component__ = __webpack_require__("../../../../../src/app/communications/services/client-configurations/client-configs-by-comm-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_configs_by_comm_modal_component__ = __webpack_require__("../../../../../src/app/communications/services/client-configurations/client-configs-by-comm-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -501,7 +503,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientConfigsByCommModalService = (function () {
+
+var ClientConfigsByCommModalService = /** @class */ (function () {
     function ClientConfigsByCommModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -522,7 +525,7 @@ var ClientConfigsByCommModalService = (function () {
                         modalOpts = {
                             size: 'lg'
                         };
-                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_2__client_configs_by_comm_modal_component__["a" /* ClientConfigsByCommModalComponent */], modalOpts);
+                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_3__client_configs_by_comm_modal_component__["a" /* ClientConfigsByCommModalComponent */], modalOpts);
                         modalComp = modalRef.componentInstance;
                         modalComp.communication = communication;
                         _a = modalComp;
@@ -535,7 +538,7 @@ var ClientConfigsByCommModalService = (function () {
                         _b.clientConfigurations = _c.sent();
                         modalComp.modalInit();
                         modalRef.result.then(function (result) {
-                            if (result.resultTxt === modalComp.SAVESUCCESS) {
+                            if (result.resultTxt === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS) {
                                 console.log('configureClientModal result: ', result.modalResult);
                                 _this.closeResult = "Closed with: " + result.resultTxt;
                                 if (result.modalResult) {
@@ -574,7 +577,8 @@ var ClientConfigsByCommModalService = (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getClientConfigurations()];
+                    case 0: // : ClientConfiguration[] {
+                    return [4 /*yield*/, this.getClientConfigurations()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.clientConfigurations.filter(function (cc) {
@@ -657,7 +661,7 @@ var ClientConfigsByCommModalService = (function () {
     };
     ClientConfigsByCommModalService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__["a" /* DataApiService */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__["a" /* DataApiService */],
             __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["c" /* NgbModal */]])
     ], ClientConfigsByCommModalService);
     return ClientConfigsByCommModalService;
@@ -670,7 +674,7 @@ var ClientConfigsByCommModalService = (function () {
 /***/ "../../../../../src/app/communications/services/program-configurations/prog-configs-by-comm-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #programConfigurationViaCommunicationForm=\"ngForm\" \n(ngSubmit)=\"saveProgramConfiguration()\" >\n\n<div class=\"modal-header bg-gradient-dark\">\n  <h4 class=\"modal-title text-white\">\n    Configure Program <!-- -->\n    <small>for CommId {{communication.id}}: {{communication.name}}</small> \n  </h4>\n  <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureProgramModal.dismiss('Cross click')\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\n    <caption></caption>\n    <thead class=\"bg-gradient-dark text-white\">\n      <tr>\n        <th>ID</th>\n        <th>N<small>ame</small></th>\n        <th>E<small>mail</small></th>\n        <th>IVR</th>\n        <th>SMS</th>\n        <th>M<small>ail</small></th>\n        <th>M<small>obile</small></th>\n        <th>M<small>andatory</small></th>\n        <th>E<small>ffective</small></th>\n        <th>E<small>xpiration</small></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let pc of programConfigurations; let i = index\" \n          [class.table-info]=\"i == lastPgmConfigRow\">\n        <td>\n          <span *ngIf=\"i !== lastPgmConfigRow\" class=\"badge badge-secondary\">{{pc.id}}</span>\n          <span *ngIf=\"i === lastPgmConfigRow\">\n              <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \n                 title=\"New Program configuration for {{communication.name}}\"></i></span></td>\n        <td>\n          <span *ngIf=\"i !== lastPgmConfigRow\">\n            <input type=\"text\" class=\"form-control form-control-sm\" name=\"name\" [(ngModel)]=\"pc.name\" readonly\n                   id=\"pgmConfigName\" aria-describedby=\"pgmConfigNameHelp\" placeholder=\"Enter Program Configuration Name\"></span>\n          <span *ngIf=\"i === lastPgmConfigRow\">\n            <input type=\"text\" class=\"form-control form-control-sm\" name=\"name\" [(ngModel)]=\"pc.name\" required\n                   id=\"pgmConfigName\" aria-describedby=\"pgmConfigNameHelp\" placeholder=\"Enter Program Configuration Name\"></span></td>\n        <td><app-select-channel-priority id=\"chanEmailPriority\" name=\"chanEmailPriority\" \n              [(ngModel)]=\"pc.chanEmailPriority\"\n              [actualStaticValue]=\"pc.chanEmailPriority\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td>\n        <td><app-select-channel-priority id=\"chanIvrPriority\" name=\"chanIvrPriority\" \n              [(ngModel)]=\"pc.chanIvrPriority\"\n              [actualStaticValue]=\"pc.chanIvrPriority\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td>\n        <td><app-select-channel-priority id=\"chanSmsPriority\" name=\"chanSmsPriority\" \n              [(ngModel)]=\"pc.chanSmsPriority\"\n              [actualStaticValue]=\"pc.chanSmsPriority\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td>  \n        <td><app-select-channel-priority id=\"chanMailPriority\" name=\"chanMailPriority\" \n              [(ngModel)]=\"pc.chanMailPriority\"\n              [actualStaticValue]=\"pc.chanMailPriority\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td> \n        <td><app-select-channel-priority id=\"chanMobilePriority\" name=\"chanMobilePriority\" \n              [(ngModel)]=\"pc.chanMobilePriority\"\n              [actualStaticValue]=\"pc.chanMobilePriority\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td> \n        <td><app-select-channel-mandatory id=\"chanMandatory\" name=\"chanMandatory\" \n              [(ngModel)]=\"pc.chanMandatory\"\n              [actualStaticValue]=\"pc.chanMandatory\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-mandatory></td>\n        <td><app-date-eff-exp\n              dateType=\"effective\" [commConfig]=\"pc\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\"\n              (newDateValue)=\"updateDateValue($event, pc, 'effective')\"></app-date-eff-exp></td>\n        <td><app-date-eff-exp\n              dateType=\"expiration\" [commConfig]=\"pc\"\n              [lastConfigRow]=\"i === lastPgmConfigRow\"\n              (newDateValue)=\"updateDateValue($event, pc, 'expiration')\"></app-date-eff-exp></td>\n      </tr>\n    </tbody>\n  </table>\n  <div class=\"form-group\">\n    <label for=\"programName\">Choose Program</label>\n    <select id=\"program\" name=\"program\" [(ngModel)]=\"selectedProgram\" required>\n      <option *ngFor=\"let p of programs\" [ngValue]=\"p.id\">{{p.name}}</option>\n    </select>\n  </div>\n</div>\n<div class=\"modal-footer\">\n  <!-- https://github.com/twbs/bootstrap/issues/24413 -->\n  <!--span class=\"mr-auto\">Some instructional content or condition message goes here: {{newPgmConfig.effective}}</span-->\n  <div class=\"w-100\">\n    <span class=\"float-left\">Some instructional content or condition message goes here:<!-- {{newPgmConfig.effective}}--></span>\n    <div class=\"float-right\">\n        <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programConfigurationViaCommunicationForm.valid\">Save</button>\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureProgramModal.close('Close click')\">Cancel</button>\n    </div>\n  </div>\n  \n</div>\n\n</form>"
+module.exports = "<form #programConfigurationViaCommunicationForm=\"ngForm\" \r\n(ngSubmit)=\"saveProgramConfiguration()\" >\r\n\r\n<div class=\"modal-header bg-gradient-dark\">\r\n  <h4 class=\"modal-title text-white\">\r\n    Configure Program <!-- -->\r\n    <small>for CommId {{communication.id}}: {{communication.name}}</small> \r\n  </h4>\r\n  <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureProgramModal.dismiss('Cross click')\">\r\n    <span aria-hidden=\"true\">&times;</span>\r\n  </button>\r\n</div>\r\n<div class=\"modal-body\">\r\n  <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n    <caption></caption>\r\n    <thead class=\"bg-gradient-dark text-white\">\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>N<small>ame</small></th>\r\n        <th>E<small>mail</small></th>\r\n        <th>IVR</th>\r\n        <th>SMS</th>\r\n        <th>M<small>ail</small></th>\r\n        <th>M<small>obile</small></th>\r\n        <th>D<small>efault</small></th>\r\n        <th>E<small>ffective</small></th>\r\n        <th>E<small>xpiration</small></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let pc of programConfigurations; let i = index\" \r\n          [class.table-info]=\"i == lastPgmConfigRow\">\r\n        <td>\r\n          <span *ngIf=\"i !== lastPgmConfigRow\" class=\"badge badge-secondary\">{{pc.id}}</span>\r\n          <span *ngIf=\"i === lastPgmConfigRow\">\r\n              <i class=\"fa fa-file-o clickable\" aria-hidden=\"true\" \r\n                 title=\"New Program configuration for {{communication.name}}\"></i></span></td>\r\n        <td>\r\n          <span *ngIf=\"i !== lastPgmConfigRow\">\r\n            <input type=\"text\" class=\"form-control form-control-sm\" name=\"name\" [(ngModel)]=\"pc.name\" readonly\r\n                   id=\"pgmConfigName\" aria-describedby=\"pgmConfigNameHelp\" placeholder=\"Enter Program Configuration Name\"></span>\r\n          <span *ngIf=\"i === lastPgmConfigRow\">\r\n            <input type=\"text\" class=\"form-control form-control-sm\" name=\"name\" [(ngModel)]=\"pc.name\" required\r\n                   id=\"pgmConfigName\" aria-describedby=\"pgmConfigNameHelp\" placeholder=\"Enter Program Configuration Name\"></span></td>\r\n        <td><app-select-channel-priority id=\"chanEmailPriority\" name=\"chanEmailPriority\" \r\n              [(ngModel)]=\"pc.chanEmailPriority\"\r\n              [actualStaticValue]=\"pc.chanEmailPriority\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td>\r\n        <td><app-select-channel-priority id=\"chanIvrPriority\" name=\"chanIvrPriority\" \r\n              [(ngModel)]=\"pc.chanIvrPriority\"\r\n              [actualStaticValue]=\"pc.chanIvrPriority\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td>\r\n        <td><app-select-channel-priority id=\"chanSmsPriority\" name=\"chanSmsPriority\" \r\n              [(ngModel)]=\"pc.chanSmsPriority\"\r\n              [actualStaticValue]=\"pc.chanSmsPriority\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td>  \r\n        <td><app-select-channel-priority id=\"chanMailPriority\" name=\"chanMailPriority\" \r\n              [(ngModel)]=\"pc.chanMailPriority\"\r\n              [actualStaticValue]=\"pc.chanMailPriority\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td> \r\n        <td><app-select-channel-priority id=\"chanMobilePriority\" name=\"chanMobilePriority\" \r\n              [(ngModel)]=\"pc.chanMobilePriority\"\r\n              [actualStaticValue]=\"pc.chanMobilePriority\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-priority></td> \r\n        <td><app-select-channel-default id=\"chanDefault\" name=\"chanDefault\" \r\n              [(ngModel)]=\"pc.chanDefault\"\r\n              [actualStaticValue]=\"pc.chanDefault\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\" ></app-select-channel-default></td>\r\n        <td><app-date-eff-exp\r\n              dateType=\"effective\" [commConfig]=\"pc\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\"\r\n              (newDateValue)=\"updateDateValue($event, pc, 'effective')\"></app-date-eff-exp></td>\r\n        <td><app-date-eff-exp\r\n              dateType=\"expiration\" [commConfig]=\"pc\"\r\n              [lastConfigRow]=\"i === lastPgmConfigRow\"\r\n              (newDateValue)=\"updateDateValue($event, pc, 'expiration')\"></app-date-eff-exp></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <div class=\"form-group\">\r\n    <label for=\"programName\">Choose Program</label>\r\n    <select id=\"program\" name=\"program\" [(ngModel)]=\"selectedProgram\" required>\r\n      <option *ngFor=\"let p of programs\" [ngValue]=\"p.id\">{{p.name}}</option>\r\n    </select>\r\n  </div>\r\n</div>\r\n<div class=\"modal-footer\">\r\n  <!-- https://github.com/twbs/bootstrap/issues/24413 -->\r\n  <!--span class=\"mr-auto\">Some instructional content or condition message goes here: {{newPgmConfig.effective}}</span-->\r\n  <div class=\"w-100\">\r\n    <span class=\"float-left\">Some instructional content or condition message goes here:<!-- {{newPgmConfig.effective}}--></span>\r\n    <div class=\"float-right\">\r\n        <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programConfigurationViaCommunicationForm.valid\">Save</button>\r\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureProgramModal.close('Close click')\">Cancel</button>\r\n    </div>\r\n  </div>\r\n  \r\n</div>\r\n\r\n</form>"
 
 /***/ }),
 
@@ -696,12 +700,13 @@ module.exports = module.exports.toString();
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramConfigsByCommModalComponent; });
 /* unused harmony export ProgramConfigModalResult */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramConfigsByCommModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_configuration__ = __webpack_require__("../../../../../src/app/shared/model/program-configuration.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_configuration__ = __webpack_require__("../../../../../src/app/shared/model/program-configuration.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -715,14 +720,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ProgramConfigsByCommModalComponent = (function () {
+
+var ProgramConfigModalResult = /** @class */ (function () {
+    function ProgramConfigModalResult() {
+    }
+    return ProgramConfigModalResult;
+}());
+
+var ProgramConfigsByCommModalComponent = /** @class */ (function () {
     function ProgramConfigsByCommModalComponent(configureProgramModal) {
         this.configureProgramModal = configureProgramModal;
-        this.communication = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__["a" /* Communication */](); // wtf;
-        this.SAVESUCCESS = 'Close on succesful save';
+        this.communication = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__["a" /* Communication */](); // wtf;
     }
     ProgramConfigsByCommModalComponent.prototype.ngOnInit = function () {
-        console.log('ProgramConfigurationsModalComponent ngOnInit: ', this.programs);
+        // console.log('ProgramConfigurationsModalComponent ngOnInit: ', this.programs);
     };
     ProgramConfigsByCommModalComponent.prototype.modalInit = function () {
         console.log('ProgramConfigByCommComponent init: ');
@@ -750,14 +761,14 @@ var ProgramConfigsByCommModalComponent = (function () {
         if (lastPgmConfig) {
             // adding a new row, expiring the previous, copying the previous values
             lastPgmConfig.expiration = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            this.newPgmConfig = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_configuration__["a" /* ProgramConfiguration */](lastPgmConfig);
+            this.newPgmConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_configuration__["a" /* ProgramConfiguration */](lastPgmConfig);
         }
         else {
             // this is a first-time row for this communication, set some defaults
-            this.newPgmConfig = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program_configuration__["a" /* ProgramConfiguration */]();
+            this.newPgmConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_configuration__["a" /* ProgramConfiguration */]();
         }
         this.newPgmConfig.effective = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate();
-        this.newPgmConfig.expiration = '9999-12-31';
+        this.newPgmConfig.expiration = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].UNEXPIRED;
         this.lastPgmConfigRow = this.programConfigurations.length;
         this.programConfigurations[this.programConfigurations.length] = this.newPgmConfig;
     };
@@ -773,7 +784,7 @@ var ProgramConfigsByCommModalComponent = (function () {
             prevProgConfig: this.prevPgmConfig,
             newProgConfig: this.newPgmConfig
         };
-        this.configureProgramModal.close({ resultTxt: this.SAVESUCCESS, modalResult: modalResult });
+        this.configureProgramModal.close({ resultTxt: __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS, modalResult: modalResult });
     };
     ProgramConfigsByCommModalComponent.prototype.updateDateValue = function (newDateValue, pc, dateType) {
         console.log('ProgramConfigByCommComponent updateDateValue: ', newDateValue, pc, dateType);
@@ -786,7 +797,7 @@ var ProgramConfigsByCommModalComponent = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__["a" /* Communication */])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__["a" /* Communication */])
     ], ProgramConfigsByCommModalComponent.prototype, "communication", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -807,12 +818,6 @@ var ProgramConfigsByCommModalComponent = (function () {
     return ProgramConfigsByCommModalComponent;
 }());
 
-var ProgramConfigModalResult = (function () {
-    function ProgramConfigModalResult() {
-    }
-    return ProgramConfigModalResult;
-}());
-
 
 
 /***/ }),
@@ -824,8 +829,9 @@ var ProgramConfigModalResult = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramConfigsByCommModalService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__prog_configs_by_comm_modal_component__ = __webpack_require__("../../../../../src/app/communications/services/program-configurations/prog-configs-by-comm-modal.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__prog_configs_by_comm_modal_component__ = __webpack_require__("../../../../../src/app/communications/services/program-configurations/prog-configs-by-comm-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -874,7 +880,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramConfigsByCommModalService = (function () {
+
+var ProgramConfigsByCommModalService = /** @class */ (function () {
     function ProgramConfigsByCommModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -889,7 +896,7 @@ var ProgramConfigsByCommModalService = (function () {
                         modalOpts = {
                             size: 'lg'
                         };
-                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_2__prog_configs_by_comm_modal_component__["a" /* ProgramConfigsByCommModalComponent */], modalOpts);
+                        modalRef = this.modalService.open(__WEBPACK_IMPORTED_MODULE_3__prog_configs_by_comm_modal_component__["a" /* ProgramConfigsByCommModalComponent */], modalOpts);
                         modalComp = modalRef.componentInstance;
                         // this.programs = await this.getPrograms();
                         // this.programConfigurations = await this.getProgramConfigurations();
@@ -905,7 +912,7 @@ var ProgramConfigsByCommModalService = (function () {
                         _b.programConfigurations = _c.sent();
                         modalComp.modalInit();
                         modalRef.result.then(function (result) {
-                            if (result.resultTxt === modalComp.SAVESUCCESS) {
+                            if (result.resultTxt === __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].SAVESUCCESS) {
                                 console.log('configureProgramModal result: ', result.modalResult);
                                 _this.closeResult = "Closed with: " + result.resultTxt;
                                 if (result.modalResult) {
@@ -968,7 +975,8 @@ var ProgramConfigsByCommModalService = (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.getProgramConfigurations()];
+                    case 0: // : ProgramConfiguration[] {
+                    return [4 /*yield*/, this.getProgramConfigurations()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.programConfigurations.filter(function (pc) {
@@ -1040,7 +1048,7 @@ var ProgramConfigsByCommModalService = (function () {
     };
     ProgramConfigsByCommModalService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_app_shared_services_data_api_service__["a" /* DataApiService */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__["a" /* DataApiService */],
             __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["c" /* NgbModal */]])
     ], ProgramConfigsByCommModalService);
     return ProgramConfigsByCommModalService;
