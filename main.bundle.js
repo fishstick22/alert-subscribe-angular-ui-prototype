@@ -314,7 +314,8 @@ var AUTH_CONFIG = {
     CLIENT_ID: '5dTmLzbTbdfpmJ6Zp5AH9l1ORljfOU2N',
     CLIENT_DOMAIN: 'fishstick22.auth0.com',
     AUDIENCE: 'http://localhost:8080',
-    REDIRECT: 'http://localhost:4200/callback',
+    // REDIRECT: 'http://localhost:4200/callback',
+    REDIRECT: 'https://fishstick22.github.io/alert-subscribe-angular-ui-prototype/callback',
     SCOPE: 'openid profile email'
 };
 
