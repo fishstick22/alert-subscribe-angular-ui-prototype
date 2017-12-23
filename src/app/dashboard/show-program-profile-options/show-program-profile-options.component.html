@@ -1,0 +1,10 @@
+<label for="{{profileProperty}}" class="flex-justify-left rounded"
+    [ngClass]="{'sr-only': profileOptionLabelHidden}">
+    <small>{{profileOptionLabel}}</small></label>
+<!--<select class="form-control form-control-sm flex-justify-right"
+    id="{{profileProperty}}_{{profileProperty.id}}" name="{{profileProperty}}" readonly>
+    <option>{{staticReadonlyOption}}</option>-->
+<input class="form-control form-control-sm flex-justify-right"
+    id="{{profileProperty}}_{{profileProperty.id}}" name="{{profileProperty}}" 
+    title="{{profileOptionTitle}}"
+    value="{{staticReadonlyOption}}" readonly />

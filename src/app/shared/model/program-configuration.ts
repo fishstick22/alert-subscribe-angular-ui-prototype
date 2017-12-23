@@ -12,7 +12,9 @@ export class ProgramConfiguration implements CommunicationConfiguration {
   chanSmsPriority: number;
   chanMailPriority: number;
   chanMobilePriority: number;
-  chanMandatory: 'No' | 'Email' | 'IVR' | 'SMS';
+  chanDefault: 'No' | 'Email' | 'IVR' | 'SMS';
+  required: boolean;
+  mandatory: boolean;
   effective: string;
   expiration: string;
   program: Program;
@@ -28,14 +30,18 @@ export class ProgramConfiguration implements CommunicationConfiguration {
       this.chanSmsPriority    = programConfig.chanSmsPriority;
       this.chanMailPriority   = programConfig.chanMailPriority;
       this.chanMobilePriority = programConfig.chanMobilePriority;
-      this.chanMandatory      = programConfig.chanMandatory;
+      this.chanDefault        = programConfig.chanDefault;
+      this.required           = programConfig.required;
+      this.mandatory          = programConfig.mandatory;
     } else {
       this.chanEmailPriority  = 0;
       this.chanIvrPriority    = 0;
       this.chanSmsPriority    = 0;
       this.chanMailPriority   = 0;
       this.chanMobilePriority = 0;
-      this.chanMandatory      = 'No';
+      this.chanDefault        = 'No';
+      this.required           = false;
+      this.mandatory          = false;
     }
   }
 

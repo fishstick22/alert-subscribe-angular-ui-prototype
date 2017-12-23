@@ -23,12 +23,17 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService  } from 'app/shared/services/in-memory-data.service';
 import { environment          } from 'environments/environment';
 
+// Services -- only DataApiService is scoped globally from AppModule,
+// DataApiService acts as facade from the numerous API services and when new one is added
+// only new methods in DataApiService are needed to limit changes in feature components
 // import { DataApiService } from './services/data-api.service';
 import { ClientConfigurationsService  } from './services/client-configurations/client-configurations.service';
 import { ClientsService               } from './services/clients/clients.service';
 import { CommunicationsService        } from './services/communications/communications.service';
 import { ProgramConfigurationsService } from './services/program-configurations/program-configurations.service';
 import { ProgramProfilesService       } from './services/program-profiles/program-profiles.service';
+import { ProgramProfileClientExceptionsService
+                                      } from './services/program-profile-client-exceptions/program-profile-client-exceptions.service';
 import { ProgramsService              } from './services/programs/programs.service';
 
 // testing within shared module
@@ -42,7 +47,7 @@ import { CommActionsPopoverComponent     } from './components/comm-actions-popov
 import { CommActionTableComponent        } from './components/comm-action-table/comm-action-table.component';
 import { DateEffExpComponent             } from './components/date-eff-exp/date-eff-exp.component';
 import { DatePickerPopupComponent        } from './components/date-picker-popup/date-picker-popup.component';
-import { SelectChannelMandatoryComponent } from './components/select-channel-mandatory/select-channel-mandatory.component';
+import { SelectChannelDefaultComponent   } from './components/select-channel-default/select-channel-default.component';
 import { SelectChannelPriorityComponent  } from './components/select-channel-priority/select-channel-priority.component';
 import { SelectProfileOptionComponent    } from './components/select-profile-option/select-profile-option.component';
 import { SortableColumnComponent         } from './components/sortable-column/sortable-column.component';
@@ -71,7 +76,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     CommActionTableComponent,
     DateEffExpComponent,
     DatePickerPopupComponent,
-    SelectChannelMandatoryComponent,
+    SelectChannelDefaultComponent,
     SelectChannelPriorityComponent,
     SelectProfileOptionComponent,
     SortableColumnComponent,
@@ -82,7 +87,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     ClickOutsideDirective,
     DraggableDirective,
     DroppableDirective,
-    SortableTableDirective,
+    SortableTableDirective
   ],
   providers: [
     HttpClientModule,
@@ -92,7 +97,8 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     CommunicationsService,
     ProgramConfigurationsService,
     ProgramProfilesService,
-    ProgramsService
+    ProgramsService,
+    ProgramProfileClientExceptionsService
   ],
   exports: [
     CommonModule,
@@ -105,7 +111,7 @@ import { SortableTableDirective } from './directives/sortable-table.directive';
     CommActionTableComponent,
     DateEffExpComponent,
     DatePickerPopupComponent,
-    SelectChannelMandatoryComponent,
+    SelectChannelDefaultComponent,
     SelectChannelPriorityComponent,
     SelectProfileOptionComponent,
     // directives

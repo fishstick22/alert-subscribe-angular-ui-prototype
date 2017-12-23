@@ -10,10 +10,10 @@
     [excludeBeforeClick]="excludeBeforeClick">
 
     <div class="float-left inner-popover">
-        <span class="badge badge-success clickable"
-             (click)="configure(clientId, 'communications'); p.close();"
-              title="Configure Communications for  {{clientId}}: {{clientName}} ">
-          Communications</span></div>
+      <span class="badge badge-info clickable"
+            (click)="configure(clientId, 'communications'); p.close();"
+            title="Configure Communications for  {{clientId}}: {{clientName}} ">
+        Configure<br/>Communications</span></div>
   </div>
 </ng-template>
 <div [ngbPopover]="popContent"

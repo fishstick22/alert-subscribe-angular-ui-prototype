@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
          ClientConfiguration,
@@ -18,6 +20,7 @@ const communication = helper.getTestCommunication();
 const programConfig: ProgramConfiguration  = helper.getTestProgramConfiguration();
 export const PROGCONFIGS: ProgramConfiguration[] = [programConfig];
 
+@Injectable()
 export class FakeProgramConfigurationsService extends ProgramConfigurationsService {
 
   programConfigs = PROGCONFIGS.map(pc => pc.clone());

@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
          ClientConfiguration,
@@ -18,6 +20,7 @@ const helper = new ModelTestingHelper();
 const programProfile: ProgramProfile  = helper.getTestProgramProfile();
 export const PROGPROFILES: ProgramProfile[] = [programProfile];
 
+@Injectable()
 export class FakeProgramProfilesService extends ProgramProfilesService {
 
   programProfiles = PROGPROFILES.map(pp => pp.clone());

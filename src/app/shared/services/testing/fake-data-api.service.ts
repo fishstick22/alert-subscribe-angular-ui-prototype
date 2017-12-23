@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+
+import { APP_CONFIG, IAppConfig } from 'app/app.config';
 
 import { ModelTestingHelper,
          Client, TEST_CLIENT,
@@ -7,7 +9,8 @@ import { ModelTestingHelper,
          CommunicationConfiguration,
          Program, TEST_PROGRAM,
          ProgramConfiguration,
-         ProgramProfile } from 'app/shared/model/testing/model-testing-helper';
+         ProgramProfile,
+         ProgramProfileClientException } from 'app/shared/model/testing/model-testing-helper';
 
 import { FakeClientsService,
          ClientsService               } from './fake-clients.service';
@@ -22,6 +25,10 @@ import { FakeProgramConfigurationsService,
 import { FakeProgramProfilesService,
          ProgramProfilesService       } from './fake-program-profiles.service';
 
+import { FakeProgramProfileClientExceptionsService,
+          ProgramProfileClientExceptionsService
+                                      } from './fake-program-profile-client-exceptions.service';
+
 import { DataApiService               } from 'app/shared/services/data-api.service';
 
 // re-export for tester convenience
@@ -31,31 +38,49 @@ export * from './fake-program-profiles.service';
 export * from './fake-program-configurations.service';
 export * from './fake-clients.service';
 export * from './fake-client-configurations.service';
+export * from './fake-program-profile-client-exceptions.service';
 
 export { DataApiService } from 'app/shared/services/data-api.service';
 
 @Injectable()
 export class FakeDataApiService extends DataApiService {
 
+  config: IAppConfig;
   communications: Communication[];
-  // private communicationService = new FakeCommunicationsService();
+  clients: Client[];
+  clientConfigurations: ClientConfiguration[];
+  programs: Program[];
+  programConfigurations: ProgramConfiguration[];
+  programProfiles: ProgramProfile[];
+  programProfileClientExceptions: ProgramProfileClientException[];
 
-  constructor(
+  constructor(@Inject(APP_CONFIG) config: IAppConfig,
     communicationsService: FakeCommunicationsService,
-    clientsService: ClientsService,
-    clientConfigurationsService: ClientConfigurationsService,
+    clientsService: FakeClientsService,
+    clientConfigurationsService: FakeClientConfigurationsService,
     programsService: FakeProgramsService,
     programProfilesService: FakeProgramProfilesService,
-    programConfigurationsService: FakeProgramConfigurationsService
+    programConfigurationsService: FakeProgramConfigurationsService,
+    programProfileClientExceptionsService: FakeProgramProfileClientExceptionsService
   ) {
-    super(
+    super(config,
       communicationsService,
       clientsService,
       clientConfigurationsService,
       programsService,
       programProfilesService,
-      programConfigurationsService
+      programConfigurationsService,
+      programProfileClientExceptionsService
     );
+  }
+
+  public async getClients(): Promise<Client[]> {
+    if (this.clients) {
+      return this.clients;
+    } else {
+      this.clients = await this.clientsService.getClientsThruApi();
+      return this.clients;
+    }
   }
 
   public async getCommunications(): Promise<Communication[]> {
@@ -64,7 +89,6 @@ export class FakeDataApiService extends DataApiService {
     } else {
       this.communications = await this.communicationsService.getCommunicationsThruApi();
       return this.communications;
-      // return this.removeProgramConfigurationCruft(this.communications);
     }
   }
 

@@ -6,6 +6,10 @@ import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 //
+export class ProgramConfigModalResult {
+  newProgramConfigs: ProgramConfiguration[];
+}
+
 @Component({
   selector: 'app-program-configurations-modal',
   templateUrl: './program-configurations-modal.component.html',
@@ -140,8 +144,4 @@ export class ProgramConfigurationsModalComponent implements OnInit {
       pc.expiration = newDateValue;
     }
   }
-}
-
-export class ProgramConfigModalResult {
-  newProgramConfigs: ProgramConfiguration[];
 }

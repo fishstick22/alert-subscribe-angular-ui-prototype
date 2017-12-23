@@ -27,6 +27,16 @@ export class ProgramProfilesService {
     }
   }
 
+  async getProgramProfileByIdThruApi(programProfileId: number): Promise<ProgramProfile> {
+    const url = `${this.progProfileApiEndpoint}/${programProfileId}`;
+    try {
+      const response = await this.http.get(url).toPromise();
+      return response as ProgramProfile;
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
   async createProgramProfileThruApi(programProfile: ProgramProfile): Promise<ProgramProfile> {
     try {
       const response = await this.http.post(

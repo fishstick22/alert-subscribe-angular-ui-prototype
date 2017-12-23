@@ -10,15 +10,15 @@
     [excludeBeforeClick]="excludeBeforeClick">
 
     <div class="float-left inner-popover">
-        <span class="badge badge-success clickable"
-             (click)="configure(commId, 'program'); p.close();"
-              title="Configure Program for CommId {{commId}}: {{commName}} ">
-          Program</span></div>
+      <span class="badge badge-info clickable"
+            (click)="configure(commId, 'program'); p.close();"
+            title="Configure Program for CommId {{commId}}: {{commName}} ">
+        Configure<br/>Program</span></div>
     <div class="float-right inner-popover">
-        <span class="badge badge-success clickable"
-             (click)="configure(commId, 'clients'); p.close();"
-              title="Configure Client(s) for CommId {{commId}}: {{commName}} ">
-          Clients</span>
+      <span class="badge badge-info clickable"
+            (click)="configure(commId, 'clients'); p.close();"
+            title="Configure Client(s) for CommId {{commId}}: {{commName}} ">
+        Configure<br/>Clients</span>
       </div>
   </div>
 </ng-template>

@@ -11,7 +11,9 @@ export class ClientConfiguration implements CommunicationConfiguration {
   chanSmsPriority: number;
   chanMailPriority: number;
   chanMobilePriority: number;
-  chanMandatory: 'No' | 'Email' | 'IVR' | 'SMS';
+  chanDefault: 'No' | 'Email' | 'IVR' | 'SMS';
+  required: boolean;
+  mandatory: boolean;
   effective: string;
   expiration: string;
   client: Client;
@@ -26,14 +28,18 @@ export class ClientConfiguration implements CommunicationConfiguration {
       this.chanSmsPriority    = clientConfig.chanSmsPriority;
       this.chanMailPriority   = clientConfig.chanMailPriority;
       this.chanMobilePriority = clientConfig.chanMobilePriority;
-      this.chanMandatory      = clientConfig.chanMandatory;
+      this.chanDefault        = clientConfig.chanDefault;
+      this.required           = clientConfig.required;
+      this.mandatory          = clientConfig.mandatory;
     } else {
       this.chanEmailPriority  = 0;
       this.chanIvrPriority    = 0;
       this.chanSmsPriority    = 0;
       this.chanMailPriority   = 0;
       this.chanMobilePriority = 0;
-      this.chanMandatory      = 'No';
+      this.chanDefault        = 'No';
+      this.required           = false;
+      this.mandatory          = false;
     }
   }
 

@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
-import { ClientsService               } from 'app/shared/services/clients/clients.service';
-import { ClientConfigurationsService  } from 'app/shared/services/client-configurations/client-configurations.service';
-import { CommunicationsService        } from 'app/shared/services/communications/communications.service';
-import { ProgramsService              } from 'app/shared/services/programs/programs.service';
-import { ProgramProfilesService       } from 'app/shared/services/program-profiles/program-profiles.service';
-import { ProgramConfigurationsService } from 'app/shared/services/program-configurations/program-configurations.service';
+import { APP_CONFIG, IAppConfig } from 'app/app.config';
+
+import { ClientsService               } from './clients/clients.service';
+import { ClientConfigurationsService  } from './client-configurations/client-configurations.service';
+import { CommunicationsService        } from './communications/communications.service';
+import { ProgramsService              } from './programs/programs.service';
+import { ProgramProfilesService       } from './program-profiles/program-profiles.service';
+import { ProgramConfigurationsService } from './program-configurations/program-configurations.service';
+import { ProgramProfileClientExceptionsService
+                                      } from './program-profile-client-exceptions/program-profile-client-exceptions.service';
 
 // import { IProgramConfig } from 'app/classes/model/iprog-config';
 
@@ -15,6 +19,8 @@ import { Communication        } from 'app/shared/model/communication';
 import { Program              } from 'app/shared/model/program';
 import { ProgramProfile       } from 'app/shared/model/program-profile';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
+import { ProgramProfileClientException
+                              } from 'app/shared/model/program-profile-client-exception';
 
 @Injectable()
 export class DataApiService {
@@ -34,14 +40,16 @@ export class DataApiService {
   programs: Program[];
   programConfigurations: ProgramConfiguration[];
   programProfiles: ProgramProfile[];
+  programProfileClientExceptions: ProgramProfileClientException[];
 
-  constructor(
+  constructor(@Inject(APP_CONFIG) protected config: IAppConfig,
     protected communicationsService: CommunicationsService,
     protected clientsService: ClientsService,
     protected clientConfigurationsService: ClientConfigurationsService,
     protected programsService: ProgramsService,
-    protected programProfileService: ProgramProfilesService,
-    protected programConfigurationService: ProgramConfigurationsService
+    protected programProfilesService: ProgramProfilesService,
+    protected programConfigurationService: ProgramConfigurationsService,
+    protected programProfileClientExceptionsService: ProgramProfileClientExceptionsService
   ) { }
 
   public async getCommunications(): Promise<Communication[]> {
@@ -85,9 +93,11 @@ export class DataApiService {
   }
 
   public async getPrograms(): Promise<Program[]> {
-    if (this.programs) {
+    if (this.config.cachePrograms && this.programs) {
+      console.log('getPrograms', this.config.cachePrograms);
       return this.programs;
     } else {
+      console.log('getPrograms', this.config.cachePrograms);
       this.programs = await this.programsService.getProgramsThruApi();
       return this.programs;
       // return this.removeProgramConfigurationCruft(this.programs);
@@ -105,9 +115,19 @@ export class DataApiService {
 
   }
 
-  public async updateProgram(program: Program): Promise<Program> {
-    await this.programsService.updateProgramThruApi(program);
+  public async getProgramById(programId: number): Promise<Program> {
+    const program: Program = await this.programsService.getProgramByIdThruApi(programId);
     return program;
+  }
+
+  public async updateProgram(program: Program): Promise<Program> {
+    const updateProgram = await this.programsService.updateProgramThruApi(program);
+    console.log('DataApiService updateProgram:', updateProgram);
+    // in-memory-web-api returning null even tough update works?
+    if (updateProgram) {
+      return updateProgram;
+    }
+    return this.getProgramById(program.id);
   }
 
   // public async deleteProgram(program: Program): Promise<Program> {
@@ -139,23 +159,63 @@ export class DataApiService {
 
   //
   public async getProgramProfiles(): Promise<ProgramProfile[]> {
-    if (this.programProfiles) {
+    if (this.config.cacheProgramProfiles && this.programProfiles) {
+      console.log('getProgramProfiles', this.config.cacheProgramProfiles);
       return this.programProfiles;
     } else {
-      this.programProfiles = await this.programProfileService.getProgramProfilesThruApi();
+      console.log('getProgramProfiles', this.config.cacheProgramProfiles);
+      this.programProfiles = await this.programProfilesService.getProgramProfilesThruApi();
       return this.programProfiles;
     }
   }
 
   public async createProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
-    programProfile = await this.programProfileService.createProgramProfileThruApi(programProfile);
-    this.insertProgramProfile(programProfile);
+    const newProgramProfile = await this.programProfilesService.createProgramProfileThruApi(programProfile);
+    this.insertProgramProfile(newProgramProfile);
+    return newProgramProfile;
+  }
+
+  public async getProgramProfileById(programProfileId: number): Promise<ProgramProfile> {
+    const programProfile: ProgramProfile = await this.programProfilesService.getProgramProfileByIdThruApi(programProfileId);
     return programProfile;
   }
 
   public async updateProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
-    programProfile = await this.programProfileService.updateProgramProfileThruApi(programProfile);
-    return programProfile;
+    const updateProgramProfile = await this.programProfilesService.updateProgramProfileThruApi(programProfile);
+    // in-memory-web-api returning null even tough update works?
+    if (updateProgramProfile) {
+      return updateProgramProfile;
+    }
+    return this.getProgramProfileById(programProfile.id);
+  }
+
+  //
+  public async getProgramProfileClientExceptions(): Promise<ProgramProfileClientException[]> {
+    if (this.programProfileClientExceptions) {
+      return this.programProfileClientExceptions;
+    } else {
+      this.programProfileClientExceptions = await this.programProfileClientExceptionsService.getProgramProfileClientExceptionsThruApi();
+      return this.programProfileClientExceptions;
+    }
+  }
+
+  public async createProgramProfileClientException(
+    programProfileClientException: ProgramProfileClientException
+  ): Promise<ProgramProfileClientException> {
+
+    programProfileClientException =
+      await this.programProfileClientExceptionsService.createProgramProfileClientExceptionThruApi(programProfileClientException);
+    this.insertProgramProfileClientException(programProfileClientException);
+    return programProfileClientException;
+  }
+
+  public async updateProgramProfileClientException(
+    programProfileClientException: ProgramProfileClientException
+  ): Promise<ProgramProfileClientException> {
+
+    programProfileClientException =
+      await this.programProfileClientExceptionsService.updateProgramProfileClientExceptionThruApi(programProfileClientException);
+    return programProfileClientException;
   }
   /*
   */
@@ -205,5 +265,8 @@ export class DataApiService {
 
   protected insertProgramProfile(programProfile: ProgramProfile): void {
     this.programProfiles.push(programProfile);
+  }
+  protected insertProgramProfileClientException(programProfileClientException: ProgramProfileClientException): void {
+    this.programProfileClientExceptions.push(programProfileClientException);
   }
 }

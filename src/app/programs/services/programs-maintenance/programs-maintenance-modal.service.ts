@@ -11,125 +11,160 @@ import { ProgramProfile } from 'app/shared/model/program-profile';
 import { ProgramsMaintenanceModalComponent,
          ProgramsMaintModalResult } from './programs-maintenance-modal.component';
 import { DataApiService } from 'app/shared/services/data-api.service';
+import { ModalStaticHelper, ModalResult } from 'app/shared/classes/modal-helpers';
+
+export { ProgramsMaintModalResult } from './programs-maintenance-modal.component';
 
 @Injectable()
 export class ProgramsMaintenanceModalService {
 
-  program: Program;
   programProfiles: ProgramProfile[];
   closeResult: string;
 
   constructor(
     private dataApiService: DataApiService,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
-  async maintainProgramModal(configType, nextId?: number, program?: Program) {
+  async maintainProgram(configType, nextId?: number, program?: Program): Promise<ModalResult> {
+    const modalResult = new ModalResult();
+
+    const promise = new Promise<ModalResult>((resolve, reject) => {
+      this.maintainProgramModal(configType, nextId, program)
+      .then( async (result) => { // hmm, mixed syntax
+        if (result.resultTxt === AppConstants.SAVESUCCESS) {
+          try {
+            if (program && program.status) {
+              program.detectChanges = 'saving';
+              program.status.update(program);
+            }
+            modalResult.modalOutput = await this.fulfillProgramMaintenance(result, configType);
+            modalResult.success = true;
+          } catch (error) {
+            // TODO part of larger error handling effort
+          }
+
+          modalResult.closeResult = `Closed with: ${result.resultTxt}`;
+        } else {
+          modalResult.closeResult = `Closed with: ${result}`;
+        }
+        console.log('maintainProgram', modalResult);
+        resolve(modalResult);
+      }, (reason) => {
+        modalResult.closeResult = `Dismissed ${ModalStaticHelper.getDismissReason(reason)}`;
+        reject(modalResult);
+      }).catch((error) => {
+        console.log('maintainProgram', error);
+        reject(error);
+      });
+    });
+
+    return promise;
+  }
+
+  private async fulfillProgramMaintenance(result, configType): Promise<ProgramsMaintModalResult> {
+    const modalResult: ProgramsMaintModalResult = result.modalResult;
+    if (configType === 'add' && modalResult.insertProgram) {
+      const newProgram = await this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
+      console.log('fulfillProgramMaintenance add', newProgram);
+      modalResult.resultProgram = newProgram;
+    }
+    if (configType === 'edit' && modalResult.updateProgram) {
+      if (modalResult.updateProgramProfile || modalResult.insertProgramProfile) {
+        // means a new profile was added (prev one expired)
+        modalResult.resultProgram =
+          await this.updateProgramAndProfiles(
+            modalResult.updateProgram,
+            modalResult.updateProgramProfile,
+            modalResult.insertProgramProfile);
+      } else {
+        modalResult.resultProgram = await this.updateProgram(modalResult.updateProgram);
+      }
+    }
+    if (configType === 'expire' && modalResult.updateProgram) {
+      modalResult.resultProgram =
+        await this.updateProgramAndProfiles(
+          modalResult.updateProgram,
+          modalResult.updateProgramProfile);
+    }
+    return modalResult;
+  }
+
+  private async addProgramAndProfile(program: Program, programProfile: ProgramProfile): Promise<Program> {
+    // have to single thread these so they are done in the right order
+    try {
+      program = await this.dataApiService.createProgram(program);
+      const pp = await this.dataApiService.createProgramProfile(programProfile);
+      await (program.programProfile = [pp]);
+      console.log('addProgramAndProfile:', program);
+      return program;
+    } catch (error) {
+      console.log('addProgramAndProfile error: ', error);
+    }
+  }
+
+  private async updateProgramAndProfiles(
+    updateProgram: Program,
+    updateProgramProfile?: ProgramProfile,
+    insertProgramProfile?: ProgramProfile): Promise<Program> {
+    // have to single thread these so they are done in the right order
+    try {
+      if (updateProgramProfile) {
+        await this.dataApiService.updateProgramProfile(updateProgramProfile)
+          .then(ppu => {
+            for (let i = 0; i < updateProgram.programProfile.length; i++) {
+              if (updateProgram.programProfile[i].id === ppu.id) {
+                  updateProgram.programProfile[i] = ppu;
+              }
+            }
+          });
+      }
+      if (insertProgramProfile) {
+        const ppc: ProgramProfile = await this.dataApiService.createProgramProfile(insertProgramProfile);
+        updateProgram.programProfile.push(ppc);
+      }
+      const pu = await this.dataApiService.updateProgram(updateProgram);
+      console.log('addProgramAndProfile:', updateProgram);
+      return updateProgram;
+    } catch (error) {
+      console.log('addProgramAndProfile error: ', error);
+    }
+  }
+
+  private async maintainProgramModal(configType, nextId?: number, program?: Program): Promise<any> {
+
     const modalOpts: NgbModalOptions = {
       size: 'lg'
     };
     const modalRef = this.modalService.open(ProgramsMaintenanceModalComponent, modalOpts);
     const modalComp: ProgramsMaintenanceModalComponent  = modalRef.componentInstance;
 
+    // initialize all the @Inputs to the component
     modalComp.configType = configType;
+    modalComp.program = (program) ? new Program(program.id, program.name) : new Program(); // shallow copy just to display
+    modalComp.programForForm = await this.setupProgramForForm(configType, nextId, program);
 
-    if (configType === 'add' && nextId) {
-      modalComp.program = new Program(nextId, '');
-    }
-    if (configType === 'edit' || configType === 'expire') {
-      modalComp.program = program;
-      if (!program.programProfile || program.programProfile.length === 0) {
-        // hey, it could happen!
-        program.programProfile = await this.findProgramProfiles(program);
-        console.log(program);
-        if (program.programProfile.length === 0) {
-          // but if it still doesn't have one (shouldn't happen)
-          program.programProfile = [new ProgramProfile(program.id)];
-          program.programProfile[0].expiration = AppConstants.UNEXPIRED;
-        }
-      }
-      if (program.status) {
-        program.status.statusText = configType;
-      }
-    }
-
+    // OnInit has likely fired previously, invoke some initialization code
     modalComp.modalInit();
 
-    // so up until now using @JsonIdentityReference(alwaysAsId = true) on related entites in the JPA
-    // so the json coming back doesn't have full related objects, just id references
-    // but with Program/ProgramProfile didn't so code is dealing with responses that include the Profile
-    // and the requests back to store can be Program with Profile inside
-    // or, separate requests for the Profiles
-    // but not both -- have to decide to stick with the original approach, which works fine for
-    // everything else, or do this differently by saving the Program entirely which
-    // then can include additions and updates to Profile related entities
-    modalRef.result.then( async (result) => {
-      if (result.resultTxt === AppConstants.SAVESUCCESS) {
-        console.log('configureProgramModal result: ', result.modalResult);
-        this.closeResult = `Closed with: ${result.resultTxt}`;
-        if (result.modalResult) {
-          const modalResult: ProgramsMaintModalResult = result.modalResult;
-          // if (modalResult.updateProgramProfile) {
-          //   this.updateProgramProfile(modalResult.updateProgramProfile);
-          // }
-          // if (modalResult.insertProgramProfile) {
-          //   this.addProgramProfile(modalResult.insertProgramProfile);
-          // }
-          if (configType === 'add' && modalResult.insertProgram) {
-            // except for a new add, the Profile creates an unresolved forward reference
-            // the Program must be saved first, then the Profile will reference a valid entity
-            // this.addProgram(modalResult.insertProgram);
-            // this.addProgramProfile(modalResult.insertProgramProfile);
-            const newProgram = await this.addProgramAndProfile(modalResult.insertProgram, modalResult.insertProgramProfile);
-            if (newProgram.status && newProgram.status.statusText === 'undetermined') {
-              newProgram.detectChanges = 'added';
-              newProgram.status.update(newProgram);
-            } else {
-              newProgram.status = new ProgramStatus(this.program);
-              newProgram.detectChanges = newProgram.status.statusText;
-            }
-          }
-          if (configType === 'edit' && modalResult.updateProgram) {
-            const editProgram = await this.updateProgram(modalResult.updateProgram);
-            editProgram.detectChanges = 'edited';
-            editProgram.status.update(editProgram);
-          }
-          if (configType === 'expire' && modalResult.updateProgram) {
-            const expireProgram = await this.updateProgram(modalResult.updateProgram);
-            expireProgram.detectChanges = 'expired';
-            expireProgram.status.update(expireProgram);
-          }
-          // return configType;
-        } else {
-          // this would be some kind of exception
-          console.log('CommunicationComponent configureProgramModal bad result: ', result.modalResult);
-        }
-        return AppConstants.SAVESUCCESS;
-      } else {
-        this.closeResult = `Closed with: ${result}`;
-      }
-      // this.setClickedRow(null);
-      console.log('configureProgramModal result: ', this.closeResult);
-      return this.closeResult;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      // this.setClickedRow(null);
-      console.log('configureProgramModal result: ', this.closeResult);
-      return this.closeResult;
-    });
+    return modalRef.result;
+
   }
 
-  private async addProgramAndProfile(program: Program, programProfile: ProgramProfile) {
-    // have to single thread these so they are done in the right order
-    try {
-      this.program = await this.dataApiService.createProgram(program);
-      const pp = await this.dataApiService.createProgramProfile(programProfile);
-      this.program.programProfile = [pp];
-      console.log('addProgramAndProfile:', program, this.program);
-      return this.program;
-    } catch (error) {
-      console.log('addProgramAndProfile error: ', error);
+  private async setupProgramForForm(configType, nextId?: number, program?: Program): Promise<Program> {
+    if (configType === 'add' && nextId) {
+      return new Program(nextId, '');
     }
+    if (program && (configType === 'edit' || configType === 'expire')) {
+      const programForForm: Program = new Program(program.id, program.name, program.description);
+      // don't use references from existing program
+      programForForm.programProfile = await this.findProgramProfiles(program);
+      // but ok for these...
+      programForForm.programConfiguration = program.programConfiguration;
+      programForForm.programProfileClientException = program.programProfileClientException;
+      return programForForm;
+    }
+    return null;
   }
 
   private async addProgramProfile(programProfile: ProgramProfile) {
@@ -143,33 +178,44 @@ export class ProgramsMaintenanceModalService {
 
   private async addProgram(program: Program) {
     try {
-      this.program = await this.dataApiService.createProgram(program);
-      console.log('addProgram:', program, this.program);
+      program = await this.dataApiService.createProgram(program);
+      console.log('addProgram:', program);
     } catch (error) {
       console.log('addProgram error: ', error);
     }
   }
 
-  private async updateProgram(program: Program) {
+  private async getProgramById(programId: number): Promise<Program> {
     try {
-      this.program = await this.dataApiService.updateProgram(program);
-      console.log('updateProgram:', program, this.program);
+      const program: Program = await this.dataApiService.getProgramById(programId);
+      console.log('getProgramById:', program);
       return program;
+    } catch (error) {
+      console.log('getProgramById error: ', error);
+    }
+  }
+
+  private async updateProgram(program: Program): Promise<Program> {
+    try {
+      const updateProgram = await this.dataApiService.updateProgram(program);
+      console.log('updateProgram:', program);
+      return updateProgram;
     } catch (error) {
       console.log('updateProgram error: ', error);
     }
   }
 
-  private async updateProgramProfile(programProfile: ProgramProfile) {
+  private async updateProgramProfile(programProfile: ProgramProfile): Promise<ProgramProfile> {
     try {
-      await this.dataApiService.updateProgramProfile(programProfile);
+      const updateProgramProfile = await this.dataApiService.updateProgramProfile(programProfile);
       console.log('updateProgramProfile:', programProfile, this.programProfiles);
+      return updateProgramProfile;
     } catch (error) {
       console.log('updateProgramProfile error: ', error);
     }
   }
 
-  async getProgramProfiles() {
+  async getProgramProfiles(): Promise<ProgramProfile[]> {
     try {
       this.programProfiles = await this.dataApiService.getProgramProfiles();
       return this.programProfiles;
@@ -178,33 +224,14 @@ export class ProgramsMaintenanceModalService {
     }
   }
 
-  private async findProgramProfiles(selectedProgram: Program) { // : ProgramProfile[] {
+  private async findProgramProfiles(selectedProgram: Program): Promise<ProgramProfile[]> {
     await this.getProgramProfiles();
     return this.programProfiles.filter(pp => {
       if (typeof(pp.program) === 'number') {
         if (pp.program === selectedProgram.id) {
-          // pc.program = selectedProgram;
-          // if (typeof(pc.communication) === 'number') {
-          //   pc.communication = this.findCommunication(<number>pc.communication);
-          // }
           return true;
         } else { return false; }
-      } // else if (pp.program.id === selectedProgram.id) {
-      //   if (typeof(pc.communication) === 'number') {
-      //     pc.communication = this.findCommunication(<number>pc.communication);
-      //   }
-      //   return true;
-      // }
+      }
     });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
   }
 }

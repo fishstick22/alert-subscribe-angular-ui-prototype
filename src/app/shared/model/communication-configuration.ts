@@ -7,7 +7,9 @@ export interface CommunicationConfiguration {
     chanSmsPriority: number;
     chanMailPriority: number;
     chanMobilePriority: number;
-    chanMandatory: 'No' | 'Email' | 'IVR' | 'SMS';
+    chanDefault: 'No' | 'Email' | 'IVR' | 'SMS';
+    required: boolean;
+    mandatory: boolean;
     effective: string;
     expiration: string;
 }

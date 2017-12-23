@@ -6,6 +6,10 @@ import { Communication } from 'app/shared/model/communication';
 import { Client } from 'app/shared/model/client';
 import { ClientConfiguration } from 'app/shared/model/client-configuration';
 
+export class ClientConfigModalResult {
+  newClientConfigs: ClientConfiguration[];
+}
+
 @Component({
   selector: 'app-client-configurations-modal',
   templateUrl: './client-configurations-modal.component.html',
@@ -44,8 +48,8 @@ export class ClientConfigurationsModalComponent implements OnInit {
   }
 
   modalInit() {
-    console.log('ClientConfigComponent init: ');
-    console.log(this.client);
+    // console.log('ClientConfigComponent init: ');
+    // console.log(this.client);
     // get the list of clients to populate the dropdown (covered in @Input() clients: Client[];)
     // check if there are progConfig already (for now just checking for first one, have to check for eff dates)
     this.displayCommStartEmpty = true;
@@ -136,8 +140,4 @@ export class ClientConfigurationsModalComponent implements OnInit {
     }
   }
 
-}
-
-export class ClientConfigModalResult {
-  newClientConfigs: ClientConfiguration[];
 }

@@ -50,6 +50,15 @@ export class CommActionsPopoverStubComponent {
 }
 
 @Component({
+  selector: 'app-communications-maintenance-panel',
+  template: 'dummy component for testing'
+})
+export class CommunicationsMaintenancePanelStubComponent {
+
+  @Input() selectedProgram: Program;
+}
+
+@Component({
   selector: 'app-comm-action-table',
   template: 'dummy component for testing'
 })
@@ -96,6 +105,13 @@ export class ProgramActionsPopoverStubComponent  {
   @Input() progId: string;
   @Input() progName: string;
 }
+@Component({
+  selector: 'app-program-client-exceptions-maintenance-panel',
+  template: 'dummy component for testing'
+})
+export class ProgramClientExceptionsMaintenancePanelStubComponent {
+  @Input() selectedProgram: Program;
+}
 
 @Component({
   selector: 'app-program-status',
@@ -105,6 +121,12 @@ export class ProgramStatusStubComponent {
   @Input() program;
   @Input() detectChanges;
 }
+
+@Component({
+  selector: 'app-programs-maintenance-panel',
+  template: 'dummy component for testing'
+})
+export class ProgramsMaintenancePanelStubComponent { }
 
 @Component({
   selector: 'app-select-channel-priority',
@@ -119,10 +141,10 @@ export class SelectChannelPriorityStubComponent {
 }
 
 @Component({
-  selector: 'app-select-channel-mandatory',
+  selector: 'app-select-channel-default',
   template: 'dummy component for testing'
 })
-export class SelectChannelMandatoryStubComponent {
+export class SelectChannelDefaultStubComponent {
   @Input() id: string;
   @Input() name: string;
   @Input() actualStaticValue: string; // sometimes you just do stuff because
@@ -143,6 +165,33 @@ export class SelectProfileOptionStubComponent {
   @Input() showHeader: boolean;
   @Input() staticReadOnly: boolean;
   @Input() dynamicPicker: string;
+}
+
+@Component({
+  selector: 'app-show-communication-configuration-options',
+  template: 'dummy component for testing'
+})
+export class ShowCommunicationConfigurationOptionsStubComponent {
+
+  @Input() configuration;
+  @Input() configurationProperty;
+  @Input() configurationOptionLabel;
+  @Input() configurationOptionLabelHidden = false;
+  @Input() configurationOptionTitle = '';
+}
+
+@Component({
+  selector: 'app-show-program-profile-options',
+  template: 'dummy component for testing'
+})
+export class ShowProgramProfileOptionsStubComponent {
+
+  @Input() profile;
+  @Input() profileProperty;
+  @Input() profileOptionLabel;
+  @Input() profileOptionLabelHidden = false;
+  @Input() profileOptionTitle = '';
+
 }
 
 @Component({

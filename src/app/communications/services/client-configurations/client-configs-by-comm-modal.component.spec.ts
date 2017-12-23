@@ -14,7 +14,7 @@ import { ModelTestingHelper,
 } from 'app/shared/testing/shared-module-testing-helper';
 
 import { SelectChannelPriorityStubComponent,
-         SelectChannelMandatoryStubComponent,
+         SelectChannelDefaultStubComponent,
          DateEffExpStubComponent,
          FakeNgbActiveModal,
          ClientActionTableStubComponent,
@@ -39,7 +39,7 @@ describe('ClientConfigsByCommModalComponent', () => {
         DraggableDirective,
         DroppableDirective,
         SelectChannelPriorityStubComponent,
-        SelectChannelMandatoryStubComponent,
+        SelectChannelDefaultStubComponent,
         DateEffExpStubComponent,
         ClientActionTableStubComponent,
       ],

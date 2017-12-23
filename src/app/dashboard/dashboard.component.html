@@ -1,3 +1,52 @@
-<p>
-  dashboard works!
-</p>
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <div class="card text-center border-dark">
+      <h3 class="card-header bg-gradient-secondary text-white">Maintenance Panel</h3>
+      <div class="card-body">
+        
+        <!--<div class="card border-secondary mb-3 text-center"></div>-->
+        <app-programs-maintenance-panel
+          (programSelected)="onProgramSelect($event)"></app-programs-maintenance-panel>
+
+        <!--</div>card-->
+
+        <div class="card border-secondary mb-3 text-center">
+          <h5 class="card-title bg-gradient-secondary text-white text-center">
+            Program (
+            <span *ngIf="selectedProgram">
+                {{selectedProgram.id}}</span>
+            ) &mdash; Client Exceptions</h5>
+          <div class="card-body text-center">
+              <app-program-client-exceptions-maintenance-panel
+                [selectedProgram]="selectedProgram"></app-program-client-exceptions-maintenance-panel>
+          </div>              
+        </div>
+
+        <div class="card border-secondary mb-3 text-center">
+          <h5 class="card-title bg-gradient-secondary text-white text-center">
+            Program (
+              <span *ngIf="selectedProgram">
+                  {{selectedProgram.id}}</span>
+            ) &mdash; Communication Configurations</h5>
+          <div class="card-body text-center">
+            <app-communications-maintenance-panel
+              [selectedProgram]="selectedProgram"></app-communications-maintenance-panel>
+          </div>
+        </div>
+
+        <div class="card border-secondary mb-3 text-center">
+          <h5 class="card-title text-center">Program () &mdash;Client Communication Configurations</h5>
+          <div class="card-body text-center">
+            <blockquote class="card-blockquote">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+              <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+            </blockquote>
+          </div>
+        </div>
+
+      </div><!--card-body -->
+    </div><!--card (main) -->
+  </div><!--col-md-12-->
+</div><!--row-->
+</div><!--container-->

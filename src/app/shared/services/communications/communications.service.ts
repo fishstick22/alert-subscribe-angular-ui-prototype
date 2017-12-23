@@ -26,7 +26,11 @@ export class CommunicationsService {
 
   async getCommunicationsThruApi(): Promise<Communication[]> {
     try {
-      const response = await this.http.get(this.commApiEndpoint).toPromise();
+      const response = await this.http.get(
+        this.commApiEndpoint, {
+          headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+        }
+      ).toPromise();
       // return response.json() as Communication[];
       return response as Communication[];
     } catch (error) {

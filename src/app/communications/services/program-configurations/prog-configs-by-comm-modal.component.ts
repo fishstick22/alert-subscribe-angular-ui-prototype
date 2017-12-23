@@ -6,6 +6,11 @@ import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramConfiguration } from 'app/shared/model/program-configuration';
 
+export class ProgramConfigModalResult {
+  prevProgConfig: ProgramConfiguration;
+  newProgConfig: ProgramConfiguration;
+}
+
 @Component({
   // entry component, don't use the selector
   // selector: 'app-program-configurations-modal',
@@ -31,7 +36,7 @@ export class ProgramConfigsByCommModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('ProgramConfigurationsModalComponent ngOnInit: ', this.programs);
+    // console.log('ProgramConfigurationsModalComponent ngOnInit: ', this.programs);
   }
 
   modalInit() {
@@ -106,9 +111,4 @@ export class ProgramConfigsByCommModalComponent implements OnInit {
       pc.expiration = newDateValue;
     }
   }
-}
-
-export class ProgramConfigModalResult {
-  prevProgConfig: ProgramConfiguration;
-  newProgConfig: ProgramConfiguration;
 }

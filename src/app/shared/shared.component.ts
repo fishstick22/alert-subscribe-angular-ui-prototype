@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { AuthService } from 'app/core/auth/auth.service';
 import { Communication } from 'app/shared/model/communication';
 import { Program } from 'app/shared/model/program';
 import { ProgramProfile } from 'app/shared/model/program-profile';
+import { ProgramProfileClientException } from 'app/shared/model/program-profile-client-exception';
 import { DataApiService } from 'app/shared/services/data-api.service';
 
 @Component({
@@ -16,9 +18,11 @@ export class SharedComponent implements OnInit {
   communications: Communication[];
   programs: Program[];
   programProfiles: ProgramProfile[];
+  programProfileClientExceptions: ProgramProfileClientException[];
   displayComm: Communication[];
 
   constructor(
+    public authService: AuthService,
     private dataApiService: DataApiService
   ) { }
 
@@ -26,6 +30,7 @@ export class SharedComponent implements OnInit {
     await this.getCommunications();
     await this.getPrograms();
     await this.getProgramProfiles();
+    await this.getProgramProfileClientExceptions();
     console.log('SharedComponent ngOnInit', this.communications, this.programs, this.programProfiles);
   }
 
@@ -51,6 +56,16 @@ export class SharedComponent implements OnInit {
     try {
       this.programProfiles = await this.dataApiService.getProgramProfiles();
       // return this.programProfiles;
+    } catch (error) {
+      console.log('getPrograms error: ', error);
+    }
+  }
+
+
+  async getProgramProfileClientExceptions() {
+    try {
+      this.programProfileClientExceptions = await this.dataApiService.getProgramProfileClientExceptions();
+      // return this.programProfileClientExceptions;
     } catch (error) {
       console.log('getPrograms error: ', error);
     }

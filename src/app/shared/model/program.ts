@@ -9,6 +9,7 @@ export class Program {
   name: string;
   description: string;
   programProfile: ProgramProfile[];
+  programProfileClientException: number[];
   programConfiguration: number[];
   status: any; // not saved to DB, only used in the UI
   detectChanges: any;
@@ -18,6 +19,7 @@ export class Program {
     name: string = '',
     description?: string,
     programProfile?: ProgramProfile[],
+    programProfileClientException?: number[],
     programConfiguration?: number[],
   ) {
     const emptyNum: number[] = [];
@@ -26,6 +28,7 @@ export class Program {
     this.name = name;
     this.description = (description) ? description : '';
     this.programProfile = (programProfile) ? programProfile : [];
+    this.programProfileClientException = (programProfileClientException) ? programProfileClientException : emptyNum;
     this.programConfiguration = (programConfiguration) ? programConfiguration : emptyNum;
   }
 
@@ -33,6 +36,7 @@ export class Program {
     return new Program(
       this.id, this.name, this.description,
       this.programProfile,
+      this.programProfileClientException,
       this.programConfiguration
     );
   }
@@ -65,7 +69,10 @@ export class ProgramStatus {
   }
 
   private setStatus(program: Program) {
-    if (program.programProfile && program.programProfile.length > 0) {
+    if (program.detectChanges === 'saving') {
+      this.effExpDateText = 'saving...';
+    } else if (program.programProfile && program.programProfile.length > 0) {
+      program.programProfile.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
       this.lastProfile = program.programProfile[program.programProfile.length - 1];
       this.expiredProgram = (this.lastProfile.expiration !== AppConstants.UNEXPIRED);
       this.statusText = this.expiredProgram ? 'expired' : 'active';

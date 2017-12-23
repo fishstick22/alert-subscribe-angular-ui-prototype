@@ -12,6 +12,7 @@ import {
   Program, ProgramsService, FakeProgramsService,
   ProgramProfile, ProgramProfilesService, FakeProgramProfilesService,
   ProgramConfiguration, ProgramConfigurationsService, FakeProgramConfigurationsService,
+  ProgramProfileClientException, ProgramProfileClientExceptionsService, FakeProgramProfileClientExceptionsService,
 } from 'app/shared/testing/shared-module-testing-helper';
 
 const communication: Communication = new Communication(260, 'Refill Available Notice');
@@ -25,6 +26,7 @@ describe('DataApiService', () => {
         CommunicationsService,
         ProgramsService,
         ProgramProfilesService,
+        ProgramProfileClientExceptionsService,
         ProgramConfigurationsService,
         ClientsService,
         ClientConfigurationsService,
@@ -32,6 +34,7 @@ describe('DataApiService', () => {
         { provide: CommunicationsService, usevalue: FakeCommunicationsService },
         { provide: ProgramsService, usevalue: FakeProgramsService },
         { provide: ProgramProfilesService, usevalue: FakeProgramProfilesService },
+        { provide: ProgramProfileClientExceptionsService, usevalue: FakeProgramProfileClientExceptionsService },
         { provide: ProgramConfigurationsService, usevalue: FakeProgramConfigurationsService },
         { provide: ClientsService, usevalue: FakeClientsService },
         { provide: ClientConfigurationsService, usevalue: FakeClientConfigurationsService }

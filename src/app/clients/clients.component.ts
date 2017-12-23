@@ -26,7 +26,7 @@ export class ClientsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    console.log('ClientComponent ngOnInit...');
+    // console.log('ClientComponent ngOnInit...');
     await this.getClients();
   }
 

@@ -8,7 +8,7 @@ import {
   ClientConfiguration,
   CommunicationConfiguration,
   SelectChannelPriorityStubComponent,
-  SelectChannelMandatoryStubComponent,
+  SelectChannelDefaultStubComponent,
   DateEffExpStubComponent,
   CommActionTableStubComponent,
   ClientActionTableStubComponent
@@ -30,6 +30,8 @@ export { SortableTableDirective } from 'app/shared/directives/sortable-table.dir
 export { DragDropService } from 'app/shared/services/drag-drop.service';
 export { DropEvent } from 'app/shared/directives/drag-drop/drop-event.model';
 
+@Injectable()
+export class FakeProgramClientExceptionsModalService {}
 
 @Injectable()
 export class FakeProgramConfigurationsModalService {}

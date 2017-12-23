@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
+import { AppConstants } from 'app/app-constants';
+
 const noop = () => {
 };
 
@@ -32,7 +34,7 @@ export class SelectChannelPriorityComponent implements OnInit, ControlValueAcces
                                       // a problem is driving you nuts
   @Input() lastConfigRow: boolean;
 
-  channelPriortyOpts: number[] = [0, 1, 2, 3];
+  channelPriortyOpts: number[] = AppConstants.CHANNELPRIORTYOPTS;
 
   // http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
   // The internal data model

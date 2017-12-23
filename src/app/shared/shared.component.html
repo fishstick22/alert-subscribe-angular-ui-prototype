@@ -1,32 +1,36 @@
-<h2>Shared Module Tests</h2>
-<!-- this stuff can all go once refactoring is complete
-     mostly just for showing features off -->
-<app-drag-drop-test></app-drag-drop-test>
-<app-click-outside-test></app-click-outside-test>
+<div class="container">
+  <h2>Shared Module Tests</h2>
+  <!-- this stuff can all go once refactoring is complete
+       mostly just for showing features off -->
+ 
+  <h4>Authentication</h4>
+  <span *ngIf="!authService.authenticated">You are not logged in</span>
+  <span *ngIf="authService.authenticated">
+    You are logged in as 
+    <span *ngIf="authService.userProfile && authService.userProfile.name">
+      {{authService.userProfile.name}}
+    </span>
+    {{authService.userProfile | json}}
+  </span>
+  <h4>Programs</h4>
+  <span *ngIf="programs">
+    <ul *ngFor="let p of programs">
+      <li>{{p | json}}</li> 
+    </ul>
+  </span>
+  <h4>Program Profiles</h4>
+  <span *ngIf="programProfiles">
+    <ul *ngFor="let pp of programProfiles">
+      <li>{{pp | json}}</li> 
+    </ul>
+  </span>
+  <h4>Program Profile Client Exceptions</h4>
+  <span *ngIf="programProfileClientExceptions">
+    <ul *ngFor="let ppce of programProfileClientExceptions">
+      <li>{{ppce | json}}</li> 
+    </ul>
+  </span>
+  <app-drag-drop-test></app-drag-drop-test>
+  <app-click-outside-test></app-click-outside-test>
+</div>
 
-<h4>Programs</h4>
-<span *ngIf="programs">
-  <ul *ngFor="let p of programs">
-    <li>{{p | json}}</li> 
-  </ul>
-</span>
-<h4>Program Profiles</h4>
-<span *ngIf="programProfiles">
-  <ul *ngFor="let pp of programProfiles">
-    <li>{{pp | json}}</li> 
-  </ul>
-</span>
-
-<h4>Manage Communications</h4>
-<app-comm-action-table 
-  [communications]="communications"
-  [displayComm]="displayComm"
-  [displayCommStartEmpty]="false"
-  [showCommId]="true"
-  [showCommName]="true"
-  [showCommDesc]="true"
-  [showStatus]="true"
-  [showAction]="true"
-  (selRowOut)="setClickedRow($event)"
-  (commConfigAction)="configureCommunication($event)">
-</app-comm-action-table>

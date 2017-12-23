@@ -1,0 +1,10 @@
+<label for="{{configurationProperty}}" class="flex-justify-left rounded"
+  [ngClass]="{'sr-only': configurationOptionLabelHidden}">
+  <small>{{configurationOptionLabel}}</small></label>
+<!--<select class="form-control form-control-sm flex-justify-right"
+  id="{{configurationProperty}}_{{configurationProperty.id}}" name="{{configurationProperty}}" readonly>
+  <option>{{staticReadonlyOption}}</option>-->
+<input class="form-control form-control-sm flex-justify-right"
+  id="{{configurationProperty}}_{{configurationProperty.id}}" name="{{configurationProperty}}" 
+  title="{{configurationOptionTitle}}"
+  value="{{staticReadonlyOption}}" readonly />
