@@ -1,29 +1,33 @@
 // https://auth0.com/blog/angular-2-authentication/
 // https://jwt.io/
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as auth0 from 'auth0-js';
-import { AUTH_CONFIG } from './auth-config';
+
+import { APP_CONFIG, IAppConfig, IAuthConfig } from 'app/app.config';
+// import { AuthConfig } from './auth-config';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   // Create Auth0 web auth instance
-  auth0 = new auth0.WebAuth({
-    clientID: AUTH_CONFIG.CLIENT_ID,
-    domain: AUTH_CONFIG.CLIENT_DOMAIN,
-    responseType: 'token id_token',
-    redirectUri: AUTH_CONFIG.REDIRECT,
-    audience: AUTH_CONFIG.AUDIENCE,
-    scope: AUTH_CONFIG.SCOPE
-  });
+  // auth0 = new auth0.WebAuth({
+  //   clientID: AUTH_CONFIG.CLIENT_ID,
+  //   domain: AUTH_CONFIG.CLIENT_DOMAIN,
+  //   responseType: 'token id_token',
+  //   redirectUri: AUTH_CONFIG.REDIRECT,
+  //   audience: AUTH_CONFIG.AUDIENCE,
+  //   scope: AUTH_CONFIG.SCOPE
+  // });
+  private auth0: auth0.WebAuth;
   userProfile: any;
 
   // Create a stream of logged in status to communicate throughout app
   loggedIn: boolean;
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-  constructor(private router: Router) {
+  constructor(@Inject(APP_CONFIG) private config: IAppConfig, private router: Router) {
+    this.auth0 = this.setWebAuth(config.authConfig);
     // If authenticated, set local profile property and update login status subject
     // If token is expired, log out to clear any data from localStorage
     if (this.authenticated) {
@@ -32,6 +36,11 @@ export class AuthService {
     } else {
       this.logout();
     }
+  }
+
+  private setWebAuth(authConfig: IAuthConfig): auth0.WebAuth {
+
+    return new auth0.WebAuth(authConfig);
   }
 
   setLoggedIn(value: boolean) {
