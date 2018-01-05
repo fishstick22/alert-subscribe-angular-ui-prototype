@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 
 import { addMatchers, newEvent, Router, RouterStub,
          RouterLinkStubDirective, RouterOutletStubComponent } from '../../../testing';
+import { APP_CONFIG, AppConfig } from 'app/app.config';
 import { AuthService } from '../auth/auth.service';
 
 import { NavbarComponent } from './navbar.component';
@@ -39,7 +40,8 @@ describe('NavbarComponent', () => {
       ],
       providers: [
         AuthService,
-        { provide: Router, useClass: RouterStub}
+        { provide: Router, useClass: RouterStub},
+        { provide: APP_CONFIG, useValue: AppConfig }
       ]
     })
     .compileComponents();
