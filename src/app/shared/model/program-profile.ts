@@ -1,13 +1,13 @@
 export class ProgramProfile {
   id: number;
-  defaultOptIn: boolean;
-  visibleInUi: boolean;
-  chanEmail: boolean;
-  chanIvr: boolean;
-  chanSms: boolean;
-  chanSecure: boolean;
-  chanMail: boolean;
-  chanMobile: boolean;
+  defaultOptIn: 'Y' | 'N';
+  visibleInUi: 'Y' | 'N' | 'P';
+  chanEmail:  'Y' | 'N';
+  chanIvr:    'Y' | 'N';
+  chanSms:    'Y' | 'N';
+  chanSecure: 'Y' | 'N';
+  chanMail:   'Y' | 'N';
+  chanMobile: 'Y' | 'N';
   effective: string;
   expiration: string;
   program: number;
@@ -36,14 +36,14 @@ export class ProgramProfile {
 
     } else {
 
-      this.defaultOptIn = false;
-      this.visibleInUi  = false;
-      this.chanEmail    = false;
-      this.chanIvr      = false;
-      this.chanSms      = false;
-      this.chanSecure   = false;
-      this.chanMail     = false;
-      this.chanMobile   = false;
+      this.defaultOptIn = 'N';
+      this.visibleInUi  = 'N';
+      this.chanEmail    = 'N';
+      this.chanIvr      = 'N';
+      this.chanSms      = 'N';
+      this.chanSecure   = 'N';
+      this.chanMail     = 'N';
+      this.chanMobile   = 'N';
 
       this.program      = programId;
 

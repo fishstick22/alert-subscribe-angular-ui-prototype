@@ -5,11 +5,12 @@ export interface CommunicationConfiguration {
     chanEmailPriority: number;
     chanIvrPriority: number;
     chanSmsPriority: number;
+    chanSecurePriority: number;
     chanMailPriority: number;
     chanMobilePriority: number;
     chanDefault: 'No' | 'Email' | 'IVR' | 'SMS';
-    required: boolean;
-    mandatory: boolean;
+    required: 'Y' | 'N';
+    mandatory: 'Y' | 'N';
     effective: string;
     expiration: string;
 }

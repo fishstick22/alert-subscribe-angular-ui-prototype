@@ -44,14 +44,14 @@ export class ModelTestingHelper {
     const programProfile = new ProgramProfile(1);
 
     programProfile.id = 1;
-    programProfile.defaultOptIn = true;
-    programProfile.visibleInUi = true;
-    programProfile.chanEmail = true;
-    programProfile.chanIvr = true;
-    programProfile.chanSms = true;
-    programProfile.chanSecure = true;
-    programProfile.chanMail = false;
-    programProfile.chanMobile = false;
+    programProfile.defaultOptIn = 'Y';
+    programProfile.visibleInUi = 'Y';
+    programProfile.chanEmail = 'Y';
+    programProfile.chanIvr = 'Y';
+    programProfile.chanSms = 'Y';
+    programProfile.chanSecure = 'Y';
+    programProfile.chanMail = 'N';
+    programProfile.chanMobile = 'N';
     programProfile.effective = '2017-01-01';
     programProfile.expiration = '9999-12-31';
     programProfile.program = 1;
@@ -63,14 +63,14 @@ export class ModelTestingHelper {
     const programProfileClientException = new ProgramProfileClientException(1, 142);
 
     programProfileClientException.id = 1;
-    programProfileClientException.defaultOptIn = true;
-    programProfileClientException.visibleInUi = true;
-    programProfileClientException.chanEmail = true;
-    programProfileClientException.chanIvr = true;
-    programProfileClientException.chanSms = true;
-    programProfileClientException.chanSecure = true;
-    programProfileClientException.chanMail = false;
-    programProfileClientException.chanMobile = false;
+    programProfileClientException.defaultOptIn = 'Y';
+    programProfileClientException.visibleInUi = 'Y';
+    programProfileClientException.chanEmail = 'Y';
+    programProfileClientException.chanIvr = 'Y';
+    programProfileClientException.chanSms = 'Y';
+    programProfileClientException.chanSecure = 'Y';
+    programProfileClientException.chanMail = 'N';
+    programProfileClientException.chanMobile = 'N';
     programProfileClientException.effective = '2017-01-01';
     programProfileClientException.expiration = '9999-12-31';
     programProfileClientException.program = 1;
@@ -90,8 +90,8 @@ export class ModelTestingHelper {
     clientConfig.chanMailPriority = 0,
     clientConfig.chanMobilePriority = 0,
     clientConfig.chanDefault = 'Email',
-    clientConfig.required = true,
-    clientConfig.mandatory = true,
+    clientConfig.required = 'Y',
+    clientConfig.mandatory = 'Y',
     clientConfig.effective = '2017-01-01',
     clientConfig.expiration = '9999-12-31',
     clientConfig.client = this.getTestClient();
@@ -112,8 +112,8 @@ export class ModelTestingHelper {
     programConfig.chanMailPriority = 0,
     programConfig.chanMobilePriority = 0,
     programConfig.chanDefault = 'Email',
-    programConfig.required = true,
-    programConfig.mandatory = true,
+    programConfig.required = 'Y',
+    programConfig.mandatory = 'Y',
     programConfig.effective = '2017-01-01',
     programConfig.expiration = '9999-12-31',
     programConfig.program = this.getTestProgram();

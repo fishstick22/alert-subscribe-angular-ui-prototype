@@ -5,9 +5,6 @@
         <th><small>ID</small></th>
         <th><small>Name</small></th>
         <th *ngFor="let pco of programConfigurationOptions"><small title="{{pco.title}}">{{pco.label}}</small></th>
-        <th><small>Default</small></th>
-        <th><small>Required</small></th>
-        <th><small>Mandatory</small></th>
         <th><small>Effective</small></th>
         <th><small>Expiration</small></th>
       </tr>
@@ -27,12 +24,6 @@
               [configurationProperty]="pco.property"
               [configurationOptionLabel]="pco.label"
               [configurationOptionLabelHidden]="true"></app-show-communication-configuration-options>
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
         </td>
         <td>
           <label for="effective" class="sr-only"><small>Effective</small></label>
