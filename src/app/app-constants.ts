@@ -10,8 +10,8 @@ export class AppConstants {
     {'property': 'defaultOptIn', 'label': 'OptIn',   'opts': AppConstants.YESNOOPTS, 'title': 'Default Opt-In?'},
     {'property': 'visibleInUi',  'label': 'Visible', 'opts': AppConstants.PROMOTEOPTS, 'title': 'Visible in UI?'},
     {'property': 'chanEmail',    'label': 'Email',   'opts': AppConstants.YESNOOPTS, 'title': 'Program allows Email channel subscription'},
-    {'property': 'chanIvr',      'label': 'IVR',     'opts': AppConstants.YESNOOPTS, 'title': 'Program allows IVR channel subscription'},
-    {'property': 'chanSms',      'label': 'SMS',     'opts': AppConstants.YESNOOPTS, 'title': 'Program allows SMS channel subscription'},
+    {'property': 'chanIvr',      'label': 'Call',    'opts': AppConstants.YESNOOPTS, 'title': 'Program allows IVR channel subscription'},
+    {'property': 'chanSms',      'label': 'Text',    'opts': AppConstants.YESNOOPTS, 'title': 'Program allows SMS channel subscription'},
     {'property': 'chanSecure',   'label': 'Secure',  'opts': AppConstants.YESNOOPTS, 'title': 'Program allows Secure channel subscription'},
     {'property': 'chanMail',     'label': 'Mail',    'opts': AppConstants.YESNOOPTS, 'title': 'Program allows Mail channel subscription'},
     {'property': 'chanMobile',   'label': 'Mobile',  'opts': AppConstants.YESNOOPTS, 'title': 'Program allows Mobile channel subscription'},
@@ -19,20 +19,30 @@ export class AppConstants {
     // {'property': 'expiration',   'label': 'Expiration', 'title': 'Expiration Date of Program'}
   ];
 
+  public static CHANNELPRIORTYOPTS: number[] = [0, 1, 2, 3];
+  public static CHANNELSECUREPRIORTYOPTS: number[] = [0, 1];
+  public static CHANDEFAULTOPTS: string[] = ['No', 'Email', 'Call', 'Text'];
   public static PROGRAMCONFIGURATIONOPTIONS = [
-    { 'property': 'chanEmailPriority',  'label': 'Email',  'title': 'Program Email channel prority' },
-    { 'property': 'chanIvrPriority',    'label': 'IVR',    'title': 'Program IVR channel prority' },
-    { 'property': 'chanSmsPriority',    'label': 'SMS',    'title': 'Program SMS channel prority' },
-    { 'property': 'chanSecurePriority', 'label': 'Secure', 'title': 'Program Secure channel prority' },
-    // { 'property': 'chanMailPriority',   'label': 'Mail',   'title': 'Program Mail channel prority' },
-    // { 'property': 'chanMobilePriority', 'label': 'Mobile', 'title': 'Program Mobile channel prority' },
-    { 'property': 'chanDefault', 'label': 'Default',   'title': 'Program default channel' },
-    { 'property': 'required',    'label': 'Required',  'title': 'Program communication required' },
-    { 'property': 'mandatory',   'label': 'Mandatory', 'title': 'Program communication mandatory' },
+    { 'property': 'chanEmailPriority',  'label': 'Email', 'opts': AppConstants.CHANNELPRIORTYOPTS,
+      'title': 'Program Email channel prority' },
+    { 'property': 'chanIvrPriority',    'label': 'Call',  'opts': AppConstants.CHANNELPRIORTYOPTS,
+      'title': 'Program IVR channel prority' },
+    { 'property': 'chanSmsPriority',    'label': 'Text',  'opts': AppConstants.CHANNELPRIORTYOPTS,
+      'title': 'Program SMS channel prority' },
+    { 'property': 'chanSecurePriority', 'label': 'Secure', 'opts': AppConstants.CHANNELSECUREPRIORTYOPTS,
+      'title': 'Program Secure channel prority' },
+    { 'property': 'chanMailPriority',   'label': 'Mail',   'opts': AppConstants.CHANNELPRIORTYOPTS,
+      'title': 'Program Mail channel prority' },
+    { 'property': 'chanMobilePriority', 'label': 'Mobile', 'opts': AppConstants.CHANNELPRIORTYOPTS,
+      'title': 'Program Mobile channel prority' },
+    { 'property': 'chanDefault',        'label': 'Default', 'opts': AppConstants.CHANDEFAULTOPTS,
+      'title': 'Program default channel' },
+    { 'property': 'required',           'label': 'Reqd',   'opts': AppConstants.YESNOOPTS,
+      'title': 'Program communication required' },
+    { 'property': 'mandatory',          'label': 'Mand',   'opts': AppConstants.YESNOOPTS,
+      'title': 'Program communication mandatory' },
     // {'property': 'effective',    'label': 'Effective', 'title': 'Effective Date of Program Configuration'},
     // {'property': 'expiration',   'label': 'Expiration', 'title': 'Expiration Date of Program Configuration'}
   ];
 
-  public static CHANNELPRIORTYOPTS: number[] = [0, 1, 2, 3];
-  public static CHANDEFAULTOPTS: string[] = ['No', 'Email', 'IVR', 'SMS'];
 }

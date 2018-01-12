@@ -25,6 +25,10 @@ export class ProgramClientExceptionsModalComponent implements OnInit {
   @Input() program: Program = new Program(); // just becasue service inits whenever
   @Input() programClientExceptions: ProgramProfileClientException[];
 
+  effectiveProfile: ProgramProfile;
+
+  programProfileOptions = AppConstants.PROGRAMPROFILEOPTIONS;
+
   addProfile: boolean = false;
   newProgram: boolean = false;
   expireProgram: boolean = false;

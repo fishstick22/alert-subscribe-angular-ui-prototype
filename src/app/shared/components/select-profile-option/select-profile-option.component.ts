@@ -33,8 +33,8 @@ export class SelectProfileOptionComponent implements OnInit, ControlValueAccesso
   @Input() showHeader: boolean;
   @Input() staticReadOnly: boolean;
   @Input() dynamicPicker: string;
+  @Input() profileOpts: Object[] = [{opt: 'Y', val: 'Y'}, {opt: 'N', val: 'N'}];
 
-  profileOpts: Object[] = [{opt: 'Y', val: true}, {opt: 'N', val: false}];
   staticReadonlyOption: string;
   // http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
   // The internal data model
@@ -43,7 +43,8 @@ export class SelectProfileOptionComponent implements OnInit, ControlValueAccesso
   constructor() { }
 
   ngOnInit() {
-   this.staticReadonlyOption = this.staticValue ? 'Y' : 'N';
+  //  this.staticReadonlyOption = this.staticValue ? 'Y' : 'N';
+   this.staticReadonlyOption = this.staticValue;
   }
 
   // get accessor

@@ -26,12 +26,17 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   @Input() programForForm: Program = new Program(); // just becasue service inits whenever
   @Input() programProfiles: ProgramProfile[] = [];
 
+  effectiveProfile: ProgramProfile;
+
+  programProfileOptions = AppConstants.PROGRAMPROFILEOPTIONS;
+
   addProfile: boolean = false;
   newProgram: boolean = false;
   expireProgram: boolean = false;
 
   today = new Date();
   tomorrow = new Date();
+
 
   constructor(
     private maintainProgramModal: NgbActiveModal
@@ -63,7 +68,8 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
       // show only the current effective Profile row
       this.programProfiles = [];
       const currentEffectiveProfile: ProgramProfile = this.getCurrentEffectiveProfile(this.programForForm)[0];
-      this.programProfiles = [new ProgramProfile(this.programForForm.id, currentEffectiveProfile, true)];
+      this.effectiveProfile = new ProgramProfile(this.programForForm.id, currentEffectiveProfile, true);
+      this.programProfiles = [this.effectiveProfile];
       this.addProfile = true;
     }
 
@@ -89,6 +95,10 @@ export class ProgramsMaintenanceModalComponent implements OnInit {
   }
 
   changeProfile(currProfile: ProgramProfile) {
+    // somehow this is coming in null from template?
+    if (!currProfile) {
+      currProfile = this.effectiveProfile;
+    }
     if (this.addProfile) {
       // expire the current profile row
       currProfile.expiration = // TODO shared util method

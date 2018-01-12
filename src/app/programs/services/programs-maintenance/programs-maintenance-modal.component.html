@@ -14,7 +14,7 @@
   </div>
     
   <div class="modal-body">
-    <div class="form-row">
+<!--    <div class="form-row">
       <div class="form-group col-md-4">
         <label for="programName" class="text-white bg-gradient-dark flex-justify-left rounded">
           Program Name</label>
@@ -31,11 +31,117 @@
                aria-describedby="programDescriptionlHelp" placeholder="Enter Program Description">
         <small id="programDescriptionlHelp" class="form-text text-muted">Brief Description of the Program.</small>
       </div>
-    </div>
-        
-    <span *ngIf="programProfiles">
-      <div class="form-row" *ngFor="let profile of programProfiles; let i = index">
+    </div>-->
+    <table class="table table-responsive table-sm table-striped table-bordered table-hover">
+      <caption></caption>
+      <thead class="bg-gradient-light">
+        <tr>
+          <th width="20%">Program Name</th>
+          <th width="80%">Program Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="form-group">
 
+              <label for="programName" class="text-white bg-gradient-dark flex-justify-left rounded sr-only">
+                Program Name</label>
+              <input type="text" class="form-control"
+                      [(ngModel)]="programForForm.name" id="programName" name="name" required
+                      aria-describedby="programNameHelp" placeholder="Enter Program Name">
+              <small id="programNameHelp" class="form-text text-muted">Short Name of the Program.</small>
+
+          </td>
+          <td class="form-group">
+
+              <label for="programDescription" class="text-white bg-gradient-dark flex-justify-left rounded sr-only">
+                Program Description</label>
+              <input type="text" class="form-control" 
+                      [(ngModel)]="programForForm.description" id="programDescription" name="description" required
+                      aria-describedby="programDescriptionHelp" placeholder="Enter Program Description">
+              <small id="programDescriptionHelp" class="form-text text-muted">Brief Description of the Program.</small>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table *ngIf="programProfiles" class="table table-responsive table-sm table-striped table-bordered table-hover">
+      <caption></caption>
+      <thead class="bg-gradient-light">
+        <tr>
+          <th *ngFor="let ppo of programProfileOptions">
+            <small title="{{ppo.title}}">{{ppo.label}}</small>
+          </th>
+          <th><small>Effective</small></th>
+          <th><small>Expiration</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profile of programProfiles; let i = index">
+          <td *ngFor="let ppo of programProfileOptions">
+
+            <app-select-profile-option 
+              [name]="ppo.property" [label]="ppo.label"
+              [(ngModel)]="profile[ppo.property]"
+              [staticValue]="profile[ppo.property]"
+              [showHeader]="false"
+              [staticReadOnly]="i === 0 && !newProgram"
+              [dynamicPicker]="i !== 0 || newProgram"
+              [profileOpts]="ppo.opts"></app-select-profile-option>
+          </td>
+          <td>
+              <span *ngIf="i === 0 && !newProgram">
+                  <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+                      Effective</label>
+                  <!-- the effective date of the current effective row -->
+                  <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.effective}}" readonly>
+                </span>
+                <span *ngIf="newProgram || i !== 0">
+                  <label for="effective" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+                    Effective</label>
+                  <!-- set the effective date for the new row -->
+                  <app-date-picker-popup [dateValue]="profile.effective"
+                    (newDateValue)="updateDateValue($event, profile, 'effective')"></app-date-picker-popup>           
+                </span>
+          </td>
+          <td>
+              <span *ngIf="i === 0 && expireProgram">
+                  <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+                    Expiration</label>
+                  <!-- the expiration date of the current/previous row -->
+                  <app-date-picker-popup [dateValue]="profile.expiration"
+                    (newDateValue)="updateDateValue($event, profile, 'expiration')"></app-date-picker-popup> 
+                </span>
+                <span *ngIf="i === 0 && !expireProgram">
+                  <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+                    Expiration</label>
+                  <!-- the expiration date of the current/previous row -->
+                  <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.expiration}}" readonly
+                    (click)="changeProfile(profile)" >
+                </span>
+                <span *ngIf="i !== 0">
+                  <label for="expiration" class="text-white bg-gradient-dark flex-justify-center rounded sr-only">
+                    Expiration</label>
+                  <!-- the expiration date of the current/previous row -->
+                  <input class="form-control form-control-sm date-eff-exp-input" value="{{profile.expiration}}" readonly>
+                </span>
+          </td>
+        </tr>
+
+        <tr *ngIf="addProfile">
+          <td colspan="10">
+              <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
+                (click)="changeProfile(profile)" title="Modify Program Profile"></i>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <span *ngIf="false">
+      <div class="form-row" *ngFor="let profile of programProfiles; let i = index">
+<!--
         <div class="form-group col-md-1">
             <app-select-profile-option 
               id="defaultOptIn" name="defaultOptIn" label="Opt In"
@@ -115,7 +221,7 @@
             [staticReadOnly]="i === 0 && !newProgram"
             [dynamicPicker]="i !== 0 || newProgram"></app-select-profile-option>
         </div>
-
+      -->
         <!-- move these into a component, the current eff/exp component only works on configs -->
         <div class="form-group col-md-2">
           <span *ngIf="i === 0 && !newProgram">
@@ -160,7 +266,7 @@
         <div class="form-row" *ngIf="addProfile">
           <div class="form-group col-md-1">
             <i class="fa fa-plus-square-o clickable" aria-hidden="true" 
-              (click)="changeProfile(profile)" title="Modify Program Profile"></i>
+              (click)="changeProfile(effectiveProfile)" title="Modify Program Profile"></i>
           </div>
         </div>
 
