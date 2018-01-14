@@ -15,21 +15,16 @@
   <div id="configuredClients">
     <table class="table table-responsive table-sm table-striped table-bordered table-hover">
       <caption></caption>
-      <thead class="bg-gradient-dark text-white">
+      <thead class="bg-gradient-light">
         <tr>
-          <th>ID</th>
-          <th>C<small>ode</small></th>
-          <th>N<small>ame</small></th>
-          <th><small>OptIn Def</small></th>
-          <th><small>UI Visible</small></th>
-          <th>E<small>mail</small></th>
-          <th>IVR</th>
-          <th>SMS</th>
-          <th>S<small>ecure</small></th>
-<!--           <th>M<small>ail</small></th>
-          <th>M<small>obile</small></th> -->
-          <th>E<small>ffective</small></th>
-          <th>E<small>xpiration</small></th>
+          <th><small>ID</small></th>
+          <th><small>Code</small></th>
+          <th><small>Name</small></th>
+          <th *ngFor="let ppo of programProfileOptions">
+            <small title="{{ppo.title}}">{{ppo.label}}</small>
+          </th>
+          <th><small>Effective</small></th>
+          <th><small>Expiration</small></th>
         </tr>
       </thead>
       <tbody>
@@ -39,78 +34,18 @@
           </td>
           <td><span >{{pce.client.code}}</span></td>
           <td width="18%"><span >{{pce.client.name}}</span></td>
-<!--          <td>
+
+          <td *ngFor="let ppo of programProfileOptions">
             <app-select-profile-option 
-              id="defaultOptIn" name="defaultOptIn" label="Opt In"
-              [(ngModel)]="pce.defaultOptIn"
-              [staticValue]="pce.defaultOptIn"
+              [name]="ppo.property" [label]="ppo.label"
+              [(ngModel)]="pce[ppo.property]"
+              [staticValue]="pce[ppo.property]"
               [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
+              [staticReadOnly]="i === 0 && !newProgram"
+              [dynamicPicker]="i !== 0 || newProgram"
+              [profileOpts]="ppo.opts"></app-select-profile-option>
           </td>
-          <td>
-            <app-select-profile-option 
-              id="visibleInUi" name="visibleInUi" label="UI"
-              [(ngModel)]="pce.visibleInUi"
-              [staticValue]="pce.visibleInUi"
-              [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
-          </td>
-          <td>
-            <app-select-profile-option 
-              id="chanEmail" name="chanEmail" label="Email"
-              [(ngModel)]="pce.chanEmail"
-              [staticValue]="pce.chanEmail"
-              [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
-          </td>
-          <td>
-            <app-select-profile-option 
-              id="chanIvr" name="chanIvr" label="IVR"
-              [(ngModel)]="pce.chanIvr"
-              [staticValue]="pce.chanIvr"
-              [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
-          </td>
-          <td>
-            <app-select-profile-option 
-              id="chanSms" name="chanSms" label="SMS"
-              [(ngModel)]="pce.chanSms"
-              [staticValue]="pce.chanSms"
-              [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
-          </td>
-          <td>
-            <app-select-profile-option 
-              id="chanMail" name="chanMail" label="Secure"
-              [(ngModel)]="pce.chanMail"
-              [staticValue]="pce.chanMail"
-              [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
-          </td>
-          <td>
-            <app-select-profile-option 
-              id="chanMail" name="chanMail" label="Mail"
-              [(ngModel)]="pce.chanMail"
-              [staticValue]="pce.chanMail"
-              [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
-          </td>
-          <td>
-            <app-select-profile-option 
-              id="chanMobile" name="chanMobile" label="Mobile"
-              [(ngModel)]="pce.chanMobile"
-              [staticValue]="pce.chanMobile"
-              [showHeader]="false"
-              [staticReadOnly]="true"
-              [dynamicPicker]="false"></app-select-profile-option>
-          </td> -->
+
           <td>
             <app-date-picker-popup [dateValue]="pce.effective"
               (newDateValue)="updateDateValue($event, profile, 'effective')"></app-date-picker-popup>    

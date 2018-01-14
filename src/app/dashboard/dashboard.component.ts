@@ -19,6 +19,7 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 export class DashboardComponent implements OnInit {
 
   selectedProgram: Program;
+  selectedCommunications: Communication[];
 
   constructor(
     private dataApiService: DataApiService
@@ -30,5 +31,10 @@ export class DashboardComponent implements OnInit {
   onProgramSelect(program: Program) {
     console.log('onProgramSelect:', program, (program instanceof Program));
     this.selectedProgram = program;
+  }
+
+  onCommunicationsSelect(communications: Communication[]) {
+    console.log('onCommunicationsSelect:', communications);
+    this.selectedCommunications = communications;
   }
 }

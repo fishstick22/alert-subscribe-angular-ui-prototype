@@ -18,6 +18,7 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 export class CommunicationsMaintenancePanelComponent implements OnInit, OnChanges {
 
   @Input() selectedProgram: Program;
+  @Output() communicationsSelected = new EventEmitter<any>();
 
   selectedProgramConfigurations: ProgramConfiguration[];
   programConfigurationOptions = AppConstants.PROGRAMCONFIGURATIONOPTIONS;
@@ -38,6 +39,9 @@ export class CommunicationsMaintenancePanelComponent implements OnInit, OnChange
     console.log('CommunicationsMaintenancePanelComponent OnChanges', changes);
     if (changes.selectedProgram && !changes.selectedProgram.firstChange) {
       this.selectedProgramConfigurations = this.findProgramConfigurations(this.selectedProgram);
+      // output the selectedConfigurations' communications
+      this.communicationsSelected.emit(this.findConfiguredCommunications());
+
       console.log(this.selectedProgramConfigurations);
     }
   }
@@ -81,4 +85,14 @@ export class CommunicationsMaintenancePanelComponent implements OnInit, OnChange
       return false;
     });
   }
+
+  private findConfiguredCommunications(): Communication[] {
+
+    const communications: Communication[] = [];
+    for (let i = 0; i < this.programConfigurations.length; i++) {
+      communications.push(this.programConfigurations[i].communication);
+    }
+    return communications;
+  }
+
 }
