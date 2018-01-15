@@ -1,19 +1,29 @@
 # AlertSubscribeAngularUiPrototype
 
-## Alert Subscribe Maintenance Panel ## is an application for managing Business Rules related to Member Subscriptions to PBM Communications.
+**Alert Subscribe Maintenance Panel** is an application for managing Business Rules related to Member Subscriptions to PBM Communications.
 This Prototype is a Single-Page Application written using Angular 5 with a SpringBoot REST API backend on top of a MySQL database.  The intent is to provide a tool to research both the technologies and design/development of the application as well as a means to collaborate between Business, BA and IT on the functionality of the production-ready implementation.
 
 ## Definitions:
 **Members** are individuals that are enrolled in prescription benefits.
+
 **Clients** are commercial entities that contract with the PBM to provide benefits to their Members.
+
 **Communications** are existing PBM Alerts sent to Members over channels (email, SMS/text IVR/call, secure inbox) based on Triggering Application business rules (such as an order being shipped or a refill coming due).
+
 **Channels** are communication mechanism to deliver Communications.  Existing channels are email, text, phone calls and Caremark.com Secure Inbox.
+
 **Preferences** are existing implementation allowing members to opt-in to specific Communications categories and to designate the preferred channel.  Clients are able to define rules to provide defaults and/or to restrict what Communications and Channels are available to their Members.
+
 **Programs** are a new construct introduced in this project that defines a collection of Communications and associates business rules for how the member can subscribe to receive Communications and what default behavior, if any, in the absence of any member subscription or Client rule.
+
 **Subscriptions** are Member enrollments to receive Communications via provided contacts (Phone, email Address).  Members can manage subscriptions via Caremark.com Portal, or thru a Care Agent using PeopleSafe. 
+
 **Program Profiles** are business rules configured at the program-level that define attributes for how the Program is displayed, what channels are available/permitted, what default behavior is prescribed, etc.
+
 **Client Profile Exceptions** are business rules configured at the program-level that override the rules configured for the Program.
+
 **Program-Level Configurations** are associations between a Program and one or more Communications (1 to many) that defines business rules/attributes like Channel Priority, Default Channel, Required and Mandatory and that have effective and expiration dates.  
+
 **Client-Level Exception Configurations** are associations between a Client and one or more Communications (1 to many) that defines business rules/attributes that override general Program rules like Channel Priority, Default Channel, Required and Mandatory and that have effective and expiration dates.  
 
 
