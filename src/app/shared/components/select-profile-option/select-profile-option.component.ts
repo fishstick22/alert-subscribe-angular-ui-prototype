@@ -26,14 +26,13 @@ export class SelectProfileOptionComponent implements OnInit, ControlValueAccesso
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
 
-  @Input() id: string;
   @Input() name: string;
   @Input() label: string;
   @Input() staticValue: string;
   @Input() showHeader: boolean;
   @Input() staticReadOnly: boolean;
   @Input() dynamicPicker: string;
-  @Input() profileOpts: Object[] = [{opt: 'Y', val: 'Y'}, {opt: 'N', val: 'N'}];
+  @Input() profileOpts: Object[] = [{opt: 'Yes', val: 'Y'}, {opt: 'No', val: 'N'}];
 
   staticReadonlyOption: string;
   // http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
@@ -44,7 +43,18 @@ export class SelectProfileOptionComponent implements OnInit, ControlValueAccesso
 
   ngOnInit() {
   //  this.staticReadonlyOption = this.staticValue ? 'Y' : 'N';
-   this.staticReadonlyOption = this.staticValue;
+  //  this.staticReadonlyOption = this.staticValue;
+    if (this.profileOpts && this.profileOpts.length) {
+      for (let i = 0; i < this.profileOpts.length; i++ ) {
+        const option = this.profileOpts[i];
+        if (option['val'] === this.staticValue) {
+          this.staticReadonlyOption = option['opt'];
+        }
+      }
+    } else {
+      this.staticReadonlyOption = this.staticValue;
+    }
+
   }
 
   // get accessor

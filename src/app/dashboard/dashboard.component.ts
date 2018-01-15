@@ -19,7 +19,8 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 export class DashboardComponent implements OnInit {
 
   selectedProgram: Program;
-  selectedCommunications: Communication[];
+  selectedCommunication: Communication;
+  configuredCommunications: Communication[];
 
   constructor(
     private dataApiService: DataApiService
@@ -31,10 +32,18 @@ export class DashboardComponent implements OnInit {
   onProgramSelect(program: Program) {
     console.log('onProgramSelect:', program, (program instanceof Program));
     this.selectedProgram = program;
+    // this.configuredCommunications = undefined;
+    // this.selectedCommunication = undefined;
   }
 
-  onCommunicationsSelect(communications: Communication[]) {
-    console.log('onCommunicationsSelect:', communications);
-    this.selectedCommunications = communications;
+  onCommunicationsConfigured(communications: Communication[]) {
+    console.log('onCommunicationsConfigured:', communications);
+    this.configuredCommunications = communications;
+    this.selectedCommunication = null;
+  }
+
+  onCommunicationSelect(communication: Communication) {
+    console.log('onCommunicationSelect:', communication);
+    this.selectedCommunication = communication;
   }
 }

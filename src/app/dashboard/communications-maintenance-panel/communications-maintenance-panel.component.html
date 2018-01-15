@@ -13,9 +13,11 @@
       <tr *ngIf="selectedProgramConfigurations && selectedProgramConfigurations.length === 0">
         <td colspan="10">No Communications configured for Program</td>
       </tr>
-      <tr *ngFor="let progConfig of selectedProgramConfigurations; let i = index">
+      <tr *ngFor="let progConfig of selectedProgramConfigurations; let i = index"
+          (click)="setClickedCommRow(i, progConfig.communication)" [class.table-info]="i === selectedRow"
+          title="Click on Communication Configuration to reveal Client Exceptions below" >
         <td>
-            <span *ngIf="progConfig.communication" class="badge badge-secondary">{{progConfig.communication.id}}</span>
+            <span *ngIf="progConfig.communication" class="badge badge-secondary clickable">{{progConfig.communication.id}}</span>
         </td>
         <td width="20%"><span *ngIf="progConfig.communication">{{progConfig.communication.name}}</span></td>
         <td *ngFor="let pco of programConfigurationOptions">

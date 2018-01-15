@@ -19,7 +19,7 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 export class ClientConfigurationsMaintenancePanelComponent implements OnInit, OnChanges {
 
   @Input() selectedProgram: Program;
-  @Input() selectedCommunications: Communication[];
+  @Input() selectedCommunication: Communication;
 
   clients: Client[];
   clientConfigurations: ClientConfiguration[];
@@ -47,8 +47,8 @@ export class ClientConfigurationsMaintenancePanelComponent implements OnInit, On
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('ClientConfigurationsMaintenancePanelComponent OnChanges', changes);
-    if (changes.selectedCommunications && !changes.selectedCommunications.firstChange) {
-      this.selectedClientConfigurations = this.findClientConfigurations(this.selectedCommunications);
+    if (changes.selectedCommunication && !changes.selectedCommunication.firstChange) {
+      this.selectedClientConfigurations = this.findClientConfigurations(this.selectedCommunication);
       console.log(this.selectedClientConfigurations);
     }
   }
@@ -73,27 +73,32 @@ export class ClientConfigurationsMaintenancePanelComponent implements OnInit, On
     return this.clients.find(c => c.id === id);
   }
 
-  private findCommunication(id: number): Communication {
-    return this.selectedCommunications.find(c => c.id === id);
-  }
+  // private findCommunication(id: number): Communication {
+  //   return this.selectedCommunications.find(c => c.id === id);
+  // }
 
-  private findClientConfigurations(selectedCommunications: Communication[]): ClientConfiguration[] {
-    // here find all the client configurations that point to any of these passed-in communications
+  private findClientConfigurations(selectedCommunication: Communication): ClientConfiguration[] {
+    // here find all the client configurations that point to this passed-in communication
+    if (selectedCommunication === null) {
+      return null;
+    }
+
     return this.clientConfigurations.filter(cc => {
-      // if (typeof(cc.communication) === 'number') {
-      //   if (cc.client === selectedClient.id) {
-      //     cc.client = selectedClient;
-      //     if (typeof(cc.communication) === 'number') {
-      //       cc.communication = this.findCommunication(<number>cc.communication);
-      //     }
-      //     return true;
-      //   } else { return false; }
-      // } else if (cc.client.id === selectedClient.id) {
-      //   if (typeof(cc.communication) === 'number') {
-      //     cc.communication = this.findCommunication(<number>cc.communication);
-      //   }
+      let filterMatch = false;
+      if (typeof(cc.communication) === 'number') {
+        if (cc.communication === selectedCommunication.id) {
+          filterMatch = true;
+          cc.communication = selectedCommunication;
+        }
+      } else {
+        filterMatch = (cc.communication.id === selectedCommunication.id);
+      }
+      if (filterMatch) {
+        if (typeof(cc.client) === 'number') {
+          cc.client = this.findClient(cc.client);
+        }
         return true;
-      // }
+      }
     });
   }
 }

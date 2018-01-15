@@ -18,13 +18,16 @@ import { DataApiService } from 'app/shared/services/data-api.service';
 export class CommunicationsMaintenancePanelComponent implements OnInit, OnChanges {
 
   @Input() selectedProgram: Program;
-  @Output() communicationsSelected = new EventEmitter<any>();
+  @Output() configuredCommunications = new EventEmitter<any>();
+  @Output() selectedCommunication = new EventEmitter<any>();
 
   selectedProgramConfigurations: ProgramConfiguration[];
   programConfigurationOptions = AppConstants.PROGRAMCONFIGURATIONOPTIONS;
 
   programConfigurations: ProgramConfiguration[];
   communications: Communication[];
+
+  selectedRow: number;
 
   constructor(
     private dataApiService: DataApiService
@@ -40,8 +43,8 @@ export class CommunicationsMaintenancePanelComponent implements OnInit, OnChange
     if (changes.selectedProgram && !changes.selectedProgram.firstChange) {
       this.selectedProgramConfigurations = this.findProgramConfigurations(this.selectedProgram);
       // output the selectedConfigurations' communications
-      this.communicationsSelected.emit(this.findConfiguredCommunications());
-
+      this.configuredCommunications.emit(this.findConfiguredCommunications(this.selectedProgramConfigurations));
+      this.selectedRow = null;
       console.log(this.selectedProgramConfigurations);
     }
   }
@@ -86,13 +89,23 @@ export class CommunicationsMaintenancePanelComponent implements OnInit, OnChange
     });
   }
 
-  private findConfiguredCommunications(): Communication[] {
+  private findConfiguredCommunications(selectedProgramConfigurations: ProgramConfiguration[]): Communication[] {
 
     const communications: Communication[] = [];
-    for (let i = 0; i < this.programConfigurations.length; i++) {
-      communications.push(this.programConfigurations[i].communication);
+    for (let i = 0; i < selectedProgramConfigurations.length; i++) {
+      communications.push(selectedProgramConfigurations[i].communication);
     }
     return communications;
   }
 
+  private setClickedCommRow(index, communication: Communication) {
+    if (this.selectedRow === index) {
+      this.selectedRow = null;
+      this.selectedCommunication.emit(null);
+    } else {
+      this.selectedRow = index;
+      this.selectedCommunication.emit(communication);
+    }
+
+  }
 }

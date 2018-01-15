@@ -32,20 +32,22 @@
           <div class="card-body text-center">
             <app-communications-maintenance-panel
               [selectedProgram]="selectedProgram"
-              (communicationsSelected)="onCommunicationsSelect($event)"></app-communications-maintenance-panel>
+              (configuredCommunications)="onCommunicationsConfigured($event)"
+              (selectedCommunication)="onCommunicationSelect($event)">
+            </app-communications-maintenance-panel>
           </div>
         </div>
 
         <div class="card border-secondary mb-3 text-center">
           <h5 class="card-title bg-gradient-secondary text-white text-center">
-            Program (
-              <span *ngIf="selectedProgram">
-                  {{selectedProgram.id}}</span>
-            ) &mdash; Client Communication Configuration Exceptions</h5>
+            Communication (
+              <span *ngIf="selectedCommunication">
+                  {{selectedCommunication.id}}</span>
+            ) &mdash; Client Configuration Exceptions</h5>
           <div class="card-body text-center">
             <app-client-configurations-maintenance-panel
               [selectedProgram]="selectedProgram"
-              [selectedCommunications]="selectedCommunications"></app-client-configurations-maintenance-panel>
+              [selectedCommunication]="selectedCommunication"></app-client-configurations-maintenance-panel>
           </div>
         </div>
 

@@ -5,14 +5,14 @@
 
 <span *ngIf="staticReadOnly">
   <select class="form-control form-control-sm flex-justify-right"
-          id="{{id}}" name="{{name}}" value="actualStaticValue" disabled>
+          name="{{name}}" value="actualStaticValue" disabled>
           <option value="actualStaticValue">{{staticReadonlyOption}}</option>
   </select>
 </span>
 
 <span *ngIf="dynamicPicker">
   <select class="form-control form-control-sm flex-justify-right"
-          [(ngModel)]="value" id="{{id}}" name="{{name}}" required (blur)="onBlur()">
+          [(ngModel)]="value" name="{{name}}" required (blur)="onBlur()">
     <option *ngFor="let po of profileOpts" [ngValue]="po.val">{{po.opt}}</option>>
   </select>
 </span>
