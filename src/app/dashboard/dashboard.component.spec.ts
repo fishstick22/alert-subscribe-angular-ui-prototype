@@ -2,6 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataApiService, FakeDataApiService,
+         ClientConfigurationsMaintenancePanelStubComponent,
          CommunicationsMaintenancePanelStubComponent,
          ProgramClientExceptionsMaintenancePanelStubComponent,
          ProgramsMaintenancePanelStubComponent,
@@ -17,6 +18,7 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
+        ClientConfigurationsMaintenancePanelStubComponent,
         CommunicationsMaintenancePanelStubComponent,
         ProgramClientExceptionsMaintenancePanelStubComponent,
         ProgramsMaintenancePanelStubComponent,

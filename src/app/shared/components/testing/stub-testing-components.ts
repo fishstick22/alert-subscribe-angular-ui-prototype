@@ -50,6 +50,16 @@ export class CommActionsPopoverStubComponent {
 }
 
 @Component({
+  selector: 'app-client-configurations-maintenance-panel',
+  template: 'dummy component for testing'
+})
+export class ClientConfigurationsMaintenancePanelStubComponent {
+
+  @Input() selectedProgram: Program;
+  @Input() selectedCommunication: Communication;
+}
+
+@Component({
   selector: 'app-communications-maintenance-panel',
   template: 'dummy component for testing'
 })
@@ -158,13 +168,13 @@ export class SelectChannelDefaultStubComponent {
 })
 export class SelectProfileOptionStubComponent {
 
-  @Input() id: string;
   @Input() name: string;
   @Input() label: string;
   @Input() staticValue: string;
   @Input() showHeader: boolean;
   @Input() staticReadOnly: boolean;
   @Input() dynamicPicker: string;
+  @Input() profileOpts: Object[] = [{opt: 'Yes', val: 'Y'}, {opt: 'No', val: 'N'}];
 }
 
 @Component({
