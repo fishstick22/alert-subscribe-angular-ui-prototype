@@ -1,9 +1,235 @@
 webpackJsonp(["dashboard.module"],{
 
+/***/ "../../../../../src/app/dashboard/client-maintenance-panel/client-configurations-maintenance-panel.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\n    <caption></caption>\n    <thead class=\"bg-gradient-light\">\n      <tr *ngIf=\"selectedClientConfigurations && selectedClientConfigurations.length !== 0\">\n        <th><small>ID</small></th>\n        <th><small>Name</small></th>\n        <th *ngFor=\"let pco of programConfigurationOptions\"><small title=\"{{pco.title}}\">{{pco.label}}</small></th>\n        <th><small>Effective</small></th>\n        <th><small>Expiration</small></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngIf=\"selectedClientConfigurations && selectedClientConfigurations.length === 0\">\n        <td colspan=\"10\">No Client Exceptions configured for Communication {{selectedCommunication.id}}</td>\n      </tr>\n      <tr *ngFor=\"let progClientConfig of selectedClientConfigurations; let i = index\">\n        <td>\n            <span *ngIf=\"progClientConfig.client\" class=\"badge badge-secondary\">{{progClientConfig.client.id}}</span>\n        </td>\n        <td width=\"20%\"><span *ngIf=\"progClientConfig.client\"><small>{{progClientConfig.client.name}}</small></span></td>\n        <td *ngFor=\"let pco of programConfigurationOptions\">\n            <app-show-communication-configuration-options\n              [configuration]=\"progClientConfig\"\n              [configurationProperty]=\"pco.property\"\n              [configurationOptionLabel]=\"pco.label\"\n              [configurationOptionLabelHidden]=\"true\"></app-show-communication-configuration-options>\n        </td>\n        <td>\n          <label for=\"effective\" class=\"sr-only\"><small>Effective</small></label>\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{progClientConfig.effective}}\" readonly></td>\n        <td>\n          <label for=\"expiration\" class=\"sr-only\"><small>Expiration</small></label>\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{progClientConfig.expiration}}\" readonly></td>\n      </tr>\n    </tbody>\n  </table>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/client-maintenance-panel/client-configurations-maintenance-panel.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/client-maintenance-panel/client-configurations-maintenance-panel.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfigurationsMaintenancePanelComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__ = __webpack_require__("../../../../../src/app/shared/model/communication.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__ = __webpack_require__("../../../../../src/app/shared/services/data-api.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+var ClientConfigurationsMaintenancePanelComponent = (function () {
+    function ClientConfigurationsMaintenancePanelComponent(dataApiService) {
+        this.dataApiService = dataApiService;
+        this.programConfigurationOptions = __WEBPACK_IMPORTED_MODULE_1_app_app_constants__["a" /* AppConstants */].PROGRAMCONFIGURATIONOPTIONS;
+    }
+    ClientConfigurationsMaintenancePanelComponent.prototype.ngOnInit = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        // this.communications = await this.getCommunications();
+                        // this.programConfigurations = await this.getProgramConfigurations();
+                        // this one is ugly -- when selecting a program the client configurations
+                        // have to be determined by first getting all the communications that are tied
+                        // to the program.  Yes, the Communication Configurations panel comonent does that
+                        // work, so really instead of passing the selected program into this component,
+                        // pass the communications selected based on the selected program thru the
+                        // communication configurations (those that are within effective/expiration dates)
+                        // once that comes into this component, we can filter out the client configurations
+                        // that apply and link the client objects
+                        _a = this;
+                        return [4 /*yield*/, this.getClients()];
+                    case 1:
+                        // this.communications = await this.getCommunications();
+                        // this.programConfigurations = await this.getProgramConfigurations();
+                        // this one is ugly -- when selecting a program the client configurations
+                        // have to be determined by first getting all the communications that are tied
+                        // to the program.  Yes, the Communication Configurations panel comonent does that
+                        // work, so really instead of passing the selected program into this component,
+                        // pass the communications selected based on the selected program thru the
+                        // communication configurations (those that are within effective/expiration dates)
+                        // once that comes into this component, we can filter out the client configurations
+                        // that apply and link the client objects
+                        _a.clients = _c.sent();
+                        _b = this;
+                        return [4 /*yield*/, this.getClientConfigurations()];
+                    case 2:
+                        _b.clientConfigurations = _c.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ClientConfigurationsMaintenancePanelComponent.prototype.ngOnChanges = function (changes) {
+        console.log('ClientConfigurationsMaintenancePanelComponent OnChanges', changes);
+        if (changes.selectedCommunication && !changes.selectedCommunication.firstChange) {
+            this.selectedClientConfigurations = this.findClientConfigurations(this.selectedCommunication);
+            console.log(this.selectedClientConfigurations);
+        }
+    };
+    ClientConfigurationsMaintenancePanelComponent.prototype.getClients = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.dataApiService.getClients()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                    case 2:
+                        error_1 = _a.sent();
+                        console.log('getClients error: ', error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ClientConfigurationsMaintenancePanelComponent.prototype.getClientConfigurations = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, this.dataApiService.getClientConfigurations()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                    case 2:
+                        error_2 = _a.sent();
+                        console.log('getClientConfigurations error: ', error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ClientConfigurationsMaintenancePanelComponent.prototype.findClient = function (id) {
+        return this.clients.find(function (c) { return c.id === id; });
+    };
+    // private findCommunication(id: number): Communication {
+    //   return this.selectedCommunications.find(c => c.id === id);
+    // }
+    ClientConfigurationsMaintenancePanelComponent.prototype.findClientConfigurations = function (selectedCommunication) {
+        var _this = this;
+        // here find all the client configurations that point to this passed-in communication
+        if (selectedCommunication === null) {
+            return null;
+        }
+        return this.clientConfigurations.filter(function (cc) {
+            var filterMatch = false;
+            if (typeof (cc.communication) === 'number') {
+                if (cc.communication === selectedCommunication.id) {
+                    filterMatch = true;
+                    cc.communication = selectedCommunication;
+                }
+            }
+            else {
+                filterMatch = (cc.communication.id === selectedCommunication.id);
+            }
+            if (filterMatch) {
+                if (typeof (cc.client) === 'number') {
+                    cc.client = _this.findClient(cc.client);
+                }
+                return true;
+            }
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */])
+    ], ClientConfigurationsMaintenancePanelComponent.prototype, "selectedProgram", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_app_shared_model_communication__["a" /* Communication */])
+    ], ClientConfigurationsMaintenancePanelComponent.prototype, "selectedCommunication", void 0);
+    ClientConfigurationsMaintenancePanelComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-client-configurations-maintenance-panel',
+            template: __webpack_require__("../../../../../src/app/dashboard/client-maintenance-panel/client-configurations-maintenance-panel.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/dashboard/client-maintenance-panel/client-configurations-maintenance-panel.component.scss")],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_12" /* ViewEncapsulation */].None
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_app_shared_services_data_api_service__["a" /* DataApiService */]])
+    ], ClientConfigurationsMaintenancePanelComponent);
+    return ClientConfigurationsMaintenancePanelComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/dashboard/client-maintenance-panel/program-client-exceptions-maintenance-panel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n    <caption></caption>\r\n    <thead class=\"bg-gradient-light\">\r\n      <tr *ngIf=\"selectedProgramProfileClientExceptions && selectedProgramProfileClientExceptions.length !== 0\">\r\n        <th><small>ID</small></th>\r\n        <th><small>Code</small></th>\r\n        <th><small>Name</small></th>\r\n        <th *ngFor=\"let ppo of programProfileOptions\"><small title=\"{{ppo.title}}\">{{ppo.label}}</small></th>\r\n        <th><small>Effective</small></th>\r\n        <th><small>Expiration</small></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngIf=\"selectedProgramProfileClientExceptions && selectedProgramProfileClientExceptions.length === 0\">\r\n        <td colspan=\"10\">No Client Exceptions for Program</td>\r\n      </tr>\r\n      <tr *ngFor=\"let pce of selectedProgramProfileClientExceptions; let i = index\">\r\n        <td>\r\n            <span *ngIf=\"pce.client.id\" class=\"badge badge-secondary\">{{pce.client.id}}</span>\r\n        </td>\r\n        <td><span >{{pce.client.code}}</span></td>\r\n        <td width=\"18%\"><span >{{pce.client.name}}</span></td>\r\n        <td *ngFor=\"let ppo of programProfileOptions\">\r\n            <app-show-program-profile-options\r\n            [profile]=\"pce\"\r\n            [profileProperty]=\"ppo.property\"\r\n            [profileOptionLabel]=\"ppo.label\"\r\n            [profileOptionLabelHidden]=\"true\"></app-show-program-profile-options>\r\n        </td>\r\n        <td>\r\n          <label for=\"effective\" class=\"sr-only\"><small>Effective</small></label>\r\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{pce.effective}}\" readonly></td>\r\n        <td>\r\n          <label for=\"expiration\" class=\"sr-only\"><small>Expiration</small></label>\r\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{pce.expiration}}\" readonly></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>"
+module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\n    <caption></caption>\n    <thead class=\"bg-gradient-light\">\n      <tr *ngIf=\"selectedProgramProfileClientExceptions && selectedProgramProfileClientExceptions.length !== 0\">\n        <th><small>ID</small></th>\n        <th><small>Code</small></th>\n        <th><small>Name</small></th>\n        <th *ngFor=\"let ppo of programProfileOptions\"><small title=\"{{ppo.title}}\">{{ppo.label}}</small></th>\n        <th><small>Effective</small></th>\n        <th><small>Expiration</small></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngIf=\"selectedProgramProfileClientExceptions && selectedProgramProfileClientExceptions.length === 0\">\n        <td colspan=\"10\">No Client Exceptions for Program</td>\n      </tr>\n      <tr *ngFor=\"let pce of selectedProgramProfileClientExceptions; let i = index\">\n        <td>\n            <span *ngIf=\"pce.client.id\" class=\"badge badge-secondary\">{{pce.client.id}}</span>\n        </td>\n        <td><span >{{pce.client.code}}</span></td>\n        <td width=\"18%\"><span >{{pce.client.name}}</span></td>\n        <td *ngFor=\"let ppo of programProfileOptions\">\n            <app-show-program-profile-options\n            [profile]=\"pce\"\n            [profileProperty]=\"ppo.property\"\n            [profileOptionLabel]=\"ppo.label\"\n            [profileOptionLabelHidden]=\"true\"></app-show-program-profile-options>\n        </td>\n        <td>\n          <label for=\"effective\" class=\"sr-only\"><small>Effective</small></label>\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{pce.effective}}\" readonly></td>\n        <td>\n          <label for=\"expiration\" class=\"sr-only\"><small>Expiration</small></label>\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{pce.expiration}}\" readonly></td>\n      </tr>\n    </tbody>\n  </table>"
 
 /***/ }),
 
@@ -82,7 +308,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramClientExceptionsMaintenancePanelComponent = /** @class */ (function () {
+var ProgramClientExceptionsMaintenancePanelComponent = (function () {
     function ProgramClientExceptionsMaintenancePanelComponent(dataApiService) {
         this.dataApiService = dataApiService;
         this.programProfileOptions = __WEBPACK_IMPORTED_MODULE_1_app_app_constants__["a" /* AppConstants */].PROGRAMPROFILEOPTIONS;
@@ -154,7 +380,7 @@ var ProgramClientExceptionsMaintenancePanelComponent = /** @class */ (function (
 /***/ "../../../../../src/app/dashboard/communications-maintenance-panel/communications-maintenance-panel.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n    <caption></caption>\r\n    <thead class=\"bg-gradient-light\">\r\n      <tr *ngIf=\"selectedProgramConfigurations && selectedProgramConfigurations.length !== 0\">\r\n        <th><small>ID</small></th>\r\n        <th><small>Name</small></th>\r\n        <th *ngFor=\"let pco of programConfigurationOptions\"><small title=\"{{pco.title}}\">{{pco.label}}</small></th>\r\n        <th><small>Default</small></th>\r\n        <th><small>Required</small></th>\r\n        <th><small>Mandatory</small></th>\r\n        <th><small>Effective</small></th>\r\n        <th><small>Expiration</small></th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngIf=\"selectedProgramConfigurations && selectedProgramConfigurations.length === 0\">\r\n        <td colspan=\"10\">No Communications configured for Program</td>\r\n      </tr>\r\n      <tr *ngFor=\"let progConfig of selectedProgramConfigurations; let i = index\">\r\n        <td>\r\n            <span *ngIf=\"progConfig.communication\" class=\"badge badge-secondary\">{{progConfig.communication.id}}</span>\r\n        </td>\r\n        <td width=\"20%\"><span *ngIf=\"progConfig.communication\">{{progConfig.communication.name}}</span></td>\r\n        <td *ngFor=\"let pco of programConfigurationOptions\">\r\n            <app-show-communication-configuration-options\r\n              [configuration]=\"progConfig\"\r\n              [configurationProperty]=\"pco.property\"\r\n              [configurationOptionLabel]=\"pco.label\"\r\n              [configurationOptionLabelHidden]=\"true\"></app-show-communication-configuration-options>\r\n        </td>\r\n        <td>\r\n        </td>\r\n        <td>\r\n        </td>\r\n        <td>\r\n        </td>\r\n        <td>\r\n          <label for=\"effective\" class=\"sr-only\"><small>Effective</small></label>\r\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{progConfig.effective}}\" readonly></td>\r\n        <td>\r\n          <label for=\"expiration\" class=\"sr-only\"><small>Expiration</small></label>\r\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{progConfig.expiration}}\" readonly></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>"
+module.exports = "<table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\n    <caption></caption>\n    <thead class=\"bg-gradient-light\">\n      <tr *ngIf=\"selectedProgramConfigurations && selectedProgramConfigurations.length !== 0\">\n        <th><small>ID</small></th>\n        <th><small>Name</small></th>\n        <th *ngFor=\"let pco of programConfigurationOptions\"><small title=\"{{pco.title}}\">{{pco.label}}</small></th>\n        <th><small>Effective</small></th>\n        <th><small>Expiration</small></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngIf=\"selectedProgramConfigurations && selectedProgramConfigurations.length === 0\">\n        <td colspan=\"10\">No Communications configured for Program</td>\n      </tr>\n      <tr *ngFor=\"let progConfig of selectedProgramConfigurations; let i = index\"\n          (click)=\"setClickedCommRow(i, progConfig.communication)\" [class.table-info]=\"i === selectedRow\"\n          title=\"Click on Communication Configuration to reveal Client Exceptions below\" >\n        <td>\n            <span *ngIf=\"progConfig.communication\" class=\"badge badge-secondary clickable\">{{progConfig.communication.id}}</span>\n        </td>\n        <td width=\"20%\"><span *ngIf=\"progConfig.communication\">{{progConfig.communication.name}}</span></td>\n        <td *ngFor=\"let pco of programConfigurationOptions\">\n            <app-show-communication-configuration-options\n              [configuration]=\"progConfig\"\n              [configurationProperty]=\"pco.property\"\n              [configurationOptionLabel]=\"pco.label\"\n              [configurationOptionLabelHidden]=\"true\"></app-show-communication-configuration-options>\n        </td>\n        <td>\n          <label for=\"effective\" class=\"sr-only\"><small>Effective</small></label>\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{progConfig.effective}}\" readonly></td>\n        <td>\n          <label for=\"expiration\" class=\"sr-only\"><small>Expiration</small></label>\n          <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{progConfig.expiration}}\" readonly></td>\n      </tr>\n    </tbody>\n  </table>"
 
 /***/ }),
 
@@ -233,9 +459,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var CommunicationsMaintenancePanelComponent = /** @class */ (function () {
+var CommunicationsMaintenancePanelComponent = (function () {
     function CommunicationsMaintenancePanelComponent(dataApiService) {
         this.dataApiService = dataApiService;
+        this.configuredCommunications = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
+        this.selectedCommunication = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         this.programConfigurationOptions = __WEBPACK_IMPORTED_MODULE_1_app_app_constants__["a" /* AppConstants */].PROGRAMCONFIGURATIONOPTIONS;
     }
     CommunicationsMaintenancePanelComponent.prototype.ngOnInit = function () {
@@ -261,6 +489,9 @@ var CommunicationsMaintenancePanelComponent = /** @class */ (function () {
         console.log('CommunicationsMaintenancePanelComponent OnChanges', changes);
         if (changes.selectedProgram && !changes.selectedProgram.firstChange) {
             this.selectedProgramConfigurations = this.findProgramConfigurations(this.selectedProgram);
+            // output the selectedConfigurations' communications
+            this.configuredCommunications.emit(this.findConfiguredCommunications(this.selectedProgramConfigurations));
+            this.selectedRow = null;
             console.log(this.selectedProgramConfigurations);
         }
     };
@@ -326,10 +557,35 @@ var CommunicationsMaintenancePanelComponent = /** @class */ (function () {
             return false;
         });
     };
+    CommunicationsMaintenancePanelComponent.prototype.findConfiguredCommunications = function (selectedProgramConfigurations) {
+        var communications = [];
+        for (var i = 0; i < selectedProgramConfigurations.length; i++) {
+            communications.push(selectedProgramConfigurations[i].communication);
+        }
+        return communications;
+    };
+    CommunicationsMaintenancePanelComponent.prototype.setClickedCommRow = function (index, communication) {
+        if (this.selectedRow === index) {
+            this.selectedRow = null;
+            this.selectedCommunication.emit(null);
+        }
+        else {
+            this.selectedRow = index;
+            this.selectedCommunication.emit(communication);
+        }
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */])
     ], CommunicationsMaintenancePanelComponent.prototype, "selectedProgram", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */])(),
+        __metadata("design:type", Object)
+    ], CommunicationsMaintenancePanelComponent.prototype, "configuredCommunications", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */])(),
+        __metadata("design:type", Object)
+    ], CommunicationsMaintenancePanelComponent.prototype, "selectedCommunication", void 0);
     CommunicationsMaintenancePanelComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-communications-maintenance-panel',
@@ -368,7 +624,7 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_component__["a" /* DashboardComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__dashboard_component__["a" /* DashboardComponent */]];
-var DashboardRoutingModule = /** @class */ (function () {
+var DashboardRoutingModule = (function () {
     function DashboardRoutingModule() {
     }
     DashboardRoutingModule = __decorate([
@@ -387,7 +643,7 @@ var DashboardRoutingModule = /** @class */ (function () {
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card text-center border-dark\">\r\n      <h3 class=\"card-header bg-gradient-secondary text-white\">Maintenance Panel</h3>\r\n      <div class=\"card-body\">\r\n        \r\n        <!--<div class=\"card border-secondary mb-3 text-center\"></div>-->\r\n        <app-programs-maintenance-panel\r\n          (programSelected)=\"onProgramSelect($event)\"></app-programs-maintenance-panel>\r\n\r\n        <!--</div>card-->\r\n\r\n        <div class=\"card border-secondary mb-3 text-center\">\r\n          <h5 class=\"card-title bg-gradient-secondary text-white text-center\">\r\n            Program (\r\n            <span *ngIf=\"selectedProgram\">\r\n                {{selectedProgram.id}}</span>\r\n            ) &mdash; Client Exceptions</h5>\r\n          <div class=\"card-body text-center\">\r\n              <app-program-client-exceptions-maintenance-panel\r\n                [selectedProgram]=\"selectedProgram\"></app-program-client-exceptions-maintenance-panel>\r\n          </div>              \r\n        </div>\r\n\r\n        <div class=\"card border-secondary mb-3 text-center\">\r\n          <h5 class=\"card-title bg-gradient-secondary text-white text-center\">\r\n            Program (\r\n              <span *ngIf=\"selectedProgram\">\r\n                  {{selectedProgram.id}}</span>\r\n            ) &mdash; Communication Configurations</h5>\r\n          <div class=\"card-body text-center\">\r\n            <app-communications-maintenance-panel\r\n              [selectedProgram]=\"selectedProgram\"></app-communications-maintenance-panel>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"card border-secondary mb-3 text-center\">\r\n          <h5 class=\"card-title text-center\">Program () &mdash;Client Communication Configurations</h5>\r\n          <div class=\"card-body text-center\">\r\n            <blockquote class=\"card-blockquote\">\r\n              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>\r\n              <footer>Someone famous in <cite title=\"Source Title\">Source Title</cite></footer>\r\n            </blockquote>\r\n          </div>\r\n        </div>\r\n\r\n      </div><!--card-body -->\r\n    </div><!--card (main) -->\r\n  </div><!--col-md-12-->\r\n</div><!--row-->\r\n</div><!--container-->"
+module.exports = "<div class=\"container\">\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <div class=\"card text-center border-dark\">\r\n      <h3 class=\"card-header bg-gradient-secondary text-white\">Maintenance Panel</h3>\r\n      <div class=\"card-body\">\r\n        \r\n        <!--<div class=\"card border-secondary mb-3 text-center\"></div>-->\r\n        <app-programs-maintenance-panel\r\n          (programSelected)=\"onProgramSelect($event)\"></app-programs-maintenance-panel>\r\n\r\n        <!--</div>card-->\r\n\r\n        <div class=\"card border-secondary mb-3 text-center\">\r\n          <h5 class=\"card-title bg-gradient-secondary text-white text-center\">\r\n            Program (\r\n            <span *ngIf=\"selectedProgram\">\r\n                {{selectedProgram.id}}</span>\r\n            ) &mdash; Client Exceptions</h5>\r\n          <div class=\"card-body text-center\">\r\n              <app-program-client-exceptions-maintenance-panel\r\n                [selectedProgram]=\"selectedProgram\"></app-program-client-exceptions-maintenance-panel>\r\n          </div>              \r\n        </div>\r\n\r\n        <div class=\"card border-secondary mb-3 text-center\">\r\n          <h5 class=\"card-title bg-gradient-secondary text-white text-center\">\r\n            Program (\r\n              <span *ngIf=\"selectedProgram\">\r\n                  {{selectedProgram.id}}</span>\r\n            ) &mdash; Communication Configurations</h5>\r\n          <div class=\"card-body text-center\">\r\n            <app-communications-maintenance-panel\r\n              [selectedProgram]=\"selectedProgram\"\r\n              (configuredCommunications)=\"onCommunicationsConfigured($event)\"\r\n              (selectedCommunication)=\"onCommunicationSelect($event)\">\r\n            </app-communications-maintenance-panel>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"card border-secondary mb-3 text-center\">\r\n          <h5 class=\"card-title bg-gradient-secondary text-white text-center\">\r\n            Communication (\r\n              <span *ngIf=\"selectedCommunication\">\r\n                  {{selectedCommunication.id}}</span>\r\n            ) &mdash; Client Configuration Exceptions</h5>\r\n          <div class=\"card-body text-center\">\r\n            <app-client-configurations-maintenance-panel\r\n              [selectedProgram]=\"selectedProgram\"\r\n              [selectedCommunication]=\"selectedCommunication\"></app-client-configurations-maintenance-panel>\r\n          </div>\r\n        </div>\r\n\r\n      </div><!--card-body -->\r\n    </div><!--card (main) -->\r\n  </div><!--col-md-12-->\r\n</div><!--row-->\r\n</div><!--container-->"
 
 /***/ }),
 
@@ -429,7 +685,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DashboardComponent = /** @class */ (function () {
+var DashboardComponent = (function () {
     function DashboardComponent(dataApiService) {
         this.dataApiService = dataApiService;
     }
@@ -438,6 +694,17 @@ var DashboardComponent = /** @class */ (function () {
     DashboardComponent.prototype.onProgramSelect = function (program) {
         console.log('onProgramSelect:', program, (program instanceof __WEBPACK_IMPORTED_MODULE_1_app_shared_model_program__["a" /* Program */]));
         this.selectedProgram = program;
+        // this.configuredCommunications = undefined;
+        // this.selectedCommunication = undefined;
+    };
+    DashboardComponent.prototype.onCommunicationsConfigured = function (communications) {
+        console.log('onCommunicationsConfigured:', communications);
+        this.configuredCommunications = communications;
+        this.selectedCommunication = null;
+    };
+    DashboardComponent.prototype.onCommunicationSelect = function (communication) {
+        console.log('onCommunicationSelect:', communication);
+        this.selectedCommunication = communication;
     };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -463,12 +730,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardModule", function() { return DashboardModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__communications_maintenance_panel_communications_maintenance_panel_component__ = __webpack_require__("../../../../../src/app/dashboard/communications-maintenance-panel/communications-maintenance-panel.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__client_maintenance_panel_program_client_exceptions_maintenance_panel_component__ = __webpack_require__("../../../../../src/app/dashboard/client-maintenance-panel/program-client-exceptions-maintenance-panel.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__programs_maintenance_panel_programs_maintenance_panel_component__ = __webpack_require__("../../../../../src/app/dashboard/programs-maintenance-panel/programs-maintenance-panel.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__show_communication_configuration_options_show_communication_configuration_options_component__ = __webpack_require__("../../../../../src/app/dashboard/show-communication-configuration-options/show-communication-configuration-options.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__show_program_profile_options_show_program_profile_options_component__ = __webpack_require__("../../../../../src/app/dashboard/show-program-profile-options/show-program-profile-options.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_app_shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__client_maintenance_panel_client_configurations_maintenance_panel_component__ = __webpack_require__("../../../../../src/app/dashboard/client-maintenance-panel/client-configurations-maintenance-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__communications_maintenance_panel_communications_maintenance_panel_component__ = __webpack_require__("../../../../../src/app/dashboard/communications-maintenance-panel/communications-maintenance-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__client_maintenance_panel_program_client_exceptions_maintenance_panel_component__ = __webpack_require__("../../../../../src/app/dashboard/client-maintenance-panel/program-client-exceptions-maintenance-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__programs_maintenance_panel_programs_maintenance_panel_component__ = __webpack_require__("../../../../../src/app/dashboard/programs-maintenance-panel/programs-maintenance-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__show_communication_configuration_options_show_communication_configuration_options_component__ = __webpack_require__("../../../../../src/app/dashboard/show-communication-configuration-options/show-communication-configuration-options.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__show_program_profile_options_show_program_profile_options_component__ = __webpack_require__("../../../../../src/app/dashboard/show-program-profile-options/show-program-profile-options.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_app_shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -485,9 +753,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 // shared
 
-var DashboardModule = /** @class */ (function () {
+var DashboardModule = (function () {
     function DashboardModule() {
     }
     DashboardModule = __decorate([
@@ -495,15 +764,16 @@ var DashboardModule = /** @class */ (function () {
             imports: [
                 // CommonModule,
                 __WEBPACK_IMPORTED_MODULE_1__dashboard_routing_module__["a" /* DashboardRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_7_app_shared_shared_module__["SharedModule"]
+                __WEBPACK_IMPORTED_MODULE_8_app_shared_shared_module__["SharedModule"]
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_1__dashboard_routing_module__["b" /* routedComponents */],
-                __WEBPACK_IMPORTED_MODULE_2__communications_maintenance_panel_communications_maintenance_panel_component__["a" /* CommunicationsMaintenancePanelComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__client_maintenance_panel_program_client_exceptions_maintenance_panel_component__["a" /* ProgramClientExceptionsMaintenancePanelComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__programs_maintenance_panel_programs_maintenance_panel_component__["a" /* ProgramsMaintenancePanelComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__show_communication_configuration_options_show_communication_configuration_options_component__["a" /* ShowCommunicationConfigurationOptionsComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__show_program_profile_options_show_program_profile_options_component__["a" /* ShowProgramProfileOptionsComponent */],
+                __WEBPACK_IMPORTED_MODULE_2__client_maintenance_panel_client_configurations_maintenance_panel_component__["a" /* ClientConfigurationsMaintenancePanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_3__communications_maintenance_panel_communications_maintenance_panel_component__["a" /* CommunicationsMaintenancePanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__client_maintenance_panel_program_client_exceptions_maintenance_panel_component__["a" /* ProgramClientExceptionsMaintenancePanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__programs_maintenance_panel_programs_maintenance_panel_component__["a" /* ProgramsMaintenancePanelComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__show_communication_configuration_options_show_communication_configuration_options_component__["a" /* ShowCommunicationConfigurationOptionsComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__show_program_profile_options_show_program_profile_options_component__["a" /* ShowProgramProfileOptionsComponent */],
             ]
         })
     ], DashboardModule);
@@ -594,7 +864,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramsMaintenancePanelComponent = /** @class */ (function () {
+var ProgramsMaintenancePanelComponent = (function () {
     function ProgramsMaintenancePanelComponent(dataApiService) {
         this.dataApiService = dataApiService;
         this.programSelected = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
@@ -703,8 +973,7 @@ var ProgramsMaintenancePanelComponent = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: // : ProgramProfile[] {
-                    return [4 /*yield*/, this.getProgramProfiles()];
+                    case 0: return [4 /*yield*/, this.getProgramProfiles()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.programProfiles.filter(function (pp) {
@@ -744,7 +1013,7 @@ var ProgramsMaintenancePanelComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/dashboard/show-communication-configuration-options/show-communication-configuration-options.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<label for=\"{{configurationProperty}}\" class=\"flex-justify-left rounded\"\r\n  [ngClass]=\"{'sr-only': configurationOptionLabelHidden}\">\r\n  <small>{{configurationOptionLabel}}</small></label>\r\n<!--<select class=\"form-control form-control-sm flex-justify-right\"\r\n  id=\"{{configurationProperty}}_{{configurationProperty.id}}\" name=\"{{configurationProperty}}\" readonly>\r\n  <option>{{staticReadonlyOption}}</option>-->\r\n<input class=\"form-control form-control-sm flex-justify-right\"\r\n  id=\"{{configurationProperty}}_{{configurationProperty.id}}\" name=\"{{configurationProperty}}\" \r\n  title=\"{{configurationOptionTitle}}\"\r\n  value=\"{{staticReadonlyOption}}\" readonly />"
+module.exports = "<label for=\"{{configurationProperty}}\" class=\"flex-justify-left rounded\"\n  [ngClass]=\"{'sr-only': configurationOptionLabelHidden}\">\n  <small>{{configurationOptionLabel}}</small></label>\n<!--<select class=\"form-control form-control-sm flex-justify-right\"\n  id=\"{{configurationProperty}}_{{configurationProperty.id}}\" name=\"{{configurationProperty}}\" readonly>\n  <option>{{staticReadonlyOption}}</option>-->\n<input class=\"form-control form-control-sm flex-justify-right\"\n  id=\"{{configurationProperty}}_{{configurationProperty.id}}\" name=\"{{configurationProperty}}\" \n  title=\"{{configurationOptionTitle}}\"\n  value=\"{{staticReadonlyOption}}\" readonly />"
 
 /***/ }),
 
@@ -773,6 +1042,7 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShowCommunicationConfigurationOptionsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_classes_form_helpers__ = __webpack_require__("../../../../../src/app/shared/classes/form-helpers.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -784,14 +1054,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ShowCommunicationConfigurationOptionsComponent = /** @class */ (function () {
+
+var ShowCommunicationConfigurationOptionsComponent = (function () {
     function ShowCommunicationConfigurationOptionsComponent() {
         this.configurationOptionLabelHidden = false;
         this.configurationOptionTitle = '';
         this.channelPriortyOpts = __WEBPACK_IMPORTED_MODULE_1_app_app_constants__["a" /* AppConstants */].CHANNELPRIORTYOPTS;
     }
+    ShowCommunicationConfigurationOptionsComponent.prototype.ngOnChanges = function (changes) {
+        if (changes.profile && !changes.profile.firstChange) {
+            this.staticReadonlyOption = __WEBPACK_IMPORTED_MODULE_2_app_shared_classes_form_helpers__["a" /* FormStaticHelper */].setReadOnlyOption(this.configuration, this.configurationProperty);
+        }
+    };
     ShowCommunicationConfigurationOptionsComponent.prototype.ngOnInit = function () {
-        this.staticReadonlyOption = this.configuration[this.configurationProperty];
+        // this.staticReadonlyOption = this.configuration[this.configurationProperty];
+        this.staticReadonlyOption = __WEBPACK_IMPORTED_MODULE_2_app_shared_classes_form_helpers__["a" /* FormStaticHelper */].setReadOnlyOption(this.configuration, this.configurationProperty);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -832,7 +1109,7 @@ var ShowCommunicationConfigurationOptionsComponent = /** @class */ (function () 
 /***/ "../../../../../src/app/dashboard/show-program-profile-options/show-program-profile-options.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<label for=\"{{profileProperty}}\" class=\"flex-justify-left rounded\"\r\n    [ngClass]=\"{'sr-only': profileOptionLabelHidden}\">\r\n    <small>{{profileOptionLabel}}</small></label>\r\n<!--<select class=\"form-control form-control-sm flex-justify-right\"\r\n    id=\"{{profileProperty}}_{{profileProperty.id}}\" name=\"{{profileProperty}}\" readonly>\r\n    <option>{{staticReadonlyOption}}</option>-->\r\n<input class=\"form-control form-control-sm flex-justify-right\"\r\n    id=\"{{profileProperty}}_{{profileProperty.id}}\" name=\"{{profileProperty}}\" \r\n    title=\"{{profileOptionTitle}}\"\r\n    value=\"{{staticReadonlyOption}}\" readonly />"
+module.exports = "<label for=\"{{profileProperty}}\" class=\"flex-justify-left rounded\"\n    [ngClass]=\"{'sr-only': profileOptionLabelHidden}\">\n    <small>{{profileOptionLabel}}</small></label>\n<!--<select class=\"form-control form-control-sm flex-justify-right\"\n    id=\"{{profileProperty}}_{{profileProperty.id}}\" name=\"{{profileProperty}}\" readonly>\n    <option>{{staticReadonlyOption}}</option>-->\n<input class=\"form-control form-control-sm flex-justify-right\"\n    id=\"{{profileProperty}}_{{profileProperty.id}}\" name=\"{{profileProperty}}\" \n    title=\"{{profileOptionTitle}}\"\n    value=\"{{staticReadonlyOption}}\" readonly />"
 
 /***/ }),
 
@@ -860,6 +1137,7 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShowProgramProfileOptionsComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_shared_classes_form_helpers__ = __webpack_require__("../../../../../src/app/shared/classes/form-helpers.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -870,14 +1148,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ShowProgramProfileOptionsComponent = /** @class */ (function () {
+
+var ShowProgramProfileOptionsComponent = (function () {
     function ShowProgramProfileOptionsComponent() {
         this.profileOptionLabelHidden = false;
         this.profileOptionTitle = '';
         this.staticReadonlyOption = '';
     }
+    ShowProgramProfileOptionsComponent.prototype.ngOnChanges = function (changes) {
+        if (changes.profile && !changes.profile.firstChange) {
+            this.staticReadonlyOption = __WEBPACK_IMPORTED_MODULE_1_app_shared_classes_form_helpers__["a" /* FormStaticHelper */].setReadOnlyOption(this.profile, this.profileProperty);
+        }
+    };
     ShowProgramProfileOptionsComponent.prototype.ngOnInit = function () {
-        this.staticReadonlyOption = this.profile[this.profileProperty] ? 'Yes' : 'No';
+        // this.staticReadonlyOption = this.profile[this.profileProperty] ? 'Yes' : 'No';
+        this.staticReadonlyOption = __WEBPACK_IMPORTED_MODULE_1_app_shared_classes_form_helpers__["a" /* FormStaticHelper */].setReadOnlyOption(this.profile, this.profileProperty);
+        // if (typeof this.profile[this.profileProperty] === 'boolean') {
+        //   this.staticReadonlyOption = this.profile[this.profileProperty] ? 'Yes' : 'No';
+        // } else {
+        // // this.staticReadonlyOption = this.profile[this.profileProperty];
+        //   switch (this.profile[this.profileProperty]) {
+        //     case 'Y': {
+        //       this.staticReadonlyOption = 'Yes';
+        //       break;
+        //     }
+        //     case 'N': {
+        //       this.staticReadonlyOption = 'No';
+        //       break;
+        //     }
+        //     case 'P': {
+        //       this.staticReadonlyOption = 'Promote';
+        //       break;
+        //     }
+        //     default: {
+        //       this.staticReadonlyOption = 'ERR ' + this.profile[this.profileProperty];
+        //       break;
+        //     }
+        //   }
+        // }
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -909,6 +1217,56 @@ var ShowProgramProfileOptionsComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], ShowProgramProfileOptionsComponent);
     return ShowProgramProfileOptionsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/shared/classes/form-helpers.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FormStaticHelper; });
+var FormStaticHelper = (function () {
+    function FormStaticHelper() {
+    }
+    FormStaticHelper.setReadOnlyOption = function (configObject, configPropName) {
+        // this.staticReadonlyOption = this.configuration[this.configurationProperty];
+        var staticReadonlyOption = 'ERR';
+        if (typeof configObject[configPropName] === 'boolean') {
+            staticReadonlyOption = configObject[configPropName] ? 'Yes' : 'No';
+        }
+        else if (typeof configObject[configPropName] === 'number') {
+            staticReadonlyOption = configObject[configPropName];
+        }
+        else if (typeof configObject[configPropName] === 'string' &&
+            configObject[configPropName].length > 1) {
+            staticReadonlyOption = configObject[configPropName];
+        }
+        else {
+            switch (configObject[configPropName]) {
+                case 'Y': {
+                    staticReadonlyOption = 'Yes';
+                    break;
+                }
+                case 'N': {
+                    staticReadonlyOption = 'No';
+                    break;
+                }
+                case 'P': {
+                    staticReadonlyOption = 'Promo';
+                    break;
+                }
+                default: {
+                    staticReadonlyOption = 'ERR ' + configObject[configPropName];
+                    break;
+                }
+            }
+        }
+        return staticReadonlyOption;
+    };
+    return FormStaticHelper;
 }());
 
 

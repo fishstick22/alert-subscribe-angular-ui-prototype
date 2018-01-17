@@ -43,7 +43,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ProgramActionsPopoverComponent = /** @class */ (function () {
+var ProgramActionsPopoverComponent = (function () {
     function ProgramActionsPopoverComponent() {
         this.attachOutsideOnClick = false;
         this.delayClickOutsideInit = true;
@@ -172,7 +172,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 
 
-var ProgramStatusComponent = /** @class */ (function () {
+var ProgramStatusComponent = (function () {
     function ProgramStatusComponent() {
         this.detectChanges = '';
         // @Output() statusUpdate = new EventEmitter<any>();
@@ -260,7 +260,7 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__programs_component__["a" /* ProgramsComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__programs_component__["a" /* ProgramsComponent */]];
-var ProgramsRoutingModule = /** @class */ (function () {
+var ProgramsRoutingModule = (function () {
     function ProgramsRoutingModule() {
     }
     ProgramsRoutingModule = __decorate([
@@ -362,7 +362,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramsComponent = /** @class */ (function () {
+var ProgramsComponent = (function () {
     function ProgramsComponent(dataApiService, programClientExcService, programConfigService, programsMaintService) {
         this.dataApiService = dataApiService;
         this.programClientExcService = programClientExcService;
@@ -682,7 +682,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // shared
 
-var ProgramsModule = /** @class */ (function () {
+var ProgramsModule = (function () {
     function ProgramsModule() {
     }
     ProgramsModule = __decorate([
@@ -723,7 +723,7 @@ var ProgramsModule = /** @class */ (function () {
 /***/ "../../../../../src/app/programs/services/program-client-exceptions/program-client-exceptions-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #programClientExceptionForm=\"ngForm\" \r\n(ngSubmit)=\"saveProgramClientExceptions()\" >\r\n\r\n<div class=\"modal-header bg-gradient-dark\">\r\n<h4 class=\"modal-title text-white\">\r\n  Configure Client Exceptions\r\n  <small>for ProgramId {{program.id}}: {{program.name}}</small>\r\n</h4>\r\n<button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureProgramClientExcModal.dismiss('Cross click')\">\r\n<span aria-hidden=\"true\">&times;</span>\r\n</button>\r\n</div>\r\n\r\n<div class=\"modal-body\">\r\n  <div id=\"configuredClients\">\r\n    <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n      <caption></caption>\r\n      <thead class=\"bg-gradient-dark text-white\">\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>C<small>ode</small></th>\r\n          <th>N<small>ame</small></th>\r\n          <th><small>OptIn Def</small></th>\r\n          <th><small>UI Visible</small></th>\r\n          <th>E<small>mail</small></th>\r\n          <th>IVR</th>\r\n          <th>SMS</th>\r\n          <th>S<small>ecure</small></th>\r\n<!--           <th>M<small>ail</small></th>\r\n          <th>M<small>obile</small></th> -->\r\n          <th>E<small>ffective</small></th>\r\n          <th>E<small>xpiration</small></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let pce of programClientExceptions; let i = index\">\r\n          <td>\r\n              <span *ngIf=\"pce.client.id\" class=\"badge badge-secondary\">{{pce.client.id}}</span>\r\n          </td>\r\n          <td><span >{{pce.client.code}}</span></td>\r\n          <td width=\"18%\"><span >{{pce.client.name}}</span></td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"defaultOptIn\" name=\"defaultOptIn\" label=\"Opt In\"\r\n              [(ngModel)]=\"pce.defaultOptIn\"\r\n              [staticValue]=\"pce.defaultOptIn\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"visibleInUi\" name=\"visibleInUi\" label=\"UI\"\r\n              [(ngModel)]=\"pce.visibleInUi\"\r\n              [staticValue]=\"pce.visibleInUi\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanEmail\" name=\"chanEmail\" label=\"Email\"\r\n              [(ngModel)]=\"pce.chanEmail\"\r\n              [staticValue]=\"pce.chanEmail\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanIvr\" name=\"chanIvr\" label=\"IVR\"\r\n              [(ngModel)]=\"pce.chanIvr\"\r\n              [staticValue]=\"pce.chanIvr\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanSms\" name=\"chanSms\" label=\"SMS\"\r\n              [(ngModel)]=\"pce.chanSms\"\r\n              [staticValue]=\"pce.chanSms\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanMail\" name=\"chanMail\" label=\"Secure\"\r\n              [(ngModel)]=\"pce.chanMail\"\r\n              [staticValue]=\"pce.chanMail\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n<!--          <td>\r\n            <app-select-profile-option \r\n              id=\"chanMail\" name=\"chanMail\" label=\"Mail\"\r\n              [(ngModel)]=\"pce.chanMail\"\r\n              [staticValue]=\"pce.chanMail\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td>\r\n          <td>\r\n            <app-select-profile-option \r\n              id=\"chanMobile\" name=\"chanMobile\" label=\"Mobile\"\r\n              [(ngModel)]=\"pce.chanMobile\"\r\n              [staticValue]=\"pce.chanMobile\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"true\"\r\n              [dynamicPicker]=\"false\"></app-select-profile-option>\r\n          </td> -->\r\n          <td>\r\n            <app-date-picker-popup [dateValue]=\"pce.effective\"\r\n              (newDateValue)=\"updateDateValue($event, profile, 'effective')\"></app-date-picker-popup>    \r\n          </td>\r\n          <td>\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{pce.expiration}}\" readonly>\r\n          </td>\r\n          \r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n  \r\n<div class=\"modal-footer\">\r\n  <div class=\"w-100\">\r\n    <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n    <div class=\"float-right\">\r\n        <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programClientExceptionForm.valid\">Save</button>\r\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureProgramClientExcModal.close('Close click')\">Cancel</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n</form> "
+module.exports = "<form #programClientExceptionForm=\"ngForm\" \r\n(ngSubmit)=\"saveProgramClientExceptions()\" >\r\n\r\n<div class=\"modal-header bg-gradient-dark\">\r\n<h4 class=\"modal-title text-white\">\r\n  Configure Client Exceptions\r\n  <small>for ProgramId {{program.id}}: {{program.name}}</small>\r\n</h4>\r\n<button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"configureProgramClientExcModal.dismiss('Cross click')\">\r\n<span aria-hidden=\"true\">&times;</span>\r\n</button>\r\n</div>\r\n\r\n<div class=\"modal-body\">\r\n  <div id=\"configuredClients\">\r\n    <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n      <caption></caption>\r\n      <thead class=\"bg-gradient-light\">\r\n        <tr>\r\n          <th><small>ID</small></th>\r\n          <th><small>Code</small></th>\r\n          <th><small>Name</small></th>\r\n          <th *ngFor=\"let ppo of programProfileOptions\">\r\n            <small title=\"{{ppo.title}}\">{{ppo.label}}</small>\r\n          </th>\r\n          <th><small>Effective</small></th>\r\n          <th><small>Expiration</small></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let pce of programClientExceptions; let i = index\">\r\n          <td>\r\n              <span *ngIf=\"pce.client.id\" class=\"badge badge-secondary\">{{pce.client.id}}</span>\r\n          </td>\r\n          <td><span >{{pce.client.code}}</span></td>\r\n          <td width=\"18%\"><span >{{pce.client.name}}</span></td>\r\n\r\n          <td *ngFor=\"let ppo of programProfileOptions\">\r\n            <app-select-profile-option \r\n              [name]=\"ppo.property\" [label]=\"ppo.label\"\r\n              [(ngModel)]=\"pce[ppo.property]\"\r\n              [staticValue]=\"pce[ppo.property]\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"i === 0 && !newProgram\"\r\n              [dynamicPicker]=\"i !== 0 || newProgram\"\r\n              [profileOpts]=\"ppo.opts\"></app-select-profile-option>\r\n          </td>\r\n\r\n          <td>\r\n            <app-date-picker-popup [dateValue]=\"pce.effective\"\r\n              (newDateValue)=\"updateDateValue($event, profile, 'effective')\"></app-date-picker-popup>    \r\n          </td>\r\n          <td>\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{pce.expiration}}\" readonly>\r\n          </td>\r\n          \r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n  \r\n<div class=\"modal-footer\">\r\n  <div class=\"w-100\">\r\n    <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n    <div class=\"float-right\">\r\n        <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programClientExceptionForm.valid\">Save</button>\r\n        <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"configureProgramClientExcModal.close('Close click')\">Cancel</button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n</form> "
 
 /***/ }),
 
@@ -753,7 +753,8 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramClientExceptionsModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_app_constants__ = __webpack_require__("../../../../../src/app/app-constants.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__ = __webpack_require__("../../../../../src/app/shared/model/program.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -766,17 +767,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ProgramClientExceptionsModalResult = /** @class */ (function () {
+
+var ProgramClientExceptionsModalResult = (function () {
     function ProgramClientExceptionsModalResult() {
     }
     return ProgramClientExceptionsModalResult;
 }());
 
-var ProgramClientExceptionsModalComponent = /** @class */ (function () {
+var ProgramClientExceptionsModalComponent = (function () {
     function ProgramClientExceptionsModalComponent(configureProgramClientExcModal) {
         this.configureProgramClientExcModal = configureProgramClientExcModal;
         this.configType = '';
-        this.program = new __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
+        this.program = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
+        this.programProfileOptions = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].PROGRAMPROFILEOPTIONS;
         this.addProfile = false;
         this.newProgram = false;
         this.expireProgram = false;
@@ -795,7 +798,7 @@ var ProgramClientExceptionsModalComponent = /** @class */ (function () {
     ], ProgramClientExceptionsModalComponent.prototype, "configType", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2_app_shared_model_program__["a" /* Program */])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */])
     ], ProgramClientExceptionsModalComponent.prototype, "program", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -880,7 +883,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramClientExceptionsModalService = /** @class */ (function () {
+var ProgramClientExceptionsModalService = (function () {
     function ProgramClientExceptionsModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -1097,13 +1100,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 //
-var ProgramConfigModalResult = /** @class */ (function () {
+var ProgramConfigModalResult = (function () {
     function ProgramConfigModalResult() {
     }
     return ProgramConfigModalResult;
 }());
 
-var ProgramConfigurationsModalComponent = /** @class */ (function () {
+var ProgramConfigurationsModalComponent = (function () {
     function ProgramConfigurationsModalComponent(
         // private dataApiService: DataApiService,
         configureProgramModal) {
@@ -1143,7 +1146,7 @@ var ProgramConfigurationsModalComponent = /** @class */ (function () {
             this.lastProgramConfigRow = this.programConfigurations.length;
             if (this.lastProgramConfigRow === 0) {
                 this.newProgramConfig = new __WEBPACK_IMPORTED_MODULE_5_app_shared_model_program_configuration__["a" /* ProgramConfiguration */]();
-                this.newProgramConfig.effective = // TODO shared util method
+                this.newProgramConfig.effective =
                     this.tomorrow.getFullYear() + '-' +
                         (this.tomorrow.getMonth() + 1) + '-' +
                         this.tomorrow.getDate();
@@ -1292,7 +1295,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramConfigurationsModalService = /** @class */ (function () {
+var ProgramConfigurationsModalService = (function () {
     function ProgramConfigurationsModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -1517,7 +1520,7 @@ var ProgramConfigurationsModalService = /** @class */ (function () {
 /***/ "../../../../../src/app/programs/services/programs-maintenance/programs-maintenance-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #programMaintenanceForm=\"ngForm\" \r\n      (ngSubmit)=\"saveProgram()\" >\r\n\r\n  <div class=\"modal-header bg-gradient-dark\">\r\n    <h4 class=\"modal-title text-white\">\r\n      <span *ngIf=\"configType === 'edit'\">\r\n        Edit Program <small>{{program.name}} (ProgramId: {{program.id}}) profile</small></span>\r\n      <span *ngIf=\"configType === 'add'\">\r\n        Add New Program</span>\r\n    </h4>\r\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"maintainProgramModal.dismiss('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n    \r\n  <div class=\"modal-body\">\r\n    <div class=\"form-row\">\r\n      <div class=\"form-group col-md-4\">\r\n        <label for=\"programName\" class=\"text-white bg-gradient-dark flex-justify-left rounded\">\r\n          Program Name</label>\r\n        <input type=\"text\" class=\"form-control\"\r\n               [(ngModel)]=\"programForForm.name\" id=\"programName\" name=\"name\" required\r\n               aria-describedby=\"programNameHelp\" placeholder=\"Enter Program Name\">\r\n        <small id=\"programNameHelp\" class=\"form-text text-muted\">Short Name of the Program.</small>\r\n      </div>\r\n      <div class=\"form-group col-md-8\">\r\n        <label for=\"programDescription\" class=\"text-white bg-gradient-dark flex-justify-left rounded\">\r\n          Program Description</label>\r\n        <input type=\"text\" class=\"form-control\" \r\n               [(ngModel)]=\"programForForm.description\" id=\"programDescription\" name=\"description\" required\r\n               aria-describedby=\"programDescriptionlHelp\" placeholder=\"Enter Program Description\">\r\n        <small id=\"programDescriptionlHelp\" class=\"form-text text-muted\">Brief Description of the Program.</small>\r\n      </div>\r\n    </div>\r\n        \r\n    <span *ngIf=\"programProfiles\">\r\n      <div class=\"form-row\" *ngFor=\"let profile of programProfiles; let i = index\">\r\n\r\n        <div class=\"form-group col-md-1\">\r\n            <app-select-profile-option \r\n              id=\"defaultOptIn\" name=\"defaultOptIn\" label=\"Opt In\"\r\n              [(ngModel)]=\"profile.defaultOptIn\"\r\n              [staticValue]=\"profile.defaultOptIn\"\r\n              [showHeader]=\"i === 0\"\r\n              [staticReadOnly]=\"i === 0 && !newProgram\"\r\n              [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n          \r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"visibleInUi\" name=\"visibleInUi\" label=\"UI\"\r\n            [(ngModel)]=\"profile.visibleInUi\"\r\n            [staticValue]=\"profile.visibleInUi\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanEmail\" name=\"chanEmail\" label=\"Email\"\r\n            [(ngModel)]=\"profile.chanEmail\"\r\n            [staticValue]=\"profile.chanEmail\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanIvr\" name=\"chanIvr\" label=\"IVR\"\r\n            [(ngModel)]=\"profile.chanIvr\"\r\n            [staticValue]=\"profile.chanIvr\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanSms\" name=\"chanSms\" label=\"SMS\"\r\n            [(ngModel)]=\"profile.chanSms\"\r\n            [staticValue]=\"profile.chanSms\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanSecure\" name=\"chanSecure\" label=\"Secure\"\r\n            [(ngModel)]=\"profile.chanSecure\"\r\n            [staticValue]=\"profile.chanSecure\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanMail\" name=\"chanMail\" label=\"Mail\"\r\n            [(ngModel)]=\"profile.chanMail\"\r\n            [staticValue]=\"profile.chanMail\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-1\">\r\n          <app-select-profile-option \r\n            id=\"chanMobile\" name=\"chanMobile\" label=\"Mobile\"\r\n            [(ngModel)]=\"profile.chanMobile\"\r\n            [staticValue]=\"profile.chanMobile\"\r\n            [showHeader]=\"i === 0\"\r\n            [staticReadOnly]=\"i === 0 && !newProgram\"\r\n            [dynamicPicker]=\"i !== 0 || newProgram\"></app-select-profile-option>\r\n        </div>\r\n\r\n        <!-- move these into a component, the current eff/exp component only works on configs -->\r\n        <div class=\"form-group col-md-2\">\r\n          <span *ngIf=\"i === 0 && !newProgram\">\r\n            <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n                Effective</label>\r\n            <!-- the effective date of the current effective row -->\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.effective}}\" readonly>\r\n          </span>\r\n          <span *ngIf=\"newProgram || i !== 0\">\r\n            <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded\"\r\n              [ngClass]=\"{'sr-only': !newProgram}\">\r\n              Effective</label>\r\n            <!-- set the effective date for the new row -->\r\n            <app-date-picker-popup [dateValue]=\"profile.effective\"\r\n              (newDateValue)=\"updateDateValue($event, profile, 'effective')\"></app-date-picker-popup>           \r\n          </span>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-2\">\r\n          <span *ngIf=\"i === 0 && expireProgram\">\r\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n              Expiration</label>\r\n            <!-- the expiration date of the current/previous row -->\r\n            <app-date-picker-popup [dateValue]=\"profile.expiration\"\r\n              (newDateValue)=\"updateDateValue($event, profile, 'expiration')\"></app-date-picker-popup> \r\n          </span>\r\n          <span *ngIf=\"i === 0 && !expireProgram\">\r\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n              Expiration</label>\r\n            <!-- the expiration date of the current/previous row -->\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly\r\n              (click)=\"changeProfile(profile)\" >\r\n          </span>\r\n          <span *ngIf=\"i !== 0\">\r\n            <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\r\n              Expiration</label>\r\n            <!-- the expiration date of the current/previous row -->\r\n            <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly>\r\n          </span>\r\n        </div>\r\n\r\n        <div class=\"form-row\" *ngIf=\"addProfile\">\r\n          <div class=\"form-group col-md-1\">\r\n            <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n              (click)=\"changeProfile(profile)\" title=\"Modify Program Profile\"></i>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n    </span>\r\n  </div>\r\n    \r\n  <div class=\"modal-footer\">\r\n    <div class=\"w-100\">\r\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n      <div class=\"float-right\">\r\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programMaintenanceForm.valid\">Save</button>\r\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"maintainProgramModal.close('Close click')\">Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</form>      "
+module.exports = "<form #programMaintenanceForm=\"ngForm\" \r\n      (ngSubmit)=\"saveProgram()\" >\r\n\r\n  <div class=\"modal-header bg-gradient-dark\">\r\n    <h4 class=\"modal-title text-white\">\r\n      <span *ngIf=\"configType === 'edit'\">\r\n        Edit Program <small>{{program.name}} (ProgramId: {{program.id}}) profile</small></span>\r\n      <span *ngIf=\"configType === 'add'\">\r\n        Add New Program</span>\r\n    </h4>\r\n    <button type=\"button\" class=\"close text-white\" aria-label=\"Close\" (click)=\"maintainProgramModal.dismiss('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n    \r\n  <div class=\"modal-body\">\r\n\r\n    <table class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n      <caption></caption>\r\n      <thead class=\"bg-gradient-light\">\r\n        <tr>\r\n          <th width=\"20%\">Program Name</th>\r\n          <th width=\"80%\">Program Description</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr>\r\n          <td class=\"form-group\">\r\n\r\n              <label for=\"programName\" class=\"text-white bg-gradient-dark flex-justify-left rounded sr-only\">\r\n                Program Name</label>\r\n              <input type=\"text\" class=\"form-control\"\r\n                      [(ngModel)]=\"programForForm.name\" id=\"programName\" name=\"name\" required\r\n                      aria-describedby=\"programNameHelp\" placeholder=\"Enter Program Name\">\r\n              <small id=\"programNameHelp\" class=\"form-text text-muted\">Short Name of the Program.</small>\r\n\r\n          </td>\r\n          <td class=\"form-group\">\r\n\r\n              <label for=\"programDescription\" class=\"text-white bg-gradient-dark flex-justify-left rounded sr-only\">\r\n                Program Description</label>\r\n              <input type=\"text\" class=\"form-control\" \r\n                      [(ngModel)]=\"programForForm.description\" id=\"programDescription\" name=\"description\" required\r\n                      aria-describedby=\"programDescriptionHelp\" placeholder=\"Enter Program Description\">\r\n              <small id=\"programDescriptionHelp\" class=\"form-text text-muted\">Brief Description of the Program.</small>\r\n\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n\r\n    <table *ngIf=\"programProfiles\" class=\"table table-responsive table-sm table-striped table-bordered table-hover\">\r\n      <caption></caption>\r\n      <thead class=\"bg-gradient-light\">\r\n        <tr>\r\n          <th *ngFor=\"let ppo of programProfileOptions\">\r\n            <small title=\"{{ppo.title}}\">{{ppo.label}}</small>\r\n          </th>\r\n          <th><small>Effective</small></th>\r\n          <th><small>Expiration</small></th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let profile of programProfiles; let i = index\">\r\n          <td *ngFor=\"let ppo of programProfileOptions\">\r\n\r\n            <app-select-profile-option \r\n              [name]=\"ppo.property\" [label]=\"ppo.label\"\r\n              [(ngModel)]=\"profile[ppo.property]\"\r\n              [staticValue]=\"profile[ppo.property]\"\r\n              [showHeader]=\"false\"\r\n              [staticReadOnly]=\"i === 0 && !newProgram\"\r\n              [dynamicPicker]=\"i !== 0 || newProgram\"\r\n              [profileOpts]=\"ppo.opts\"></app-select-profile-option>\r\n          </td>\r\n          <td><!--TODO move these to a common component -->\r\n              <span *ngIf=\"i === 0 && !newProgram\">\r\n                  <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\r\n                      Effective</label>\r\n                  <!-- the effective date of the current effective row -->\r\n                  <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.effective}}\" readonly>\r\n                </span>\r\n                <span *ngIf=\"newProgram || i !== 0\">\r\n                  <label for=\"effective\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\r\n                    Effective</label>\r\n                  <!-- set the effective date for the new row -->\r\n                  <app-date-picker-popup [dateValue]=\"profile.effective\"\r\n                    (newDateValue)=\"updateDateValue($event, profile, 'effective')\"></app-date-picker-popup>           \r\n                </span>\r\n          </td>\r\n          <td>\r\n              <span *ngIf=\"i === 0 && expireProgram\">\r\n                  <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\r\n                    Expiration</label>\r\n                  <!-- the expiration date of the current/previous row -->\r\n                  <app-date-picker-popup [dateValue]=\"profile.expiration\"\r\n                    (newDateValue)=\"updateDateValue($event, profile, 'expiration')\"></app-date-picker-popup> \r\n                </span>\r\n                <span *ngIf=\"i === 0 && !expireProgram\">\r\n                  <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\r\n                    Expiration</label>\r\n                  <!-- the expiration date of the current/previous row -->\r\n                  <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly\r\n                    (click)=\"changeProfile(profile)\" >\r\n                </span>\r\n                <span *ngIf=\"i !== 0\">\r\n                  <label for=\"expiration\" class=\"text-white bg-gradient-dark flex-justify-center rounded sr-only\">\r\n                    Expiration</label>\r\n                  <!-- the expiration date of the current/previous row -->\r\n                  <input class=\"form-control form-control-sm date-eff-exp-input\" value=\"{{profile.expiration}}\" readonly>\r\n                </span>\r\n          </td>\r\n        </tr>\r\n\r\n        <tr *ngIf=\"addProfile\">\r\n          <td colspan=\"10\">\r\n              <i class=\"fa fa-plus-square-o clickable\" aria-hidden=\"true\" \r\n                (click)=\"changeProfile(profile)\" title=\"Modify Program Profile\"></i>\r\n          </td>\r\n        </tr>\r\n\r\n      </tbody>\r\n    </table>\r\n\r\n  </div>\r\n    \r\n  <div class=\"modal-footer\">\r\n    <div class=\"w-100\">\r\n      <span class=\"float-left\">Some instructional content or condition message goes here: </span>\r\n      <div class=\"float-right\">\r\n          <button type=\"submit\" class=\"btn btn-outline-dark\" [disabled]=\"!programMaintenanceForm.valid\">Save</button>\r\n          <button type=\"button\" class=\"btn btn-outline-dark\" (click)=\"maintainProgramModal.close('Close click')\">Cancel</button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</form>      "
 
 /***/ }),
 
@@ -1564,19 +1567,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ProgramsMaintModalResult = /** @class */ (function () {
+var ProgramsMaintModalResult = (function () {
     function ProgramsMaintModalResult() {
     }
     return ProgramsMaintModalResult;
 }());
 
-var ProgramsMaintenanceModalComponent = /** @class */ (function () {
+var ProgramsMaintenanceModalComponent = (function () {
     function ProgramsMaintenanceModalComponent(maintainProgramModal) {
         this.maintainProgramModal = maintainProgramModal;
         this.configType = '';
         this.program = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */]();
         this.programForForm = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_program__["a" /* Program */](); // just becasue service inits whenever
         this.programProfiles = [];
+        this.programProfileOptions = __WEBPACK_IMPORTED_MODULE_2_app_app_constants__["a" /* AppConstants */].PROGRAMPROFILEOPTIONS;
         this.addProfile = false;
         this.newProgram = false;
         this.expireProgram = false;
@@ -1604,7 +1608,8 @@ var ProgramsMaintenanceModalComponent = /** @class */ (function () {
             // show only the current effective Profile row
             this.programProfiles = [];
             var currentEffectiveProfile = this.getCurrentEffectiveProfile(this.programForForm)[0];
-            this.programProfiles = [new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__["a" /* ProgramProfile */](this.programForForm.id, currentEffectiveProfile, true)];
+            this.effectiveProfile = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__["a" /* ProgramProfile */](this.programForForm.id, currentEffectiveProfile, true);
+            this.programProfiles = [this.effectiveProfile];
             this.addProfile = true;
         }
         if (this.configType === 'expire') {
@@ -1626,15 +1631,19 @@ var ProgramsMaintenanceModalComponent = /** @class */ (function () {
         });
     };
     ProgramsMaintenanceModalComponent.prototype.changeProfile = function (currProfile) {
+        // somehow this is coming in null from template?
+        if (!currProfile) {
+            currProfile = this.effectiveProfile;
+        }
         if (this.addProfile) {
             // expire the current profile row
-            currProfile.expiration = // TODO shared util method
+            currProfile.expiration =
                 this.today.getFullYear() + '-' +
                     (this.today.getMonth() + 1) + '-' +
                     this.today.getDate();
             // insert a new profile row with tommorow effective
             var newProfile = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_program_profile__["a" /* ProgramProfile */](this.programForForm.id, currProfile);
-            newProfile.effective = // TODO shared util method
+            newProfile.effective =
                 this.tomorrow.getFullYear() + '-' +
                     (this.tomorrow.getMonth() + 1) + '-' +
                     this.tomorrow.getDate();
@@ -1779,7 +1788,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramsMaintenanceModalService = /** @class */ (function () {
+var ProgramsMaintenanceModalService = (function () {
     function ProgramsMaintenanceModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -2167,7 +2176,7 @@ var ProgramsMaintenanceModalService = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalResult; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ng_bootstrap_ng_bootstrap__ = __webpack_require__("../../../../@ng-bootstrap/ng-bootstrap/index.js");
 
-var ModalStaticHelper = /** @class */ (function () {
+var ModalStaticHelper = (function () {
     function ModalStaticHelper() {
     }
     ModalStaticHelper.getDismissReason = function (reason) {
@@ -2184,7 +2193,7 @@ var ModalStaticHelper = /** @class */ (function () {
     return ModalStaticHelper;
 }());
 
-var ModalResult = /** @class */ (function () {
+var ModalResult = (function () {
     function ModalResult() {
         this.success = false;
     }
@@ -2200,7 +2209,7 @@ var ModalResult = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramProfile; });
-var ProgramProfile = /** @class */ (function () {
+var ProgramProfile = (function () {
     function ProgramProfile(programId, programProfile, inclId) {
         if (programProfile) {
             // this.id = inclId ? programProfile.id : undefined;
@@ -2220,14 +2229,14 @@ var ProgramProfile = /** @class */ (function () {
             this.program = programId;
         }
         else {
-            this.defaultOptIn = false;
-            this.visibleInUi = false;
-            this.chanEmail = false;
-            this.chanIvr = false;
-            this.chanSms = false;
-            this.chanSecure = false;
-            this.chanMail = false;
-            this.chanMobile = false;
+            this.defaultOptIn = 'N';
+            this.visibleInUi = 'N';
+            this.chanEmail = 'N';
+            this.chanIvr = 'N';
+            this.chanSms = 'N';
+            this.chanSecure = 'N';
+            this.chanMail = 'N';
+            this.chanMobile = 'N';
             this.program = programId;
         }
     }

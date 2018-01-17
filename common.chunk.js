@@ -5,13 +5,14 @@ webpackJsonp(["common"],{
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientConfiguration; });
-var ClientConfiguration = /** @class */ (function () {
+var ClientConfiguration = (function () {
     function ClientConfiguration(clientConfig) {
         if (clientConfig) {
             this.name = clientConfig.name;
             this.chanEmailPriority = clientConfig.chanEmailPriority;
             this.chanIvrPriority = clientConfig.chanIvrPriority;
             this.chanSmsPriority = clientConfig.chanSmsPriority;
+            this.chanSecurePriority = clientConfig.chanSecurePriority;
             this.chanMailPriority = clientConfig.chanMailPriority;
             this.chanMobilePriority = clientConfig.chanMobilePriority;
             this.chanDefault = clientConfig.chanDefault;
@@ -22,11 +23,12 @@ var ClientConfiguration = /** @class */ (function () {
             this.chanEmailPriority = 0;
             this.chanIvrPriority = 0;
             this.chanSmsPriority = 0;
+            this.chanSecurePriority = 0;
             this.chanMailPriority = 0;
             this.chanMobilePriority = 0;
             this.chanDefault = 'No';
-            this.required = false;
-            this.mandatory = false;
+            this.required = 'N';
+            this.mandatory = 'N';
         }
     }
     ClientConfiguration.prototype.clone = function () {
@@ -44,7 +46,7 @@ var ClientConfiguration = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProgramConfiguration; });
-var ProgramConfiguration = /** @class */ (function () {
+var ProgramConfiguration = (function () {
     // https://stackoverflow.com/questions/4511705/how-to-parse-json-to-receive-a-date-object-in-javascript
     function ProgramConfiguration(programConfig) {
         if (programConfig) {
@@ -52,6 +54,7 @@ var ProgramConfiguration = /** @class */ (function () {
             this.name = programConfig.name;
             this.chanIvrPriority = programConfig.chanIvrPriority;
             this.chanSmsPriority = programConfig.chanSmsPriority;
+            this.chanSecurePriority = programConfig.chanSecurePriority;
             this.chanMailPriority = programConfig.chanMailPriority;
             this.chanMobilePriority = programConfig.chanMobilePriority;
             this.chanDefault = programConfig.chanDefault;
@@ -62,11 +65,12 @@ var ProgramConfiguration = /** @class */ (function () {
             this.chanEmailPriority = 0;
             this.chanIvrPriority = 0;
             this.chanSmsPriority = 0;
+            this.chanSecurePriority = 0;
             this.chanMailPriority = 0;
             this.chanMobilePriority = 0;
             this.chanDefault = 'No';
-            this.required = false;
-            this.mandatory = false;
+            this.required = 'N';
+            this.mandatory = 'N';
         }
     }
     ProgramConfiguration.prototype.clone = function () {
@@ -90,7 +94,7 @@ var ProgramConfiguration = /** @class */ (function () {
 // import { IProgramConfig } from 'app/classes/model/iprog-config';
 
 // export class Program implements IProgramConfig {
-var Program = /** @class */ (function () {
+var Program = (function () {
     function Program(id, name, description, programProfile, programProfileClientException, programConfiguration) {
         if (id === void 0) { id = 0; }
         if (name === void 0) { name = ''; }
@@ -108,7 +112,7 @@ var Program = /** @class */ (function () {
     return Program;
 }());
 
-var ProgramConfigAction = /** @class */ (function () {
+var ProgramConfigAction = (function () {
     function ProgramConfigAction(id, type) {
         this.progId = id;
         this.configType = type;
@@ -116,7 +120,7 @@ var ProgramConfigAction = /** @class */ (function () {
     return ProgramConfigAction;
 }());
 
-var ProgramStatus = /** @class */ (function () {
+var ProgramStatus = (function () {
     function ProgramStatus(program) {
         this.setStatus(program);
         // program.detectChanges = 'new';

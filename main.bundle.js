@@ -49,31 +49,44 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppConstants; });
-var AppConstants = /** @class */ (function () {
+var AppConstants = (function () {
     function AppConstants() {
     }
     AppConstants.SAVESUCCESS = 'Close on succesful save';
     AppConstants.UNEXPIRED = '9999-12-31';
+    AppConstants.YESNOOPTS = [{ opt: 'Yes', val: 'Y' }, { opt: 'No', val: 'N' }];
+    AppConstants.PROMOTEOPTS = [{ opt: 'Yes', val: 'Y' }, { opt: 'No', val: 'N' }, { opt: 'Promote', val: 'P' }];
     AppConstants.PROGRAMPROFILEOPTIONS = [
-        { 'property': 'defaultOptIn', 'label': 'OptIn', 'title': 'Default Opt-In?' },
-        { 'property': 'visibleInUi', 'label': 'Visible', 'title': 'Visible in UI?' },
-        { 'property': 'chanEmail', 'label': 'Email', 'title': 'Program allows Email channel subscription' },
-        { 'property': 'chanIvr', 'label': 'IVR', 'title': 'Program allows IVR channel subscription' },
-        { 'property': 'chanSms', 'label': 'SMS', 'title': 'Program allows SMS channel subscription' },
-        { 'property': 'chanSecure', 'label': 'Secure', 'title': 'Program allows Secure channel subscription' },
-        { 'property': 'chanMail', 'label': 'Mail', 'title': 'Program allows Mail channel subscription' },
-        { 'property': 'chanMobile', 'label': 'Mobile', 'title': 'Program allows Mobile channel subscription' },
-    ];
-    AppConstants.PROGRAMCONFIGURATIONOPTIONS = [
-        { 'property': 'chanEmailPriority', 'label': 'Email', 'title': 'Program Email channel prority' },
-        { 'property': 'chanIvrPriority', 'label': 'IVR', 'title': 'Program IVR channel prority' },
-        { 'property': 'chanSmsPriority', 'label': 'SMS', 'title': 'Program SMS channel prority' },
-        // { 'property': 'chanSecurePriority', 'label': 'Secure', 'title': 'Program Secure channel prority' },
-        { 'property': 'chanMailPriority', 'label': 'Mail', 'title': 'Program Mail channel prority' },
-        { 'property': 'chanMobilePriority', 'label': 'Mobile', 'title': 'Program Mobile channel prority' },
+        { 'property': 'defaultOptIn', 'label': 'OptIn', 'opts': AppConstants.YESNOOPTS, 'title': 'Default Opt-In?' },
+        { 'property': 'visibleInUi', 'label': 'Visible', 'opts': AppConstants.PROMOTEOPTS, 'title': 'Visible in UI?' },
+        { 'property': 'chanEmail', 'label': 'Email', 'opts': AppConstants.YESNOOPTS, 'title': 'Program allows Email channel subscription' },
+        { 'property': 'chanIvr', 'label': 'Call', 'opts': AppConstants.YESNOOPTS, 'title': 'Program allows IVR channel subscription' },
+        { 'property': 'chanSms', 'label': 'Text', 'opts': AppConstants.YESNOOPTS, 'title': 'Program allows SMS channel subscription' },
+        { 'property': 'chanSecure', 'label': 'Secure', 'opts': AppConstants.YESNOOPTS, 'title': 'Program allows Secure channel subscription' },
     ];
     AppConstants.CHANNELPRIORTYOPTS = [0, 1, 2, 3];
-    AppConstants.CHANDEFAULTOPTS = ['No', 'Email', 'IVR', 'SMS'];
+    AppConstants.CHANNELSECUREPRIORTYOPTS = [0, 1];
+    AppConstants.CHANDEFAULTOPTS = ['No', 'Email', 'Call', 'Text'];
+    AppConstants.PROGRAMCONFIGURATIONOPTIONS = [
+        { 'property': 'chanEmailPriority', 'label': 'Email', 'opts': AppConstants.CHANNELPRIORTYOPTS,
+            'title': 'Program Email channel prority' },
+        { 'property': 'chanIvrPriority', 'label': 'Call', 'opts': AppConstants.CHANNELPRIORTYOPTS,
+            'title': 'Program IVR channel prority' },
+        { 'property': 'chanSmsPriority', 'label': 'Text', 'opts': AppConstants.CHANNELPRIORTYOPTS,
+            'title': 'Program SMS channel prority' },
+        { 'property': 'chanSecurePriority', 'label': 'Secure', 'opts': AppConstants.CHANNELSECUREPRIORTYOPTS,
+            'title': 'Program Secure channel prority' },
+        // { 'property': 'chanMailPriority',   'label': 'Mail',   'opts': AppConstants.CHANNELPRIORTYOPTS,
+        //   'title': 'Program Mail channel prority' },
+        // { 'property': 'chanMobilePriority', 'label': 'Mobile', 'opts': AppConstants.CHANNELPRIORTYOPTS,
+        //   'title': 'Program Mobile channel prority' },
+        { 'property': 'chanDefault', 'label': 'Default', 'opts': AppConstants.CHANDEFAULTOPTS,
+            'title': 'Program default channel' },
+        { 'property': 'required', 'label': 'Reqd', 'opts': AppConstants.YESNOOPTS,
+            'title': 'Program communication required' },
+        { 'property': 'mandatory', 'label': 'Mand', 'opts': AppConstants.YESNOOPTS,
+            'title': 'Program communication mandatory' },
+    ];
     return AppConstants;
 }());
 
@@ -115,7 +128,7 @@ var routes = [
     { path: 'callback', component: __WEBPACK_IMPORTED_MODULE_3__core_auth_callback_component__["a" /* CallbackComponent */] },
     { path: '**', component: __WEBPACK_IMPORTED_MODULE_4__core_page_not_found_page_not_found_component__["a" /* PageNotFoundComponent */] }
 ];
-var AppRoutingModule = /** @class */ (function () {
+var AppRoutingModule = (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
@@ -181,7 +194,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 // import { environment } from 'environments/environment';
 
 
-var AppComponent = /** @class */ (function () {
+var AppComponent = (function () {
     function AppComponent(config, authService) {
         this.config = config;
         this.authService = authService;
@@ -220,7 +233,15 @@ var AppConfig = {
     apiEndpoint: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].apiEndpoint,
     envName: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].envName,
     cachePrograms: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].cachePrograms,
-    cacheProgramProfiles: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].cacheProgramProfiles
+    cacheProgramProfiles: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].cacheProgramProfiles,
+    authConfig: {
+        clientID: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].authConfig.client_id,
+        domain: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].authConfig.client_domain,
+        responseType: 'token id_token',
+        redirectUri: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].authConfig.redirect,
+        audience: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].authConfig.audience,
+        scope: __WEBPACK_IMPORTED_MODULE_1_environments_environment__["a" /* environment */].authConfig.scope
+    }
 };
 
 
@@ -273,7 +294,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AppModule = /** @class */ (function () {
+var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
@@ -305,23 +326,6 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/core/auth/auth-config.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AUTH_CONFIG; });
-var AUTH_CONFIG = {
-    CLIENT_ID: '5dTmLzbTbdfpmJ6Zp5AH9l1ORljfOU2N',
-    CLIENT_DOMAIN: 'fishstick22.auth0.com',
-    AUDIENCE: 'http://localhost:8080',
-    // REDIRECT: 'http://localhost:4200/callback',
-    REDIRECT: 'https://fishstick22.github.io/alert-subscribe-angular-ui-prototype/callback',
-    SCOPE: 'openid profile email'
-};
-
-
-/***/ }),
-
 /***/ "../../../../../src/app/core/auth/auth.guard.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -342,7 +346,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var AuthGuard = /** @class */ (function () {
+var AuthGuard = (function () {
     function AuthGuard(authService, router) {
         this.authService = authService;
         this.router = router;
@@ -374,7 +378,7 @@ var AuthGuard = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_BehaviorSubject__ = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_auth0_js__ = __webpack_require__("../../../../auth0-js/src/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_auth0_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_auth0_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__auth_config__ = __webpack_require__("../../../../../src/app/core/auth/auth-config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_app_config__ = __webpack_require__("../../../../../src/app/app.config.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -385,26 +389,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 // https://auth0.com/blog/angular-2-authentication/
 // https://jwt.io/
 
 
 
 
+// import { AuthConfig } from './auth-config';
 
-var AuthService = /** @class */ (function () {
-    function AuthService(router) {
+var AuthService = (function () {
+    function AuthService(config, router) {
+        this.config = config;
         this.router = router;
-        // Create Auth0 web auth instance
-        this.auth0 = new __WEBPACK_IMPORTED_MODULE_2_auth0_js__["WebAuth"]({
-            clientID: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].CLIENT_ID,
-            domain: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].CLIENT_DOMAIN,
-            responseType: 'token id_token',
-            redirectUri: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].REDIRECT,
-            audience: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].AUDIENCE,
-            scope: __WEBPACK_IMPORTED_MODULE_3__auth_config__["a" /* AUTH_CONFIG */].SCOPE
-        });
         this.loggedIn$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_BehaviorSubject__["a" /* BehaviorSubject */](this.loggedIn);
+        this.auth0 = this.setWebAuth(config.authConfig);
         // If authenticated, set local profile property and update login status subject
         // If token is expired, log out to clear any data from localStorage
         if (this.authenticated) {
@@ -415,6 +416,9 @@ var AuthService = /** @class */ (function () {
             this.logout();
         }
     }
+    AuthService.prototype.setWebAuth = function (authConfig) {
+        return new __WEBPACK_IMPORTED_MODULE_2_auth0_js__["WebAuth"](authConfig);
+    };
     AuthService.prototype.setLoggedIn = function (value) {
         // Update login status subject
         this.loggedIn$.next(value);
@@ -476,7 +480,8 @@ var AuthService = /** @class */ (function () {
     });
     AuthService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
+        __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Inject */])(__WEBPACK_IMPORTED_MODULE_3_app_app_config__["a" /* APP_CONFIG */])),
+        __metadata("design:paramtypes", [Object, __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
     ], AuthService);
     return AuthService;
 }());
@@ -503,7 +508,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var CallbackComponent = /** @class */ (function () {
+var CallbackComponent = (function () {
     function CallbackComponent(authService) {
         this.authService = authService;
     }
@@ -563,7 +568,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
-var CoreModule = /** @class */ (function () {
+var CoreModule = (function () {
     function CoreModule(core) {
         if (core) {
             throw new Error('Cannot Import and Instantiate CoreModule!');
@@ -642,7 +647,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var FooterComponent = /** @class */ (function () {
+var FooterComponent = (function () {
     function FooterComponent() {
     }
     FooterComponent.prototype.ngOnInit = function () {
@@ -708,7 +713,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var HomeComponent = /** @class */ (function () {
+var HomeComponent = (function () {
     function HomeComponent() {
     }
     HomeComponent.prototype.ngOnInit = function () {
@@ -774,7 +779,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 // https://angularfirebase.com/lessons/bootstrap-4-collapsable-navbar-work-with-angular/
 // huff, the BootStrap 4 Navbar needs a little nudge to work with Angular
-var NavbarComponent = /** @class */ (function () {
+var NavbarComponent = (function () {
     function NavbarComponent(authService) {
         this.authService = authService;
         this.show = false;
@@ -846,7 +851,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var PageNotFoundComponent = /** @class */ (function () {
+var PageNotFoundComponent = (function () {
     function PageNotFoundComponent() {
     }
     PageNotFoundComponent.prototype.ngOnInit = function () {
@@ -908,7 +913,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ClientActionTableComponent = /** @class */ (function () {
+var ClientActionTableComponent = (function () {
     function ClientActionTableComponent() {
         this.supressClient = [];
         this.displayClientStartEmpty = true;
@@ -1192,7 +1197,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var ClientActionsPopoverComponent = /** @class */ (function () {
+var ClientActionsPopoverComponent = (function () {
     function ClientActionsPopoverComponent() {
         this.attachOutsideOnClick = false;
         this.delayClickOutsideInit = true;
@@ -1284,7 +1289,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var CommActionTableComponent = /** @class */ (function () {
+var CommActionTableComponent = (function () {
     function CommActionTableComponent() {
         this.supressComm = [];
         this.displayCommStartEmpty = true;
@@ -1570,7 +1575,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // https://ng-bootstrap.github.io/#/components/popover/examples
-var CommActionsPopoverComponent = /** @class */ (function () {
+var CommActionsPopoverComponent = (function () {
     function CommActionsPopoverComponent() {
         this.attachOutsideOnClick = false;
         this.delayClickOutsideInit = true;
@@ -1661,7 +1666,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var DateEffExpComponent = /** @class */ (function () {
+var DateEffExpComponent = (function () {
     function DateEffExpComponent() {
         this.newDateValue = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
     }
@@ -1744,7 +1749,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var DatePickerPopupComponent = /** @class */ (function () {
+var DatePickerPopupComponent = (function () {
     function DatePickerPopupComponent() {
         this.attachOutsideOnClick = true;
         this.delayClickOutsideInit = false;
@@ -1857,7 +1862,7 @@ var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     multi: true
 };
 /* tslint:enable:no-use-before-declare */
-var SelectChannelDefaultComponent = /** @class */ (function () {
+var SelectChannelDefaultComponent = (function () {
     function SelectChannelDefaultComponent() {
         // Placeholders for the callbacks which are later providesd
         // by the Control Value Accessor
@@ -1990,7 +1995,7 @@ var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     multi: true
 };
 /* tslint:enable:no-use-before-declare */
-var SelectChannelPriorityComponent = /** @class */ (function () {
+var SelectChannelPriorityComponent = (function () {
     function SelectChannelPriorityComponent() {
         // Placeholders for the callbacks which are later providesd
         // by the Control Value Accessor
@@ -2077,7 +2082,7 @@ var SelectChannelPriorityComponent = /** @class */ (function () {
 /***/ "../../../../../src/app/shared/components/select-profile-option/select-profile-option.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<span *ngIf=\"showHeader\">\r\n  <label for=\"{{name}}\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n    {{label}}</label>\r\n</span>\r\n\r\n<span *ngIf=\"staticReadOnly\">\r\n  <select class=\"form-control form-control-sm flex-justify-right\"\r\n          id=\"{{id}}\" name=\"{{name}}\" value=\"actualStaticValue\" disabled>\r\n          <option value=\"actualStaticValue\">{{staticReadonlyOption}}</option>\r\n  </select>\r\n</span>\r\n\r\n<span *ngIf=\"dynamicPicker\">\r\n  <select class=\"form-control form-control-sm flex-justify-right\"\r\n          [(ngModel)]=\"value\" id=\"{{id}}\" name=\"{{name}}\" required (blur)=\"onBlur()\">\r\n    <option *ngFor=\"let po of profileOpts\" [ngValue]=\"po.val\">{{po.opt}}</option>>\r\n  </select>\r\n</span>"
+module.exports = "<span *ngIf=\"showHeader\">\r\n  <label for=\"{{name}}\" class=\"text-white bg-gradient-dark flex-justify-center rounded\">\r\n    {{label}}</label>\r\n</span>\r\n\r\n<span *ngIf=\"staticReadOnly\">\r\n  <select class=\"form-control form-control-sm flex-justify-right\"\r\n          name=\"{{name}}\" value=\"actualStaticValue\" disabled>\r\n          <option value=\"actualStaticValue\">{{staticReadonlyOption}}</option>\r\n  </select>\r\n</span>\r\n\r\n<span *ngIf=\"dynamicPicker\">\r\n  <select class=\"form-control form-control-sm flex-justify-right\"\r\n          [(ngModel)]=\"value\" name=\"{{name}}\" required (blur)=\"onBlur()\">\r\n    <option *ngFor=\"let po of profileOpts\" [ngValue]=\"po.val\">{{po.opt}}</option>>\r\n  </select>\r\n</span>"
 
 /***/ }),
 
@@ -2127,19 +2132,31 @@ var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
     multi: true
 };
 /* tslint:enable:no-use-before-declare */
-var SelectProfileOptionComponent = /** @class */ (function () {
+var SelectProfileOptionComponent = (function () {
     function SelectProfileOptionComponent() {
         // Placeholders for the callbacks which are later providesd
         // by the Control Value Accessor
         this.onTouchedCallback = noop;
         this.onChangeCallback = noop;
-        this.profileOpts = [{ opt: 'Y', val: true }, { opt: 'N', val: false }];
+        this.profileOpts = [{ opt: 'Yes', val: 'Y' }, { opt: 'No', val: 'N' }];
         // http://almerosteyn.com/2016/04/linkup-custom-control-to-ngcontrol-ngmodel
         // The internal data model
         this.innerValue = '';
     }
     SelectProfileOptionComponent.prototype.ngOnInit = function () {
-        this.staticReadonlyOption = this.staticValue ? 'Y' : 'N';
+        //  this.staticReadonlyOption = this.staticValue ? 'Y' : 'N';
+        //  this.staticReadonlyOption = this.staticValue;
+        if (this.profileOpts && this.profileOpts.length) {
+            for (var i = 0; i < this.profileOpts.length; i++) {
+                var option = this.profileOpts[i];
+                if (option['val'] === this.staticValue) {
+                    this.staticReadonlyOption = option['opt'];
+                }
+            }
+        }
+        else {
+            this.staticReadonlyOption = this.staticValue;
+        }
     };
     Object.defineProperty(SelectProfileOptionComponent.prototype, "value", {
         // get accessor
@@ -2177,10 +2194,6 @@ var SelectProfileOptionComponent = /** @class */ (function () {
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", String)
-    ], SelectProfileOptionComponent.prototype, "id", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-        __metadata("design:type", String)
     ], SelectProfileOptionComponent.prototype, "name", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -2202,6 +2215,10 @@ var SelectProfileOptionComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
         __metadata("design:type", String)
     ], SelectProfileOptionComponent.prototype, "dynamicPicker", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", Array)
+    ], SelectProfileOptionComponent.prototype, "profileOpts", void 0);
     SelectProfileOptionComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-select-profile-option',
@@ -2263,7 +2280,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // http://www.carbonatethis.com/sort-table-columns-with-angular-and-typescript/
-var SortableColumnComponent = /** @class */ (function () {
+var SortableColumnComponent = (function () {
     function SortableColumnComponent(sortService) {
         this.sortService = sortService;
         this.sortDirection = '';
@@ -2355,7 +2372,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var ClickOutsideComponent = /** @class */ (function () {
+var ClickOutsideComponent = (function () {
     function ClickOutsideComponent() {
         this.countInside = 0;
         this.countOutside = 0;
@@ -2430,7 +2447,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var DragDropComponent = /** @class */ (function () {
+var DragDropComponent = (function () {
     function DragDropComponent() {
         this.vegetables = [
             { name: 'Carrot', type: 'vegetable' },
@@ -2512,7 +2529,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 // https://github.com/arkon/ng-click-outside
-var ClickOutsideDirective = /** @class */ (function () {
+var ClickOutsideDirective = (function () {
     function ClickOutsideDirective(_el, platformId) {
         this._el = _el;
         this.platformId = platformId;
@@ -2657,7 +2674,7 @@ var ClickOutsideDirective = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DomHelper; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 
-var DomHelper = /** @class */ (function () {
+var DomHelper = (function () {
     function DomHelper() {
     }
     /**
@@ -2745,7 +2762,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DraggableDirective = /** @class */ (function () {
+var DraggableDirective = (function () {
     function DraggableDirective(el, renderer, ng2DragDropService, zone) {
         this.el = el;
         this.renderer = renderer;
@@ -2996,7 +3013,7 @@ var DraggableDirective = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropEvent; });
-var DropEvent = /** @class */ (function () {
+var DropEvent = (function () {
     function DropEvent(event, data) {
         this.nativeEvent = event;
         this.dragData = data;
@@ -3036,7 +3053,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var DroppableDirective = /** @class */ (function () {
+var DroppableDirective = (function () {
     function DroppableDirective(el, renderer, ng2DragDropService, zone) {
         this.el = el;
         this.renderer = renderer;
@@ -3296,7 +3313,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // http://www.carbonatethis.com/sort-table-columns-with-angular-and-typescript/
-var SortableTableDirective = /** @class */ (function () {
+var SortableTableDirective = (function () {
     function SortableTableDirective(sortService) {
         this.sortService = sortService;
         this.sorted = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
@@ -3335,7 +3352,7 @@ var SortableTableDirective = /** @class */ (function () {
 /* unused harmony export ClientSortCriteria */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ClientConfigAction; });
 // import { IClientConfig } from 'app/classes/model/iclient-config';
-var Client = /** @class */ (function () {
+var Client = (function () {
     function Client(id, code, name, programProfileClientException, clientConfiguration) {
         if (id === void 0) { id = 0; }
         if (code === void 0) { code = ''; }
@@ -3353,13 +3370,13 @@ var Client = /** @class */ (function () {
     return Client;
 }());
 
-var ClientSortCriteria = /** @class */ (function () {
+var ClientSortCriteria = (function () {
     function ClientSortCriteria() {
     }
     return ClientSortCriteria;
 }());
 
-var ClientConfigAction = /** @class */ (function () {
+var ClientConfigAction = (function () {
     function ClientConfigAction(id, type) {
         this.clientId = id;
         this.configType = type;
@@ -3378,7 +3395,7 @@ var ClientConfigAction = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Communication; });
 /* unused harmony export CommunicationSortCriteria */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return CommunicationConfigAction; });
-var Communication = /** @class */ (function () {
+var Communication = (function () {
     function Communication(id, name, description, programConfiguration, clientConfiguration) {
         if (id === void 0) { id = 0; }
         if (name === void 0) { name = ''; }
@@ -3395,13 +3412,13 @@ var Communication = /** @class */ (function () {
     return Communication;
 }());
 
-var CommunicationSortCriteria = /** @class */ (function () {
+var CommunicationSortCriteria = (function () {
     function CommunicationSortCriteria() {
     }
     return CommunicationSortCriteria;
 }());
 
-var CommunicationConfigAction = /** @class */ (function () {
+var CommunicationConfigAction = (function () {
     function CommunicationConfigAction(id, type) {
         this.commId = id;
         this.configType = type;
@@ -3474,7 +3491,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientConfigurationsService = /** @class */ (function () {
+var ClientConfigurationsService = (function () {
     function ClientConfigurationsService(config, http) {
         this.config = config;
         this.http = http;
@@ -3620,7 +3637,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientsService = /** @class */ (function () {
+var ClientsService = (function () {
     function ClientsService(config, http) {
         this.config = config;
         this.http = http;
@@ -3723,7 +3740,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var CommunicationsService = /** @class */ (function () {
+var CommunicationsService = (function () {
     function CommunicationsService(config, http) {
         this.config = config;
         this.http = http;
@@ -3839,7 +3856,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var DataApiService = /** @class */ (function () {
+var DataApiService = (function () {
     function DataApiService(config, communicationsService, clientsService, clientConfigurationsService, programsService, programProfilesService, programConfigurationService, programProfileClientExceptionsService) {
         this.config = config;
         this.communicationsService = communicationsService;
@@ -4244,7 +4261,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // forked from https://github.com/ObaidUrRehman/ng-drag-drop
-var DragDropService = /** @class */ (function () {
+var DragDropService = (function () {
     function DragDropService() {
         this.onDragStart = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["a" /* Subject */]();
         this.onDragEnd = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["a" /* Subject */]();
@@ -4265,7 +4282,7 @@ var DragDropService = /** @class */ (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InMemoryDataService; });
-var InMemoryDataService = /** @class */ (function () {
+var InMemoryDataService = (function () {
     function InMemoryDataService() {
     }
     InMemoryDataService.prototype.createDb = function () {
@@ -4357,9 +4374,19 @@ var InMemoryDataService = /** @class */ (function () {
             { 'id': 102, 'name': 'Non-Prescription Alerts',
                 'description': 'PBM non-transactional Communications like Portal Registration, Password Recovery',
                 'programProfile': [
-                    { 'id': 2, 'defaultOptIn': true, 'visibleInUi': false,
-                        'chanEmail': true, 'chanIvr': true, 'chanSms': true, 'chanSecure': true, 'chanMail': false, 'chanMobile': false,
+                    { 'id': 2, 'defaultOptIn': 'Y', 'visibleInUi': 'N',
+                        'chanEmail': 'Y', 'chanIvr': 'N', 'chanSms': 'Y', 'chanSecure': 'N', 'chanMail': 'N', 'chanMobile': 'N',
                         'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 102
+                    }
+                ],
+                'programProfileClientException': []
+            },
+            { 'id': 103, 'name': 'Show Full Drug Names',
+                'description': 'Program that supports member opt-in to receive full drug names on email alerts',
+                'programProfile': [
+                    { 'id': 3, 'defaultOptIn': 'Y', 'visibleInUi': 'P',
+                        'chanEmail': 'Y', 'chanIvr': 'N', 'chanSms': 'N', 'chanSecure': 'N', 'chanMail': 'N', 'chanMobile': 'N',
+                        'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 103
                     }
                 ],
                 'programProfileClientException': []
@@ -4367,42 +4394,55 @@ var InMemoryDataService = /** @class */ (function () {
         ];
         var programprofile = [
             { 'id': 1,
-                'defaultOptIn': true,
-                'visibleInUi': true,
-                'chanEmail': true,
-                'chanIvr': true,
-                'chanSms': true,
-                'chanSecure': true,
-                'chanMail': false,
-                'chanMobile': false,
+                'defaultOptIn': 'Y',
+                'visibleInUi': 'Y',
+                'chanEmail': 'Y',
+                'chanIvr': 'Y',
+                'chanSms': 'Y',
+                'chanSecure': 'Y',
+                'chanMail': 'N',
+                'chanMobile': 'N',
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'program': 101
             },
             { 'id': 2,
-                'defaultOptIn': true,
-                'visibleInUi': false,
-                'chanEmail': true,
-                'chanIvr': true,
-                'chanSms': true,
-                'chanSecure': true,
-                'chanMail': false,
-                'chanMobile': false,
+                'defaultOptIn': 'Y',
+                'visibleInUi': 'N',
+                'chanEmail': 'Y',
+                'chanIvr': 'Y',
+                'chanSms': 'Y',
+                'chanSecure': 'Y',
+                'chanMail': 'N',
+                'chanMobile': 'N',
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'program': 102
+            },
+            { 'id': 3,
+                'defaultOptIn': 'Y',
+                'visibleInUi': 'P',
+                'chanEmail': 'Y',
+                'chanIvr': 'N',
+                'chanSms': 'N',
+                'chanSecure': 'N',
+                'chanMail': 'N',
+                'chanMobile': 'N',
+                'effective': '2017-01-01',
+                'expiration': '9999-12-31',
+                'program': 103
             }
         ];
         var programprofileclientexception = [
             { 'id': 1,
-                'defaultOptIn': true,
-                'visibleInUi': true,
-                'chanEmail': true,
-                'chanIvr': true,
-                'chanSms': true,
-                'chanSecure': true,
-                'chanMail': false,
-                'chanMobile': false,
+                'defaultOptIn': 'Y',
+                'visibleInUi': 'Y',
+                'chanEmail': 'Y',
+                'chanIvr': 'Y',
+                'chanSms': 'Y',
+                'chanSecure': 'Y',
+                'chanMail': 'N',
+                'chanMobile': 'N',
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'program': 101,
@@ -4419,11 +4459,12 @@ var InMemoryDataService = /** @class */ (function () {
                 'chanEmailPriority': 2,
                 'chanIvrPriority': 3,
                 'chanSmsPriority': 1,
+                'chanSecurePriority': 1,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
                 'chanDefault': 'Email',
-                'required': true,
-                'mandatory': true,
+                'required': 'Y',
+                'mandatory': 'Y',
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'program': 101,
@@ -4435,11 +4476,12 @@ var InMemoryDataService = /** @class */ (function () {
                 'chanEmailPriority': 2,
                 'chanIvrPriority': 3,
                 'chanSmsPriority': 1,
+                'chanSecurePriority': 0,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
-                'chanDefault': 'Email',
-                'required': true,
-                'mandatory': true,
+                'chanDefault': 'No',
+                'required': 'N',
+                'mandatory': 'N',
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'program': 101,
@@ -4504,11 +4546,12 @@ var InMemoryDataService = /** @class */ (function () {
                 'chanEmailPriority': 2,
                 'chanIvrPriority': 3,
                 'chanSmsPriority': 1,
+                'chanSecurePriority': 0,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
                 'chanDefault': 'Email',
-                'required': false,
-                'mandatory': false,
+                'required': 'N',
+                'mandatory': 'N',
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'client': 142,
@@ -4520,11 +4563,12 @@ var InMemoryDataService = /** @class */ (function () {
                 'chanEmailPriority': 3,
                 'chanIvrPriority': 1,
                 'chanSmsPriority': 2,
+                'chanSecurePriority': 0,
                 'chanMailPriority': 0,
                 'chanMobilePriority': 0,
                 'chanDefault': 'No',
-                'required': false,
-                'mandatory': false,
+                'required': 'N',
+                'mandatory': 'N',
                 'effective': '2017-01-01',
                 'expiration': '9999-12-31',
                 'client': 259,
@@ -4610,7 +4654,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramConfigurationsService = /** @class */ (function () {
+var ProgramConfigurationsService = (function () {
     function ProgramConfigurationsService(config, http) {
         this.config = config;
         this.http = http;
@@ -4754,7 +4798,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramProfileClientExceptionsService = /** @class */ (function () {
+var ProgramProfileClientExceptionsService = (function () {
     function ProgramProfileClientExceptionsService(config, http) {
         this.config = config;
         this.http = http;
@@ -4898,7 +4942,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramProfilesService = /** @class */ (function () {
+var ProgramProfilesService = (function () {
     function ProgramProfilesService(config, http) {
         this.config = config;
         this.http = http;
@@ -5065,7 +5109,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramsService = /** @class */ (function () {
+var ProgramsService = (function () {
     function ProgramsService(config, http) {
         this.config = config;
         this.http = http;
@@ -5202,7 +5246,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var SortableColumnService = /** @class */ (function () {
+var SortableColumnService = (function () {
     function SortableColumnService() {
         this.columnSortedSource = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Subject__["a" /* Subject */]();
         this.columnSorted$ = this.columnSortedSource.asObservable();
@@ -5243,7 +5287,7 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__shared_component__["a" /* SharedComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__shared_component__["a" /* SharedComponent */]];
-var SharedRoutingModule = /** @class */ (function () {
+var SharedRoutingModule = (function () {
     function SharedRoutingModule() {
     }
     SharedRoutingModule = __decorate([
@@ -5339,7 +5383,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var SharedComponent = /** @class */ (function () {
+var SharedComponent = (function () {
     function SharedComponent(authService, dataApiService) {
         this.authService = authService;
         this.dataApiService = dataApiService;
@@ -5560,7 +5604,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var SharedModule = /** @class */ (function () {
+var SharedModule = (function () {
     function SharedModule() {
     }
     SharedModule = __decorate([
@@ -5646,7 +5690,16 @@ var environment = {
     inMemAPI: true,
     apiEndpoint: '',
     cachePrograms: false,
-    cacheProgramProfiles: false
+    cacheProgramProfiles: false,
+    // Auth0 Configuration:
+    authConfig: {
+        client_id: '5dTmLzbTbdfpmJ6Zp5AH9l1ORljfOU2N',
+        client_domain: 'fishstick22.auth0.com',
+        responseType: 'token id_token',
+        audience: 'http://localhost:8080',
+        redirect: 'https://fishstick22.github.io/alert-subscribe-angular-ui-prototype/callback',
+        scope: 'openid profile email'
+    }
 };
 
 

@@ -22,7 +22,7 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__communications_component__["a" /* CommunicationsComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__communications_component__["a" /* CommunicationsComponent */]];
-var CommunicationsRoutingModule = /** @class */ (function () {
+var CommunicationsRoutingModule = (function () {
     function CommunicationsRoutingModule() {
     }
     CommunicationsRoutingModule = __decorate([
@@ -120,7 +120,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var CommunicationsComponent = /** @class */ (function () {
+var CommunicationsComponent = (function () {
     function CommunicationsComponent(dataApiService, programConfigurationService, clientConfigsByCommModalService) {
         this.dataApiService = dataApiService;
         this.programConfigurationService = programConfigurationService;
@@ -237,7 +237,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // shared
 
-var CommunicationsModule = /** @class */ (function () {
+var CommunicationsModule = (function () {
     function CommunicationsModule() {
     }
     CommunicationsModule = __decorate([
@@ -321,13 +321,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ClientConfigModalResult = /** @class */ (function () {
+var ClientConfigModalResult = (function () {
     function ClientConfigModalResult() {
     }
     return ClientConfigModalResult;
 }());
 
-var ClientConfigsByCommModalComponent = /** @class */ (function () {
+var ClientConfigsByCommModalComponent = (function () {
     function ClientConfigsByCommModalComponent(configureClientModal) {
         this.configureClientModal = configureClientModal;
         this.clientDropEnabled = false;
@@ -359,7 +359,7 @@ var ClientConfigsByCommModalComponent = /** @class */ (function () {
             this.lastClientConfigRow = this.clientConfigurations.length;
             if (this.lastClientConfigRow === 0) {
                 this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client_configuration__["a" /* ClientConfiguration */]();
-                this.newClientConfig.effective = // TODO shared util method
+                this.newClientConfig.effective =
                     this.tomorrow.getFullYear() + '-' +
                         (this.tomorrow.getMonth() + 1) + '-' +
                         this.tomorrow.getDate();
@@ -504,7 +504,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientConfigsByCommModalService = /** @class */ (function () {
+var ClientConfigsByCommModalService = (function () {
     function ClientConfigsByCommModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -577,8 +577,7 @@ var ClientConfigsByCommModalService = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: // : ClientConfiguration[] {
-                    return [4 /*yield*/, this.getClientConfigurations()];
+                    case 0: return [4 /*yield*/, this.getClientConfigurations()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.clientConfigurations.filter(function (cc) {
@@ -721,13 +720,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ProgramConfigModalResult = /** @class */ (function () {
+var ProgramConfigModalResult = (function () {
     function ProgramConfigModalResult() {
     }
     return ProgramConfigModalResult;
 }());
 
-var ProgramConfigsByCommModalComponent = /** @class */ (function () {
+var ProgramConfigsByCommModalComponent = (function () {
     function ProgramConfigsByCommModalComponent(configureProgramModal) {
         this.configureProgramModal = configureProgramModal;
         this.communication = new __WEBPACK_IMPORTED_MODULE_3_app_shared_model_communication__["a" /* Communication */](); // wtf;
@@ -881,7 +880,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ProgramConfigsByCommModalService = /** @class */ (function () {
+var ProgramConfigsByCommModalService = (function () {
     function ProgramConfigsByCommModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -975,8 +974,7 @@ var ProgramConfigsByCommModalService = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: // : ProgramConfiguration[] {
-                    return [4 /*yield*/, this.getProgramConfigurations()];
+                    case 0: return [4 /*yield*/, this.getProgramConfigurations()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.programConfigurations.filter(function (pc) {

@@ -22,7 +22,7 @@ var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_2__clients_component__["a" /* ClientsComponent */] }
 ];
 var routedComponents = [__WEBPACK_IMPORTED_MODULE_2__clients_component__["a" /* ClientsComponent */]];
-var ClientsRoutingModule = /** @class */ (function () {
+var ClientsRoutingModule = (function () {
     function ClientsRoutingModule() {
     }
     ClientsRoutingModule = __decorate([
@@ -118,7 +118,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientsComponent = /** @class */ (function () {
+var ClientsComponent = (function () {
     function ClientsComponent(dataApiService, clientConfigService) {
         this.dataApiService = dataApiService;
         this.clientConfigService = clientConfigService;
@@ -224,7 +224,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // shared
 
-var ClientsModule = /** @class */ (function () {
+var ClientsModule = (function () {
     function ClientsModule() {
     }
     ClientsModule = __decorate([
@@ -303,13 +303,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ClientConfigModalResult = /** @class */ (function () {
+var ClientConfigModalResult = (function () {
     function ClientConfigModalResult() {
     }
     return ClientConfigModalResult;
 }());
 
-var ClientConfigurationsModalComponent = /** @class */ (function () {
+var ClientConfigurationsModalComponent = (function () {
     function ClientConfigurationsModalComponent(configureClientModal) {
         this.configureClientModal = configureClientModal;
         this.client = new __WEBPACK_IMPORTED_MODULE_4_app_shared_model_client__["a" /* Client */](); // just becasue service inits whenever
@@ -343,7 +343,7 @@ var ClientConfigurationsModalComponent = /** @class */ (function () {
             this.lastClientConfigRow = this.clientConfigurations.length;
             if (this.lastClientConfigRow === 0) {
                 this.newClientConfig = new __WEBPACK_IMPORTED_MODULE_5_app_shared_model_client_configuration__["a" /* ClientConfiguration */]();
-                this.newClientConfig.effective = // TODO shared util method
+                this.newClientConfig.effective =
                     this.tomorrow.getFullYear() + '-' +
                         (this.tomorrow.getMonth() + 1) + '-' +
                         this.tomorrow.getDate();
@@ -488,7 +488,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var ClientConfigurationsModalService = /** @class */ (function () {
+var ClientConfigurationsModalService = (function () {
     function ClientConfigurationsModalService(dataApiService, modalService) {
         this.dataApiService = dataApiService;
         this.modalService = modalService;
@@ -564,8 +564,7 @@ var ClientConfigurationsModalService = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: // : ClientConfiguration[] {
-                    return [4 /*yield*/, this.getClientConfigurations()];
+                    case 0: return [4 /*yield*/, this.getClientConfigurations()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, this.clientConfigurations.filter(function (pc) {
