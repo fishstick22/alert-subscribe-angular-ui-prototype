@@ -18,10 +18,10 @@ describe('Shared/Model: ClientConfiguration', () => {
     expect(pc.id).toBe(undefined);
   });
 
-  it('has name', () => {
-    const pc = new ClientConfiguration(clientConfig);
-    expect(pc.name).toBe('Prescription Alerts Order Status');
-  });
+  // it('has name', () => {
+  //   const pc = new ClientConfiguration(clientConfig);
+  //   expect(pc.name).toBe('Prescription Alerts Order Status');
+  // });
 
   it('can clone itself with the ID left undefined', () => {
     const clone = clientConfig.clone();

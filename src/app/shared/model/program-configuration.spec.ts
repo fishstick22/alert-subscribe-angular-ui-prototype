@@ -29,10 +29,10 @@ describe('Shared/Model: ProgramConfiguration', () => {
     expect(pc.id).toBe(undefined);
   });
 
-  it('has name', () => {
-    const pc = new ProgramConfiguration(programConfig);
-    expect(pc.name).toBe('Prescription Alerts Order Status');
-  });
+  // it('has name', () => {
+  //   const pc = new ProgramConfiguration(programConfig);
+  //   expect(pc.name).toBe('Prescription Alerts Order Status');
+  // });
 
   it('can clone itself with the ID left undefined', () => {
 

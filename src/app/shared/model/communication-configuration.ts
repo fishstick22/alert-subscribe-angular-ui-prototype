@@ -1,7 +1,7 @@
 export interface CommunicationConfiguration {
     id: number;
-    name: string;
-    description: string;
+    // name: string;
+    // description: string;
     chanEmailPriority: number;
     chanIvrPriority: number;
     chanSmsPriority: number;

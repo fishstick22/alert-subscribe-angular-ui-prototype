@@ -5,8 +5,8 @@ import { CommunicationConfiguration } from './communication-configuration';
 export class ProgramConfiguration implements CommunicationConfiguration {
 
   id: number;
-  name: string;
-  description: string;
+  // name: string;
+  // description: string;
   chanEmailPriority: number;
   chanIvrPriority: number;
   chanSmsPriority: number;
@@ -26,7 +26,7 @@ export class ProgramConfiguration implements CommunicationConfiguration {
 
     if (programConfig) {
       this.chanEmailPriority  = programConfig.chanEmailPriority;
-      this.name               = programConfig.name;
+      // this.name               = programConfig.name;
       this.chanIvrPriority    = programConfig.chanIvrPriority;
       this.chanSmsPriority    = programConfig.chanSmsPriority;
       this.chanSecurePriority = programConfig.chanSecurePriority;

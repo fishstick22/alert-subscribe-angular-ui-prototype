@@ -110,6 +110,7 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
     const programprofile = [
       {'id': 1,
+       'displayOrder': 1,
        'defaultOptIn': 'Y',
        'visibleInUi': 'Y',
        'chanEmail': 'Y',
@@ -123,30 +124,32 @@ export class InMemoryDataService implements InMemoryDbService {
        'program': 101
       },
       {'id': 2,
+       'displayOrder': 2,
+       'defaultOptIn': 'Y',
+       'visibleInUi': 'N',
+       'chanEmail': 'Y',
+       'chanIvr': 'Y',
+       'chanSms': 'Y',
+       'chanSecure': 'Y',
+       'chanMail': 'N',
+       'chanMobile': 'N',
+       'effective': '2017-01-01',
+       'expiration': '9999-12-31',
+       'program': 102
+     },
+     {'id': 3,
+      'displayOrder': 3,
       'defaultOptIn': 'Y',
-      'visibleInUi': 'N',
+      'visibleInUi': 'P',
       'chanEmail': 'Y',
-      'chanIvr': 'Y',
-      'chanSms': 'Y',
-      'chanSecure': 'Y',
+      'chanIvr': 'N',
+      'chanSms': 'N',
+      'chanSecure': 'N',
       'chanMail': 'N',
       'chanMobile': 'N',
       'effective': '2017-01-01',
       'expiration': '9999-12-31',
-      'program': 102
-     },
-     {'id': 3,
-     'defaultOptIn': 'Y',
-     'visibleInUi': 'P',
-     'chanEmail': 'Y',
-     'chanIvr': 'N',
-     'chanSms': 'N',
-     'chanSecure': 'N',
-     'chanMail': 'N',
-     'chanMobile': 'N',
-     'effective': '2017-01-01',
-     'expiration': '9999-12-31',
-     'program': 103
+      'program': 103
     }
     ];
     const programprofileclientexception = [
@@ -171,8 +174,8 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
     const programconfiguration = [
       {'id': 1,
-       'name': 'Prescription Alerts Order Status',
-       'description': 'Order Status Program-level Configuration',
+      //  'name': 'Prescription Alerts Order Status',
+      //  'description': 'Order Status Program-level Configuration',
        'chanEmailPriority': 2,
        'chanIvrPriority': 3,
        'chanSmsPriority': 1,
@@ -188,8 +191,8 @@ export class InMemoryDataService implements InMemoryDbService {
        'communication': 261
       },
       {'id': 2,
-       'name': 'Prescription Alerts Order Status',
-       'description': 'Order Status Program-level Configuration',
+      //  'name': 'Prescription Alerts Order Status',
+      //  'description': 'Order Status Program-level Configuration',
        'chanEmailPriority': 2,
        'chanIvrPriority': 3,
        'chanSmsPriority': 1,
@@ -258,8 +261,8 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
     const clientconfiguration = [
       {'id': 1,
-       'name': 'Prescription Alerts Order Status',
-       'description': 'Order Status Client-level Configuration',
+      //  'name': 'Prescription Alerts Order Status',
+      //  'description': 'Order Status Client-level Configuration',
        'chanEmailPriority': 2,
        'chanIvrPriority': 3,
        'chanSmsPriority': 1,
@@ -275,8 +278,8 @@ export class InMemoryDataService implements InMemoryDbService {
        'communication': 261
       },
       {'id': 2,
-       'name': 'Prescription Alerts Order Status',
-       'description': 'Order Status Client-level Configuration',
+      //  'name': 'Prescription Alerts Order Status',
+      //  'description': 'Order Status Client-level Configuration',
        'chanEmailPriority': 3,
        'chanIvrPriority': 1,
        'chanSmsPriority': 2,

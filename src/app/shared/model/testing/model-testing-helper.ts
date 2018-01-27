@@ -82,8 +82,8 @@ export class ModelTestingHelper {
     const clientConfig: ClientConfiguration  = new ClientConfiguration();
 
     clientConfig.id = 1;
-    clientConfig.name = 'Prescription Alerts Order Status',
-    clientConfig.description = 'Order Status Client-level Configuration',
+    // clientConfig.name = 'Prescription Alerts Order Status',
+    // clientConfig.description = 'Order Status Client-level Configuration',
     clientConfig.chanEmailPriority = 2,
     clientConfig.chanIvrPriority = 3,
     clientConfig.chanSmsPriority = 1,
@@ -104,8 +104,8 @@ export class ModelTestingHelper {
     const programConfig: ProgramConfiguration  = new ProgramConfiguration();
 
     programConfig.id = 1,
-    programConfig.name = 'Prescription Alerts Order Status',
-    programConfig.description = 'Order Status Program-level Configuration',
+    // programConfig.name = 'Prescription Alerts Order Status',
+    // programConfig.description = 'Order Status Program-level Configuration',
     programConfig.chanEmailPriority = 2,
     programConfig.chanIvrPriority = 3,
     programConfig.chanSmsPriority = 1,

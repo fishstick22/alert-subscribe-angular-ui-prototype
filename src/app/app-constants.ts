@@ -4,9 +4,19 @@ export class AppConstants {
   public static SAVESUCCESS: string = 'Close on succesful save';
   public static UNEXPIRED: string = '9999-12-31';
 
+  public static ORDOPTS: Object[] = [
+    {opt: '1', val: 1},
+    {opt: '2', val: 2},
+    {opt: '3', val: 3},
+    {opt: '4', val: 4},
+    {opt: '5', val: 5},
+    {opt: '6', val: 6},
+    {opt: '7', val: 7},
+  ];
   public static YESNOOPTS: Object[] = [{opt: 'Yes', val: 'Y'}, {opt: 'No', val: 'N'}];
   public static PROMOTEOPTS: Object[] = [{opt: 'Yes', val: 'Y'}, {opt: 'No', val: 'N'}, {opt: 'Promote', val: 'P'}];
   public static PROGRAMPROFILEOPTIONS = [
+    {'property': 'displayOrder', 'label': 'Order',   'opts': AppConstants.ORDOPTS, 'title': 'Display Order'},
     {'property': 'defaultOptIn', 'label': 'OptIn',   'opts': AppConstants.YESNOOPTS, 'title': 'Default Opt-In?'},
     {'property': 'visibleInUi',  'label': 'Visible', 'opts': AppConstants.PROMOTEOPTS, 'title': 'Visible in UI?'},
     {'property': 'chanEmail',    'label': 'Email',   'opts': AppConstants.YESNOOPTS, 'title': 'Program allows Email channel subscription'},

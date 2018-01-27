@@ -1,5 +1,6 @@
 export class ProgramProfile {
   id: number;
+  displayOrder: number;
   defaultOptIn: 'Y' | 'N';
   visibleInUi: 'Y' | 'N' | 'P';
   chanEmail:  'Y' | 'N';
