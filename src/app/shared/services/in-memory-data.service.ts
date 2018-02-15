@@ -77,7 +77,10 @@ export class InMemoryDataService implements InMemoryDbService {
             'programConfiguration': [], 'clientConfiguration': []},
       {'id': 2519, 'name': 'Zero Refills Warning',
             'description': 'Notifies a member when one or more of their Rx\'s has no more refills available',
-            'programConfiguration': [], 'clientConfiguration': []}
+            'programConfiguration': [], 'clientConfiguration': []},
+      {'id': 2536, 'name': 'SHOW DRUG RX', 
+            'description': 'Member Preference Pseudo Key for Show Full Drug Name program',
+            'programConfiguration': [], 'clientConfiguration': []},        
     ];
     // real API configured to return the programProfile as an object, not ID
     // but in case it does come as id it is handled
@@ -139,7 +142,7 @@ export class InMemoryDataService implements InMemoryDbService {
      },
      {'id': 3,
       'displayOrder': 3,
-      'defaultOptIn': 'Y',
+      'defaultOptIn': 'N',
       'visibleInUi': 'P',
       'chanEmail': 'Y',
       'chanIvr': 'N',
@@ -206,6 +209,23 @@ export class InMemoryDataService implements InMemoryDbService {
        'expiration': '9999-12-31',
        'program': 101,
        'communication': 264
+      },
+      {'id': 3,
+      //  'name': 'Prescription Alerts Order Status',
+      //  'description': 'Order Status Program-level Configuration',
+       'chanEmailPriority': 1,
+       'chanIvrPriority': 0,
+       'chanSmsPriority': 0,
+       'chanSecurePriority': 0,
+       'chanMailPriority': 0,
+       'chanMobilePriority': 0,
+       'chanDefault': 'No',
+       'required': 'N',
+       'mandatory': 'N',
+       'effective': '2017-01-01',
+       'expiration': '9999-12-31',
+       'program': 103,
+       'communication': 2536
       }
     ];
     const client = [
