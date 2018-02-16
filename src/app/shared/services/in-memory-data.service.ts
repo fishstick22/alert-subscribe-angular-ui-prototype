@@ -78,9 +78,9 @@ export class InMemoryDataService implements InMemoryDbService {
       {'id': 2519, 'name': 'Zero Refills Warning',
             'description': 'Notifies a member when one or more of their Rx\'s has no more refills available',
             'programConfiguration': [], 'clientConfiguration': []},
-      {'id': 2536, 'name': 'SHOW DRUG RX', 
+      {'id': 2536, 'name': 'SHOW DRUG RX',
             'description': 'Member Preference Pseudo Key for Show Full Drug Name program',
-            'programConfiguration': [], 'clientConfiguration': []},        
+            'programConfiguration': [], 'clientConfiguration': []},
     ];
     // real API configured to return the programProfile as an object, not ID
     // but in case it does come as id it is handled
@@ -93,7 +93,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {'id': 102, 'name': 'Non-Prescription Alerts',
       'description': 'PBM non-transactional Communications like Portal Registration, Password Recovery',
        'programProfile': [
-        {'id': 2, 'defaultOptIn': 'Y', 'visibleInUi': 'N',
+        {'id': 2, 'displayOrder': 2, 'defaultOptIn': 'Y', 'visibleInUi': 'N',
          'chanEmail': 'Y', 'chanIvr': 'N', 'chanSms': 'Y', 'chanSecure': 'N', 'chanMail': 'N', 'chanMobile': 'N',
          'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 102
         }
@@ -103,7 +103,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {'id': 103, 'name': 'Show Full Drug Names',
       'description': 'Program that supports member opt-in to receive full drug names on email alerts',
        'programProfile': [
-        {'id': 3, 'defaultOptIn': 'Y', 'visibleInUi': 'P',
+        {'id': 3, 'displayOrder': 3, 'defaultOptIn': 'N', 'visibleInUi': 'P',
          'chanEmail': 'Y', 'chanIvr': 'N', 'chanSms': 'N', 'chanSecure': 'N', 'chanMail': 'N', 'chanMobile': 'N',
          'effective': '2017-01-01', 'expiration': '9999-12-31', 'program': 103
         }
